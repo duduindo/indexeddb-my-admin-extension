@@ -45,9 +45,6 @@
 <style lang="sass">
 @import '../node_modules/bootstrap/scss/bootstrap.scss'
 
-body
-  background: $white
-
 .l-container
   display: grid
   grid-template-columns: 2fr 8fr

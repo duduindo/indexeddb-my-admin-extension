@@ -52,7 +52,6 @@
 
     td, th
       border-right: 2px solid #fff
-      color: red
 
     th:first-child
       padding-left: .3rem
@@ -64,6 +63,4 @@
   tbody
     td
       padding: .3rem
-
-
 </style>
