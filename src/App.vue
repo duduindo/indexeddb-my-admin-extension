@@ -1,19 +1,8 @@
-<!-- <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
-</template> -->
-
-
 <template>
-  <div id="app" class="l-container">
+  <div class="l-container" id="app">
     <aside class="l-aside">
       <h3>logo</h3>
-      <Expander />
+      <!-- <Expander /> -->
     </aside>
 
     <header class="l-masthead">
@@ -24,7 +13,8 @@
 
     <main class="l-main">
       <!-- <Route exact path="/databases" component={Databases} />
-      <Route exact path="/store-list/:database/:version/:store" component={StoreList} />
+      <Route exact path="/stores" component={Stores} />
+      <Route exact path="/store-values" component={StoreValues} />
       <Route path="/content" component={Content} /> -->
       <router-view/>
     </main>
@@ -32,34 +22,13 @@
 </template>
 
 <script>
-  import Expander from '@/components/Expander.vue'
-
-  export default {
-    name: 'App',
-    components: {
-      Expander
-    }
-  }
+export default {
+  name: 'App'
+}
 </script>
 
 <style lang="sass">
-@import '../node_modules/bootstrap/scss/bootstrap.scss'
-
-.l-container
-  display: grid
-  grid-template-columns: 2fr 8fr
-  grid-template-rows: auto 10fr
-  grid-gap: 5px
-
-.l-masthead
-  grid-column: 2
-  grid-row: auto
-
-.l-aside
-  grid-column: 1
-  grid-row: 1/3
-
-.l-main
-  grid-column: 2
-  grid-row: 2
+  @import 'src/sass/layout/index'
+  @import 'node_modules/bootstrap/scss/bootstrap'
+  @import 'node_modules/bootstrap-vue/src/index.scss'
 </style>
