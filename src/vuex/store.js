@@ -1,4 +1,8 @@
+import tree from './modules/tree'
+
 export default {
-  modules: {},
+  modules: {
+    tree
+  },
   strict: true
 }
