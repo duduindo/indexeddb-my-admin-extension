@@ -6,6 +6,8 @@ import Vuex from 'vuex'
 import BootstrapVue from 'bootstrap-vue'
 import { sync } from 'vuex-router-sync'
 import { routes } from '@/router-config'
+import Store from '@/vuex/store'
+
 
 // Components
 import App from '@/App'
@@ -16,7 +18,7 @@ Vue.use(Vuex)
 Vue.use(BootstrapVue)
 
 // Vuex
-const store = new Vuex.Store({})
+const store = new Vuex.Store(Store)
 
 // Route
 const router = new Router({
