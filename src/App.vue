@@ -1,22 +1,34 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png" class="test" :class="opa">
-    <router-view/>
+  <div class="l-container" id="app">
+    <aside class="l-aside">
+      <h3>logo</h3>
+      <!-- <Expander /> -->
+    </aside>
+
+    <header class="l-masthead">
+      <!-- <Route component={Header} />
+      <Route path="/content" component={Filter} />
+      <Route path="/content" component={StatusResults} /> -->
+    </header>
+
+    <main class="l-main">
+      <!-- <Route exact path="/databases" component={Databases} />
+      <Route exact path="/stores" component={Stores} />
+      <Route exact path="/store-values" component={StoreValues} />
+      <Route path="/content" component={Content} /> -->
+      <router-view/>
+    </main>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'App',
-  data() {
-    return {
-      opa: 'test2'
-    }
-  }
+  name: 'App'
 }
 </script>
 
 <style lang="sass">
-  @import 'node_modules/bootstrap/scss/bootstrap';
-  @import 'node_modules/bootstrap-vue/src/index.scss';
+  @import 'src/sass/layout/index'
+  @import 'node_modules/bootstrap/scss/bootstrap'
+  @import 'node_modules/bootstrap-vue/src/index.scss'
 </style>
