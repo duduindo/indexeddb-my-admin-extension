@@ -27,5 +27,7 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     // Require or disallow a space before function parenthesis
     'space-before-function-paren': 'off',
+    // disallow multiple empty lines
+    'no-multiple-empty-lines': ['error', { 'max': 2, 'maxBOF': 1}],
   }
 }
