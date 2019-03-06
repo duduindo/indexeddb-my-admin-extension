@@ -1,9 +1,7 @@
 <template>
   <div id="app">
-    <input type="text" v-model="domain" placeholder="Example: www.example.com">
-
     <ul>
-      <li :key="index" v-for="(tree, index) in trees(domain)">{{ tree.domain }}</li>
+      <li :key="index" v-for="(tree, index) in trees">{{ tree.host }}</li>
     </ul>
   </div>
 </template>

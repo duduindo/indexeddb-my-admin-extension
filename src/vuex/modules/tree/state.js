@@ -2,7 +2,7 @@ export default {
   trees:
   [
     {
-      domain: 'www.example.com',
+      host: 'localhost:8081',
       databases: [
         {
           name: 'database-1',
@@ -22,7 +22,7 @@ export default {
     },
 
     {
-      domain: 'www.google.com',
+      host: 'www.google.com',
       databases: [
         {
           name: 'database-22',
