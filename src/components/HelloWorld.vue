@@ -12,12 +12,6 @@ import {mapGetters} from 'vuex'
 export default {
   name: 'HelloWorld',
 
-  data() {
-    return {
-      domain: 'www.example.com'
-    }
-  },
-
   computed: {
     ...mapGetters({
       trees: 'getTrees'
