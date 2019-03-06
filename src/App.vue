@@ -28,7 +28,7 @@ export default {
 </script>
 
 <style lang="sass">
-  @import 'src/sass/layout/index'
+  @import 'src/assets/sass/layout/index'
   @import 'node_modules/bootstrap/scss/bootstrap'
   @import 'node_modules/bootstrap-vue/src/index.scss'
 </style>
