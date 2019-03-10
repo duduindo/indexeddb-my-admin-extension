@@ -7,31 +7,36 @@ import BootstrapVue from 'bootstrap-vue'
 import { sync } from 'vuex-router-sync'
 import { routes } from '@/router-config'
 import Store from '@/vuex/store'
-
+import BrowserExtensionSingleton from '@/api/browser-extension'
 
 // Components
 import App from '@/App'
 
-// Use
-Vue.use(Router)
-Vue.use(Vuex)
-Vue.use(BootstrapVue)
+const extension = new BrowserExtensionSingleton()
 
-// Vuex
-const store = new Vuex.Store(Store)
 
-// Route
-const router = new Router({
-  routes,
-  mode: 'hash'
+extension.onLoad(() => {
+  // Use
+  Vue.use(Router)
+  Vue.use(Vuex)
+  Vue.use(BootstrapVue)
+
+  // Vuex
+  const store = new Vuex.Store(Store)
+
+  // Route
+  const router = new Router({
+    routes,
+    mode: 'hash'
+  })
+
+  // Sync
+  sync(store, router)
+
+  // Vue
+  new Vue({
+    router,
+    store,
+    render: h => h(App)
+  }).$mount('#app')
 })
-
-// Sync
-sync(store, router)
-
-// Vue
-new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount('#app')

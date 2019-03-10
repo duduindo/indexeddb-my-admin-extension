@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div>
     <ul>
       <li :key="index" v-for="(tree, index) in trees">{{ tree.host }}</li>
     </ul>

@@ -2,7 +2,7 @@ export default {
   trees:
   [
     {
-      host: 'localhost:8081',
+      host: 'localhost:8080',
       databases: [
         {
           name: 'database-1',

@@ -1,6 +1,6 @@
 export default {
   fetchTree(context, value) {
-    context.commit('FETCH_INDEXEDDB_EXTENSION', value)
+    context.commit('FETCH_TREE', value)
   },
 
   setTree(context, value) {
