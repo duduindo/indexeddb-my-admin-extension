@@ -1,6 +1,6 @@
 {
   "name": "indexeddb-my-admin-extension",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "IndexedDB My Admin Extension",
   "author": "Eduardo <duduindo@gmail.com>",
   "private": true,
