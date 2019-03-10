@@ -11,7 +11,8 @@
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
     "lint": "eslint --ext .js,.vue src test/unit test/e2e/specs",
-    "build": "node build/build.js"
+    "build": "node build/build.js",
+    "test:watch": "jest --config test/unit/jest.conf.js --watch"
   },
   "dependencies": {
     "bootstrap": "^4.3.1",
@@ -55,8 +56,9 @@
     "file-loader": "^1.1.4",
     "friendly-errors-webpack-plugin": "^1.6.1",
     "html-webpack-plugin": "^2.30.1",
-    "jest": "^22.0.4",
+    "jest": "^24.3.1",
     "jest-serializer-vue": "^0.3.0",
+    "jest-webextension-mock": "^3.5.0",
     "nightwatch": "^0.9.12",
     "node-notifier": "^5.1.2",
     "node-sass": "^4.11.0",

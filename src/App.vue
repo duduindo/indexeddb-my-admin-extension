@@ -31,4 +31,10 @@ export default {
   @import 'src/assets/sass/layout/index'
   @import 'node_modules/bootstrap/scss/bootstrap'
   @import 'node_modules/bootstrap-vue/src/index.scss'
+
+  body
+    background-color: silver
+
+  h3
+    background-color: white
 </style>
