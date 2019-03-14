@@ -2,7 +2,7 @@ export default {
   trees:
   [
     {
-      host: 'localhost:8080',
+      host: 'localhost:8081',
       databases: [
         {
           name: 'database-1',
@@ -13,6 +13,23 @@ export default {
               indexes: [
                 {
                   name: 'index-1'
+                },
+                {
+                  name: 'index-12'
+                }
+              ]
+            }
+          ]
+        },
+        {
+          name: 'database-12',
+          version: 2,
+          stores: [
+            {
+              name: 'store-12',
+              indexes: [
+                {
+                  name: 'index-12'
                 }
               ]
             }

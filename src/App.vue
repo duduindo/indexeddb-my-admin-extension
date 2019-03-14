@@ -2,7 +2,7 @@
   <div class="l-container" id="app">
     <aside class="l-aside">
       <h3>logo</h3>
-      <!-- <Expander /> -->
+      <Expander />
     </aside>
 
     <header class="l-masthead">
@@ -23,8 +23,11 @@
 </template>
 
 <script>
+import Expander from '@/components/Expander'
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: {Expander}
 }
 </script>
 
@@ -35,7 +38,4 @@ export default {
 
   body
     background-color: silver
-
-  h3
-    background-color: white
 </style>
