@@ -2,49 +2,52 @@
  * Origin: https://github.com/eddyerburgh/vue-test-utils-vuex-example/blob/master/test/unit/specs/MyComponent.spec.js
  *         https://github.com/vuejs/vue-test-utils-jest-example/blob/master/test/List.spec.js
  */
-
 import Vuex from 'vuex'
+import Router from 'vue-router'
 import { shallowMount, createLocalVue } from '@vue/test-utils'
-import myModule from '@/vuex/modules/tree'
-import Expander from '../'
+import treeModule from '@/vuex/modules/tree'
+import Expander from '@/components/Expander'
 
 const localVue = createLocalVue()
 
 localVue.use(Vuex)
+localVue.use(Router)
 
 
-describe('Getters', () => {
-  let actions
+describe('Expander', () => {
   let state
   let store
+  let emptyStore
 
   beforeEach(() => {
     state = {
       trees: [
         {
           host: 'localhost',
-          databases: []
+          databases: [
+            {
+              name: 'database-name',
+              version: 1
+            }
+          ]
         }
       ]
     }
 
-    actions = {}
-
     store = new Vuex.Store({
       modules: {
-        myModule: {
+        treeModule: {
           state,
-          actions,
-          getters: myModule.getters
+          getters: treeModule.getters
         }
       }
     })
   })
 
-  test('####', () => {
+  test('Should redirection link like database name and version', () => {
     const wrapper = shallowMount(Expander, { store, localVue })
-    const ul = wrapper.find('ul')
+    const link = wrapper.find('ul [tag="a"]')
 
-    console.log(ul)
+    expect(link.attributes()).toMatchObject({to: '/database/database-name/1/'})
   })
 })
