@@ -4,7 +4,8 @@
   "description": "IndexedDB My Admin Extension",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --config build/build.js"
   },
   "repository": {
     "type": "git",
@@ -21,5 +22,26 @@
   "bugs": {
     "url": "https://gitlab.com/duduindo/indexeddb-my-admin-extension/issues"
   },
-  "homepage": "https://gitlab.com/duduindo/indexeddb-my-admin-extension#readme"
+  "homepage": "https://gitlab.com/duduindo/indexeddb-my-admin-extension#readme",
+  "dependencies": {
+    "json-string-formatter": "^1.0.1",
+    "vue": "^2.6.10",
+    "vue-json-pretty": "^1.6.0",
+    "vue-router": "^3.0.3",
+    "vuex": "^3.1.0",
+    "vuex-router-sync": "^5.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.3",
+    "babel-loader": "^8.0.5",
+    "copy-webpack-plugin": "^5.0.2",
+    "css-loader": "^2.1.1",
+    "dotenv": "^7.0.0",
+    "lodash.mergewith": "^4.6.1",
+    "vue-loader": "^15.7.0",
+    "vue-style-loader": "^4.1.2",
+    "vue-template-compiler": "^2.6.10",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0"
+  }
 }
