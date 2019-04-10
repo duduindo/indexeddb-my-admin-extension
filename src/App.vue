@@ -1,26 +1,11 @@
 <template>
   <div>
-    <h1>Hello World 2!</h1>
+    oi
   </div>
 </template>
 
 <script>
-  import Test from '@/components/Test.vue'
-
   export default {
-    name: 'app',
-    components: {Test},
-    props: {},
-    data() { return {} },
-    mounted() {},
-    methods: {},
-    computed: {},
-    filters: {},
+    name: 'app'
   }
 </script>
-
-<style lang="sass">
-  body
-    background-color: yellow
-
-</style>

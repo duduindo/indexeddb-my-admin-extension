@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint --ext .js,.vue src shells",
     "build": "webpack --config build/build.js --progress --mode=production",
     "watch": "webpack --config build/build.js --progress --watch --mode=development"
   },
@@ -34,9 +35,18 @@
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
+    "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.5",
     "copy-webpack-plugin": "^5.0.2",
     "css-loader": "^2.1.1",
+    "eslint": "^5.16.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-loader": "^2.1.2",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-promise": "^4.1.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "eslint-plugin-vue": "^5.2.2",
     "lodash.mergewith": "^4.6.1",
     "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0",

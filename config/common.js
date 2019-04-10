@@ -23,21 +23,27 @@ module.exports = {
     }
   },
 
+  // Lint
+  //useEslint: true,
+
   // Module
   module: {
     rules: [
+      // VUE
       {
         test: /\.vue$/,
         loader: 'vue-loader'
       },
-      // this will apply to both plain `.js` files
-      // AND `<script>` blocks in `.vue` files
+
+      // JS
+      // this will apply to both plain `.js` files AND `<script>` blocks in `.vue` files
       {
         test: /\.js$/,
         loader: 'babel-loader'
       },
-      // this will apply to both plain `.css` files
-      // AND `<style>` blocks in `.vue` files
+
+      // CSS
+      // this will apply to both plain `.css` files AND `<style>` blocks in `.vue` files
       {
         test: /\.css$/,
         use: [
@@ -45,8 +51,9 @@ module.exports = {
           'css-loader'
         ]
       },
-      // this will apply to both plain `.scss` files
-      // AND `<style lang="scss">` blocks in `.vue` files
+
+      // SASS
+      // this will apply to both plain `.scss` files AND `<style lang="scss">` blocks in `.vue` files
       {
         test: /\.scss$/,
         use: [
@@ -67,6 +74,14 @@ module.exports = {
             }
           }
         ]
+      },
+
+      // Eslint
+      {
+        enforce: 'pre',
+        test: /\.(js|vue)$/,
+        loader: 'eslint-loader',
+        exclude: /node_modules/
       }
     ]
   },
