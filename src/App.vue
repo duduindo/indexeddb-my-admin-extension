@@ -7,7 +7,6 @@
 <script>
   import Test from '@/components/Test.vue'
 
-
   export default {
     name: 'app',
     components: {Test},
@@ -20,6 +19,8 @@
   }
 </script>
 
-<style>
+<style lang="sass">
+  body
+    background-color: yellow
 
 </style>
