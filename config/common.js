@@ -1,7 +1,6 @@
 'use strict'
 
 const path = require('path')
-const { parsed: env } = require('dotenv').config()
 const { VueLoaderPlugin } = require('vue-loader')
 
 
@@ -9,24 +8,10 @@ function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
 
-function isDevelopment() {
-  if (env.NODE_ENV && env.NODE_ENV !== 'development') {
-    return false
-  } else {
-    return true
-  }
-}
-
 
 module.exports = {
-  // Mode
-  mode: isDevelopment() ? 'development' : 'production',
-
   // Watch
-  watch: isDevelopment(),
   watchOptions: {
-    // aggregateTimeout: 1000,
-    // poll: 1000,
     ignored: ['node_modules', 'dist', 'config', 'build', '.*']
   },
 
