@@ -1,5 +1,9 @@
 export default {
   store: {},
-  storeFiltered: {},
+  storeFiltered: {
+    values: [],
+    keys: [],
+    keyPath: ''
+  },
   storeObjectUpdatedStatus: 'waiting'
 }

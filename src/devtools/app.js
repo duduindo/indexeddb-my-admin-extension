@@ -15,8 +15,6 @@ Vue.use(VueRouter)
 Vue.use(Vuex)
 Vue.component('vue-json-pretty', VueJsonPretty)
 
-console.log(Array.prototype.filterIndex)
-
 // Vuex
 const store = new Vuex.Store(Store)
 

@@ -33,7 +33,7 @@ function createOnMessagePlugin(onMessage) {
     })
 
     store.subscribe(mutation => {
-      console.log('Plugin. Mutation type: ', mutation.type)
+      // console.log('Plugin. Mutation type: ', mutation.type)
     })
   }
 }
