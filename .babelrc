@@ -1,0 +1,36 @@
+{
+  // "plugins": ["transform-vue-jsx", "transform-runtime"],
+  // "plugins": [
+  //   "@babel/plugin-syntax-dynamic-import",
+  //   "@babel/plugin-syntax-import-meta",
+  //   ["@babel/plugin-proposal-class-properties", { "loose": false }],
+  //   "@babel/plugin-proposal-json-strings"
+  // ],
+  // "presets": [
+  //   // ["@babel/preset-env", {
+  //   //   "modules": false,
+  //   //   "targets": {
+  //   //     "browsers": ["> 1%", "last 2 versions", "not ie <= 8"]
+  //   //   }
+  //   // }],
+  //   // "@vue/app",
+  //   // "@babel/preset-stage-3"
+  // ],
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "browsers": ["> 1%", "last 2 versions", "not ie <= 8"]
+        },
+      },
+    ],
+    "@vue/app"
+  ],
+  "env": {
+    "test": {
+      // "presets": ["@babel/preset-env", "@babel/preset-stage-3"],
+      // "plugins": ["transform-vue-jsx", "transform-es2015-modules-commonjs", "dynamic-import-node"]
+    }
+  }
+}
