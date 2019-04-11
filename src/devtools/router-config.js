@@ -1,8 +1,8 @@
-import Database from '@/pages/Database.vue'
-import EditStore from '@/pages/EditStore.vue'
-import Store from '@/pages/Store.vue'
-import HeaderStore from '@/components/HeaderStore.vue'
-import Test from '@/pages/Test.vue'
+import Database from '@/pages/Database'
+import EditStore from '@/pages/EditStore'
+import Store from '@/pages/Store'
+import PaginationStore from '@/components/PaginationStore'
+import Test from '@/pages/Test'
 
 
 export const routes = [
@@ -20,7 +20,7 @@ export const routes = [
     path: '/store/:database/:version/:store/',
     components: {
       default: Store,
-      header: HeaderStore
+      header: PaginationStore
     },
     children: []
   },
