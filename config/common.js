@@ -10,21 +10,12 @@ function resolve(dir) {
 
 
 module.exports = {
+  devtool: 'inline-source-map',
+
   // Watch
   watchOptions: {
     ignored: ['node_modules', 'dist', 'config', 'build', '.*']
   },
-
-  // Resolve
-  resolve: {
-    extensions: ['.js', '.vue', '.json'],
-    alias: {
-      '@': resolve('src'),
-    }
-  },
-
-  // Lint
-  //useEslint: true,
 
   // Module
   module: {

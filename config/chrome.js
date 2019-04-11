@@ -12,6 +12,10 @@ function customizer(objValue, srcValue) {
   }
 }
 
+function resolve(dir) {
+  return path.join(__dirname, '..', dir)
+}
+
 
 const plugins = mergeWith({}, commonConfig, {
   plugins: [
@@ -27,19 +31,35 @@ const plugins = mergeWith({}, commonConfig, {
 
 const app = mergeWith({}, plugins, {
   name: 'chrome',
-  entry: './src/app.js',
+  entry: './src/devtools/app.js',
   output: {
     filename: 'chrome/devtools.js',
-  }
+  },
+
+  // Resolve
+  resolve: {
+    extensions: ['.js', '.vue', '.json'],
+    alias: {
+      '@': resolve('src/devtools'),
+    }
+  },
 });
 
 
 const content = mergeWith({}, plugins, {
   name: 'chrome',
-  entry: './src/content.js',
+  entry: './src/content/app.js',
   output: {
     filename: 'chrome/content.js',
-  }
+  },
+
+  // Resolve
+  resolve: {
+    extensions: ['.js', '.json'],
+    alias: {
+      '@': resolve('src/content'),
+    }
+  },
 });
 
 
