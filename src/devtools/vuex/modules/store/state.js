@@ -5,5 +5,5 @@ export default {
     keys: [],
     keyPath: ''
   },
-  storeObjectUpdatedStatus: 'waiting'
+  storeObjectUpdatedStatus: 'Waiting to update'
 }

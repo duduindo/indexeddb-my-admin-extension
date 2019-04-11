@@ -13,7 +13,7 @@
       <tr :key="index" v-for="(cursor, index) in values">
         <td><input type="checkbox"></td>
         <td>
-          <router-link :to="`/edit/store/${database}/${version}/${store}/`" :query="cursor">Edit</router-link>
+          <router-link :to="{ path: `/edit/store/${database}/${version}/${store}/`, query: { cursor } }">Edit</router-link>
         </td>
         <td><a href="#copy">Copy</a></td>
         <td><a href="#delete">Delete</a></td>
