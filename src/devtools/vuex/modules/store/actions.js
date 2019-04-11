@@ -26,8 +26,8 @@ export default {
 
     chrome.tabs.sendMessage(id, { type: 'UPDATE_DATABASE_STORE', payload: value })
   },
-  resetStatus(context) {
-    context.commit('SET_STORE_UPDATED_STATUS', 'Waiting to update')
+  setStatus(context, value) {
+    context.commit('SET_STORE_UPDATED_STATUS', value)
   },
   searchStoreValues(context, value) {
     let store = context.getters.getStoreFull

@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Edit</h1>
-    <h3>Status: {{ this.status }}</h3>
+    <h3>Status: <i>{{ this.status }}</i></h3>
     <form>
       <button type="button" @click="handleUpdate">Update</button>
       <hr>
@@ -30,7 +30,7 @@
     methods: {
       ...mapActions({
         fetch: 'fetchUpdateStore',
-        resetStatus: 'resetStatus'
+        setStatus: 'setStatus'
       }),
       handleUpdate() {
         const { database, store, version } = this.$route.params
@@ -47,7 +47,7 @@
             newValue: cursor
           })
         } catch (err) {
-          console.error(err)
+          this.setStatus(err)
         }
       }
     },
@@ -61,7 +61,7 @@
       this.rows = cursorFormatted.match(/\n/g) ? (cursorFormatted.match(/\n/g).length + 1) : 2
     },
     destroyed() {
-      this.resetStatus()
+      this.setStatus('Waiting to update')
     }
   }
 </script>
