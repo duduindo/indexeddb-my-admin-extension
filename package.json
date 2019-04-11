@@ -6,9 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint --ext .js,.vue src shells",
-    "unit": "jest --config test/unit/jest.conf.js --coverage",
-    "build": "webpack --config build/build.js --progress --mode=production",
-    "watch": "webpack --config build/build.js --progress --watch --mode=development"
+    "test": "jest --config test/unit/jest.conf.js",
+    "test:coverage": "jest --config test/unit/jest.conf.js --coverage",
+    "test:watch": "jest --config test/unit/jest.conf.js --watch",
+    "watch": "webpack --config build/build.js --progress --watch --mode=development",
+    "build": "webpack --config build/build.js --progress --mode=production"
   },
   "repository": {
     "type": "git",

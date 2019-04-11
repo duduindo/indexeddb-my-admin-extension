@@ -13,12 +13,7 @@ function customizer(objValue, srcValue) {
 }
 
 
-module.exports = mergeWith(commonConfig, {
-  name: 'chrome',
-  entry: './src/app.js',
-  output: {
-    filename: 'chrome/devtools.js',
-  },
+const plugins = mergeWith({}, commonConfig, {
   plugins: [
     new CopyPlugin([
       {
@@ -28,3 +23,24 @@ module.exports = mergeWith(commonConfig, {
     ]),
   ],
 }, customizer);
+
+
+const app = mergeWith({}, plugins, {
+  name: 'chrome',
+  entry: './src/app.js',
+  output: {
+    filename: 'chrome/devtools.js',
+  }
+});
+
+
+const content = mergeWith({}, plugins, {
+  name: 'chrome',
+  entry: './src/content.js',
+  output: {
+    filename: 'chrome/content.js',
+  }
+});
+
+
+module.exports = [app, content]
