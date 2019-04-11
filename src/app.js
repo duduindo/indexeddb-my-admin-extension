@@ -1,8 +1,10 @@
-// import Vue from 'vue'
-// import App from './App.vue'
+import Vue from 'vue'
+import App from './App.vue'
 
 
-// new Vue({
-//   el: '#app2',
-//   render: h => h(App)
-// })
+chrome.devtools.panels.create('IndexedDBMyAdmin', '', 'devtools.html', function(panel) {
+  new Vue({
+    el: '#app',
+    render: h => h(App)
+  })
+})
