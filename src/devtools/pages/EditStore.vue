@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Edit</h1>
-    <h3>Status: <i>{{ this.status }}</i></h3>
+    <h3>Status: <i>{{ status }}</i></h3>
     <form>
       <button type="button" @click="handleUpdate">Update</button>
       <hr>

@@ -1,7 +1,7 @@
 <template>
   <form>
     <label for="filter-rows"></label>
-    <input type="text" id="filter-rows" placeholder="Search this store" @keyup="this.handleKeyup">
+    <input type="text" id="filter-rows" placeholder="Search this store" v-model="terms">
   </form>
 </template>
 
@@ -12,20 +12,23 @@
     name: 'pagination-store',
     data() {
       return {
-        timeout: null
+        timeout: null,
+        terms: ''
       }
     },
     methods: {
       ...mapActions({
         search: 'searchStoreValues'
-      }),
-      handleKeyup(event) {
+      })
+    },
+    watch: {
+      terms(value) {
         if (this.timeout) {
           clearTimeout(this.timeout)
           this.timeout = null
         }
 
-        this.timeout = setTimeout(this.search, 80, event.target.value)
+        this.timeout = setTimeout(this.search, 80, value)
       }
     }
   }

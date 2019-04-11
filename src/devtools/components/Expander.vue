@@ -1,6 +1,6 @@
 <template>
   <div>
-    <list :tree="this.tree"/>
+    <list :tree="tree"/>
   </div>
 </template>
 
