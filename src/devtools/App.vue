@@ -6,11 +6,11 @@
     </aside>
 
     <header class="l-masthead">
-      <router-view name="header"></router-view>
+      <router-view name="header" />
     </header>
 
     <main class="l-main">
-      <router-view/>
+      <router-view />
     </main>
   </div>
 </template>
