@@ -10,7 +10,7 @@ function resolve(dir) {
 
 
 module.exports = {
-  devtool: 'inline-source-map',
+  devtool: 'cheap-source-map',
 
   // Watch
   watchOptions: {
