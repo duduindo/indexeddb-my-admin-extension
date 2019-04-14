@@ -22,7 +22,7 @@ const plugins = mergeWith({}, commonConfig, {
     new CopyPlugin([
       {
         from: './shells/chrome',
-        to: 'chrome'
+        to: 'chrome/IndexedDBMyAdmin'
       },
     ]),
   ],
@@ -40,7 +40,7 @@ const app = mergeWith({}, plugins, {
   name: 'chrome',
   entry: './src/devtools/app.js',
   output: {
-    filename: 'chrome/devtools.js'
+    filename: 'chrome/IndexedDBMyAdmin/devtools.js'
   }
 });
 
@@ -49,7 +49,7 @@ const content = mergeWith({}, plugins, {
   name: 'chrome',
   entry: './src/content/app.js',
   output: {
-    filename: 'chrome/content.js'
+    filename: 'chrome/IndexedDBMyAdmin/content.js'
   }
 });
 
