@@ -1,9 +1,9 @@
 
-// import App from '@/devtools/App.vue'
+import App from '@/devtools/App.vue'
 
 
 describe('Describe here', () => {
   test('Test here', () => {
-    console.log('Its ok!')
+    console.log('Its ok!', App)
   })
 })
