@@ -1,5 +1,5 @@
 
-import App from '@/devtools/App.vue'
+// import App from '@/devtools/App.vue'
 
 
 describe('Describe here', () => {
