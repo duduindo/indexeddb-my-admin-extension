@@ -6,7 +6,7 @@
 
 <script>
   import { mapActions, mapGetters } from 'vuex'
-  import List from '@/components/List.vue'
+  import List from '@/devtools/components/List.vue'
 
   export default {
     name: 'expander',

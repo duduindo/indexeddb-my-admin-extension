@@ -1,8 +1,8 @@
-import Database from '@/pages/Database'
-import EditStore from '@/pages/EditStore'
-import Store from '@/pages/Store'
-import PaginationStore from '@/components/PaginationStore'
-import Test from '@/pages/Test'
+import Database from '@/devtools/pages/Database'
+import EditStore from '@/devtools/pages/EditStore'
+import Store from '@/devtools/pages/Store'
+import PaginationStore from '@/devtools/components/PaginationStore'
+import Test from '@/devtools/pages/Test'
 
 
 export const routes = [

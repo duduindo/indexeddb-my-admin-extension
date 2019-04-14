@@ -26,6 +26,13 @@ const plugins = mergeWith({}, commonConfig, {
       },
     ]),
   ],
+  // Resolve
+  resolve: {
+    extensions: ['.js', '.vue', '.json'],
+    alias: {
+      '@': resolve('src'),
+    }
+  },
 }, customizer);
 
 
@@ -33,16 +40,8 @@ const app = mergeWith({}, plugins, {
   name: 'chrome',
   entry: './src/devtools/app.js',
   output: {
-    filename: 'chrome/devtools.js',
-  },
-
-  // Resolve
-  resolve: {
-    extensions: ['.js', '.vue', '.json'],
-    alias: {
-      '@': resolve('src/devtools'),
-    }
-  },
+    filename: 'chrome/devtools.js'
+  }
 });
 
 
@@ -50,16 +49,8 @@ const content = mergeWith({}, plugins, {
   name: 'chrome',
   entry: './src/content/app.js',
   output: {
-    filename: 'chrome/content.js',
-  },
-
-  // Resolve
-  resolve: {
-    extensions: ['.js', '.json'],
-    alias: {
-      '@': resolve('src/content'),
-    }
-  },
+    filename: 'chrome/content.js'
+  }
 });
 
 

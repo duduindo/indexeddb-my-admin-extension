@@ -1,4 +1,4 @@
-import Commands from '@/commands'
+import Commands from '@/content/commands'
 
 const command = new Commands()
 

@@ -17,7 +17,7 @@
 
 <script>
   import { mapActions } from 'vuex'
-  import Expander from '@/components/Expander'
+  import Expander from '@/devtools/components/Expander'
 
   export default {
     name: 'App',

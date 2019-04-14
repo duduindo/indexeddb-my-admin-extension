@@ -3,10 +3,10 @@ import VueRouter from 'vue-router'
 import Vuex from 'vuex'
 import { sync } from 'vuex-router-sync'
 import VueJsonPretty from 'vue-json-pretty'
-import { routes } from '@/router-config.js'
-import App from '@/App.vue'
-import Store from '@/vuex/store.js'
-import '@/assets/array-filter-index.js'
+import { routes } from '@/devtools/router-config.js'
+import App from '@/devtools/App.vue'
+import Store from '@/devtools/vuex/store.js'
+import '@/devtools/assets/array-filter-index.js'
 
 Vue.config.devtools = false
 Vue.config.productionTip = false

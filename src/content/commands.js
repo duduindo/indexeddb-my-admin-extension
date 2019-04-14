@@ -1,5 +1,5 @@
-import IndexedDBAdmin from '@/indexedDBAdmin'
-import Tab from '@/tab'
+import IndexedDBAdmin from '@/content/indexedDBAdmin'
+import Tab from '@/content/tab'
 
 
 class Commands {
