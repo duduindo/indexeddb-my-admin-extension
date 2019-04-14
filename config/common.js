@@ -32,7 +32,7 @@ module.exports = {
         test: /\.js$/,
         loader: 'babel-loader',
         options: {
-          root: '../'
+          configFile: resolve('babel.config.js')
         }
       },
 

@@ -1,13 +1,48 @@
 module.exports = {
-  "presets": [
-    [
-      "@babel/preset-env",
-      {
-        "targets": {
-          "chrome": 70,
-        },
-      },
-    ],
-    "@vue/app"
-  ]
+  "env": {
+    // Production
+    "production": {
+      "presets": [
+        [
+          "@babel/preset-env",
+          {
+            "targets": {
+              "chrome": 70,
+            },
+          },
+        ]
+      ],
+    },
+
+    // Development
+    "development": {
+      "presets": [
+        [
+          "@babel/preset-env",
+          {
+            "targets": {
+              "chrome": 70,
+            },
+          },
+        ]
+      ],
+    },
+
+    // Test
+    "test": {
+      "presets": [
+        [
+          "@babel/preset-env",
+          {
+            "targets": {
+              "chrome": 70,
+            },
+          },
+        ]
+      ],
+    },
+  }
 }
+
+
+
