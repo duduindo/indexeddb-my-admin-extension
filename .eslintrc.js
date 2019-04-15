@@ -8,6 +8,9 @@ module.exports = {
   env: {
     browser: true,
   },
+  "globals": {
+     "chrome": "readonly"
+  },
   extends: [
     // https://github.com/vuejs/eslint-plugin-vue#priority-a-essential-error-prevention
     // consider switching to `plugin:vue/strongly-recommended` or `plugin:vue/recommended` for stricter rules.
@@ -29,5 +32,24 @@ module.exports = {
     'space-before-function-paren': 'off',
     // disallow multiple empty lines
     'no-multiple-empty-lines': ['error', { 'max': 2, 'maxBOF': 1}],
-  }
+    // This rule enforces a consistent indentation style
+    'indent': 2,
+    'no-new': 'off',
+  },
+
+  // https://github.com/vuejs/eslint-plugin-vue/issues/399#issuecomment-368003747
+  overrides: [
+    {
+      'files': ['*.vue'],
+      'rules': {
+        'indent': 'off',
+        'vue/script-indent': ['error', 2, {
+          'baseIndent': 1
+        }],
+        'vue/html-indent': ['error', 2, {
+          'baseIndent': 1
+        }],
+      }
+    }
+  ]
 }
