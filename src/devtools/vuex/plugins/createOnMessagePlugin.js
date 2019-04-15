@@ -22,6 +22,10 @@ function createOnMessagePlugin(onMessage) {
           store.commit('SET_STORE', data)
           break
 
+        case 'ADD_DATABASE_STORE':
+          store.commit('SET_STORE_ADDED_STATUS', data)
+          break
+
         case 'UPDATE_DATABASE_STORE':
           store.commit('SET_STORE_UPDATED_STATUS', data)
           break

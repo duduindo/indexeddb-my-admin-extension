@@ -1,5 +1,6 @@
+import AddObjectStore from '@/devtools/pages/AddObjectStore'
 import Database from '@/devtools/pages/Database'
-import EditStore from '@/devtools/pages/EditStore'
+import EditObjectStore from '@/devtools/pages/EditObjectStore'
 import Store from '@/devtools/pages/Store'
 import PaginationStore from '@/devtools/components/PaginationStore'
 import Test from '@/devtools/pages/Test'
@@ -26,7 +27,12 @@ export const routes = [
   },
   {
     path: '/edit/store/:database/:version/:store/',
-    component: EditStore,
+    component: EditObjectStore,
+    children: []
+  },
+  {
+    path: '/add/store/:database/:version/:store/',
+    component: AddObjectStore,
     children: []
   }
 ]

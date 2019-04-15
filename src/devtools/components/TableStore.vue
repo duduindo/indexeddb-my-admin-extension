@@ -15,7 +15,9 @@
         <td>
           <router-link :to="{ path: `/edit/store/${database}/${version}/${store}/`, query: { cursor } }">Edit</router-link>
         </td>
-        <td><a href="#copy">Copy</a></td>
+        <td>
+          <router-link :to="{ path: `/add/store/${database}/${version}/${store}/`, query: { cursor } }">Copy</router-link>
+        </td>
         <td><a href="#delete">Delete</a></td>
         <td>{{ index }}</td>
         <td>{{ keys[index] }}</td>

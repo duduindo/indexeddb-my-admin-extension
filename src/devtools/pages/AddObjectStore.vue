@@ -1,9 +1,9 @@
 <template>
   <div>
-    <h1>Edit</h1>
+    <h1>Add</h1>
     <h3>Status: <i>{{ status }}</i></h3>
     <form>
-      <button type="button" @click="handleUpdate">Update</button>
+      <button type="button" @click="handleAdd">Go</button>
       <hr>
       <textarea v-model="cursor" :rows="rows" autofocus="true" autocorrect="off" spellcheck="false"></textarea>
     </form>
@@ -18,36 +18,33 @@
     data() {
       return {
         cursor: '{}',
-        oldCursor: '{}',
         rows: 2
       }
     },
     computed: {
       ...mapGetters({
-        status: 'getStoreUpdatedStatus'
+        status: 'getStoreAddedStatus'
       })
     },
     methods: {
       ...mapActions({
-        fetch: 'fetchUpdateStore',
-        setStatus: 'setStatus'
+        fetch: 'fetchAddStore',
+        setStatus: 'setAddStatus'
       }),
-      handleUpdate() {
+      handleAdd() {
         const { database, store, version } = this.$route.params
 
         try {
           const cursor = JSON.parse(this.cursor)
-          const oldCursor = JSON.parse(this.oldCursor)
 
           this.fetch({
             name: database,
             version,
             store,
-            oldValue: oldCursor,
-            newValue: cursor
+            value: cursor
           })
         } catch (err) {
-          this.setStatus(err)
+          this.setStatus(err.message)
         }
       }
     },
@@ -57,11 +54,10 @@
       const cursorFormatted = JsonStringFormatter.format(cursorString, '  ')
 
       this.cursor = cursorFormatted
-      this.oldCursor = cursorString
       this.rows = cursorFormatted.match(/\n/g) ? (cursorFormatted.match(/\n/g).length + 1) : 2
     },
     destroyed() {
-      this.setStatus('Waiting to update')
+      this.setStatus('Waiting to add')
     }
   }
 </script>

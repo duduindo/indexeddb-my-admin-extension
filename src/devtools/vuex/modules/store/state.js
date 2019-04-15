@@ -5,5 +5,6 @@ export default {
     keys: [],
     keyPath: ''
   },
+  storeObjectAddedStatus: 'Waiting to create',
   storeObjectUpdatedStatus: 'Waiting to update'
 }

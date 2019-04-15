@@ -8,5 +8,8 @@ export default {
   },
   SET_STORE_UPDATED_STATUS: (state, value) => {
     state.storeObjectUpdatedStatus = value
+  },
+  SET_STORE_ADDED_STATUS: (state, value) => {
+    state.storeObjectAddedStatus = value
   }
 }

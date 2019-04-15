@@ -21,12 +21,20 @@ export default {
 
     chrome.tabs.sendMessage(id, { type: 'GET_DATABASE_STORE', payload: value })
   },
+  fetchAddStore(context, value) {
+    const id = context.getters.getID
+
+    chrome.tabs.sendMessage(id, { type: 'ADD_DATABASE_STORE', payload: value })
+  },
+  setAddStatus(context, value) {
+    context.commit('SET_STORE_ADDED_STATUS', value)
+  },
   fetchUpdateStore(context, value) {
     const id = context.getters.getID
 
     chrome.tabs.sendMessage(id, { type: 'UPDATE_DATABASE_STORE', payload: value })
   },
-  setStatus(context, value) {
+  setUpdateStatus(context, value) {
     context.commit('SET_STORE_UPDATED_STATUS', value)
   },
   searchStoreValues(context, value) {
