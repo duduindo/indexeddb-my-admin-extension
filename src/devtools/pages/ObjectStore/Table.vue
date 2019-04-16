@@ -31,7 +31,7 @@
 
 <script>
   export default {
-    name: 'TableStore',
+    name: 'Table',
     data() {
       return {
         keyPath: null,

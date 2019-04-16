@@ -9,7 +9,7 @@
 
 <script>
   import { mapActions, mapGetters } from 'vuex'
-  import TableStore from '@/devtools/components/TableStore'
+  import TableStore from '@/devtools/components/store/Table'
 
   export default {
     components: { TableStore },

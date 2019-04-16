@@ -2,7 +2,7 @@ import AddObjectStore from '@/devtools/pages/AddObjectStore'
 import Database from '@/devtools/pages/Database'
 import EditObjectStore from '@/devtools/pages/EditObjectStore'
 import Store from '@/devtools/pages/Store'
-import PaginationStore from '@/devtools/components/PaginationStore'
+import PaginationStore from '@/devtools/components/store/Pagination'
 import Test from '@/devtools/pages/Test'
 
 

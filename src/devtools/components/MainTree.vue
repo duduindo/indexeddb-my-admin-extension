@@ -27,7 +27,7 @@
 
 <script>
   export default {
-    name: 'list',
+    name: 'MainTree',
     props: {
       tree: {
         type: Array,

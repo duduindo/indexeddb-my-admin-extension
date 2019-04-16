@@ -9,7 +9,7 @@
   import { mapActions } from 'vuex'
 
   export default {
-    name: 'pagination-store',
+    name: 'Pagination',
     data() {
       return {
         timeout: null,

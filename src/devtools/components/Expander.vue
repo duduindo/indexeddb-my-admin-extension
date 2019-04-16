@@ -1,17 +1,17 @@
 <template>
   <div>
-    <list :tree="tree"/>
+    <main-tree :tree="tree"/>
   </div>
 </template>
 
 <script>
   import { mapActions, mapGetters } from 'vuex'
-  import List from '@/devtools/components/List.vue'
+  import MainTree from '@/devtools/components/MainTree'
 
   export default {
-    name: 'expander',
+    name: 'Expander',
     components: {
-      List
+      MainTree
     },
     data() {
       return {
