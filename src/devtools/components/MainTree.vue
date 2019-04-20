@@ -7,7 +7,7 @@
       <!-- Store -->
       <ul>
         <li :key="storeIndex" v-for="(store, storeIndex) in database.stores">
-          <router-link :to="`/store/${database.name}/${database.version}/${store.name}/`">
+          <router-link :to="`/object-store/${database.name}/${database.version}/${store.name}/`">
             <p>{{ store.name }}</p>
           </router-link>
 
@@ -27,7 +27,7 @@
 
 <script>
   export default {
-    name: 'list',
+    name: 'MainTree',
     props: {
       tree: {
         type: Array,

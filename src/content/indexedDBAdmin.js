@@ -1,6 +1,3 @@
-import _ from 'lodash'
-
-
 class IndexedDBAdmin {
   constructor(name, version) {
     this.name = name
@@ -81,6 +78,41 @@ class IndexedDBAdmin {
   }
 
   // @public
+  async getAllFromObjectStoreSearch(name, terms = '') {
+    const objectStore = await this.objectStore(name)
+    const { keyPath } = objectStore
+    const termsLower = terms.toLowerCase()
+
+    return new Promise((resolve, reject) => {
+      const openCursor = objectStore.openCursor()
+      const values = []
+      const keys = []
+
+      openCursor.onsuccess = event => {
+        const cursor = event.target.result
+        let stringify = ''
+        let stringifyLower = ''
+
+        if (cursor) {
+          stringify = JSON.stringify(cursor.value)
+          stringifyLower = stringify.toLowerCase()
+
+          if (stringifyLower.indexOf(termsLower) > -1) {
+            values.push(cursor.value)
+            keys.push(cursor.value[keyPath])
+          }
+
+          cursor.continue()
+        } else {
+          resolve({ keyPath, keys, values })
+        }
+      }
+
+      openCursor.onerror = reject
+    })
+  }
+
+  // @public
   async getDatabaseTree() {
     const storeNames = await this.getStoreNamesToArray()
     const database = { name: this.name, version: this.version, stores: [] }
@@ -101,30 +133,7 @@ class IndexedDBAdmin {
   }
 
   // @public
-  async getCursors(name) {
-    const objectStore = await this.objectStore(name)
-
-    return new Promise((resolve, reject) => {
-      const openCursor = objectStore.openCursor()
-      const data = []
-
-      openCursor.onsuccess = event => {
-        const cursor = event.target.result
-
-        if (cursor) {
-          data.push(cursor.value)
-          cursor.continue()
-        } else {
-          resolve(data)
-        }
-      }
-
-      openCursor.onerror = reject
-    })
-  }
-
-  // @public
-  async addObjectStore(name, value) {
+  async insertObjectStoreContent(name, value) {
     const objectStore = await this.objectStore(name, 'readwrite')
 
     return new Promise((resolve, reject) => {
@@ -132,42 +141,6 @@ class IndexedDBAdmin {
 
       put.onsuccess = () => resolve('success')
       put.onerror = reject
-    })
-  }
-
-  // @public
-  async updateObjectStore(name, oldValue, newValue) {
-    const objectStore = await this.objectStore(name, 'readwrite')
-    const { keyPath } = objectStore
-
-    return new Promise((resolve, reject) => {
-      const openCursor = objectStore.openCursor()
-
-      openCursor.onsuccess = event => {
-        const cursor = event.target.result
-
-        if (cursor) {
-          const library = cursor.value
-
-          if (_.isEqual(oldValue, library)) {
-            _.assignWith(library, newValue, (objValue, srcValue, objKey) => {
-              if (objKey === keyPath) {
-                return objValue
-              } else {
-                return srcValue
-              }
-            })
-
-            cursor.update(library)
-          }
-
-          cursor.continue()
-        } else {
-          resolve('success')
-        }
-      }
-
-      openCursor.onerror = reject
     })
   }
 }

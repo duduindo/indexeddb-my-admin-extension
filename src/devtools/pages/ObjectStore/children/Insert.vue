@@ -1,9 +1,9 @@
 <template>
   <div>
-    <h1>Add</h1>
-    <h3>Status: <i>{{ status }}</i></h3>
-    <form>
-      <button type="button" @click="handleAdd">Go</button>
+    <h2>Insert</h2>
+    <p>Status: <i>{{ status }}</i></p>
+    <form @submit.prevent>
+      <button @click="handleClick">Go</button>
       <hr>
       <textarea v-model="cursor" :rows="rows" autofocus="true" autocorrect="off" spellcheck="false"></textarea>
     </form>
@@ -23,15 +23,15 @@
     },
     computed: {
       ...mapGetters({
-        status: 'getStoreAddedStatus'
+        status: 'getObjectStoreInsertedStatus'
       })
     },
     methods: {
       ...mapActions({
-        fetch: 'fetchAddStore',
-        setStatus: 'setAddStatus'
+        fetch: 'fetchObjectStoreInsert',
+        setStatus: 'setObjectStoreStatusInserted'
       }),
-      handleAdd() {
+      handleClick() {
         const { database, store, version } = this.$route.params
 
         try {
@@ -43,6 +43,8 @@
             store,
             value: cursor
           })
+
+          this.setStatus('loading...')
         } catch (err) {
           this.setStatus(err.message)
         }
@@ -57,7 +59,7 @@
       this.rows = cursorFormatted.match(/\n/g) ? (cursorFormatted.match(/\n/g).length + 1) : 2
     },
     destroyed() {
-      this.setStatus('Waiting to add')
+      this.setStatus('')
     }
   }
 </script>

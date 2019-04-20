@@ -13,10 +13,10 @@
       <tr :key="index" v-for="(cursor, index) in values">
         <td><input type="checkbox"></td>
         <td>
-          <router-link :to="{ path: `/edit/store/${database}/${version}/${store}/`, query: { cursor } }">Edit</router-link>
+          <router-link :to="{ path: `/object-store/${database}/${version}/${store}/insert`, query: { cursor } }">Edit</router-link>
         </td>
         <td>
-          <router-link :to="{ path: `/add/store/${database}/${version}/${store}/`, query: { cursor } }">Copy</router-link>
+          <router-link :to="{ path: `/object-store/${database}/${version}/${store}/insert`, query: { cursor } }">Copy</router-link>
         </td>
         <td><a href="#delete">Delete</a></td>
         <td>{{ index }}</td>
@@ -31,7 +31,7 @@
 
 <script>
   export default {
-    name: 'TableStore',
+    name: 'Table',
     data() {
       return {
         keyPath: null,
@@ -52,7 +52,7 @@
         type: String,
         required: true
       },
-      objectStore: {
+      content: {
         type: Object,
         required: true,
         default() {
@@ -65,7 +65,7 @@
       }
     },
     watch: {
-      objectStore(value) {
+      content(value) {
         if (value.keyPath) {
           this.keyPath = value.keyPath
         }

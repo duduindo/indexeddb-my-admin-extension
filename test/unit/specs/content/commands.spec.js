@@ -46,9 +46,9 @@ describe('Tests all', () => {
       expect(data).toEqual(result)
     })
 
-    test('Should return all data from store', async () => {
+    test('Should return all data from store content', async () => {
       const action = {
-        type: 'GET_DATABASE_STORE',
+        type: 'GET_DATABASE_OBJECTSTORE_CONTENT',
         payload: {
           name: 'library',
           version: 1,
@@ -58,7 +58,7 @@ describe('Tests all', () => {
       }
 
       const result = {
-        type: 'GET_DATABASE_STORE',
+        type: 'GET_DATABASE_OBJECTSTORE_CONTENT',
         data: {
           keyPath: 'isbn',
           keys: [ 123456, 234567, 345678 ],
@@ -77,9 +77,39 @@ describe('Tests all', () => {
     })
 
 
-    test('Should return success when object store added', async () => {
+    test('Should return data searched from store content', async () => {
       const action = {
-        type: 'ADD_DATABASE_STORE',
+        type: 'GET_DATABASE_OBJECTSTORE_SEARCH',
+        payload: {
+          name: 'library',
+          version: 1,
+          store: 'books',
+          terms: '234567'
+        },
+        origin: window.location.host
+      }
+
+      const result = {
+        type: 'GET_DATABASE_OBJECTSTORE_SEARCH',
+        data: {
+          keyPath: 'isbn',
+          keys: [ 234567 ],
+          values: [
+            { title: 'Water Buffaloes', author: 'Fred', isbn: 234567 }
+          ]
+        },
+        origin: window.location.host
+      }
+
+      const data = await command.exec(action)
+
+      expect(data).toEqual(result)
+    })
+
+
+    test('Should return success when object store inserted', async () => {
+      const action = {
+        type: 'INSERT_DATABASE_OBJECTSTORE_CONTENT',
         payload: {
           name: 'library',
           version: 1,
@@ -90,32 +120,7 @@ describe('Tests all', () => {
       }
 
       const result = {
-        type: 'ADD_DATABASE_STORE',
-        data: 'success',
-        origin: window.location.host
-      }
-
-      const data = await command.exec(action)
-
-      expect(data).toEqual(result)
-    })
-
-
-    test('Should return success when object store updated', async () => {
-      const action = {
-        type: 'UPDATE_DATABASE_STORE',
-        payload: {
-          name: 'library',
-          version: 1,
-          store: 'books',
-          oldValue: { title: '1964', author: 'Fulano', isbn: 6543 },
-          newValue: { title: '2000', author: 'Sicrano', isbn: 2000 }
-        },
-        origin: window.location.host
-      }
-
-      const result = {
-        type: 'UPDATE_DATABASE_STORE',
+        type: 'INSERT_DATABASE_OBJECTSTORE_CONTENT',
         data: 'success',
         origin: window.location.host
       }
