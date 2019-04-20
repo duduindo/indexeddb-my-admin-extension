@@ -1,7 +1,3 @@
-import isEqual from 'lodash/isEqual'
-import assignWith from 'lodash/assignWith'
-
-
 class IndexedDBAdmin {
   constructor(name, version) {
     this.name = name
