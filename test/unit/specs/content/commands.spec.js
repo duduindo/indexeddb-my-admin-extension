@@ -46,9 +46,9 @@ describe('Tests all', () => {
       expect(data).toEqual(result)
     })
 
-    test('Should return all data from store', async () => {
+    test('Should return all data from store content', async () => {
       const action = {
-        type: 'GET_DATABASE_STORE',
+        type: 'GET_DATABASE_OBJECTSTORE_CONTENT',
         payload: {
           name: 'library',
           version: 1,
@@ -58,7 +58,7 @@ describe('Tests all', () => {
       }
 
       const result = {
-        type: 'GET_DATABASE_STORE',
+        type: 'GET_DATABASE_OBJECTSTORE_CONTENT',
         data: {
           keyPath: 'isbn',
           keys: [ 123456, 234567, 345678 ],
@@ -66,6 +66,36 @@ describe('Tests all', () => {
             { title: 'Quarry Memories', author: 'Fred', isbn: 123456 },
             { title: 'Water Buffaloes', author: 'Fred', isbn: 234567 },
             { title: 'Bedrock Nights', author: 'Barney', isbn: 345678 }
+          ]
+        },
+        origin: window.location.host
+      }
+
+      const data = await command.exec(action)
+
+      expect(data).toEqual(result)
+    })
+
+
+    test('Should return data searched from store content', async () => {
+      const action = {
+        type: 'GET_DATABASE_OBJECTSTORE_SEARCH',
+        payload: {
+          name: 'library',
+          version: 1,
+          store: 'books',
+          terms: '234567'
+        },
+        origin: window.location.host
+      }
+
+      const result = {
+        type: 'GET_DATABASE_OBJECTSTORE_SEARCH',
+        data: {
+          keyPath: 'isbn',
+          keys: [ 234567 ],
+          values: [
+            { title: 'Water Buffaloes', author: 'Fred', isbn: 234567 }
           ]
         },
         origin: window.location.host

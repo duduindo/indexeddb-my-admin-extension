@@ -1,5 +1,5 @@
 <template>
-  <form>
+  <form @submit.prevent>
     <fieldset>
       <label for="filter-rows"></label>
       <input type="text" id="filter-rows" placeholder="Search this store" v-model="terms">
@@ -32,7 +32,7 @@
           this.timeout = null
         }
 
-        this.timeout = setTimeout(this.fetch, 100, {
+        this.timeout = setTimeout(this.fetch, 200, {
           name,
           version,
           store,

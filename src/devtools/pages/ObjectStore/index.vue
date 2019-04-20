@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Object Store</h1>
+    <h1>Object Store Page</h1>
     <router-view></router-view>
   </div>
 </template>

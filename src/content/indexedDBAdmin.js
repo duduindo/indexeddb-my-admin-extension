@@ -1,4 +1,5 @@
-import _ from 'lodash'
+import isEqual from 'lodash/isEqual'
+import assignWith from 'lodash/assignWith'
 
 
 class IndexedDBAdmin {
@@ -81,12 +82,38 @@ class IndexedDBAdmin {
   }
 
   // @public
-  async getAllFromObjectStoreSearch(name, terms) { /* @TODO - To create test. It needs to remove keyPath, keys and values variables  */
-    const { keyPath } = await this.objectStore(name)
-    const keys = await this.getAllKeysFromObjectStore(name)
-    const values = await this.getAllValuesFromObjectStore(name)
+  async getAllFromObjectStoreSearch(name, terms = '') {
+    const objectStore = await this.objectStore(name)
+    const { keyPath } = objectStore
+    const termsLower = terms.toLowerCase()
 
-    return { keyPath, keys, values }
+    return new Promise((resolve, reject) => {
+      const openCursor = objectStore.openCursor()
+      const values = []
+      const keys = []
+
+      openCursor.onsuccess = event => {
+        const cursor = event.target.result
+        let stringify = ''
+        let stringifyLower = ''
+
+        if (cursor) {
+          stringify = JSON.stringify(cursor.value)
+          stringifyLower = stringify.toLowerCase()
+
+          if (stringifyLower.indexOf(termsLower) > -1) {
+            values.push(cursor.value)
+            keys.push(cursor.value[keyPath])
+          }
+
+          cursor.continue()
+        } else {
+          resolve({ keyPath, keys, values })
+        }
+      }
+
+      openCursor.onerror = reject
+    })
   }
 
   // @public
@@ -158,8 +185,8 @@ class IndexedDBAdmin {
         if (cursor) {
           const library = cursor.value
 
-          if (_.isEqual(oldValue, library)) {
-            _.assignWith(library, newValue, (objValue, srcValue, objKey) => {
+          if (isEqual(oldValue, library)) {
+            assignWith(library, newValue, (objValue, srcValue, objKey) => {
               if (objKey === keyPath) {
                 return objValue
               } else {
