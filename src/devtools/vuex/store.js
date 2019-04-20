@@ -1,7 +1,8 @@
-import store from './modules/store/index.js'
-import tab from './modules/tab/index.js'
-import tree from './modules/tree/index.js'
-import createOnMessagePlugin from './plugins/createOnMessagePlugin.js'
+import objectStore from './modules/objectStore/index'
+import store from './modules/store/index'
+import tab from './modules/tab/index'
+import tree from './modules/tree/index'
+import createOnMessagePlugin from './plugins/createOnMessagePlugin'
 
 
 const plugins = [
@@ -10,6 +11,7 @@ const plugins = [
 
 export default {
   modules: {
+    objectStore,
     store,
     tab,
     tree

@@ -13,8 +13,12 @@ class Commands {
     let request = null
 
     switch (type) {
-      case 'GET_DATABASE_STORE':
+      case 'GET_DATABASE_OBJECTSTORE_CONTENT':
         request = indexedDBAdmin.getAllFromObjectStore(payload.store)
+        break
+
+      case 'GET_DATABASE_OBJECTSTORE_SEARCH':
+        request = indexedDBAdmin.getAllFromObjectStoreSearch(payload.store, payload.terms)
         break
 
       case 'GET_DATABASE_TREE':

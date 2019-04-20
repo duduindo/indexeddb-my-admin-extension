@@ -1,7 +1,9 @@
 <template>
   <form>
-    <label for="filter-rows"></label>
-    <input type="text" id="filter-rows" placeholder="Search this store" v-model="terms">
+    <fieldset>
+      <label for="filter-rows"></label>
+      <input type="text" id="filter-rows" placeholder="Search this store" v-model="terms">
+    </fieldset>
   </form>
 </template>
 
@@ -18,17 +20,24 @@
     },
     methods: {
       ...mapActions({
-        search: 'searchStoreValues'
+        fetch: 'fetchObjectStoreSearch'
       })
     },
     watch: {
       terms(value) {
+        const { database: name, version, store } = this.$route.params
+
         if (this.timeout) {
           clearTimeout(this.timeout)
           this.timeout = null
         }
 
-        this.timeout = setTimeout(this.search, 80, value)
+        this.timeout = setTimeout(this.fetch, 100, {
+          name,
+          version,
+          store,
+          terms: value
+        })
       }
     }
   }

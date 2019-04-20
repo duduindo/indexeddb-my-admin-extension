@@ -18,20 +18,17 @@ function createOnMessagePlugin(onMessage) {
           store.commit('SET_HOST', data)
           break
 
-        case 'GET_DATABASE_STORE':
-          store.commit('SET_STORE', data)
-          break
-
-        case 'ADD_DATABASE_STORE':
-          store.commit('SET_STORE_ADDED_STATUS', data)
-          break
-
-        case 'UPDATE_DATABASE_STORE':
-          store.commit('SET_STORE_UPDATED_STATUS', data)
-          break
-
         case 'GET_DATABASE_TREE':
           store.commit('SET_TREE', data)
+          break
+
+        // Object Store
+        case 'GET_DATABASE_OBJECTSTORE_CONTENT':
+          store.commit('SET_OBJECTSTORE_CONTENT', data)
+          break
+
+        case 'GET_DATABASE_OBJECTSTORE_SEARCH':
+          store.commit('SET_OBJECTSTORE_CONTENT', data)
           break
       }
     })

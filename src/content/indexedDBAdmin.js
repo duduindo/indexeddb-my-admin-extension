@@ -81,6 +81,15 @@ class IndexedDBAdmin {
   }
 
   // @public
+  async getAllFromObjectStoreSearch(name, terms) { /* @TODO - To create test. It needs to remove keyPath, keys and values variables  */
+    const { keyPath } = await this.objectStore(name)
+    const keys = await this.getAllKeysFromObjectStore(name)
+    const values = await this.getAllValuesFromObjectStore(name)
+
+    return { keyPath, keys, values }
+  }
+
+  // @public
   async getDatabaseTree() {
     const storeNames = await this.getStoreNamesToArray()
     const database = { name: this.name, version: this.version, stores: [] }
