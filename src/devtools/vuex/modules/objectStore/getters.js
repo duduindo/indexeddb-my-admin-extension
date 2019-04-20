@@ -1,3 +1,4 @@
 export default {
-  getObjectStoreContent: state => state.content
+  getObjectStoreContent: state => state.content,
+  getObjectStoreInsertedStatus: state => state.statusInserted
 }

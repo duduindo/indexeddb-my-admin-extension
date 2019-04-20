@@ -1,7 +1,6 @@
 import Index from './'
-import Add from './children/Add'
+import Insert from './children/Insert'
 import Content from './children/Content'
-import Edit from './children/Edit'
 
 
 export const route = {
@@ -9,17 +8,13 @@ export const route = {
   component: Index,
   children: [
     {
-      path: 'add',
-      component: Add
+      path: 'insert',
+      component: Insert
     },
     {
       path: 'content',
       alias: '',
       component: Content
-    },
-    {
-      path: 'edit',
-      component: Edit
     }
   ]
 }

@@ -23,6 +23,10 @@ function createOnMessagePlugin(onMessage) {
           break
 
         // Object Store
+        case 'INSERT_DATABASE_OBJECTSTORE_CONTENT':
+          store.commit('SET_OBJECTSTORE_INSERTED_STATUS', data)
+          break
+
         case 'GET_DATABASE_OBJECTSTORE_CONTENT':
           store.commit('SET_OBJECTSTORE_CONTENT', data)
           break

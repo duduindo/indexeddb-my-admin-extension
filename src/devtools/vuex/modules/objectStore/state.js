@@ -3,5 +3,6 @@ export default {
     keyPath: '',
     keys: [],
     values: []
-  }
+  },
+  statusInserted: ''
 }
