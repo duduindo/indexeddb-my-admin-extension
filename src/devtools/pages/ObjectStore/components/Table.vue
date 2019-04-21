@@ -1,5 +1,5 @@
 <template>
-  <table>
+  <table class="table table-pmahomme">
     <thead>
       <tr>
         <th colspan="4">Actions</th>

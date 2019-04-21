@@ -34,36 +34,20 @@
 </script>
 
 <style lang="sass">
-  body
-    background-color: silver
+  @import '@/devtools/sass/index'
 
-  table
-    border-collapse: collapse
-    width: 100%
+  // body
+  //   background-color: silver
 
-  td, th
-    border: 1px solid #dddddd
-    text-align: left
-    padding: 8px
+  // table
+  //   border-collapse: collapse
+  //   width: 100%
 
-  tr:nth-child(even)
-    background-color: #dddddd
+  // td, th
+  //   border: 1px solid #dddddd
+  //   text-align: left
+  //   padding: 8px
 
-  .l-container
-    display: grid
-    grid-template-columns: 2fr 8fr
-    grid-template-rows: auto 10fr
-    grid-gap: 5px
-
-  .l-masthead
-    grid-column: 2
-    grid-row: auto
-
-  .l-aside
-    grid-column: 1
-    grid-row: 1/3
-
-  .l-main
-    grid-column: 2
-    grid-row: 2
+  // tr:nth-child(even)
+  //   background-color: #dddddd
 </style>
