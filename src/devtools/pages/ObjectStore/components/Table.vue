@@ -2,10 +2,10 @@
   <table class="table table-pmahomme">
     <thead>
       <tr>
-        <th colspan="4">Actions</th>
-        <th>#</th>
-        <th>Key (key path: "{{ keyPath }}")</th>
-        <th>Value</th>
+        <th colspan="4"><a href="#">Actions</a></th>
+        <th><a href="#">#</a></th>
+        <th><a href="#">Key (key path: "{{ keyPath }}")</a></th>
+        <th><a href="#">Value</a></th>
       </tr>
     </thead>
 
@@ -13,12 +13,23 @@
       <tr :key="index" v-for="(cursor, index) in values">
         <td><input type="checkbox"></td>
         <td>
-          <router-link :to="{ path: `/object-store/${database}/${version}/${store}/insert`, query: { cursor } }">Edit</router-link>
+          <router-link :to="{ path: `/object-store/${database}/${version}/${store}/insert`, query: { cursor } }">
+            <img src="images/b_edit.png" alt="Edit object store">
+            <span>Edit</span>
+          </router-link>
         </td>
         <td>
-          <router-link :to="{ path: `/object-store/${database}/${version}/${store}/insert`, query: { cursor } }">Copy</router-link>
+          <router-link :to="{ path: `/object-store/${database}/${version}/${store}/insert`, query: { cursor } }">
+            <img src="images/b_insrow.png" alt="Copy object store">
+            <span>Copy</span>
+          </router-link>
         </td>
-        <td><a href="#delete">Delete</a></td>
+        <td>
+          <a href="#delete">
+            <img src="images/b_drop.png" alt="Delete object store">
+            <span>Delete</span>
+          </a>
+        </td>
         <td>{{ index }}</td>
         <td>{{ keys[index] }}</td>
         <td>

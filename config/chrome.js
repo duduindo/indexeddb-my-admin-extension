@@ -24,6 +24,10 @@ const plugins = mergeWith({}, commonConfig, {
         from: './shells/chrome',
         to: 'chrome/IndexedDBMyAdmin'
       },
+      {
+        from: './src/devtools/assets/images',
+        to: 'chrome/IndexedDBMyAdmin/images'
+      }
     ]),
   ],
   // Resolve
