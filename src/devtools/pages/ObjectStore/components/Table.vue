@@ -1,5 +1,5 @@
 <template>
-  <table class="table table-pmahomme">
+  <table class="table table-objectstore">
     <thead>
       <tr>
         <th colspan="4"><a href="#">Actions</a></th>
