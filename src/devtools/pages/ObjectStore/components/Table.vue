@@ -1,11 +1,11 @@
 <template>
-  <table class="table table-objectstore">
+  <table class="table table-extension">
     <thead>
       <tr>
-        <th colspan="4"><a href="#">Actions</a></th>
-        <th><a href="#">#</a></th>
-        <th><a href="#">Key (key path: "{{ keyPath }}")</a></th>
-        <th><a href="#">Value</a></th>
+        <th scope="col" colspan="4"><a href="#">Actions</a></th>
+        <th scope="col"><a href="#">#</a></th>
+        <th scope="col"><a href="#">Key (key path: "{{ keyPath }}")</a></th>
+        <th scope="col"><a href="#">Value</a></th>
       </tr>
     </thead>
 
@@ -30,7 +30,7 @@
             <span>Delete</span>
           </a>
         </td>
-        <td>{{ index }}</td>
+        <td scope="row">{{ index }}</td>
         <td>{{ keys[index] }}</td>
         <td>
           <vue-json-pretty :data="cursor"></vue-json-pretty>

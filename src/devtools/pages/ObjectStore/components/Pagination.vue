@@ -1,6 +1,13 @@
 <template>
-  <div class="pagination pagination-objectstore">
+  <div class="pagination pagination-extension">
     <form class="form-inline" @submit.prevent>
+      <div class="form-group">
+        <label class="form-check-label" for="show-all">
+          Show all
+        </label>
+        <input class="form-check-input" type="checkbox" value="" id="show-all">
+      </div>
+
       <div class="form-group">
         <label for="number-of-rows">Number of rows:</label>
         <select class="form-control form-control-xs" id="number-of-rows">
