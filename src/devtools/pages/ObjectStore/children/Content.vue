@@ -1,5 +1,19 @@
 <template>
   <div>
+    <div class="alert alert-success alert-extension" role="alert">
+      <div class="alert-head">
+        Showing rows 0 - 7 (8 total, Query took 0.0005 seconds.)
+      </div>
+
+      <div class="alert-body">
+        SELECT * FROM `Categories`
+      </div>
+
+      <div class="alert-foot text-right">
+        <button class="btn btn-sm btn-secondary btn-extension">Copy code</button>
+      </div>
+    </div>
+
     <Pagination />
     <Table
       :database="$route.params.database"

@@ -1,5 +1,5 @@
 <template>
-  <div class="l-container" id="app">
+  <div class="l-container theme-pmahomme" id="app">
     <aside class="l-aside">
       <router-link :to="'/'" >Go to index</router-link>
       <Expander />

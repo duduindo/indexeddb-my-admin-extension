@@ -25,15 +25,15 @@
         <tfoot>
           <tr>
             <td>
-              <button class="btn btn-primary" @click="handleClick"><b>Go</b></button>
+              <button class="btn btn-sm btn-primary btn-extension" @click="handleClick"><b>Go</b></button>
             </td>
           </tr>
         </tfoot>
       </table>
 
       <div>
-        <button class="btn btn-secondary">Preview script</button>
-        <button class="btn btn-secondary">Reset</button>
+        <button class="btn btn-sm btn-secondary btn-extension">Preview script</button>
+        <button class="btn btn-sm btn-secondary btn-extension">Reset</button>
       </div>
     </form>
   </div>
