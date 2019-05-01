@@ -1,0 +1,28 @@
+// ==========================================================================
+// Table
+// ==========================================================================
+
+.table-extension
+  a, span
+    padding-left: .3em
+
+  td
+    padding: .1em .3em
+    vertical-align: middle
+
+  thead
+    th
+      padding: .1em
+      border-bottom: none
+      border-left: 1px solid $white
+      border-right: none
+      border-top: none
+
+  tbody
+    tr
+      td
+        &:nth-last-of-type(1n+4)
+          width: 80px
+
+        &:nth-of-type(1)
+          width: 35px

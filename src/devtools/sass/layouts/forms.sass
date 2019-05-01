@@ -1,0 +1,20 @@
+// ==========================================================================
+// Forms
+// ==========================================================================
+
+$input-btn-padding-y-xs:      .25rem !default
+$input-padding-y-xs:          .20rem !default
+$input-padding-x-xs:          .2rem !default
+$input-height-border-xs:      $input-border-width * 1 !default
+$input-font-size-xs:          $font-size-base * .875 !default
+$input-line-height-xs:        1 !default
+$input-border-radius-xs:      .1rem !default
+$input-height-xs:             calc(#{$input-line-height-xs * 1em} + #{$input-btn-padding-y-xs * 3} + #{$input-height-border-xs}) !default
+
+
+.form-control-xs
+  height: $input-height-xs
+  padding: $input-padding-y-xs $input-padding-x-xs
+  @include font-size($input-font-size-xs)
+  line-height: $input-line-height-xs
+  @include border-radius($input-border-radius-xs)

@@ -1,11 +1,40 @@
 <template>
   <div>
     <h2>Insert</h2>
-    <p>Status: <i>{{ status }}</i></p>
+
     <form @submit.prevent>
-      <button @click="handleClick">Go</button>
-      <hr>
-      <textarea v-model="cursor" :rows="rows" autofocus="true" autocorrect="off" spellcheck="false"></textarea>
+      <p>Status: <i>{{ status }}</i></p>
+
+      <table class="table table-extension table-borderless">
+        <thead>
+          <tr>
+            <th><label for="cursorTextarea">Value</label></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>
+              <div class="form-group">
+                <textarea v-model="cursor" :rows="rows" id="cursorTextarea" class="form-control" autofocus="true" autocorrect="off" spellcheck="false"></textarea>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+
+        <tfoot>
+          <tr>
+            <td>
+              <button class="btn btn-sm btn-primary btn-extension" @click="handleClick"><b>Go</b></button>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+
+      <div>
+        <button class="btn btn-sm btn-secondary btn-extension">Preview script</button>
+        <button class="btn btn-sm btn-secondary btn-extension">Reset</button>
+      </div>
     </form>
   </div>
 </template>
@@ -63,8 +92,3 @@
     }
   }
 </script>
-
-<style lang="sass" scoped>
-  textarea
-    width: 100%
-</style>
