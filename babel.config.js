@@ -1,47 +1,18 @@
 module.exports = {
-  "env": {
-    // Production
-    "production": {
-      "presets": [
-        [
-          "@babel/preset-env",
-          {
-            "targets": {
-              "chrome": 70,
-            },
-          },
-        ]
-      ],
-    },
-
-    // Development
-    "development": {
-      "presets": [
-        [
-          "@babel/preset-env",
-          {
-            "targets": {
-              "chrome": 70,
-            },
-          },
-        ]
-      ],
-    },
-
-    // Test
-    "test": {
-      "presets": [
-        [
-          "@babel/preset-env",
-          {
-            "targets": {
-              "chrome": 70,
-            },
-          },
-        ]
-      ],
-    },
-  }
+  presets: [
+    [
+      "@babel/preset-env",
+      {
+        targets: {
+          chrome: 70,
+        },
+      },
+    ]
+  ],
+  plugins: [
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-proposal-private-methods"
+  ]
 }
 
 
