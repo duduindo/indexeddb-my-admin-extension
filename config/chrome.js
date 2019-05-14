@@ -32,7 +32,7 @@ const plugins = mergeWith({}, commonConfig, {
   ],
   // Resolve
   resolve: {
-    extensions: ['.js', '.vue', '.json', '.sass', '.scss', '.styl'],
+    extensions: ['.js', '.vue', '.json', '.sass', '.scss', '.styl', '.ts'],
     alias: {
       '@': resolve('src'),
     }

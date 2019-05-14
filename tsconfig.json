@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "target": "es2017",
+    "baseUrl": "./",
+    "newLine": "lf",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "outDir": "dist/",
+    "strict": true,
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "**/node_modules/*",
+    "**/*.spec.ts"
+  ],
+  "include": [
+    "typings/**/*.d.ts",
+    "node_modules/@*/types-*/*.d.ts"
+  ],
+  "types": [
+    "chrome"
+  ],
+  "globals": {
+    "ts-jest": {
+      "diagnostics": false
+    }
+  }
+}
