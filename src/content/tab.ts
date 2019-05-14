@@ -1,5 +1,5 @@
 class Tab {
-  getHost() {
+  getHost(): string {
     return window.location.host
   }
 }
