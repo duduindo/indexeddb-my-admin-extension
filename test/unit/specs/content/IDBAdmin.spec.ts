@@ -28,7 +28,7 @@ describe('IDBAdmin', () => {
         const storesName = await dbAdmin.getStoreNamesToArray()
         const result = {
           data: [],
-          text: 'TypeError',
+          text: expect.any(String),
           type: 'error'
         };
 

@@ -32,7 +32,7 @@ class IDBAdmin {
         type: 'success'
       }
     } catch(e) {
-      text = (e.msg) ? e.msg : e.toString()
+      text = e.toString()
       text = ('oldVersion' in e) ? `Altered version from ${e.oldVersion} to ${e.newVersion}` : text
 
       return {
