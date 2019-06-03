@@ -16,41 +16,34 @@ class IDBAdmin {
     })
   }
 
-  private async objectStore(name: string, mode: any = 'readonly'): Promise<IDBObjectStore> {
-    const db = await this.open()
-
-    return db.target.result.transaction(name, mode).objectStore(name)
-  }
-
-  async getStoreNamesToArray(): Promise<string[] | string> {
-    let db: any
-    let list: any
-    let arList: any
+  async getStoreNamesToArray(): Promise<IDBAdminResponse> {
+    let db: Open
+    let list: Array<string> = []
+    let text: string
 
     try {
       db = await this.open()
-      list = db.target.result.objectStoreNames
-      arList = Array.from(list)
+      list = Array.from(db.target.result.objectStoreNames)
+      text = 'Success'
 
-      return arList
-    } catch(e) {
-      if ('newVersion' in e) {
-        return `Altered version from ${e.oldVersion} to ${e.newVersion}`
+      return {
+        data: list,
+        text,
+        type: 'success'
       }
+    } catch(e) {
+      text = (e.msg) ? e.msg : e.toString()
+      text = ('oldVersion' in e) ? `Altered version from ${e.oldVersion} to ${e.newVersion}` : text
 
-      return e.msg || e.toString()
+      return {
+        data: list,
+        text,
+        type: 'error'
+      }
     }
   }
 
-  async getAllKeysFromObjectStore(name: string): Promise<(string | number)[]> {
-    const objectStore = await this.objectStore(name)
-    const keys = objectStore.getAllKeys()
 
-    return new Promise((resolve, reject) => {
-      keys.onsuccess = (event: any) => resolve(event.target.result);
-      keys.onerror = (event: any) => reject(event);
-    })
-  }
 }
 
 export default IDBAdmin;

@@ -1,41 +1,51 @@
 import IDBAdmin from '@/content/IDBAdmin'
 
 
-describe('IndexedDB Admin', () => {
-  describe('Requests successfully', () => {
-    let dbAdmin: IDBAdmin
-
-    beforeEach((): void => {
-      require('../../mocks/content/indexeddb-library.js')
-
-      dbAdmin = new IDBAdmin('library', 1)
-    })
-
-    test('Should return a list of the names of stores from database', async () => {
-      const storesName = await dbAdmin.getStoreNamesToArray()
-
-      expect(storesName).toEqual(['books', 'e-readers'])
-    })
-  })
-
-
-  describe('Requests failed', () => {
+describe('IDBAdmin', () => {
+  describe('getStoreNamesToArray', () => {
     beforeAll((): void => {
       require('../../mocks/content/indexeddb-library.js')
     })
 
-    test('Should return any Error in string when version is wrong', async () => {
-      const dbAdmin = new IDBAdmin('library', -2)
-      const storesName = await dbAdmin.getStoreNamesToArray()
+    describe('Successfully', () => {
+      test('Should return a list of the names of stores from database', async () => {
+        const dbAdmin = new IDBAdmin('library', 1)
+        const storesName = await dbAdmin.getStoreNamesToArray()
+        const result = {
+          data: ['books', 'e-readers'],
+          text: 'Success',
+          type: 'success'
+        };
 
-      expect(storesName).toMatch('Error')
+        expect(storesName).toEqual(result)
+      })
     })
 
-    test('Should return a message of altered version', async () => {
-      const dbAdmin = new IDBAdmin('library', 2)
-      const storesName = await dbAdmin.getStoreNamesToArray()
 
-      expect(storesName).toMatch(/(altered version)/i)
+    describe('Failed', () => {
+      test('Should return any Error in string when version is wrong', async () => {
+        const dbAdmin = new IDBAdmin('library', -2)
+        const storesName = await dbAdmin.getStoreNamesToArray()
+        const result = {
+          data: [],
+          text: 'TypeError',
+          type: 'error'
+        };
+
+        expect(storesName).toEqual(result)
+      })
+
+      test('Should return a message of altered version', async () => {
+        const dbAdmin = new IDBAdmin('library', 2)
+        const storesName = await dbAdmin.getStoreNamesToArray()
+        const result = {
+          data: [],
+          text: 'Altered version from 1 to 2',
+          type: 'error'
+        };
+
+        expect(storesName).toEqual(result)
+      })
     })
   })
 })
