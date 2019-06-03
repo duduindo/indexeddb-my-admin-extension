@@ -10,8 +10,9 @@ class IDBAdmin {
     const request = window.indexedDB.open(this.name, this.version)
 
     return new Promise((resolve, reject) => {
-      request.onsuccess = (event: any) => resolve(event);
-      request.onerror = (event: any) => reject(event);
+      request.onsuccess = (event: any) => resolve(event)
+      request.onerror = (event: any) => reject(event)
+      request.onblocked = (event: any) => reject(event)
     })
   }
 
@@ -21,12 +22,24 @@ class IDBAdmin {
     return db.target.result.transaction(name, mode).objectStore(name)
   }
 
-  async getStoreNamesToArray(): Promise<string[]> {
-    const db = await this.open()
-    const list = db.target.result.objectStoreNames
-    const arList = Array.from(list);
+  async getStoreNamesToArray(): Promise<string[] | string> {
+    let db: any
+    let list: any
+    let arList: any
 
-    return arList;
+    try {
+      db = await this.open()
+      list = db.target.result.objectStoreNames
+      arList = Array.from(list)
+
+      return arList
+    } catch(e) {
+      if ('newVersion' in e) {
+        return `Altered version from ${e.oldVersion} to ${e.newVersion}`
+      }
+
+      return e.msg || e.toString()
+    }
   }
 
   async getAllKeysFromObjectStore(name: string): Promise<(string | number)[]> {
