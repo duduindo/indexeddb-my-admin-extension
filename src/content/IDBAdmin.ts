@@ -51,6 +51,32 @@ class IDBAdmin extends IDBAdminRequest {
       }
     }
   }
+
+  async getAllValuesFromObjectStore(name: string): Promise<IDBAdminResponse> {
+    let conn: IDBAdminOpen
+    let request: IDBAdminRequestEvent
+    let data: Object = {}
+
+    try {
+      conn = await this.open()
+      request = await this.requestObjectStoreValues(conn, name)
+      data = request.target.result
+
+      return {
+        data,
+        text: 'Success',
+        type: 'success',
+        timeStamp: conn.timeStamp + request.timeStamp
+      }
+    } catch(e) {
+      return {
+        data,
+        text: e.toString(),
+        type: 'error',
+        timeStamp: 0
+      }
+    }
+  }
 }
 
 export default IDBAdmin;

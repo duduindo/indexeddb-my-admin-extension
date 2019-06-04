@@ -36,6 +36,25 @@ class IDBAdminRequest {
       }
     })
   }
+
+  protected async requestObjectStoreValues(connection: IDBAdminOpen, name: string): Promise<IDBAdminRequestEvent> {
+    const conn: IDBAdminOpen = connection
+    const result: IDBDatabase = conn.target.result
+    const hasObjectStore: boolean = !!result.objectStoreNames.length
+    const notFoundError = new Error('NotFoundError: Object Store Keys not found')
+    let values: any
+
+    return new Promise((resolve, reject) => {
+      if (hasObjectStore) {
+        values = result.transaction(name).objectStore(name).getAll()
+
+        values.onsuccess = (event: any) => resolve(event);
+        values.onerror = (event: any) => reject(event);
+      } else {
+        reject(notFoundError);
+      }
+    })
+  }
 }
 
 export default IDBAdminRequest;

@@ -72,7 +72,7 @@ describe('IDBAdmin', () => {
     describe('Failed', () => {
       test('Should return a error when objectStore not found', async () => {
         const dbAdmin = new IDBAdmin('library', 1)
-        const keys = await dbAdmin.getAllKeysFromObjectStore('bookss')
+        const keys = await dbAdmin.getAllKeysFromObjectStore('BOOKSSSS')
         const result = {
           data: [],
           text: expect.any(String),
@@ -81,6 +81,39 @@ describe('IDBAdmin', () => {
         };
 
         expect(keys).toEqual(result)
+      })
+    })
+  })
+
+
+  describe('getAllValuesFromObjectStore', () => {
+    describe('Successfully', () => {
+      test('Should return a array of Values Object Store', async () => {
+        const dbAdmin = new IDBAdmin('library', 1)
+        const values = await dbAdmin.getAllValuesFromObjectStore('books')
+        const result = {
+          data: expect.any(Object),
+          text: expect.any(String),
+          type: 'success',
+          timeStamp: expect.any(Number)
+        };
+
+        expect(values).toEqual(result)
+      })
+    })
+
+    describe('Failed', () => {
+      test('Should return a error when objectStore not found', async () => {
+        const dbAdmin = new IDBAdmin('library', 1)
+        const values = await dbAdmin.getAllValuesFromObjectStore('BOOKSSSS')
+        const result = {
+          data: {},
+          text: expect.any(String),
+          type: 'error',
+          timeStamp: expect.any(Number)
+        };
+
+        expect(values).toEqual(result)
       })
     })
   })
