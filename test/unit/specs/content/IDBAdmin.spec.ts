@@ -2,11 +2,12 @@ import IDBAdmin from '@/content/IDBAdmin'
 
 
 describe('IDBAdmin', () => {
-  describe('getStoreNamesToArray', () => {
-    beforeAll((): void => {
-      require('../../mocks/content/indexeddb-library.js')
-    })
+  beforeAll((): void => {
+    require('../../mocks/content/indexeddb-library.js')
+  })
 
+
+  describe('getStoreNamesToArray', () => {
     describe('Successfully', () => {
       test('Should return a list of the names of stores from database', async () => {
         const dbAdmin = new IDBAdmin('library', 1)
@@ -20,7 +21,6 @@ describe('IDBAdmin', () => {
         expect(storesName).toEqual(result)
       })
     })
-
 
     describe('Failed', () => {
       test('Should return any Error in string when version is wrong', async () => {
@@ -48,6 +48,35 @@ describe('IDBAdmin', () => {
       })
     })
   })
+
+
+  describe('getAllKeysFromObjectStore', () => {
+    describe('Successfully', () => {
+      test('Should return a array of Keys Object Store', async () => {
+        const dbAdmin = new IDBAdmin('library', 1)
+        const keys = await dbAdmin.getAllKeysFromObjectStore('books')
+        const result = {
+          data: expect.any(Array),
+          text: expect.any(String),
+          type: 'success'
+        };
+
+        expect(keys).toEqual(result)
+      })
+    })
+
+    describe('Failed', () => {
+      test('Should return a error when objectStore not found', async () => {
+        const dbAdmin = new IDBAdmin('library', 1)
+        const keys = await dbAdmin.getAllKeysFromObjectStore('bookss')
+        const result = {
+          data: [],
+          text: expect.any(String),
+          type: 'error'
+        };
+
+        expect(keys).toEqual(result)
+      })
+    })
+  })
 })
-
-
