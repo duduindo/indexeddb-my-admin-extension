@@ -1,54 +1,9 @@
-type Open = {
-  target: IDBOpenDBRequest
-}
-
-type IDBRequestEvent = {
-  target: IDBRequest
-}
+import IDBAdminRequest from '@/content/IDBAdminRequest'
 
 
-class IDBAdmin {
-  constructor(private name: string, private version: number) {}
-
-  private open(): Promise<Open> {
-    const request = window.indexedDB.open(this.name, this.version)
-
-    return new Promise((resolve, reject) => {
-      request.onsuccess = (event: any) => resolve(event)
-      request.onerror = (event: any) => reject(event)
-      request.onblocked = (event: any) => {
-        const env = {
-          ...event,
-          toString: () => `Altered version from ${event.oldVersion} to ${event.newVersion}`
-        }
-
-        reject(env)
-      }
-    })
-  }
-
-  private async requestObjectStoreKeys(connection: Open, name: string): Promise<IDBRequestEvent> {
-    const conn: Open = connection
-    const result: IDBDatabase = conn.target.result
-    const hasObjectStore: boolean = !!result.objectStoreNames.length
-    const notFoundError = new Error('NotFoundError: Object Store Keys not found')
-    let keys: any
-
-    return new Promise((resolve, reject) => {
-      if (hasObjectStore) {
-        keys = result.transaction(name).objectStore(name).getAllKeys()
-
-        keys.onsuccess = (event: any) => resolve(event);
-        keys.onerror = (event: any) => reject(event);
-      } else {
-        reject(notFoundError);
-      }
-    })
-  }
-
-
+class IDBAdmin extends IDBAdminRequest {
   async getStoreNamesToArray(): Promise<IDBAdminResponse> {
-    let conn: Open
+    let conn: IDBAdminOpen
     let list: Array<string> = []
 
     try {
@@ -58,20 +13,22 @@ class IDBAdmin {
       return {
         data: list,
         text: 'Success',
-        type: 'success'
+        type: 'success',
+        timeStamp: conn.timeStamp
       }
     } catch(e) {
       return {
         data: list,
         text: e.toString(),
-        type: 'error'
+        type: 'error',
+        timeStamp: 0
       }
     }
   }
 
   async getAllKeysFromObjectStore(name: string): Promise<IDBAdminResponse> {
-    let conn: Open
-    let request: IDBRequestEvent
+    let conn: IDBAdminOpen
+    let request: IDBAdminRequestEvent
     let list: Array<any> = []
 
     try {
@@ -82,13 +39,15 @@ class IDBAdmin {
       return {
         data: list,
         text: 'Success',
-        type: 'success'
+        type: 'success',
+        timeStamp: conn.timeStamp + request.timeStamp
       }
     } catch(e) {
       return {
         data: list,
         text: e.toString(),
-        type: 'error'
+        type: 'error',
+        timeStamp: 0
       }
     }
   }

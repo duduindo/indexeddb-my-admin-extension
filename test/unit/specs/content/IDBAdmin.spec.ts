@@ -15,7 +15,8 @@ describe('IDBAdmin', () => {
         const result = {
           data: ['books', 'e-readers'],
           text: 'Success',
-          type: 'success'
+          type: 'success',
+          timeStamp: undefined
         };
 
         expect(storesName).toEqual(result)
@@ -29,7 +30,8 @@ describe('IDBAdmin', () => {
         const result = {
           data: [],
           text: expect.any(String),
-          type: 'error'
+          type: 'error',
+          timeStamp: expect.any(Number)
         };
 
         expect(storesName).toEqual(result)
@@ -41,7 +43,8 @@ describe('IDBAdmin', () => {
         const result = {
           data: [],
           text: 'Altered version from 1 to 2',
-          type: 'error'
+          type: 'error',
+          timeStamp: expect.any(Number)
         };
 
         expect(storesName).toEqual(result)
@@ -58,7 +61,8 @@ describe('IDBAdmin', () => {
         const result = {
           data: expect.any(Array),
           text: expect.any(String),
-          type: 'success'
+          type: 'success',
+          timeStamp: expect.any(Number)
         };
 
         expect(keys).toEqual(result)
@@ -72,7 +76,8 @@ describe('IDBAdmin', () => {
         const result = {
           data: [],
           text: expect.any(String),
-          type: 'error'
+          type: 'error',
+          timeStamp: expect.any(Number)
         };
 
         expect(keys).toEqual(result)
