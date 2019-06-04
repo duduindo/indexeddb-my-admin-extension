@@ -117,4 +117,37 @@ describe('IDBAdmin', () => {
       })
     })
   })
+
+
+  describe('getIndexesFromObjectStore', () => {
+    describe('Successfully', () => {
+      test('Should return a array of Indexes', async () => {
+        const dbAdmin = new IDBAdmin('library', 1)
+        const indexes = await dbAdmin.getIndexesFromObjectStore('books')
+        const result = {
+          data: expect.any(Array),
+          text: expect.any(String),
+          type: 'success',
+          timeStamp: undefined
+        };
+
+        expect(indexes).toEqual(result)
+      })
+    })
+
+    describe('Failed', () => {
+      test('Should return a error when objectStore not found', async () => {
+        const dbAdmin = new IDBAdmin('library', 1)
+        const indexes = await dbAdmin.getIndexesFromObjectStore('BOOKSSSS')
+        const result = {
+          data: {},
+          text: expect.any(String),
+          type: 'error',
+          timeStamp: expect.any(Number)
+        };
+
+        expect(indexes).toEqual(result)
+      })
+    })
+  })
 })

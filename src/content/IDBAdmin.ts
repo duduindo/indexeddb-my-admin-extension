@@ -77,6 +77,31 @@ class IDBAdmin extends IDBAdminRequest {
       }
     }
   }
+
+  async getIndexesFromObjectStore(name: string): Promise<IDBAdminResponse> {
+    let conn: IDBAdminOpen
+    let request: IDBAdminRequestEvent
+    let data: Object = {}
+
+    try {
+      conn = await this.open()
+      data = await this.requestIndexesFromObjectStore(conn, name)
+
+      return {
+        data,
+        text: 'Success',
+        type: 'success',
+        timeStamp: conn.timeStamp
+      }
+    } catch(e) {
+      return {
+        data,
+        text: e.toString(),
+        type: 'error',
+        timeStamp: 0
+      }
+    }
+  }
 }
 
 export default IDBAdmin;

@@ -55,6 +55,24 @@ class IDBAdminRequest {
       }
     })
   }
+
+  protected async requestIndexesFromObjectStore(connection: IDBAdminOpen, name: string): Promise<IDBAdminRequestEvent> {
+    const conn: IDBAdminOpen = connection
+    const result: IDBDatabase = conn.target.result
+    const hasObjectStore: boolean = !!result.objectStoreNames.length
+    const notFoundError = new Error('NotFoundError: Object Store Names not found')
+    let names: any
+
+    return new Promise((resolve, reject) => {
+      if (hasObjectStore) {
+        names = result.transaction(name).objectStore(name).indexNames
+
+        resolve(names);
+      } else {
+        reject(notFoundError);
+      }
+    })
+  }
 }
 
 export default IDBAdminRequest;
