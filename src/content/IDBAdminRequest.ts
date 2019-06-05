@@ -18,6 +18,24 @@ class IDBAdminRequest {
     })
   }
 
+  protected async requestObjectStore(connection: IDBAdminOpen, name: string): Promise<IDBObjectStore> {
+    const conn: IDBAdminOpen = connection
+    const result: IDBDatabase = conn.target.result
+    const hasObjectStore: boolean = !!result.objectStoreNames.length
+    const notFoundError = new Error('NotFoundError: Object Store Keys not found')
+    let objectStore: any
+
+    return new Promise((resolve, reject) => {
+      if (hasObjectStore) {
+        objectStore = result.transaction(name).objectStore(name)
+
+        resolve(objectStore)
+      } else {
+        reject(notFoundError)
+      }
+    })
+  }
+
   protected async requestObjectStoreKeys(connection: IDBAdminOpen, name: string): Promise<IDBAdminRequestEvent> {
     const conn: IDBAdminOpen = connection
     const result: IDBDatabase = conn.target.result
@@ -29,10 +47,10 @@ class IDBAdminRequest {
       if (hasObjectStore) {
         keys = result.transaction(name).objectStore(name).getAllKeys()
 
-        keys.onsuccess = (event: any) => resolve(event);
-        keys.onerror = (event: any) => reject(event);
+        keys.onsuccess = (event: any) => resolve(event)
+        keys.onerror = (event: any) => reject(event)
       } else {
-        reject(notFoundError);
+        reject(notFoundError)
       }
     })
   }
@@ -48,10 +66,10 @@ class IDBAdminRequest {
       if (hasObjectStore) {
         values = result.transaction(name).objectStore(name).getAll()
 
-        values.onsuccess = (event: any) => resolve(event);
-        values.onerror = (event: any) => reject(event);
+        values.onsuccess = (event: any) => resolve(event)
+        values.onerror = (event: any) => reject(event)
       } else {
-        reject(notFoundError);
+        reject(notFoundError)
       }
     })
   }
@@ -67,9 +85,9 @@ class IDBAdminRequest {
       if (hasObjectStore) {
         names = result.transaction(name).objectStore(name).indexNames
 
-        resolve(names);
+        resolve(names)
       } else {
-        reject(notFoundError);
+        reject(notFoundError)
       }
     })
   }

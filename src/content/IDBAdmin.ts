@@ -105,6 +105,7 @@ class IDBAdmin extends IDBAdminRequest {
 
   async getAllFromObjectStore(name: string): Promise<IDBAdminResponse> {
     let conn: IDBAdminOpen
+    let requestObjectStore: IDBObjectStore
     let requestKeys: IDBAdminRequestEvent
     let requestValues: IDBAdminRequestEvent
     let data: Object = {}
@@ -114,11 +115,12 @@ class IDBAdmin extends IDBAdminRequest {
 
     try {
       conn = await this.open()
+      requestObjectStore = await this.requestObjectStore(conn, name)
       requestKeys = await this.requestObjectStoreKeys(conn, name)
       requestValues = await this.requestObjectStoreValues(conn, name)
 
       data = {
-        keyPath: 0,
+        keyPath: requestObjectStore.keyPath,
         keys: requestKeys.target.result,
         values: requestValues.target.result
       }

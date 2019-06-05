@@ -163,7 +163,7 @@ describe('IDBAdmin', () => {
         const all = await dbAdmin.getAllFromObjectStore('books')
         const result = {
           data: {
-            keyPath: 0,
+            keyPath: 'isbn',
             keys: [123456, 234567, 345678],
             values: [
               { title: 'Quarry Memories', author: 'Fred', isbn: 123456 },
