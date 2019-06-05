@@ -59,7 +59,7 @@ describe('IDBAdmin', () => {
         const dbAdmin = new IDBAdmin('library', 1)
         const keys = await dbAdmin.getAllKeysFromObjectStore('books')
         const result = {
-          data: expect.any(Array),
+          data: [123456, 234567, 345678],
           text: expect.any(String),
           type: 'success',
           timeStamp: expect.any(Number)
@@ -92,7 +92,11 @@ describe('IDBAdmin', () => {
         const dbAdmin = new IDBAdmin('library', 1)
         const values = await dbAdmin.getAllValuesFromObjectStore('books')
         const result = {
-          data: expect.any(Object),
+          data: [
+            { title: 'Quarry Memories', author: 'Fred', isbn: 123456 },
+            { title: 'Water Buffaloes', author: 'Fred', isbn: 234567 },
+            { title: 'Bedrock Nights', author: 'Barney', isbn: 345678 }
+          ],
           text: expect.any(String),
           type: 'success',
           timeStamp: expect.any(Number)
@@ -125,7 +129,7 @@ describe('IDBAdmin', () => {
         const dbAdmin = new IDBAdmin('library', 1)
         const indexes = await dbAdmin.getIndexesFromObjectStore('books')
         const result = {
-          data: expect.any(Array),
+          data: ['by_title'],
           text: expect.any(String),
           type: 'success',
           timeStamp: undefined
