@@ -154,4 +154,45 @@ describe('IDBAdmin', () => {
       })
     })
   })
+
+
+  describe('getAllFromObjectStore', () => {
+    describe('Successfully', () => {
+      test('Should return a array of all data from Object Stores', async () => {
+        const dbAdmin = new IDBAdmin('library', 1)
+        const all = await dbAdmin.getAllFromObjectStore('books')
+        const result = {
+          data: {
+            keyPath: 0,
+            keys: [123456, 234567, 345678],
+            values: [
+              { title: 'Quarry Memories', author: 'Fred', isbn: 123456 },
+              { title: 'Water Buffaloes', author: 'Fred', isbn: 234567 },
+              { title: 'Bedrock Nights', author: 'Barney', isbn: 345678 }
+            ]
+          },
+          text: expect.any(String),
+          type: 'success',
+          timeStamp: expect.any(Number)
+        };
+
+        expect(all).toEqual(result)
+      })
+    })
+
+    describe('Failed', () => {
+      test('Should return a error when objectStore not found', async () => {
+        const dbAdmin = new IDBAdmin('library', 1)
+        const all = await dbAdmin.getAllFromObjectStore('BOOOKS')
+        const result = {
+          data: {},
+          text: expect.any(String),
+          type: 'error',
+          timeStamp: expect.any(Number)
+        };
+
+        expect(all).toEqual(result)
+      })
+    })
+  })
 })
