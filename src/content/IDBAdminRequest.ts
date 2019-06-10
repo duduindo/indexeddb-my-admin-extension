@@ -36,6 +36,27 @@ class IDBAdminRequest {
     })
   }
 
+  protected async requestOpenCursor(connection: IDBAdminOpen, name: string): Promise<IDBAdminRequestEvent> {
+    const conn: IDBAdminOpen = connection
+    const result: IDBDatabase = conn.target.result
+    const hasObjectStore: boolean = !!result.objectStoreNames.length
+    const notFoundError = new Error('NotFoundError: Object Store Keys not found')
+    let objectStore: IDBObjectStore
+    let openCursor: IDBRequest
+
+    return new Promise((resolve, reject) => {
+      if (hasObjectStore) {
+        objectStore = result.transaction(name).objectStore(name)
+        openCursor = objectStore.openCursor()
+
+        openCursor.onsuccess = (event: any) => resolve(event)
+        openCursor.onerror = (event: any) => reject(event)
+      } else {
+        reject(notFoundError)
+      }
+    })
+  }
+
   protected async requestObjectStoreKeys(connection: IDBAdminOpen, name: string): Promise<IDBAdminRequestEvent> {
     const conn: IDBAdminOpen = connection
     const result: IDBDatabase = conn.target.result
@@ -91,6 +112,8 @@ class IDBAdminRequest {
       }
     })
   }
+
+
 }
 
 export default IDBAdminRequest;

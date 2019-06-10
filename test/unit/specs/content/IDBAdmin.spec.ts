@@ -194,7 +194,7 @@ describe('IDBAdmin', () => {
         const dbLibrary = new IDBAdmin('library', 1)
         const allBooks = await dbLibrary.getAllFromObjectStore('BOOOKS')
         const resultBooks = {
-          data: {},
+          data: { keyPath: '', keys: [], values: [] },
           text: expect.any(String),
           type: 'error',
           timeStamp: expect.any(Number)
@@ -204,4 +204,50 @@ describe('IDBAdmin', () => {
       })
     })
   })
+
+
+  describe('getAllFromObjectStoreSearch', () => {
+    describe('Successfully', () => {
+      test('Should return a array of all data from Object Stores', async () => {
+        const dbLibrary = new IDBAdmin('library', 1)
+        const allBooks = await dbLibrary.getAllFromObjectStoreSearch('books', 'barney')
+        const resultBooks = {
+          data: {
+            keyPath: 'isbn',
+            keys: [123456, 234567, 345678],
+            values: [
+              { title: 'Quarry Memories', author: 'Fred', isbn: 123456 },
+              { title: 'Water Buffaloes', author: 'Fred', isbn: 234567 },
+              { title: 'Bedrock Nights', author: 'Barney', isbn: 345678 }
+            ]
+          },
+          text: expect.any(String),
+          type: 'success',
+          timeStamp: expect.any(Number)
+        };
+
+        console.log( allBooks )
+
+        // expect(allBooks).toEqual(resultBooks)
+      })
+    })
+
+    describe.skip('Failed', () => {
+      test('Should return a error when objectStore not found', async () => {
+        const dbLibrary = new IDBAdmin('library', 1)
+        const allBooks = await dbLibrary.getAllFromObjectStoreSearch('BOOOKS', 'a')
+        const resultBooks = {
+          data: [],
+          text: expect.any(String),
+          type: 'error',
+          timeStamp: expect.any(Number)
+        };
+
+        // expect(allBooks).toEqual(resultBooks)
+      })
+    })
+  })
+
+
+
 })
