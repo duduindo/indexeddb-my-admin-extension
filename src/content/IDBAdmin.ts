@@ -188,6 +188,33 @@ class IDBAdmin extends IDBAdminRequest {
       timeStamp: 0
     }
   }
+
+
+  async insertObjectStoreContent(name: string, value: object): Promise<IDBAdminResponse> {
+    let conn: IDBAdminOpen
+    let request: IDBObjectStore
+
+    try {
+      conn = await this.open()
+      request = await this.requestObjectStore(conn, name, 'readwrite')
+
+      request.put(value)
+
+      return {
+        data: 'success',
+        text: 'Success',
+        type: 'success',
+        timeStamp: conn.timeStamp
+      }
+    } catch (e) {
+      return {
+        data: 'error',
+        text: e.toString(),
+        type: 'error',
+        timeStamp: 0
+      }
+    }
+  }
 }
 
 export default IDBAdmin;

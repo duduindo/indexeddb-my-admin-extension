@@ -18,7 +18,7 @@ class IDBAdminRequest {
     })
   }
 
-  protected async requestObjectStore(connection: IDBAdminOpen, name: string): Promise<IDBObjectStore> {
+  protected async requestObjectStore(connection: IDBAdminOpen, name: string, mode: any = 'readonly'): Promise<IDBObjectStore> {
     const conn: IDBAdminOpen = connection
     const result: IDBDatabase = conn.target.result
     const hasObjectStore: boolean = !!result.objectStoreNames.length
@@ -27,7 +27,7 @@ class IDBAdminRequest {
 
     return new Promise((resolve, reject) => {
       if (hasObjectStore) {
-        objectStore = result.transaction(name).objectStore(name)
+        objectStore = result.transaction(name, mode).objectStore(name)
 
         resolve(objectStore)
       } else {
