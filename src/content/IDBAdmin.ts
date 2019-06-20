@@ -16,7 +16,7 @@ class IDBAdmin extends IDBAdminRequest {
         type: 'success',
         timeStamp: conn.timeStamp
       }
-    } catch(e) {
+    } catch (e) {
       return {
         data: list,
         text: e.toString(),
@@ -42,7 +42,7 @@ class IDBAdmin extends IDBAdminRequest {
         type: 'success',
         timeStamp: conn.timeStamp + request.timeStamp
       }
-    } catch(e) {
+    } catch (e) {
       return {
         data: list,
         text: e.toString(),
@@ -68,7 +68,7 @@ class IDBAdmin extends IDBAdminRequest {
         type: 'success',
         timeStamp: conn.timeStamp + request.timeStamp
       }
-    } catch(e) {
+    } catch (e) {
       return {
         data,
         text: e.toString(),
@@ -93,7 +93,7 @@ class IDBAdmin extends IDBAdminRequest {
         type: 'success',
         timeStamp: conn.timeStamp
       }
-    } catch(e) {
+    } catch (e) {
       return {
         data,
         text: e.toString(),
@@ -128,7 +128,7 @@ class IDBAdmin extends IDBAdminRequest {
         type: 'success',
         timeStamp: conn.timeStamp + requestKeys.timeStamp + requestValues.timeStamp
       }
-    } catch(e) {
+    } catch (e) {
       return {
         data,
         text: e.toString(),
@@ -139,84 +139,31 @@ class IDBAdmin extends IDBAdminRequest {
   }
 
   async getAllFromObjectStoreSearch(name: string, terms: string): Promise<IDBAdminResponse> {
-    // let conn: IDBAdminOpen
-    // let allObjectStore: IDBAdminResponse
-    // let data: Object = {}
-    // let cursor: IDBCursorWithValue
-    // let keys: Array<any> = []
-    // let values: Array<any> = []
-    // let keyPath: string | number
-
     const allObjectStore: IDBAdminResponse = await this.getAllFromObjectStore(name)
     const searchElement: string = terms.toLowerCase()
-    const keyPath: string | number = allObjectStore.data.keyPath
+    let data: IDBAdminResponseDataGetAll = { keyPath: '', keys: [], values: [] }
+    const keyPath: string = allObjectStore.data.keyPath
     let values: Array<any> = []
     let keys: Array<any> = []
 
     values = allObjectStore.data.values.map((value: object) => JSON.stringify(value))
     values = values.filter((value: string) => value.toLowerCase().match(searchElement))
     values = values.map((value: string) => JSON.parse(value))
+    keys = values.map((value: any) => value[keyPath])
 
-    keys = allObjectStore.data.keys.filter((value: any) => (value))
+    data = {
+      keyPath,
+      keys,
+      values,
+    }
 
-    console.warn( keys )
-
-    return allObjectStore
-
-    // try {
-
-
-    //   console.warn( allObjectStore )
-
-    //   return {
-    //     data,
-    //     text: 'Success',
-    //     type: 'success',
-    //     timeStamp: 10
-    //   }
-    // } catch(e) {
-    //   return e
-    // }
-  }
-
-  async BACKUPgetAllFromObjectStoreSearch(name: string, terms: string): Promise<IDBAdminResponse | any> {
-    let conn: IDBAdminOpen
-    let requestOpenCursor: IDBAdminRequestEvent
-    let data: Array<any> = []
-    let cursor: IDBCursorWithValue
-    let keys: Array<any> = []
-    let values: Array<any> = []
-    let keyPath: string | number
-
-    try {
-      conn = await this.open()
-      requestOpenCursor = await this.requestOpenCursor(conn, name)
-      cursor = requestOpenCursor.target.result
-
-      if (cursor) {
-        data.push(cursor.value)
-
-        console.warn( cursor.continue.toString() )
-
-        cursor.continue()
-      } else {
-        return {
-          data,
-          text: 'Success',
-          type: 'success',
-          timeStamp: conn.timeStamp + requestOpenCursor.timeStamp
-        }
-      }
-    } catch(e) {
-      return {
-        data,
-        text: e.toString(),
-        type: 'error',
-        timeStamp: 0
-      }
+    return {
+      data,
+      text: 'Success',
+      type: 'success',
+      timeStamp: 10
     }
   }
-
 }
 
 export default IDBAdmin;
