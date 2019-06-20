@@ -161,7 +161,31 @@ class IDBAdmin extends IDBAdminRequest {
       data,
       text: 'Success',
       type: 'success',
-      timeStamp: 10
+      timeStamp: 0
+    }
+  }
+
+  async getDatabaseTree(): Promise<IDBAdminResponse> {
+    const storeNames: IDBAdminResponse = await this.getStoreNamesToArray()
+    const database = { name: this.name, version: this.version, stores: [] }
+    let tree: Array<Promise <never>> = []
+
+    tree = storeNames.data.map(async (name: string) => {
+      const { data: indexes }: IDBAdminResponse = await this.getIndexesFromObjectStore(name)
+
+      return {
+        name,
+        indexes
+      }
+    })
+
+    database.stores = await Promise.all(tree)
+
+    return {
+      data: database,
+      text: 'Success',
+      type: 'success',
+      timeStamp: 0
     }
   }
 }

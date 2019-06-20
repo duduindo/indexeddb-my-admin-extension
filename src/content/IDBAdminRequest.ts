@@ -1,5 +1,5 @@
 class IDBAdminRequest {
-  constructor(private name: string, private version: number) {}
+  constructor(protected name: string, protected version: number) {}
 
   protected open(): Promise<IDBAdminOpen> {
     const request = window.indexedDB.open(this.name, this.version)

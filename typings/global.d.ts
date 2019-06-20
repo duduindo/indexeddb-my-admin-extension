@@ -2,7 +2,7 @@ type IDBAdminResponse = {
   data: any,
   text: string,
   type: 'error' | 'success' | 'warning',
-  timeStamp?: number
+  timeStamp: number
 }
 
 type IDBAdminOpen = {
