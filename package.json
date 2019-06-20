@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --config test/unit/jest.conf.js --detectOpenHandles",
-    "lint": "eslint --ext .js,.vue src shells",
+    "lint": "eslint --ext .js,.ts,.vue src shells test/unit/specs",
     "test:coverage": "jest --config test/unit/jest.conf.js --coverage --detectOpenHandles",
     "test:watch": "jest --config test/unit/jest.conf.js --watch --detectOpenHandles",
     "watch": "webpack --config build/build.js --progress --watch --mode=development",

@@ -16,7 +16,7 @@ class IDBAdmin extends IDBAdminRequest {
         type: 'success',
         timeStamp: conn.timeStamp
       }
-    } catch(e) {
+    } catch (e) {
       return {
         data: list,
         text: e.toString(),
@@ -42,7 +42,7 @@ class IDBAdmin extends IDBAdminRequest {
         type: 'success',
         timeStamp: conn.timeStamp + request.timeStamp
       }
-    } catch(e) {
+    } catch (e) {
       return {
         data: list,
         text: e.toString(),
@@ -68,7 +68,7 @@ class IDBAdmin extends IDBAdminRequest {
         type: 'success',
         timeStamp: conn.timeStamp + request.timeStamp
       }
-    } catch(e) {
+    } catch (e) {
       return {
         data,
         text: e.toString(),
@@ -93,7 +93,7 @@ class IDBAdmin extends IDBAdminRequest {
         type: 'success',
         timeStamp: conn.timeStamp
       }
-    } catch(e) {
+    } catch (e) {
       return {
         data,
         text: e.toString(),
@@ -108,10 +108,7 @@ class IDBAdmin extends IDBAdminRequest {
     let requestObjectStore: IDBObjectStore
     let requestKeys: IDBAdminRequestEvent
     let requestValues: IDBAdminRequestEvent
-    let data: Object = {}
-    let keys: any
-    let values: any
-    let keyPath: string | number
+    let data: IDBAdminResponseDataGetAll = { keyPath: '', keys: [], values: [] }
 
     try {
       conn = await this.open()
@@ -131,7 +128,7 @@ class IDBAdmin extends IDBAdminRequest {
         type: 'success',
         timeStamp: conn.timeStamp + requestKeys.timeStamp + requestValues.timeStamp
       }
-    } catch(e) {
+    } catch (e) {
       return {
         data,
         text: e.toString(),
@@ -141,6 +138,83 @@ class IDBAdmin extends IDBAdminRequest {
     }
   }
 
+  async getAllFromObjectStoreSearch(name: string, terms: string): Promise<IDBAdminResponse> {
+    const allObjectStore: IDBAdminResponse = await this.getAllFromObjectStore(name)
+    const searchElement: string = terms.toLowerCase()
+    let data: IDBAdminResponseDataGetAll = { keyPath: '', keys: [], values: [] }
+    const keyPath: string = allObjectStore.data.keyPath
+    let values: Array<any> = []
+    let keys: Array<any> = []
+
+    values = allObjectStore.data.values.map((value: object) => JSON.stringify(value))
+    values = values.filter((value: string) => value.toLowerCase().match(searchElement))
+    values = values.map((value: string) => JSON.parse(value))
+    keys = values.map((value: any) => value[keyPath])
+
+    data = {
+      keyPath,
+      keys,
+      values,
+    }
+
+    return {
+      data,
+      text: 'Success',
+      type: 'success',
+      timeStamp: 0
+    }
+  }
+
+  async getDatabaseTree(): Promise<IDBAdminResponse> {
+    const storeNames: IDBAdminResponse = await this.getStoreNamesToArray()
+    const database = { name: this.name, version: this.version, stores: [] }
+    let tree: Array<Promise <never>> = []
+
+    tree = storeNames.data.map(async (name: string) => {
+      const { data: indexes }: IDBAdminResponse = await this.getIndexesFromObjectStore(name)
+
+      return {
+        name,
+        indexes
+      }
+    })
+
+    database.stores = await Promise.all(tree)
+
+    return {
+      data: database,
+      text: 'Success',
+      type: 'success',
+      timeStamp: 0
+    }
+  }
+
+
+  async insertObjectStoreContent(name: string, value: object): Promise<IDBAdminResponse> {
+    let conn: IDBAdminOpen
+    let request: IDBObjectStore
+
+    try {
+      conn = await this.open()
+      request = await this.requestObjectStore(conn, name, 'readwrite')
+
+      request.put(value)
+
+      return {
+        data: 'success',
+        text: 'Success',
+        type: 'success',
+        timeStamp: conn.timeStamp
+      }
+    } catch (e) {
+      return {
+        data: 'error',
+        text: e.toString(),
+        type: 'error',
+        timeStamp: 0
+      }
+    }
+  }
 }
 
 export default IDBAdmin;

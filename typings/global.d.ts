@@ -2,7 +2,7 @@ type IDBAdminResponse = {
   data: any,
   text: string,
   type: 'error' | 'success' | 'warning',
-  timeStamp?: number
+  timeStamp: number
 }
 
 type IDBAdminOpen = {
@@ -13,4 +13,10 @@ type IDBAdminOpen = {
 type IDBAdminRequestEvent = {
   target: IDBRequest,
   timeStamp: number
+}
+
+type IDBAdminResponseDataGetAll = {
+  keyPath: string | string[],
+  keys: Array<any>,
+  values: Array<object>
 }

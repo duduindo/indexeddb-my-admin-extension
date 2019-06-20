@@ -1,5 +1,5 @@
 class IDBAdminRequest {
-  constructor(private name: string, private version: number) {}
+  constructor(protected name: string, protected version: number) {}
 
   protected open(): Promise<IDBAdminOpen> {
     const request = window.indexedDB.open(this.name, this.version)
@@ -18,7 +18,7 @@ class IDBAdminRequest {
     })
   }
 
-  protected async requestObjectStore(connection: IDBAdminOpen, name: string): Promise<IDBObjectStore> {
+  protected async requestObjectStore(connection: IDBAdminOpen, name: string, mode: any = 'readonly'): Promise<IDBObjectStore> {
     const conn: IDBAdminOpen = connection
     const result: IDBDatabase = conn.target.result
     const hasObjectStore: boolean = !!result.objectStoreNames.length
@@ -27,9 +27,30 @@ class IDBAdminRequest {
 
     return new Promise((resolve, reject) => {
       if (hasObjectStore) {
-        objectStore = result.transaction(name).objectStore(name)
+        objectStore = result.transaction(name, mode).objectStore(name)
 
         resolve(objectStore)
+      } else {
+        reject(notFoundError)
+      }
+    })
+  }
+
+  protected async requestOpenCursor(connection: IDBAdminOpen, name: string): Promise<IDBAdminRequestEvent> {
+    const conn: IDBAdminOpen = connection
+    const result: IDBDatabase = conn.target.result
+    const hasObjectStore: boolean = !!result.objectStoreNames.length
+    const notFoundError = new Error('NotFoundError: Object Store Keys not found')
+    let objectStore: IDBObjectStore
+    let openCursor: IDBRequest
+
+    return new Promise((resolve, reject) => {
+      if (hasObjectStore) {
+        objectStore = result.transaction(name).objectStore(name)
+        openCursor = objectStore.openCursor()
+
+        openCursor.onsuccess = (event: any) => resolve(event)
+        openCursor.onerror = (event: any) => reject(event)
       } else {
         reject(notFoundError)
       }
@@ -91,6 +112,8 @@ class IDBAdminRequest {
       }
     })
   }
+
+
 }
 
 export default IDBAdminRequest;
