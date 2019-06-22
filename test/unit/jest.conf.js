@@ -5,14 +5,16 @@ module.exports = {
   moduleFileExtensions: [
     'js',
     'json',
-    'vue'
+    'vue',
+    'ts'
   ],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1'
   },
   transform: {
     '^.+\\.js$': 'babel-jest',
-    '.*\\.(vue)$': 'vue-jest'
+    '^.+\\.ts$': 'ts-jest',
+    '^.+\\.vue$': 'vue-jest'
   },
   testPathIgnorePatterns: [
     '<rootDir>/test/e2e'
@@ -24,7 +26,7 @@ module.exports = {
   ],
   coverageDirectory: '<rootDir>/test/unit/coverage',
   collectCoverageFrom: [
-    'src/**/*.{js,vue}',
+    'src/**/*.{js,ts,vue}',
     '!src/content/app.js',
     '!src/devtools/app.js',
     '!src/devtools/router-config.js',

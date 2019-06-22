@@ -36,6 +36,14 @@ module.exports = {
         }
       },
 
+      // TypeScript
+      {
+        test: /\.ts?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/
+      },
+
+
       // CSS
       // this will apply to both plain `.css` files AND `<style>` blocks in `.vue` files
       {

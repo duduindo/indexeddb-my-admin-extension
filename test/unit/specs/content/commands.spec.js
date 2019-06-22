@@ -8,7 +8,7 @@ describe('Tests all', () => {
   beforeAll(() => {
     require('../../mocks/content/indexeddb-library.js')
 
-    command = new Commands
+    command = new Commands()
   })
 
   describe('IndexedDB', () => {
@@ -17,7 +17,7 @@ describe('Tests all', () => {
         type: 'GET_DATABASE_TREE',
         payload: {
           name: 'library',
-          version: 1,
+          version: 1
         },
         origin: window.location.host
       }
