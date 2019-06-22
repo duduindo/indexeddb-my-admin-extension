@@ -1,5 +1,11 @@
 class IDBAdminRequest {
-  constructor(protected name: string, protected version: number) {}
+  protected name: string
+  protected version: number
+
+  constructor(name: string, version: number) {
+    this.name = name
+    this.version = version
+  }
 
   protected open(): Promise<IDBAdminOpen> {
     const request = window.indexedDB.open(this.name, this.version)
@@ -112,8 +118,6 @@ class IDBAdminRequest {
       }
     })
   }
-
-
 }
 
-export default IDBAdminRequest;
+export default IDBAdminRequest

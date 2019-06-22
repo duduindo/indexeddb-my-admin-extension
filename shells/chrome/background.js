@@ -1,5 +1,4 @@
 chrome.runtime.onInstalled.addListener(() => {
-
   // chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
   //   if (changeInfo.status == 'complete') {
   //     chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
@@ -7,10 +6,4 @@ chrome.runtime.onInstalled.addListener(() => {
   //     });
   //   }
   // });
-
-});
-
-
-
-
-
+})

@@ -17,7 +17,7 @@ describe('IDBAdmin', () => {
           text: 'Success',
           type: 'success',
           timeStamp: expect.any(Number)
-        };
+        }
 
         expect(storesName).toEqual(result)
       })
@@ -32,7 +32,7 @@ describe('IDBAdmin', () => {
           text: expect.any(String),
           type: 'error',
           timeStamp: expect.any(Number)
-        };
+        }
 
         expect(storesName).toEqual(result)
       })
@@ -45,7 +45,7 @@ describe('IDBAdmin', () => {
           text: 'Altered version from 1 to 2',
           type: 'error',
           timeStamp: expect.any(Number)
-        };
+        }
 
         expect(storesName).toEqual(result)
       })
@@ -63,7 +63,7 @@ describe('IDBAdmin', () => {
           text: expect.any(String),
           type: 'success',
           timeStamp: expect.any(Number)
-        };
+        }
 
         expect(keys).toEqual(result)
       })
@@ -78,7 +78,7 @@ describe('IDBAdmin', () => {
           text: expect.any(String),
           type: 'error',
           timeStamp: expect.any(Number)
-        };
+        }
 
         expect(keys).toEqual(result)
       })
@@ -100,7 +100,7 @@ describe('IDBAdmin', () => {
           text: expect.any(String),
           type: 'success',
           timeStamp: expect.any(Number)
-        };
+        }
 
         expect(valuesBooks).toEqual(result)
       })
@@ -115,7 +115,7 @@ describe('IDBAdmin', () => {
           text: expect.any(String),
           type: 'error',
           timeStamp: expect.any(Number)
-        };
+        }
 
         expect(valuesBooks).toEqual(result)
       })
@@ -134,14 +134,14 @@ describe('IDBAdmin', () => {
           text: expect.any(String),
           type: 'success',
           timeStamp: expect.any(Number)
-        };
+        }
 
         const resultReaders = {
           data: ['by_maker', 'by_title'],
           text: expect.any(String),
           type: 'success',
           timeStamp: expect.any(Number)
-        };
+        }
 
         expect(indexesBooks).toEqual(result)
         expect(indexesReaders).toEqual(resultReaders)
@@ -157,7 +157,7 @@ describe('IDBAdmin', () => {
           text: expect.any(String),
           type: 'error',
           timeStamp: expect.any(Number)
-        };
+        }
 
         expect(indexesBooks).toEqual(result)
       })
@@ -183,7 +183,7 @@ describe('IDBAdmin', () => {
           text: expect.any(String),
           type: 'success',
           timeStamp: expect.any(Number)
-        };
+        }
 
         expect(allBooks).toEqual(result)
       })
@@ -198,7 +198,7 @@ describe('IDBAdmin', () => {
           text: expect.any(String),
           type: 'error',
           timeStamp: expect.any(Number)
-        };
+        }
 
         expect(allBooks).toEqual(result)
       })
@@ -217,13 +217,13 @@ describe('IDBAdmin', () => {
             keys: [123456, 234567],
             values: [
               { title: 'Quarry Memories', author: 'Fred', isbn: 123456 },
-              { title: 'Water Buffaloes', author: 'Fred', isbn: 234567 },
+              { title: 'Water Buffaloes', author: 'Fred', isbn: 234567 }
             ]
           },
           text: expect.any(String),
           type: 'success',
           timeStamp: expect.any(Number)
-        };
+        }
 
         expect(allBooks).toEqual(result)
       })
@@ -238,7 +238,7 @@ describe('IDBAdmin', () => {
           text: expect.any(String),
           type: 'success',
           timeStamp: expect.any(Number)
-        };
+        }
 
         expect(allBooks).toEqual(result)
       })
@@ -263,7 +263,7 @@ describe('IDBAdmin', () => {
           text: expect.any(String),
           type: 'success',
           timeStamp: expect.any(Number)
-        };
+        }
 
         expect(tree).toEqual(result)
       })
@@ -282,7 +282,7 @@ describe('IDBAdmin', () => {
           text: expect.any(String),
           type: 'success',
           timeStamp: expect.any(Number)
-        };
+        }
 
         expect(tree).toEqual(result)
       })
@@ -304,7 +304,7 @@ describe('IDBAdmin', () => {
           text: expect.any(String),
           type: 'success',
           timeStamp: expect.any(Number)
-        };
+        }
         const booksSearched = await dbLibrary.getAllFromObjectStoreSearch('books', 'Clean Code')
 
         expect(booksSearched.data.keys.length).toBe(1)
@@ -321,7 +321,7 @@ describe('IDBAdmin', () => {
           text: expect.any(String),
           type: 'error',
           timeStamp: expect.any(Number)
-        };
+        }
 
         expect(tree).toEqual(result)
       })

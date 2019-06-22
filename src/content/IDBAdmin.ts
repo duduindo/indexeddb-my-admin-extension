@@ -80,7 +80,6 @@ class IDBAdmin extends IDBAdminRequest {
 
   async getIndexesFromObjectStore(name: string): Promise<IDBAdminResponse> {
     let conn: IDBAdminOpen
-    let request: IDBAdminRequestEvent
     let data: Object = {}
 
     try {
@@ -154,7 +153,7 @@ class IDBAdmin extends IDBAdminRequest {
     data = {
       keyPath,
       keys,
-      values,
+      values
     }
 
     return {
@@ -217,4 +216,4 @@ class IDBAdmin extends IDBAdminRequest {
   }
 }
 
-export default IDBAdmin;
+export default IDBAdmin
