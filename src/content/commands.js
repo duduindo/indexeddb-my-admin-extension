@@ -1,4 +1,4 @@
-import IndexedDBAdmin from '@/content/indexedDBAdmin'
+import IDBAdmin from '@/content/IDBAdmin'
 import Tab from '@/content/tab'
 
 
@@ -9,24 +9,24 @@ class Commands {
 
   async handleIndexedDB() {
     const { type, payload } = this.action
-    const indexedDBAdmin = new IndexedDBAdmin(payload.name, payload.version)
+    const iDBAdmin = new IDBAdmin(payload.name, payload.version)
     let request = null
 
     switch (type) {
       case 'GET_DATABASE_OBJECTSTORE_CONTENT':
-        request = indexedDBAdmin.getAllFromObjectStore(payload.store)
+        request = iDBAdmin.getAllFromObjectStore(payload.store)
         break
 
       case 'GET_DATABASE_OBJECTSTORE_SEARCH':
-        request = indexedDBAdmin.getAllFromObjectStoreSearch(payload.store, payload.terms)
+        request = iDBAdmin.getAllFromObjectStoreSearch(payload.store, payload.terms)
         break
 
       case 'INSERT_DATABASE_OBJECTSTORE_CONTENT':
-        request = indexedDBAdmin.insertObjectStoreContent(payload.store, payload.value)
+        request = iDBAdmin.insertObjectStoreContent(payload.store, payload.value)
         break
 
       case 'GET_DATABASE_TREE':
-        request = indexedDBAdmin.getDatabaseTree()
+        request = iDBAdmin.getDatabaseTree()
         break
 
       default:
