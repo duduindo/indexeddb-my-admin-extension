@@ -1,6 +1,6 @@
 export default {
-  SET_HOST: (state, value) => {
-    state.host = value
+  SET_HOST: (state, { data }) => {
+    state.host = data
   },
   SET_ID: (state, value) => {
     state.id = value
