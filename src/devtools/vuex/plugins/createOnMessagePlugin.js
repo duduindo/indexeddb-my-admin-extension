@@ -9,8 +9,6 @@ function createOnMessagePlugin(onMessage) {
       const idExtension = store.getters.getID
       const idTab = tab.tab.id
 
-      console.warn(data)
-
       if (idExtension !== idTab) {
         return
       }
