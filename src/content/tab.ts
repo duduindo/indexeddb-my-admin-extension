@@ -1,6 +1,13 @@
 class Tab {
-  getHost(): string {
-    return window.location.host
+  getHost(): IDBAdminResponse {
+    const host: string = window.location.host
+
+    return {
+      data: host,
+      text: 'Success',
+      type: 'success',
+      timeStamp: 0
+    }
   }
 }
 

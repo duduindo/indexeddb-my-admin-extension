@@ -23,22 +23,14 @@ describe('Tests all', () => {
       }
 
       const result = {
-        type: 'GET_DATABASE_TREE',
         data: {
-          name: 'library',
-          version: 1,
-          stores: [
-            {
-              name: 'books',
-              indexes: [ 'by_title' ]
-            },
-            {
-              name: 'e-readers',
-              indexes: [ 'by_maker', 'by_title' ]
-            }
-          ]
+          data: expect.any(Object),
+          text: 'Success',
+          type: 'success',
+          timeStamp: expect.any(Number)
         },
-        origin: window.location.host
+        origin: 'localhost',
+        type: 'GET_DATABASE_TREE'
       }
 
       const data = await command.exec(action)
@@ -58,17 +50,14 @@ describe('Tests all', () => {
       }
 
       const result = {
-        type: 'GET_DATABASE_OBJECTSTORE_CONTENT',
         data: {
-          keyPath: 'isbn',
-          keys: [ 123456, 234567, 345678 ],
-          values: [
-            { title: 'Quarry Memories', author: 'Fred', isbn: 123456 },
-            { title: 'Water Buffaloes', author: 'Fred', isbn: 234567 },
-            { title: 'Bedrock Nights', author: 'Barney', isbn: 345678 }
-          ]
+          data: expect.any(Object),
+          text: 'Success',
+          type: 'success',
+          timeStamp: expect.any(Number)
         },
-        origin: window.location.host
+        origin: 'localhost',
+        type: 'GET_DATABASE_OBJECTSTORE_CONTENT'
       }
 
       const data = await command.exec(action)
@@ -90,15 +79,14 @@ describe('Tests all', () => {
       }
 
       const result = {
-        type: 'GET_DATABASE_OBJECTSTORE_SEARCH',
         data: {
-          keyPath: 'isbn',
-          keys: [ 234567 ],
-          values: [
-            { title: 'Water Buffaloes', author: 'Fred', isbn: 234567 }
-          ]
+          data: expect.any(Object),
+          text: 'Success',
+          type: 'success',
+          timeStamp: expect.any(Number)
         },
-        origin: window.location.host
+        origin: 'localhost',
+        type: 'GET_DATABASE_OBJECTSTORE_SEARCH'
       }
 
       const data = await command.exec(action)
@@ -120,9 +108,14 @@ describe('Tests all', () => {
       }
 
       const result = {
-        type: 'INSERT_DATABASE_OBJECTSTORE_CONTENT',
-        data: 'success',
-        origin: window.location.host
+        data: {
+          data: expect.any(String),
+          text: 'Success',
+          type: 'success',
+          timeStamp: expect.any(Number)
+        },
+        origin: 'localhost',
+        type: 'INSERT_DATABASE_OBJECTSTORE_CONTENT'
       }
 
       const data = await command.exec(action)
@@ -138,8 +131,13 @@ describe('Tests all', () => {
       }
 
       const result = {
-        data: 'localhost',
-        origin: window.location.host,
+        data: {
+          data: expect.any(String),
+          text: 'Success',
+          type: 'success',
+          timeStamp: expect.any(Number)
+        },
+        origin: 'localhost',
         type: 'GET_TAB_HOST'
       }
 
