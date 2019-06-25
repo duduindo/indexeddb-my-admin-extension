@@ -13,6 +13,10 @@ class Commands {
     let request = null
 
     switch (type) {
+      case 'DELETE_DATABASE_OBJECTSTORE_CONTENT':
+        request = iDBAdmin.deleteObjectStoreContent(payload.store, payload.key)
+        break
+
       case 'GET_DATABASE_OBJECTSTORE_CONTENT':
         request = iDBAdmin.getAllFromObjectStore(payload.store)
         break
