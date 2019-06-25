@@ -327,4 +327,39 @@ describe('IDBAdmin', () => {
       })
     })
   })
+
+
+  describe('deleteObjectStoreContent', () => {
+    describe('Successfully', () => {
+      test('Should return success and has been searched book "Clean Code"', async () => {
+        const dbLibrary = new IDBAdmin('library', 1)
+        const tree = await dbLibrary.deleteObjectStoreContent('books', 234567)
+        const result = {
+          data: 'success',
+          text: expect.any(String),
+          type: 'success',
+          timeStamp: expect.any(Number)
+        }
+        const booksSearched = await dbLibrary.getAllFromObjectStoreSearch('books', 'Water Buffaloes')
+
+        expect(booksSearched.data.keys.length).not.toBe(1)
+        expect(tree).toEqual(result)
+      })
+    })
+
+    describe('Failed', () => {
+      test('Should return a error', async () => {
+        const dbLibrary = new IDBAdmin('library', 100)
+        const tree = await dbLibrary.deleteObjectStoreContent('BOOOKSS', 234567)
+        const result = {
+          data: 'error',
+          text: expect.any(String),
+          type: 'error',
+          timeStamp: expect.any(Number)
+        }
+
+        expect(tree).toEqual(result)
+      })
+    })
+  })
 })
