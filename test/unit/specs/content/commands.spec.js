@@ -95,7 +95,7 @@ describe('Tests all', () => {
     })
 
 
-    test('Should return success when object store inserted', async () => {
+    test('Should return success when object store was inserted', async () => {
       const action = {
         type: 'INSERT_DATABASE_OBJECTSTORE_CONTENT',
         payload: {
@@ -116,6 +116,35 @@ describe('Tests all', () => {
         },
         origin: 'localhost',
         type: 'INSERT_DATABASE_OBJECTSTORE_CONTENT'
+      }
+
+      const data = await command.exec(action)
+
+      expect(data).toEqual(result)
+    })
+
+
+    test('Shouldnt return success when object store was deleted', async () => {
+      const action = {
+        type: 'DELETE_DATABASE_OBJECTSTORE_CONTENT',
+        payload: {
+          name: 'library',
+          version: 1,
+          store: 'books',
+          key: 234567
+        },
+        origin: window.location.host
+      }
+
+      const result = {
+        data: {
+          data: expect.any(String),
+          text: 'Success',
+          type: 'success',
+          timeStamp: expect.any(Number)
+        },
+        origin: 'localhost',
+        type: 'DELETE_DATABASE_OBJECTSTORE_CONTENT'
       }
 
       const data = await command.exec(action)

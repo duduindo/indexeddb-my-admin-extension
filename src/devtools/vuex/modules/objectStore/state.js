@@ -4,5 +4,6 @@ export default {
     keys: [],
     values: []
   },
+  statusDeleted: '',
   statusInserted: ''
 }

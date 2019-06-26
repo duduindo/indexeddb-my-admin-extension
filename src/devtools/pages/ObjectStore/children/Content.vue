@@ -20,6 +20,7 @@
       :version="$route.params.version"
       :store="$route.params.store"
       :content="content"
+      :handleDelete="handleDelete"
     />
   </div>
 </template>
@@ -34,22 +35,47 @@
     components: { Pagination, Table },
     computed: {
       ...mapGetters({
-        content: 'getObjectStoreContent'
+        content: 'getObjectStoreContent',
+        statusDeleted: 'getObjectStoreDeletedStatus'
       })
     },
     methods: {
       ...mapActions({
-        fetch: 'fetchObjectStoreContent'
-      })
+        fetch: 'fetchObjectStoreContent',
+        fetchDelete: 'fetchObjectStoreDelete',
+        setStatusDeleted: 'setObjectStoreStatusDeleted'
+      }),
+      handleDelete(key) {
+        const { database: name, version, store } = this.$route.params
+
+        this.fetchDelete({
+          name,
+          version,
+          store,
+          key
+        })
+
+        this.setStatusDeleted('loading')
+      },
+      handleMount() {
+        const { database: name, version, store } = this.$route.params
+
+        this.fetch({
+          name,
+          version,
+          store
+        })
+      }
+    },
+    watch: {
+      statusDeleted(value) {
+        if (value === 'success') {
+          this.handleMount()
+        }
+      }
     },
     mounted() {
-      const { database: name, version, store } = this.$route.params
-
-      this.fetch({
-        name,
-        version,
-        store
-      })
+      this.handleMount()
     }
   }
 </script>

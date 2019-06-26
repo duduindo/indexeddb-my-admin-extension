@@ -214,6 +214,33 @@ class IDBAdmin extends IDBAdminRequest {
       }
     }
   }
+
+
+  async deleteObjectStoreContent(name: string, key: any): Promise<IDBAdminResponse> {
+    let conn: IDBAdminOpen
+    let request: IDBObjectStore
+
+    try {
+      conn = await this.open()
+      request = await this.requestObjectStore(conn, name, 'readwrite')
+
+      request.delete(key)
+
+      return {
+        data: 'success',
+        text: 'Success',
+        type: 'success',
+        timeStamp: conn.timeStamp
+      }
+    } catch (e) {
+      return {
+        data: 'error',
+        text: e.toString(),
+        type: 'error',
+        timeStamp: 0
+      }
+    }
+  }
 }
 
 export default IDBAdmin
