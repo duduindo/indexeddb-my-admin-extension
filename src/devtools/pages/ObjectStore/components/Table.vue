@@ -25,7 +25,7 @@
           </router-link>
         </td>
         <td>
-          <a href="#delete">
+          <a @click.prevent="handleDelete(keys[index])" href="#delete">
             <img src="images/b_drop.png" alt="Delete object store">
             <span>Delete</span>
           </a>
@@ -73,6 +73,10 @@
             values: []
           }
         }
+      },
+      handleDelete: {
+        type: Function,
+        required: true
       }
     },
     watch: {

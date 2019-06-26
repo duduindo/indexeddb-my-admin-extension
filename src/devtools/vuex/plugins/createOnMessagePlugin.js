@@ -23,8 +23,8 @@ function createOnMessagePlugin(onMessage) {
           break
 
         // Object Store
-        case 'INSERT_DATABASE_OBJECTSTORE_CONTENT':
-          store.commit('SET_OBJECTSTORE_INSERTED_STATUS', data)
+        case 'DELETE_DATABASE_OBJECTSTORE_CONTENT':
+          store.commit('SET_OBJECTSTORE_DELETED_STATUS', data)
           break
 
         case 'GET_DATABASE_OBJECTSTORE_CONTENT':
@@ -33,6 +33,10 @@ function createOnMessagePlugin(onMessage) {
 
         case 'GET_DATABASE_OBJECTSTORE_SEARCH':
           store.commit('SET_OBJECTSTORE_CONTENT', data)
+          break
+
+        case 'INSERT_DATABASE_OBJECTSTORE_CONTENT':
+          store.commit('SET_OBJECTSTORE_INSERTED_STATUS', data)
           break
       }
     })
