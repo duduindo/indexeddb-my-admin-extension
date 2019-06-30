@@ -47,15 +47,18 @@
       }),
       handleDelete(key) {
         const { database: name, version, store } = this.$route.params
+        const isConfirm = confirm('Do you really want to delete it?')
 
-        this.fetchDelete({
-          name,
-          version,
-          store,
-          key
-        })
+        if (isConfirm) {
+          this.fetchDelete({
+            name,
+            version,
+            store,
+            key
+          })
 
-        this.setStatusDeleted('loading')
+          this.setStatusDeleted('loading')
+        }
       },
       handleMount() {
         const { database: name, version, store } = this.$route.params
