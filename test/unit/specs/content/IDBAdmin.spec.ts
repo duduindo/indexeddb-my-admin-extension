@@ -362,4 +362,41 @@ describe('IDBAdmin', () => {
       })
     })
   })
+
+
+  describe('getAllFromIndex', () => {
+    describe('Successfully', () => {
+      test('####', async () => {
+        const dbLibrary = new IDBAdmin('library', 1)
+        const index = await dbLibrary.getAllFromIndex('books', 'by_title')
+        const result = {
+          data: 'success',
+          text: expect.any(String),
+          type: 'success',
+          timeStamp: expect.any(Number)
+        }
+
+
+        console.warn( index )
+
+
+        // expect(index).toEqual(result)
+      })
+    })
+
+    describe.skip('Failed', () => {
+      test('Should return a error', async () => {
+        const dbLibrary = new IDBAdmin('library', 100)
+        const index = await dbLibrary.getAllFromIndex('BOOOKSS', '')
+        const result = {
+          data: 'error',
+          text: expect.any(String),
+          type: 'error',
+          timeStamp: expect.any(Number)
+        }
+
+        expect(index).toEqual(result)
+      })
+    })
+  })
 })

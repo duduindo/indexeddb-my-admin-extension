@@ -18,5 +18,6 @@ type IDBAdminRequestEvent = {
 type IDBAdminResponseDataGetAll = {
   keyPath: string | string[],
   keys: Array<any>,
-  values: Array<object>
+  values: Array<object>,
+  valuesIndex?: Array<any>
 }

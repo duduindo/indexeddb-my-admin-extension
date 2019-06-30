@@ -241,6 +241,45 @@ class IDBAdmin extends IDBAdminRequest {
       }
     }
   }
+
+  async getAllFromIndex(name: string, nameIndex: string): Promise<IDBAdminResponse> {
+    let conn: IDBAdminOpen
+    let data: IDBAdminResponseDataGetAll = { keyPath: '', keys: [], values: [] }
+    let index: IDBIndex
+    let values: IDBAdminRequestEvent
+    let keys: IDBAdminRequestEvent
+    let cursor: IDBAdminRequestEvent
+
+
+    try {
+      conn = await this.open()
+      index = await this.requestObjectStoreIndex(conn, name, nameIndex)
+      values = await this.requestObjectStoreIndexValues(conn, name, nameIndex)
+      keys = await this.requestObjectStoreIndexKeys(conn, name, nameIndex)
+      cursor = await this.requestIndexOpenCursor(conn, name, nameIndex)
+
+      data = {
+        keyPath: index.keyPath,
+        keys: keys.target.result,
+        values: values.target.result,
+        // valuesIndex: values.target.result.map((value: any) => value[index.keyPath])
+      }
+
+      return {
+        data,
+        text: 'Success',
+        type: 'success',
+        timeStamp: 0
+      }
+    } catch (e) {
+      return {
+        data,
+        text: e.toString(),
+        type: 'error',
+        timeStamp: 0
+      }
+    }
+  }
 }
 
 export default IDBAdmin
