@@ -366,30 +366,34 @@ describe('IDBAdmin', () => {
 
   describe('getAllFromIndex', () => {
     describe('Successfully', () => {
-      test('####', async () => {
+      test('Should return a array of all data from Index', async () => {
         const dbLibrary = new IDBAdmin('library', 1)
         const index = await dbLibrary.getAllFromIndex('books', 'by_title')
         const result = {
-          data: 'success',
+          data: {
+            keyPath: 'title',
+            keys: [345678, 9780132350884, 123456],
+            values: [
+              { title: 'Bedrock Nights', author: 'Barney', isbn: 345678 },
+              { title: 'Clean Code', author: 'Robert Cecil Martin', isbn: 9780132350884 },
+              { title: 'Quarry Memories', author: 'Fred', isbn: 123456 }
+            ]
+          },
           text: expect.any(String),
           type: 'success',
           timeStamp: expect.any(Number)
         }
 
-
-        console.warn( index )
-
-
-        // expect(index).toEqual(result)
+        expect(index).toEqual(result)
       })
     })
 
-    describe.skip('Failed', () => {
+    describe('Failed', () => {
       test('Should return a error', async () => {
         const dbLibrary = new IDBAdmin('library', 100)
         const index = await dbLibrary.getAllFromIndex('BOOOKSS', '')
         const result = {
-          data: 'error',
+          data: { keyPath: '', keys: [], values: [] },
           text: expect.any(String),
           type: 'error',
           timeStamp: expect.any(Number)

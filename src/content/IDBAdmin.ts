@@ -248,21 +248,17 @@ class IDBAdmin extends IDBAdminRequest {
     let index: IDBIndex
     let values: IDBAdminRequestEvent
     let keys: IDBAdminRequestEvent
-    let cursor: IDBAdminRequestEvent
-
 
     try {
       conn = await this.open()
       index = await this.requestObjectStoreIndex(conn, name, nameIndex)
       values = await this.requestObjectStoreIndexValues(conn, name, nameIndex)
       keys = await this.requestObjectStoreIndexKeys(conn, name, nameIndex)
-      cursor = await this.requestIndexOpenCursor(conn, name, nameIndex)
 
       data = {
         keyPath: index.keyPath,
         keys: keys.target.result,
-        values: values.target.result,
-        // valuesIndex: values.target.result.map((value: any) => value[index.keyPath])
+        values: values.target.result
       }
 
       return {

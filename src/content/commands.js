@@ -17,6 +17,10 @@ class Commands {
         request = iDBAdmin.deleteObjectStoreContent(payload.store, payload.key)
         break
 
+      case 'GET_DATABASE_INDEX_CONTENT':
+        request = iDBAdmin.getAllFromIndex(payload.store, payload.index)
+        break
+
       case 'GET_DATABASE_OBJECTSTORE_CONTENT':
         request = iDBAdmin.getAllFromObjectStore(payload.store)
         break
