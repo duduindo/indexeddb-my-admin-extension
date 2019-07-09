@@ -4,7 +4,7 @@ import Content from './children/Content'
 
 
 export const route = {
-  path: '/object-store/:database/:version/:store/:index',
+  path: '/index/:database/:version/:store/:index',
   component: Index,
   children: [
     {

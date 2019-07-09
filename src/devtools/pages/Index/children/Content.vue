@@ -14,7 +14,6 @@
       </div>
     </div>
 
-    <Pagination />
     <Table
       :database="$route.params.database"
       :version="$route.params.version"
@@ -27,12 +26,11 @@
 
 <script>
   import { mapActions, mapGetters } from 'vuex'
-  import Pagination from '../components/Pagination'
   import Table from '../components/Table'
 
   export default {
     name: 'Content',
-    components: { Pagination, Table },
+    components: { Table },
     computed: {
       ...mapGetters({
         content: 'getIndexContent',
@@ -61,12 +59,13 @@
         }
       },
       handleMount() {
-        const { database: name, version, store } = this.$route.params
+        const { database: name, version, store, index } = this.$route.params
 
         this.fetch({
           name,
           version,
-          store
+          store,
+          index
         })
       }
     },
@@ -75,6 +74,9 @@
         if (value === 'success') {
           this.handleMount()
         }
+      },
+      content(v) {
+        console.log(v)
       }
     },
     mounted() {

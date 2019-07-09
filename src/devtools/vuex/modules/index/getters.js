@@ -1,3 +1,3 @@
 export default {
-  getIndexContent: state => state.content,
+  getIndexContent: state => state.content
 }

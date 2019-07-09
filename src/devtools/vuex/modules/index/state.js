@@ -3,5 +3,5 @@ export default {
     keyPath: '',
     keys: [],
     values: []
-  },
+  }
 }
