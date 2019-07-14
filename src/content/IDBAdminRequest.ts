@@ -118,6 +118,83 @@ class IDBAdminRequest {
       }
     })
   }
+
+  protected async requestObjectStoreIndex(connection: IDBAdminOpen, name: string, nameIndex: string, mode: any = 'readonly'): Promise<IDBIndex> {
+    const conn: IDBAdminOpen = connection
+    const result: IDBDatabase = conn.target.result
+    const hasObjectStore: boolean = !!result.objectStoreNames.length
+    const notFoundError = new Error('NotFoundError: Object Store Keys not found')
+    let index: IDBIndex
+
+    return new Promise((resolve, reject) => {
+      if (hasObjectStore) {
+        index = result.transaction(name).objectStore(name).index(nameIndex)
+
+        resolve(index)
+      } else {
+        reject(notFoundError)
+      }
+    })
+  }
+
+  protected async requestObjectStoreIndexValues(connection: IDBAdminOpen, name: string, nameIndex: string, mode: any = 'readonly'): Promise<IDBAdminRequestEvent> {
+    const conn: IDBAdminOpen = connection
+    const result: IDBDatabase = conn.target.result
+    const hasObjectStore: boolean = !!result.objectStoreNames.length
+    const notFoundError = new Error('NotFoundError: Object Store Keys not found')
+    let index: any
+
+    return new Promise((resolve, reject) => {
+      if (hasObjectStore) {
+        index = result.transaction(name).objectStore(name).index(nameIndex).getAll()
+
+        index.onsuccess = (event: any) => resolve(event)
+        index.onerror = (event: any) => reject(event)
+      } else {
+        reject(notFoundError)
+      }
+    })
+  }
+
+  protected async requestObjectStoreIndexKeys(connection: IDBAdminOpen, name: string, nameIndex: string, mode: any = 'readonly'): Promise<IDBAdminRequestEvent> {
+    const conn: IDBAdminOpen = connection
+    const result: IDBDatabase = conn.target.result
+    const hasObjectStore: boolean = !!result.objectStoreNames.length
+    const notFoundError = new Error('NotFoundError: Object Store Keys not found')
+    let index: any
+
+    return new Promise((resolve, reject) => {
+      if (hasObjectStore) {
+        index = result.transaction(name).objectStore(name).index(nameIndex).getAllKeys()
+
+        index.onsuccess = (event: any) => resolve(event)
+        index.onerror = (event: any) => reject(event)
+      } else {
+        reject(notFoundError)
+      }
+    })
+  }
+
+  protected async requestIndexOpenCursor(connection: IDBAdminOpen, name: string, nameIndex: string): Promise<IDBAdminRequestEvent> {
+    const conn: IDBAdminOpen = connection
+    const result: IDBDatabase = conn.target.result
+    const hasObjectStore: boolean = !!result.objectStoreNames.length
+    const notFoundError = new Error('NotFoundError: Object Store Keys not found')
+    let index: IDBIndex
+    let openCursor: IDBRequest
+
+    return new Promise((resolve, reject) => {
+      if (hasObjectStore) {
+        index = result.transaction(name).objectStore(name).index(nameIndex)
+        openCursor = index.openCursor()
+
+        openCursor.onsuccess = (event: any) => resolve(event)
+        openCursor.onerror = (event: any) => reject(event)
+      } else {
+        reject(notFoundError)
+      }
+    })
+  }
 }
 
 export default IDBAdminRequest

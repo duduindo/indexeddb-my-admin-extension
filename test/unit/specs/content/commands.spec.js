@@ -38,6 +38,34 @@ describe('Tests all', () => {
       expect(data).toEqual(result)
     })
 
+    test('Should return all data from index content', async () => {
+      const action = {
+        type: 'GET_DATABASE_INDEX_CONTENT',
+        payload: {
+          name: 'library',
+          version: 1,
+          store: 'books',
+          index: 'by_title'
+        },
+        origin: window.location.host
+      }
+
+      const result = {
+        data: {
+          data: expect.any(Object),
+          text: 'Success',
+          type: 'success',
+          timeStamp: expect.any(Number)
+        },
+        origin: 'localhost',
+        type: 'GET_DATABASE_INDEX_CONTENT'
+      }
+
+      const data = await command.exec(action)
+
+      expect(data).toEqual(result)
+    })
+
     test('Should return all data from store content', async () => {
       const action = {
         type: 'GET_DATABASE_OBJECTSTORE_CONTENT',
@@ -124,7 +152,7 @@ describe('Tests all', () => {
     })
 
 
-    test('Shouldnt return success when object store was deleted', async () => {
+    test('Should return success when object store was deleted', async () => {
       const action = {
         type: 'DELETE_DATABASE_OBJECTSTORE_CONTENT',
         payload: {

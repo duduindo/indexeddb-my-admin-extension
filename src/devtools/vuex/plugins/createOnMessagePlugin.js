@@ -27,6 +27,10 @@ function createOnMessagePlugin(onMessage) {
           store.commit('SET_OBJECTSTORE_DELETED_STATUS', data)
           break
 
+        case 'GET_DATABASE_INDEX_CONTENT':
+          store.commit('SET_INDEX_CONTENT', data)
+          break
+
         case 'GET_DATABASE_OBJECTSTORE_CONTENT':
           store.commit('SET_OBJECTSTORE_CONTENT', data)
           break

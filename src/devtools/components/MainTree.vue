@@ -14,7 +14,7 @@
           <!-- Indexes -->
           <ul>
             <li :key="index" v-for="(indexed, index) in store.indexes">
-              <router-link :to="`/store/${database.name}/${database.version}/${store.name}/${indexed}/`">
+              <router-link :to="`/index/${database.name}/${database.version}/${store.name}/${indexed}/`">
                 <p>{{ indexed }}</p>
               </router-link>
             </li>
