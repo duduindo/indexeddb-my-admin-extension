@@ -10,6 +10,7 @@
     </header>
 
     <main class="l-main">
+      <Breadcrumb />
       <router-view />
     </main>
   </div>
@@ -17,11 +18,12 @@
 
 <script>
   import { mapActions } from 'vuex'
+  import Breadcrumb from '@/devtools/components/Breadcrumb'
   import Expander from '@/devtools/components/Expander'
 
   export default {
     name: 'App',
-    components: { Expander },
+    components: { Breadcrumb, Expander },
     methods: {
       ...mapActions({
         fetch: 'fetchHost'
