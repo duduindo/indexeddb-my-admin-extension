@@ -10,26 +10,25 @@
 
   export default {
     name: 'store',
+    data() {
+      return {
+        tabs: [
+          { name: 'Browser', href: '.', isActive: true },
+          { name: 'Structure', href: '/' }
+        ]
+      }
+    },
     methods: {
       ...mapActions({
         setTabs: 'setNavigatorBarTabs',
         setTabActive: 'setNavigatorBarActive'
-      })
+      }),
+      handleTabs() {
+        this.setTabs(this.tabs)
+      }
     },
     mounted() {
-      const tabs = [
-        {
-          name: 'Browser',
-          href: '/',
-          isActive: true
-        },
-        {
-          name: 'Structure',
-          href: '/'
-        }
-      ]
-
-      this.setTabs(tabs)
+      this.handleTabs()
     },
     destroyed() {
       this.setTabs()
