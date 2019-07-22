@@ -1,5 +1,5 @@
-import breadcrumb from './modules/breadcrumb/index'
 import index from './modules/index/index'
+import navigatorBar from './modules/navigatorBar/index'
 import objectStore from './modules/objectStore/index'
 import tab from './modules/tab/index'
 import tree from './modules/tree/index'
@@ -12,8 +12,8 @@ const plugins = [
 
 export default {
   modules: {
-    breadcrumb,
     index,
+    navigatorBar,
     objectStore,
     tab,
     tree

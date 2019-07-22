@@ -11,6 +11,7 @@
 
     <main class="l-main">
       <Breadcrumb />
+      <NavigatorBar />
       <router-view />
     </main>
   </div>
@@ -20,10 +21,11 @@
   import { mapActions } from 'vuex'
   import Breadcrumb from '@/devtools/components/Breadcrumb'
   import Expander from '@/devtools/components/Expander'
+  import NavigatorBar from '@/devtools/components/NavigatorBar'
 
   export default {
     name: 'App',
-    components: { Breadcrumb, Expander },
+    components: { Breadcrumb, Expander, NavigatorBar },
     methods: {
       ...mapActions({
         fetch: 'fetchHost'
