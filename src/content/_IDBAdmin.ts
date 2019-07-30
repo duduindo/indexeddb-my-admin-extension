@@ -1,4 +1,4 @@
-import IDBAdminRequest from '@/content/IDBAdminRequest'
+import IDBAdminRequest from '@/content/_IDBAdminRequest'
 
 
 class IDBAdmin extends IDBAdminRequest {
