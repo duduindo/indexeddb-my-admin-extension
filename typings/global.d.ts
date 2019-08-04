@@ -1,3 +1,20 @@
+/**
+ * Reference:
+ * - https://github.com/redux-utilities/flux-standard-action#actions
+ */
+interface Action<Payload> {
+  type: string;
+  payload: Payload;
+  error?: boolean;
+  meta?: Object;
+}
+
+type createObjectStoreProperties = {
+  name: string,
+  keyPath?: string,
+  autoIncrement?: boolean
+}
+
 type IDBAdminResponse = {
   data: any,
   text: string,
