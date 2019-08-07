@@ -58,5 +58,16 @@ describe('Test', () => {
 
       expect(request.type).toBe('upgradeneeded')
     })
+
+    test('Get object store', async () => {
+      const admin = new IDBAdmin
+      const request = await admin.reducer(actions.objectStore({
+        name: 'library',
+        version: 1,
+        store: 'books'
+      }))
+
+      expect(request.indexNames).toEqual(['by_title'])
+    })
   })
 })

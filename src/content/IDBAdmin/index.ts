@@ -23,6 +23,18 @@ class IDBAdmin {
     if (isType(action, actions.deleteObjectStores)) {
       return this.deleteObjectStores()
     }
+
+    if (isType(action, actions.objectStore)) {
+      return this.objectStore()
+    }
+
+    return this.defaultResponse()
+  }
+
+  private defaultResponse(): Promise<string> {
+    return new Promise(resolve => {
+      resolve('IDBAdmin: Action not found')
+    })
   }
 
   private openDatabase(): Promise<any> {
