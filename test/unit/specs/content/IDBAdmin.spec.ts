@@ -70,4 +70,23 @@ describe('Test', () => {
       expect(request.indexNames).toEqual(['by_title'])
     })
   })
+
+
+  describe('Object', () => {
+    test('Create object store', async () => {
+      const admin = new IDBAdmin
+      const request = await admin.reducer(actions.addObjects({
+        name: 'library',
+        version: 1,
+        store: 'books',
+        values: [
+          { value: { title: 'Indexed Database API 3.0', author: 'W3C', isbn: 79457 } },
+          { value: { title: 'Indexed Database API 2.0', author: 'MDN', isbn: 14258 } },
+        ]
+      }))
+
+
+      request.forEach((req:any) => expect(req.readyState).toBe('pending'))
+    })
+  })
 })

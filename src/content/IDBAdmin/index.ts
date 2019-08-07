@@ -28,6 +28,10 @@ class IDBAdmin {
       return this.objectStore()
     }
 
+    if (isType(action, actions.addObjects)) {
+      return this.addObjects()
+    }
+
     return this.defaultResponse()
   }
 
@@ -118,6 +122,27 @@ class IDBAdmin {
       objectStore = result.transaction(store).objectStore(store)
 
       return objectStore
+    } catch(error) {
+      return error
+    } finally {
+      result.close()
+    }
+  }
+
+  private async addObjects() {
+    const {name, version, store, values = []} = this.action.payload
+    let request: any = null
+    let result: any = null
+    let objectStore: any = null
+    let objectsAdded: Array<IDBRequest> = []
+
+    try {
+      request = await this.openDatabase()
+      result = request.target.result
+      objectStore = result.transaction(store, 'readwrite').objectStore(store)
+      objectsAdded = values.map((data: any) => objectStore.add(data.value, data.key))
+
+      return objectsAdded
     } catch(error) {
       return error
     } finally {

@@ -15,6 +15,13 @@ type createObjectStoreProperties = {
   autoIncrement?: boolean
 }
 
+type addObjectProperties = {
+  value: object,
+  key?: any
+}
+
+
+// Old
 type IDBAdminResponse = {
   data: any,
   text: string,
@@ -22,16 +29,19 @@ type IDBAdminResponse = {
   timeStamp: number
 }
 
+// Old
 type IDBAdminOpen = {
   target: IDBOpenDBRequest,
   timeStamp: number
 }
 
+// Old
 type IDBAdminRequestEvent = {
   target: IDBRequest,
   timeStamp: number
 }
 
+// Old
 type IDBAdminResponseDataGetAll = {
   keyPath: string | string[],
   keys: Array<any>,
