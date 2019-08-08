@@ -1,5 +1,6 @@
 import { isType } from 'typescript-fsa';
 import actions from './actions'
+import IDBAObjects from './objects'
 
 
 class IDBAdmin {
@@ -30,6 +31,14 @@ class IDBAdmin {
 
     if (isType(action, actions.addObjects)) {
       return this.addObjects()
+    }
+
+    if (isType(action, actions.putObjects)) {
+      return this.putObjects()
+    }
+
+    if (isType(action, actions.getObjects)) {
+      return this.getObjects()
     }
 
     return this.defaultResponse()
@@ -134,20 +143,62 @@ class IDBAdmin {
     let request: any = null
     let result: any = null
     let objectStore: any = null
-    let objectsAdded: Array<IDBRequest> = []
+    let promises: any[] = []
 
     try {
       request = await this.openDatabase()
       result = request.target.result
       objectStore = result.transaction(store, 'readwrite').objectStore(store)
-      objectsAdded = values.map((data: any) => objectStore.add(data.value, data.key))
+      promises = values.map((data: any) => {
+        return new Promise((resolve, reject) => {
+          const added = objectStore.add(data.value, data.key)
 
-      return objectsAdded
+          added.onsuccess = (event: any) => resolve(event)
+          added.onerror = (event: any) => reject(event)
+        })
+      })
+
+      return Promise.all(promises)
     } catch(error) {
       return error
     } finally {
       result.close()
     }
+  }
+
+  private async putObjects() {
+    const {name, version, store, values = []} = this.action.payload
+    let request: any = null
+    let result: any = null
+    let objectStore: any = null
+    let promises: any[] = []
+
+    try {
+      request = await this.openDatabase()
+      result = request.target.result
+      objectStore = result.transaction(store, 'readwrite').objectStore(store)
+      promises = values.map((data: any) => {
+        return new Promise((resolve, reject) => {
+          const put = objectStore.put(data.value, data.key)
+
+          put.onsuccess = (event: any) => resolve(event)
+          put.onerror = (event: any) => reject(event)
+        })
+      })
+
+      return Promise.all(promises)
+    } catch(error) {
+      return error
+    } finally {
+      result.close()
+    }
+  }
+
+  private getObjects() {
+    const {name, version, store, keys = []} = this.action.payload
+    const request = new IDBAObjects(name, version, store)
+
+    return request.get(keys)
   }
 }
 

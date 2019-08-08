@@ -73,7 +73,7 @@ describe('Test', () => {
 
 
   describe('Object', () => {
-    test('Create object store', async () => {
+    test('Add objects', async () => {
       const admin = new IDBAdmin
       const request = await admin.reducer(actions.addObjects({
         name: 'library',
@@ -85,8 +85,34 @@ describe('Test', () => {
         ]
       }))
 
+      request.forEach((req:any) => expect(req.target.readyState).toBe('done'))
+    })
 
-      request.forEach((req:any) => expect(req.readyState).toBe('pending'))
+    test('Put objects', async () => {
+      const admin = new IDBAdmin
+      const request = await admin.reducer(actions.putObjects({
+        name: 'library',
+        version: 1,
+        store: 'books',
+        values: [
+          { value: { title: 'Indexed Database API 13.0v2', author: 'W3C', isbn: 79457 } },
+          { value: { title: 'Indexed Database API 13.0v3', author: 'MDN', isbn: 14258 } },
+        ]
+      }))
+
+      request.forEach((req:any) => expect(req.target.readyState).toBe('done'))
+    })
+
+    test('Get objects', async () => {
+      const admin = new IDBAdmin
+      const request = await admin.reducer(actions.getObjects({
+        name: 'library',
+        version: 1,
+        store: 'books',
+        keys: [79457, 14258]
+      }))
+
+      request.forEach((req:any) => expect(req.target.readyState).toBe('done'))
     })
   })
 })

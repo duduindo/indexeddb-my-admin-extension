@@ -35,5 +35,19 @@ export default {
     version: number,
     store: string,
     values: addObjectProperties[]
-  }>('IDBADMIN_ADD_OBJECTS')
+  }>('IDBADMIN_ADD_OBJECTS'),
+
+  putObjects: actionCreator<{
+    name: string,
+    version: number,
+    store: string,
+    values: addObjectProperties[]
+  }>('IDBADMIN_PUT_OBJECTS'),
+
+  getObjects: actionCreator<{
+    name: string,
+    version: number,
+    store: string,
+    keys: any[]
+  }>('IDBADMIN_GET_OBJECTS')
 }
