@@ -41,6 +41,14 @@ class IDBAdmin {
       return this.getObjects()
     }
 
+    if (isType(action, actions.deleteObjects)) {
+      return this.deleteObjects()
+    }
+
+    if (isType(action, actions.countObjects)) {
+      return this.countObjects()
+    }
+
     return this.defaultResponse()
   }
 
@@ -138,60 +146,18 @@ class IDBAdmin {
     }
   }
 
-  private async addObjects() {
+  private addObjects() {
     const {name, version, store, values = []} = this.action.payload
-    let request: any = null
-    let result: any = null
-    let objectStore: any = null
-    let promises: any[] = []
+    const request = new IDBAObjects(name, version, store)
 
-    try {
-      request = await this.openDatabase()
-      result = request.target.result
-      objectStore = result.transaction(store, 'readwrite').objectStore(store)
-      promises = values.map((data: any) => {
-        return new Promise((resolve, reject) => {
-          const added = objectStore.add(data.value, data.key)
-
-          added.onsuccess = (event: any) => resolve(event)
-          added.onerror = (event: any) => reject(event)
-        })
-      })
-
-      return Promise.all(promises)
-    } catch(error) {
-      return error
-    } finally {
-      result.close()
-    }
+    return request.put(values)
   }
 
-  private async putObjects() {
+  private putObjects() {
     const {name, version, store, values = []} = this.action.payload
-    let request: any = null
-    let result: any = null
-    let objectStore: any = null
-    let promises: any[] = []
+    const request = new IDBAObjects(name, version, store)
 
-    try {
-      request = await this.openDatabase()
-      result = request.target.result
-      objectStore = result.transaction(store, 'readwrite').objectStore(store)
-      promises = values.map((data: any) => {
-        return new Promise((resolve, reject) => {
-          const put = objectStore.put(data.value, data.key)
-
-          put.onsuccess = (event: any) => resolve(event)
-          put.onerror = (event: any) => reject(event)
-        })
-      })
-
-      return Promise.all(promises)
-    } catch(error) {
-      return error
-    } finally {
-      result.close()
-    }
+    return request.put(values)
   }
 
   private getObjects() {
@@ -199,6 +165,20 @@ class IDBAdmin {
     const request = new IDBAObjects(name, version, store)
 
     return request.get(keys)
+  }
+
+  private deleteObjects() {
+    const {name, version, store, keys = []} = this.action.payload
+    const request = new IDBAObjects(name, version, store)
+
+    return request.delete(keys)
+  }
+
+  private countObjects() {
+    const {name, version, store, keys = []} = this.action.payload
+    const request = new IDBAObjects(name, version, store)
+
+    return request.count(keys)
   }
 }
 

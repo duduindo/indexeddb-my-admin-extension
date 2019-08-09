@@ -49,5 +49,19 @@ export default {
     version: number,
     store: string,
     keys: any[]
-  }>('IDBADMIN_GET_OBJECTS')
+  }>('IDBADMIN_GET_OBJECTS'),
+
+  deleteObjects: actionCreator<{
+    name: string,
+    version: number,
+    store: string,
+    keys: any[]
+  }>('IDBADMIN_DELETE_OBJECTS'),
+
+  countObjects: actionCreator<{
+    name: string,
+    version: number,
+    store: string,
+    keys: any[]
+  }>('IDBADMIN_COUNT_OBJECTS')
 }

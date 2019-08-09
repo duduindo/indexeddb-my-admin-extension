@@ -82,6 +82,7 @@ describe('Test', () => {
         values: [
           { value: { title: 'Indexed Database API 3.0', author: 'W3C', isbn: 79457 } },
           { value: { title: 'Indexed Database API 2.0', author: 'MDN', isbn: 14258 } },
+          { value: { title: 'Indexed Database API 1.0', author: 'GOOGLE', isbn: 4682 } },
         ]
       }))
 
@@ -110,6 +111,30 @@ describe('Test', () => {
         version: 1,
         store: 'books',
         keys: [79457, 14258]
+      }))
+
+      request.forEach((req:any) => expect(req.target.readyState).toBe('done'))
+    })
+
+    test('Delete objects', async () => {
+      const admin = new IDBAdmin
+      const request = await admin.reducer(actions.deleteObjects({
+        name: 'library',
+        version: 1,
+        store: 'books',
+        keys: [79457, 14258]
+      }))
+
+      request.forEach((req:any) => expect(req.target.readyState).toBe('done'))
+    })
+
+    test('Count objects', async () => {
+      const admin = new IDBAdmin
+      const request = await admin.reducer(actions.countObjects({
+        name: 'library',
+        version: 1,
+        store: 'books',
+        keys: [79457]
       }))
 
       request.forEach((req:any) => expect(req.target.readyState).toBe('done'))
