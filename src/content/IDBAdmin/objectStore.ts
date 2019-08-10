@@ -2,8 +2,7 @@
 /**
  * Reference: https://w3c.github.io/IndexedDB/#object-store-interface
  */
-
-class IDBAObjects {
+class IDBAObjectStore {
   constructor(public name: string, public version: number, public store: string) {}
 
   private openDatabase(): Promise<any> {
@@ -140,4 +139,4 @@ class IDBAObjects {
 }
 
 
-export default IDBAObjects
+export default IDBAObjectStore

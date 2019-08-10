@@ -1,6 +1,6 @@
 import { isType } from 'typescript-fsa';
 import actions from './actions'
-import IDBAObjects from './objects'
+import IDBAObjectStore from './objectStore'
 
 
 class IDBAdmin {
@@ -148,35 +148,35 @@ class IDBAdmin {
 
   private addObjects() {
     const {name, version, store, values = []} = this.action.payload
-    const request = new IDBAObjects(name, version, store)
+    const request = new IDBAObjectStore(name, version, store)
 
     return request.put(values)
   }
 
   private putObjects() {
     const {name, version, store, values = []} = this.action.payload
-    const request = new IDBAObjects(name, version, store)
+    const request = new IDBAObjectStore(name, version, store)
 
     return request.put(values)
   }
 
   private getObjects() {
     const {name, version, store, keys = []} = this.action.payload
-    const request = new IDBAObjects(name, version, store)
+    const request = new IDBAObjectStore(name, version, store)
 
     return request.get(keys)
   }
 
   private deleteObjects() {
     const {name, version, store, keys = []} = this.action.payload
-    const request = new IDBAObjects(name, version, store)
+    const request = new IDBAObjectStore(name, version, store)
 
     return request.delete(keys)
   }
 
   private countObjects() {
     const {name, version, store, keys = []} = this.action.payload
-    const request = new IDBAObjects(name, version, store)
+    const request = new IDBAObjectStore(name, version, store)
 
     return request.count(keys)
   }
