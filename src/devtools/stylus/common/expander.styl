@@ -1,0 +1,23 @@
+// ==========================================================================
+// Expander
+// ==========================================================================
+
+
+.c-expander
+  padding 5px
+  background-color orange
+
+  ul
+    padding-inline-start 10px
+
+  &__toggle-action
+    background-color transparent
+    border 1px solid red
+
+    &::before
+      content '\2BC8'
+      display inline-block
+
+    &--active
+      &::before
+        content '\2BC6'

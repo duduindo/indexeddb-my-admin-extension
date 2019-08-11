@@ -117,7 +117,7 @@ module.exports = {
           {
             loader: 'stylus-loader'
           },
-        ]
+        ],
       },
 
       // Eslint

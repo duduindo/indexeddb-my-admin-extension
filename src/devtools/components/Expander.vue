@@ -1,59 +1,58 @@
 <template>
   <div>
-    <main-tree :tree="tree"/>
+    <nav class="c-expander">
+      <h4>Extension</h4>
+      <ul>
+        <li>Settings</li>
+      </ul>
+
+      <h4>Databases</h4>
+      <ul>
+        <li>
+          <span>icon</span>
+          <span>New</span>
+        </li>
+        <li>
+          <button class="c-expander__toggle-action c-expander__toggle-action--active"><span></span></button>
+          <span>icon</span>
+          <span>Database1</span>
+        </li>
+        <li>
+          <button class="c-expander__toggle-action c-expander__toggle-action--active"><span></span></button>
+          <span>icon</span>
+          <span>Database2</span>
+
+          <ul>
+            <li>
+              <span>icon</span>
+              <span>New</span>
+            </li>
+            <li>
+              <button class="c-expander__toggle-action"><span></span></button>
+              <span>icon</span>
+              <span>Store 1</span>
+
+              <ul>
+                <li>
+                  <span>icon</span>
+                  <span>New</span>
+                </li>
+
+                <li>
+                  <span>icon</span>
+                  <span>Index 1</span>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
   </div>
 </template>
 
 <script>
-  import { mapActions, mapGetters } from 'vuex'
-  import MainTree from '@/devtools/components/MainTree'
-
   export default {
-    name: 'Expander',
-    components: {
-      MainTree
-    },
-    data() {
-      return {
-        databasesFiltered: []
-      }
-    },
-    computed: {
-      ...mapGetters({
-        filter: 'filterDatabases',
-        tree: 'getTree',
-        host: 'getHost'
-      })
-    },
-    methods: {
-      ...mapActions({
-        fetch: 'fetchTree',
-        fetchStore: 'fetchStore'
-      })
-    },
-    watch: {
-      host(value, oldValue) {
-        if (value !== oldValue) {
-          this.databasesFiltered = this.filter(value)
-        }
-      },
-      databasesFiltered(value) {
-        const databases = value
-
-        databases.forEach(database => {
-          this.fetch({
-            name: database.name,
-            version: database.version
-          })
-        })
-      },
-      '$route'(to) {
-        const storeMatched = to.fullPath.match(/^\/store\/(?<name>.*)\/(?<version>\d{1,})\/(?<store>\w{1,})/)
-
-        if (storeMatched) {
-          this.fetchStore({ ...storeMatched.groups })
-        }
-      }
-    }
+    name: 'Expander'
   }
 </script>

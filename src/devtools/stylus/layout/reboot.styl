@@ -1,0 +1,51 @@
+// ==========================================================================
+// Reboot
+// ==========================================================================
+
+body
+  margin 0
+  width 100%
+  height 100%
+  position relative
+
+  .platform-linux
+    font-family var(--platform-linux-font-family)
+    color var(--platform-linux-color)
+
+  .platform-mac
+    font-family var(--platform-mac-font-family)
+    color var(--platform-mac-color)
+
+  .platform-windows
+    font-family var(--platform-windows-font-family)
+    color var(--platform-windows-color)
+
+
+h1, h2, h3, h4, h5, h6
+  font-weight var(--headings-font-weight)
+
+h1
+  font-weight var(--h1-font-size)
+h2
+  font-weight var(--h2-font-size)
+h3
+  font-weight var(--h3-font-size)
+h4
+  font-weight var(--h4-font-size)
+h5
+  font-weight var(--h5-font-size)
+h6
+  font-weight var(--h6-font-size)
+
+ul, ol
+  list-style-type none
+
+input, button
+  &:focus
+    outline none
+
+input[type='search'], input[type='text']
+  border 0
+
+  &:focus
+    box-shadow 0 0 0 1px $color-blue

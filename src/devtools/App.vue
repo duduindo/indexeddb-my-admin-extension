@@ -1,9 +1,7 @@
 <template>
-  <div class="l-container theme-pmahomme" id="app">
+  <div class="l-container platform-linux" id="app">
     <aside class="l-aside">
-      <!-- <router-link :to="'/'" >Go to index</router-link>
-      <Expander /> -->
-      aside
+      <Expander />
     </aside>
 
     <header class="l-masthead">
@@ -22,13 +20,11 @@
 
 <script>
   import { mapActions } from 'vuex'
-  // import Breadcrumb from '@/devtools/components/Breadcrumb'
-  // import Expander from '@/devtools/components/Expander'
-  // import NavigatorBar from '@/devtools/components/NavigatorBar'
+  import Expander from '@/devtools/components/Expander'
 
   export default {
     name: 'App',
-    // components: { Breadcrumb, Expander, NavigatorBar },
+    components: { Expander },
     methods: {
       ...mapActions({
         fetch: 'fetchHost'
