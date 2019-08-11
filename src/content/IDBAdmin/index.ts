@@ -1,5 +1,6 @@
 import { isType } from 'typescript-fsa';
 import actions from './actions'
+import IDBADatabase from './database'
 import IDBAObjectStore from './objectStore'
 
 
@@ -23,10 +24,6 @@ class IDBAdmin {
 
     if (isType(action, actions.deleteObjectStores)) {
       return this.deleteObjectStores()
-    }
-
-    if (isType(action, actions.objectStore)) {
-      return this.objectStore()
     }
 
     if (isType(action, actions.addObjects)) {
@@ -81,69 +78,17 @@ class IDBAdmin {
   }
 
   private async createObjectStores(): Promise<any> {
-    const {name, version, store, stores = []} = this.action.payload
-    let request: any = null
-    let result: any = null
+    const {name, version, stores = []} = this.action.payload
+    const request = new IDBADatabase(name, version)
 
-    try {
-      request = await this.openDatabase()
-      result = request.target.result
-
-      stores.forEach((store: createObjectStoreProperties) => {
-        const { keyPath = undefined, autoIncrement = false } = store
-
-        result.createObjectStore(store.name, {
-          keyPath: store.keyPath,
-          autoIncrement: store.autoIncrement
-        })
-      })
-
-      return request
-    } catch(error) {
-      return error
-    } finally {
-      result.close()
-    }
+    return request.createObjectStores(stores)
   }
 
   private async deleteObjectStores(): Promise<any> {
-    const {name, version, store, stores = []} = this.action.payload
-    let request: any = null
-    let result: any = null
+    const {name, version, stores = []} = this.action.payload
+    const request = new IDBADatabase(name, version)
 
-    try {
-      request = await this.openDatabase()
-      result = request.target.result
-
-      stores.forEach((store: string) => {
-        result.deleteObjectStore(store)
-      })
-
-      return request
-    } catch(error) {
-      return error
-    } finally {
-      result.close()
-    }
-  }
-
-  private async objectStore() {
-    const {name, version, store} = this.action.payload
-    let request: any = null
-    let result: any = null
-    let objectStore: any = null
-
-    try {
-      request = await this.openDatabase()
-      result = request.target.result
-      objectStore = result.transaction(store).objectStore(store)
-
-      return objectStore
-    } catch(error) {
-      return error
-    } finally {
-      result.close()
-    }
+    return request.deleteObjectStores(stores)
   }
 
   private addObjects() {
