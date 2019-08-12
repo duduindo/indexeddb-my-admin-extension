@@ -3,19 +3,29 @@
 // ==========================================================================
 
 .l-container
+  // Layout
   display grid
   grid-template-columns 2fr 8fr
   grid-template-rows auto 10fr
   grid-gap 5px
 
+  // Box
+  height 100%
+
 .l-masthead
+  // Layout
   grid-column 2
   grid-row auto
 
 .l-aside
+  // Layout
   grid-column 1
   grid-row 1/3
 
+  // Color
+  background-color $color-white-dark
+
 .l-main
+  // Layout
   grid-column 2
   grid-row 2

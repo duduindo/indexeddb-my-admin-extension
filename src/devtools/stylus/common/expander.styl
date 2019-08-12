@@ -4,17 +4,39 @@
 
 
 .c-expander
-  padding 5px
-  background-color orange
+  // Color
+  color $color-silver-dark
+
+  // Box
+  padding to-em(0 5px)
+
+  h4
+    margin 0
+    padding to-em(10px 0 5px 0)
+
+    &:not(:first-child)
+      border-top 1px solid #ccc
+      margin to-em(10px 0 0 0)
 
   ul
-    padding-inline-start 10px
+    padding-inline-start to-em(10px)
+
+  li
+    padding to-em(6px 0)
+
+    ul
+      padding-inline-start to-em(12px)
+
+  & > ul
+    margin to-em(0 0 10px 0)
 
   &__toggle-action
     background-color transparent
-    border 1px solid red
+    padding 0
+    border 0
 
     &::before
+      color $color-silver-dark
       content '\2BC8'
       display inline-block
 
