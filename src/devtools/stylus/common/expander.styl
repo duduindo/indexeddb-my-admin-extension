@@ -5,7 +5,7 @@
 
 .c-expander
   // Color
-  color $color-silver-dark
+  color var(--expander-color)
 
   // Box
   padding to-em(0 5px)
@@ -15,7 +15,7 @@
     padding to-em(10px 0 5px 0)
 
     &:not(:first-child)
-      border-top 1px solid #ccc
+      border-top 1px solid $color-silver
       margin to-em(10px 0 0 0)
 
   ul
@@ -36,7 +36,7 @@
     border 0
 
     &::before
-      color $color-silver-dark
+      color var(--expander-color)
       content '\2BC8'
       display inline-block
 
