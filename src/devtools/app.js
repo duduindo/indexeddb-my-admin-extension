@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Vuex from 'vuex'
+import LiquorTree from 'liquor-tree'
 import { sync } from 'vuex-router-sync'
 import VueJsonPretty from 'vue-json-pretty'
 import { routes } from '@/devtools/router-config.js'
@@ -13,6 +14,7 @@ Vue.config.productionTip = false
 
 Vue.use(VueRouter)
 Vue.use(Vuex)
+Vue.use(LiquorTree)
 Vue.component('vue-json-pretty', VueJsonPretty)
 
 // Vuex

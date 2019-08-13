@@ -1,49 +1,38 @@
 <template>
-  <nav class="c-expander">
-    <h4>Databases</h4>
-    <ul>
-      <li>
-        <span>New</span>
-      </li>
-      <li>
-        <button class="c-expander__toggle-action c-expander__toggle-action--active"><span></span></button>
-        <span>Database1</span>
-      </li>
-      <li>
-        <button class="c-expander__toggle-action c-expander__toggle-action--active"><span></span></button>
-        <span>Database2</span>
-
-        <ul>
-          <li>
-            <span>New</span>
-          </li>
-          <li>
-            <button class="c-expander__toggle-action"><span></span></button>
-            <span>Store 1</span>
-
-            <ul>
-              <li>
-                <span>New</span>
-              </li>
-
-              <li>
-                <span>Index 1</span>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-    </ul>
-
-    <h4>Extension</h4>
-    <ul>
-      <li>Settings</li>
-    </ul>
-  </nav>
+  <div>
+    <tree
+      :data="treeData"
+    />
+  </div>
 </template>
 
 <script>
+  import LiquorTree from 'liquor-tree'
+
   export default {
-    name: 'Expander'
+    name: 'Expander',
+    data() {
+      return {
+        treeData: [
+          { text: 'Item 1' },
+          {
+            text: 'Item 2',
+            children: [
+              { text: 'Item 2.1' },
+              {
+                text: 'Item 2.2',
+                children: [
+                  { text: 'Item 2.2.1' },
+                  { text: 'Item 2.2.2' }
+                ]
+              }
+            ]
+          },
+          { text: 'Item 3', state: { selected: true } },
+          { text: 'Item 4' }
+        ]
+      }
+    },
+    [LiquorTree.name]: LiquorTree
   }
 </script>
