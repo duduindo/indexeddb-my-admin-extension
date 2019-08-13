@@ -19,27 +19,39 @@
       margin to-em(10px 0 0 0)
 
   ul
-    padding-inline-start to-em(10px)
+    padding-inline-start to-em(5px)
 
   li
     padding to-em(6px 0)
 
     ul
-      padding-inline-start to-em(12px)
+      padding-inline-start to-em(15px)
 
   & > ul
     margin to-em(0 0 10px 0)
 
   &__toggle-action
-    background-color transparent
-    padding 0
+    background transparent
+    width to-em(12px)
+    height to-em(12px)
     border 0
+    padding 0
+    cursor pointer
 
     &::before
-      color var(--expander-color)
-      content '\2BC8'
+      content ''
       display inline-block
+      vertical-align middle
+      width 0
+      height 0
+      transition transform .2s cubic-bezier(1, -0.34, 1, 1.06)
+      transform rotate(0)
+      margin-top to-em(-3px)
+
+      border-top to-em(5px) solid transparent
+      border-bottom to-em(5px) solid transparent
+      border-left to-em(5px) solid var(--expander-color)
 
     &--active
       &::before
-        content '\2BC6'
+        transform rotate(90deg)
