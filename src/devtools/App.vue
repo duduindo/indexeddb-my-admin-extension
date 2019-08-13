@@ -35,6 +35,10 @@
   }
 </script>
 
+<style lang="sass">
+  @import './sass/index.sass'
+</style>
+
 <style lang="stylus">
   @import './stylus/index'
 </style>

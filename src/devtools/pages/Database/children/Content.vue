@@ -1,6 +1,12 @@
 <template>
   <div>
-    <h1>{{title}}</h1>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col">
+          <h1>{{title}}</h1>
+        </div>
+      </div>
+    </div>
     <hr>
   </div>
 </template>
@@ -12,11 +18,6 @@
       return {
         title: 'saaas'
       }
-    },
-    watch: {
-      // '$route'(to) {
-      //   console.warn(to)
-      // }
     },
     mounted() {
       const { database } = this.$route.params
