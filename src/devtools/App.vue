@@ -11,9 +11,8 @@
 
     <main class="l-main">
       <!-- <Breadcrumb />
-      <NavigatorBar />
-      <router-view /> -->
-      main
+      <NavigatorBar /> -->
+      <router-view />
     </main>
   </div>
 </template>

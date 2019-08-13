@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Im a Database 2</h1>
+    <router-view></router-view>
   </div>
 </template>
 
