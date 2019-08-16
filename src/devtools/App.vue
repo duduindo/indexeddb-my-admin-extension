@@ -4,14 +4,7 @@
       <Expander />
     </aside>
 
-    <header class="l-masthead">
-      <!-- <router-view name="header" /> -->
-      header
-    </header>
-
     <main class="l-main">
-      <!-- <Breadcrumb />
-      <NavigatorBar /> -->
       <router-view />
     </main>
   </div>
@@ -36,7 +29,7 @@
 </script>
 
 <style lang="sass">
-  @import './sass/index.sass'
+  @import './sass/index'
 </style>
 
 <style lang="stylus">

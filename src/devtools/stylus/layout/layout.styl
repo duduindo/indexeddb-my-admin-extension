@@ -6,7 +6,7 @@
   // Layout
   display grid
   grid-template-columns 2fr 8fr
-  grid-template-rows auto 10fr
+  grid-template-rows auto
   grid-gap 5px
 
   // Box
@@ -20,12 +20,15 @@
 .l-aside
   // Layout
   grid-column 1
-  grid-row 1/3
+  grid-row 1/2
 
   // Color
   background-color var(--aside-bg-color)
 
+  // Box
+  overflow-x scroll
+
 .l-main
   // Layout
   grid-column 2
-  grid-row 2
+  grid-row 1

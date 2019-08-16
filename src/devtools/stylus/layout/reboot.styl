@@ -4,10 +4,8 @@
 
 body
   font-size var(--body-font-size)
-  margin 0
   width 100%
   height 100vh
-  position relative
 
   .platform-linux
     font-family var(--platform-linux-font-family)
@@ -22,6 +20,8 @@ body
     color var(--platform-windows-color)
 
 
+// Headings
+// -------------------------------------------
 h1, h2, h3, h4, h5, h6
   font-weight var(--headings-font-weight)
 
@@ -38,15 +38,9 @@ h5
 h6
   font-size var(--h6-font-size)
 
-ul, ol
-  list-style-type none
 
-input, button
-  &:focus
-    outline none
-
-input[type='search'], input[type='text']
+// Divisors
+// -------------------------------------------
+hr
   border 0
-
-  &:focus
-    box-shadow 0 0 0 1px $color-blue
+  border-top 1px solid rgba(0,0,0,.1)

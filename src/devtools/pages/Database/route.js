@@ -1,5 +1,6 @@
 import Index from './'
 import Content from './children/Content'
+import Header from './components/Header'
 
 
 export const route = {
@@ -9,7 +10,10 @@ export const route = {
     {
       path: 'content',
       alias: '',
-      component: Content
+      components: {
+        default: Content,
+        header: Header
+      }
     }
   ]
 }
