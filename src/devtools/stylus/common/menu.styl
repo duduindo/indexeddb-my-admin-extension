@@ -1,0 +1,26 @@
+// ==========================================================================
+// Menu
+// ==========================================================================
+
+.c-menu
+  background purple
+  display block
+
+  &-primary
+    background-color #eee
+    border-bottom 1px solid var(--color-silver)
+
+    .pure-menu-link
+      color var(--color-black)
+
+    .pure-menu-selected
+      .pure-menu-link
+        background-color var(--color-white)
+        box-shadow 0 1px 0 var(--color-white)
+
+        &:hover
+          background var(--color-white)
+
+    .pure-menu-link
+      &:hover
+        background rgba(0,0,0, .1)
