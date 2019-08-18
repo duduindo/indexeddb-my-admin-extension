@@ -17,11 +17,12 @@ $color-black       ?= #222
 $color-silver      ?= #ccc
 $color-silver-dark ?= #5a5a5a
 $color-white-dark  ?= #f3f3f3
-$color-primary     ?= #007bff
-$color-success     ?= #1e7e34
-$color-error       ?= #bd2130
-$color-warning     ?= #ffc107
-$color-secondary   ?= #545b62
+
+$color-blue-light     ?= #007bff
+$color-green-light     ?= #1e7e34
+$color-red-light       ?= #bd2130
+$color-yellow-light     ?= #ffc107
+$color-silver-light   ?= #545b62
 
 $color-bg-phpmyadmin ?= linear-gradient(#fff, #ccc)
 
@@ -40,12 +41,11 @@ $headings-font-weight ?= 400
   --color-silver        $color-silver
   --color-silver-dark   $color-silver-dark
   --color-white-dark    $color-white-dark
-
-  --color-primary       $color-primary
-  --color-success       $color-success
-  --color-error         $color-error
-  --color-warning       $color-warning
-  --color-secondary     $color-secondary
+  --color-blue-light    $color-blue-light
+  --color-green-light   $color-green-light
+  --color-red-light     $color-red-light
+  --color-yellow-light  $color-yellow-light
+  --color-silver-light  $color-silver-light
 
   --color-bg-phpmyadmin $color-bg-phpmyadmin
 
@@ -74,4 +74,11 @@ $headings-font-weight ?= 400
 
   // Table
   --table-theme-bg-color var(--color-bg-phpmyadmin)
+
+  // Buttons
+  --button-color-primary    var(--color-blue-light)
+  --button-color-success    var(--color-green-light)
+  --button-color-error      var(--color-red-light)
+  --button-color-warning    var(--color-yellow-light)
+  --button-color-secondary  var(--color-silver-light)
 }
