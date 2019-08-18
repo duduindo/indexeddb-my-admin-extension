@@ -1,16 +1,19 @@
 <template>
   <article>
+    <h1>{{ title }}</h1>
+    <hr>
+
     <div class="container-fluid">
       <div class="row">
         <div class="col">
-          <form class="pure-form" name="object-stores-list">
+          <form class="pure-form c-table c-table-theme-phpmyadmin" name="object-stores-list">
             <fieldset>
               <table class="pure-table">
                 <thead>
                   <tr>
-                    <td><input title="Check all" type="checkbox"></td>
-                    <td>Object stores</td>
-                    <td>Indexes</td>
+                    <th><input title="Check all" type="checkbox"></th>
+                    <th>Object stores</th>
+                    <th>Indexes</th>
                   </tr>
                 </thead>
 
@@ -29,9 +32,10 @@
                 </tbody>
               </table>
 
-              <div class="mt-3">
-                <i>With selected:</i>
+              <div class="mt-3 ml-2">
+                <img src="images/arrow_ltr.png" alt="">
                 <select class="select" name="stores-actions">
+                  <option value="">With selected:</option>
                   <option value="">Delete</option>
                   <option value="">Clone</option>
                   <option value="">Join</option>
@@ -47,20 +51,9 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col">
-          <h3>Create stores</h3>
-          <form class="pure-form" action="#" name="object-stores-create">
-            <button type="button" class="pure-button btn btn-secondary mb-2" @click="removeField">Remove last field</button>
-            <button type="button" class="pure-button btn btn-primary mb-2" @click="addField">Add field</button>
-            <a href="#/" class="pure-button btn btn-success mb-2">Go</a>
-
-            <fieldset :key="field" v-for="field in fieldsToCreate">
-              <div class="pure-control-group">
-                <label :for="`name${field}`">Name:</label>
-                <input :id="`name${field}`" type="text" class="ml-2">
-
-              </div>
-            </fieldset>
-          </form>
+          <h2>Options</h2>
+          <a class="pure-button btn btn-outline-primary mt-2 mr-3" href="#">Create object stores</a>
+          <button class="pure-button btn btn-outline-error mt-2" type="button">Delete database</button>
         </div>
       </div>
     </div>
@@ -72,18 +65,7 @@
     name: 'database-content',
     data() {
       return {
-        title: 'saaas',
-        fieldsToCreate: 2
-      }
-    },
-    methods: {
-      addField() {
-        this.fieldsToCreate++
-      },
-      removeField() {
-        if (this.fieldsToCreate > 1) {
-          this.fieldsToCreate--
-        }
+        title: 'library'
       }
     },
     mounted() {

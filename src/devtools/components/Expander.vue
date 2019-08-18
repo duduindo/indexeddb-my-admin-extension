@@ -20,18 +20,17 @@
       return {
         treeDatabase: [
           { text: 'New', data: { url: '/' } },
-          { text: 'library', data: { url: '/database/library/1' } },
           {
-            text: 'Item 2',
+            text: 'library',
+            data: { url: '/database/library/1' },
             children: [
               { text: 'New' },
-              { text: 'Item 2.1' },
               {
-                text: 'Item 2.2',
+                text: 'books',
+                data: { url: '/database/library/1/books' },
                 children: [
                   { text: 'New' },
-                  { text: 'Item 2.2.1' },
-                  { text: 'Item 2.2.2' }
+                  { text: 'by_title', data: { url: '/database/library/1/books/by_title' } }
                 ]
               }
             ]

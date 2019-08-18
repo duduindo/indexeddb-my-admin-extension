@@ -10,12 +10,20 @@ $font-family-platform-mac     ?= '.SFNSDisplay-Regular', 'Helvetica Neue', 'Luci
 $font-family-platform-windows ?= 'Segoe UI', Tahoma, sans-serif
 
 // Color
+$color-white       ?= #fff
 $color-blue        ?= #1a73e8
 $color-blue-dark   ?= #303942
 $color-black       ?= #222
 $color-silver      ?= #ccc
 $color-silver-dark ?= #5a5a5a
 $color-white-dark  ?= #f3f3f3
+$color-primary     ?= #007bff
+$color-success     ?= #1e7e34
+$color-error       ?= #bd2130
+$color-warning     ?= #ffc107
+$color-secondary   ?= #545b62
+
+$color-bg-phpmyadmin ?= linear-gradient(#fff, #ccc)
 
 // Headings
 $headings-font-base   ?= $font-size-base
@@ -23,6 +31,23 @@ $headings-font-weight ?= 400
 
 :root {
   --body-font-size $font-size-base
+
+  // Colors
+  --color-white         $color-white
+  --color-blue          $color-blue
+  --color-blue-dark     $color-blue-dark
+  --color-black         $color-black
+  --color-silver        $color-silver
+  --color-silver-dark   $color-silver-dark
+  --color-white-dark    $color-white-dark
+
+  --color-primary       $color-primary
+  --color-success       $color-success
+  --color-error         $color-error
+  --color-warning       $color-warning
+  --color-secondary     $color-secondary
+
+  --color-bg-phpmyadmin $color-bg-phpmyadmin
 
   // Headings
   --h1-font-size $headings-font-base * 1.3
@@ -37,14 +62,16 @@ $headings-font-weight ?= 400
   --platform-linux-font-family $font-family-platform-linux
   --platform-mac-font-family $font-family-platform-mac
   --platform-windows-font-family $font-family-platform-windows
-  --platform-linux-color $color-blue-dark
-  --platform-mac-color $color-blue-dark
-  --platform-windows-color $color-black
+  --platform-linux-color var(--color-blue-dark)
+  --platform-mac-color var(--color-blue-dark)
+  --platform-windows-color var(--color-black)
 
   // Aside
-  --aside-bg-color $color-white-dark
+  --aside-bg-color var(--color-white-dark)
 
   // Expander
-  --expander-color $color-silver-dark
+  --expander-color var(--color-silver-dark)
 
+  // Table
+  --table-theme-bg-color var(--color-bg-phpmyadmin)
 }
