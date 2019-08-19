@@ -27,7 +27,7 @@
               { text: 'New' },
               {
                 text: 'books',
-                data: { url: '/database/library/1/books' },
+                data: { url: '/object-store/library/1/books' },
                 children: [
                   { text: 'New' },
                   { text: 'by_title', data: { url: '/database/library/1/books/by_title' } }

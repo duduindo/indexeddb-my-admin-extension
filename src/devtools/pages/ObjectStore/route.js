@@ -1,6 +1,6 @@
 import Index from './'
-import Insert from './children/Insert'
 import Content from './children/Content'
+import Header from './components/Header'
 
 
 export const route = {
@@ -8,13 +8,12 @@ export const route = {
   component: Index,
   children: [
     {
-      path: 'insert',
-      component: Insert
-    },
-    {
       path: 'content',
       alias: '',
-      component: Content
+      components: {
+        default: Content,
+        header: Header
+      }
     }
   ]
 }
