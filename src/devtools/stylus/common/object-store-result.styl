@@ -1,0 +1,44 @@
+// ==========================================================================
+// Object Store Result
+// ==========================================================================
+
+.c-object-store-result
+  fieldset
+    padding 0
+
+  .pure-table
+    font-size to-em(12px)
+    border-left-width 0
+    width 100%
+
+    thead
+    tbody
+      tr
+        td:first-child
+          border-left-width 0
+          text-align center
+          width 1px
+          white-space nowrap
+
+    thead
+      background-color var(--aside-bg-color)
+      border-bottom 1px solid #cbcbcb
+
+      span
+        color var(--color-red-light)
+        font-size 1.1em
+
+    tbody
+      tr
+        &:nth-child(even)
+          background-color #f2f7fd
+
+        &.active
+          background-color #cdddf5
+
+.platform-linux
+  .c-object-store-result
+    thead
+      td
+        color var(--platform-linux-color)
+        text-shadow 1px 0 0 var(--color-white)
