@@ -9,16 +9,6 @@
     td
       border 0
 
-  // PHPMyAdmin
-  // ==========================================================================
-  &-theme-phpmyadmin
-    thead
-      background var(--table-theme-bg-color)
-
-    th
-      text-shadow 0 1px 0 var(--color-white)
-
-
   // Chrome devtools
   // ==========================================================================
   &-theme-chrome
@@ -29,36 +19,37 @@
     thead
     tbody
       tr
-        td:nth-of-type(1)
-          border-left-width 0
+        td
+          &:nth-of-type(1)
+          &:nth-of-type(2)
+            text-align center
+            width 1px
+            white-space nowrap
 
-        td:nth-of-type(1)
-        td:nth-of-type(2)
-          text-align center
-          width 1px
-          white-space nowrap
+          &:nth-of-type(1)
+            border-left-width 0
 
-        td:nth-of-type(3)
-          padding-left 10px
-          width 200px
-          white-space nowrap
+          &:nth-of-type(3)
+            padding-left 10px
+            width 200px
+            white-space nowrap
 
     thead
-      background-color var(--aside-bg-color)
+      background-color $color-white-dark
       border-bottom 1px solid #cbcbcb
 
       span
-        color var(--color-red-light)
+        color $color-red-light
         font-size 1.1em
 
       tr
         td
-          border-color var(--color-white)
-          box-shadow 1px 0 0 var(--color-silver-dark)
+          border-color $color-white
+          box-shadow 1px 0 0 $color-silver-dark
           padding .3em 1em
 
-        td:nth-of-type(1)
-          border-left-width 0
+          &:nth-of-type(1)
+            border-left-width 0
 
     tbody
       tr
@@ -69,8 +60,8 @@
           background-color #cdddf5
 
       td
-        border-color var(--color-white)
-        box-shadow 1px 0 0 var(--color-silver-dark)
+        border-color $color-white
+        box-shadow 1px 0 0 $color-silver-dark
 
 
 // Theme linux
@@ -80,4 +71,4 @@
     thead
       td
         color var(--platform-linux-color)
-        text-shadow 1px 0 0 var(--color-white)
+        text-shadow 1px 0 0 $color-white

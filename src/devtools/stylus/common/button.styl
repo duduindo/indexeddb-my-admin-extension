@@ -12,19 +12,19 @@
     color white
 
   &-primary
-    background-color var(--button-color-primary)
+    background-color $color-blue-light
 
   &-success
-    background-color var(--button-color-success)
+    background-color $color-green-light
 
   &-error
-    background-color var(--button-color-error)
+    background-color $color-red-light
 
   &-warning
-    background-color var(--button-color-warning)
+    background-color $color-yellow-light
 
   &-secondary
-    background-color var(--button-color-secondary)
+    background-color $color-silver-light
 
   // Outline
   // ============================================
@@ -41,11 +41,11 @@
     &:hover
     &:active
     &:focus
-      color var(--color-white)
+      color $color-white
 
   &-outline-primary
-    color var(--button-color-primary)
-    border-color var(--button-color-primary)
+    color $color-blue-light
+    border-color $color-blue-light
 
     &:hover
     &:active
@@ -53,8 +53,8 @@
       @extend .btn-primary
 
   &-outline-success
-    color var(--button-color-success)
-    border-color var(--button-color-success)
+    color $color-green-light
+    border-color $color-green-light
 
     &:hover
     &:active
@@ -62,8 +62,8 @@
       @extend .btn-success
 
   &-outline-error
-    color var(--button-color-error)
-    border-color var(--button-color-error)
+    color $color-red-light
+    border-color $color-red-light
 
     &:hover
     &:active
@@ -71,18 +71,18 @@
       @extend .btn-error
 
   &-outline-warning
-    color var(--button-color-warning)
-    border-color var(--button-color-warning)
+    color $color-yellow-light
+    border-color $color-yellow-light
 
     &:hover
     &:active
     &:focus
       @extend .btn-warning
-      color var(--color-black)
+      color $color-black
 
   &-outline-secondary
-    color var(--button-color-secondary)
-    border-color var(--button-color-secondary)
+    color $color-silver-light
+    border-color $color-silver-light
 
     &:hover
     &:active
