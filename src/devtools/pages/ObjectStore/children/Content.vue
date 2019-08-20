@@ -1,16 +1,16 @@
 <template>
   <section>
     <Actions />
-    <TableResult />
+    <Table />
   </section>
 </template>
 
 <script>
   import Actions from '../components/Actions'
-  import TableResult from '../components/TableResult'
+  import Table from '../components/Table'
 
   export default {
     name: 'object-store-content',
-    components: { Actions, TableResult }
+    components: { Actions, Table }
   }
 </script>

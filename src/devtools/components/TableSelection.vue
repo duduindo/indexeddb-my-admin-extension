@@ -1,5 +1,5 @@
 <template>
-  <table class="pure-table">
+  <table class="pure-table c-table c-table-theme-chrome">
     <thead>
       <tr>
         <td></td>

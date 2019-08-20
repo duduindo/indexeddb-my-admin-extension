@@ -1,7 +1,7 @@
 <template>
   <article>
-    <form class="pure-form c-object-store-result" name="object-stores-list">
-      <fieldset>
+    <form class="pure-form" name="object-stores-table">
+      <fieldset class="pt-0 pb-0">
         <TableSelection />
       </fieldset>
     </form>
@@ -12,7 +12,7 @@
   import TableSelection from '@/devtools/components/TableSelection'
 
   export default {
-    name: 'object-store-result',
+    name: 'object-store-table',
     components: { TableSelection },
     data() {
       return {
