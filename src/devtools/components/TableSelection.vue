@@ -2,14 +2,14 @@
   <table class="pure-table c-table c-table-theme-chrome">
     <thead>
       <tr>
-        <td></td>
+        <td><input type="checkbox" title="Check all" @change="handleCheckAll"></td>
         <td :key="index" v-for="(html, index) in columns" v-html="html" />
       </tr>
     </thead>
 
     <tbody>
       <tr :key="index" v-for="(line, index) in data">
-        <td><input type="checkbox"></td>
+        <td><input type="checkbox" :value="index" v-model="checkboxs"></td>
         <td :key="indexValue" v-for="(value, indexValue) in line" v-html="value" />
       </tr>
     </tbody>
@@ -19,6 +19,11 @@
 <script>
   export default {
     name: 'table-selection',
+    data() {
+      return {
+        checkboxs: [0]
+      }
+    },
     props: {
       columns: {
         require: true,
@@ -38,8 +43,8 @@
       }
     },
     methods: {
-      handleClick() {
-        alert(10)
+      handleCheckAll({ target }) {
+        this.checkboxs = target.checked ? this.data.map(e => e[0]) : []
       }
     }
   }
