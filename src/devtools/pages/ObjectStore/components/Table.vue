@@ -2,7 +2,7 @@
   <article>
     <form class="pure-form" name="object-stores-table">
       <fieldset class="pt-0 pb-0">
-        <TableSelection />
+        <TableSelection @change="handleChange" />
       </fieldset>
     </form>
   </article>
@@ -18,6 +18,11 @@
       return {
         tableHead: [],
         tableBody: []
+      }
+    },
+    methods: {
+      handleChange(value) {
+        console.log(value)
       }
     }
   }

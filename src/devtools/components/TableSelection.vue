@@ -9,7 +9,7 @@
 
     <tbody>
       <tr :key="index" v-for="(line, index) in data">
-        <td><input type="checkbox" :value="index" v-model="checkboxs"></td>
+        <td><input type="checkbox" @change="$emit('change', line)" :value="index" v-model="checkboxs"></td>
         <td :key="indexValue" v-for="(value, indexValue) in line" v-html="value" />
       </tr>
     </tbody>
@@ -21,7 +21,8 @@
     name: 'table-selection',
     data() {
       return {
-        checkboxs: [0]
+        checkboxs: [],
+        dataChecked: []
       }
     },
     props: {
@@ -40,6 +41,11 @@
           [ 4, 'Dan', '{title: "Quarry Memories", author: "Fred", isbn: 123456}' ]
         ],
         type: Array
+      }
+    },
+    watch: {
+      checkboxs() {
+        // to add data filtered to dataChecked
       }
     },
     methods: {
