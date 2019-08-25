@@ -5,13 +5,11 @@
     />
     <Table
       @change="handleChange"
-      :data="data"
     />
   </section>
 </template>
 
 <script>
-  // import VueJsonPretty from 'vue-json-pretty'
   import Actions from '../components/Actions'
   import Table from '../components/Table'
 
