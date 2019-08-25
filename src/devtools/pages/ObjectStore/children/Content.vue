@@ -1,7 +1,11 @@
 <template>
   <section>
-    <Actions />
-    <Table />
+    <Actions
+      @copy="handleCopy"
+    />
+    <Table
+      @change="handleChange"
+    />
   </section>
 </template>
 
@@ -11,6 +15,19 @@
 
   export default {
     name: 'object-store-content',
-    components: { Actions, Table }
+    components: { Actions, Table },
+    data() {
+      return {
+        objectsSelected: []
+      }
+    },
+    methods: {
+      handleChange(value) {
+        this.objectsSelected = value
+      },
+      handleCopy(event) {
+        console.log(this.objectsSelected)
+      }
+    }
   }
 </script>
