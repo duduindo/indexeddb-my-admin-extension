@@ -1,5 +1,5 @@
 <template>
-  <table :class="classname">
+  <table :class="classname" v-if="columns.length && data.length">
     <thead>
       <tr>
         <td><input type="checkbox" title="Check all" @change="handleCheckAll"></td>
@@ -33,18 +33,12 @@
       },
       columns: {
         require: true,
-        default: () => ['#', 'Key (Key path: "<span>isbn</span>")', 'Value'],
+        default: () => [],
         type: Array
       },
       data: {
         require: true,
-        default: () => [
-          [ 0, 'John', '{title: "Quarry Memories", author: "Fred", isbn: 123456}' ],
-          [ 1, 'Jane', '{title: "Quarry Memories", author: "Fred", isbn: 123456}' ],
-          [ 2, 'Susan', '{title: "Quarry Memories", author: "Fred", isbn: 123456}' ],
-          [ 3, 'Chris', '{title: "Quarry Memories", author: "Fred", isbn: 123456}' ],
-          [ 4, 'Dan', '{title: "Quarry Memories", author: "Fred", isbn: 123456}' ]
-        ],
+        default: () => [],
         type: Array
       }
     },
