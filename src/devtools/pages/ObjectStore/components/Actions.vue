@@ -12,7 +12,7 @@
       <button @click="handleCopy" class="pure-button" type="button" title="Copy selected to clipboard"><font-awesome-icon icon="copy" /></button>
       <button @click="handleClone" class="pure-button" type="button" title="Clone selected"><font-awesome-icon icon="clone" /></button>
       <button @click="handleEdit" class="pure-button" type="button" title="Edit selected"><font-awesome-icon icon="edit" /></button>
-      <button @click="handleAdd" class="pure-button" type="button" title="Add objects"><font-awesome-icon icon="plus" /></button>
+      <button @click="handleInsert" class="pure-button" type="button" title="Insert objects"><font-awesome-icon icon="plus" /></button>
       <button @click="handleExport" class="pure-button" type="button" title="Export selected to Javascript"><font-awesome-icon :icon="['fab', 'js']" /></button>
     </form>
   </nav>
@@ -49,8 +49,8 @@
       handleEdit(e) {
         this.$emit('edit', e)
       },
-      handleAdd(e) {
-        this.$emit('add', e)
+      handleInsert(e) {
+        this.$emit('insert', e)
       },
       handleExport(e) {
         this.$emit('export', e)

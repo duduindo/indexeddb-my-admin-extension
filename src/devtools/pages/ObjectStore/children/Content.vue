@@ -5,11 +5,13 @@
     />
     <Table
       @change="handleChange"
+      :data="data"
     />
   </section>
 </template>
 
 <script>
+  // import VueJsonPretty from 'vue-json-pretty'
   import Actions from '../components/Actions'
   import Table from '../components/Table'
 
@@ -18,7 +20,11 @@
     components: { Actions, Table },
     data() {
       return {
-        objectsSelected: []
+        objectsSelected: [],
+        data: [
+          [ 0, 'John', '{title: "Quarry Memories", author: "Fred", isbn: 123456}' ],
+          [ 1, 'Jane', '{title: "Quarry Memories", author: "Fred", isbn: 123456}' ]
+        ]
       }
     },
     methods: {
