@@ -1,5 +1,5 @@
 <template>
-  <table class="pure-table c-table c-table-theme-chrome">
+  <table :class="classname">
     <thead>
       <tr>
         <td><input type="checkbox" title="Check all" @change="handleCheckAll"></td>
@@ -9,7 +9,7 @@
 
     <tbody>
       <tr :key="index" v-for="(line, index) in data">
-        <td><input type="checkbox" @change="$emit('change', line)" :value="index" v-model="checkboxs"></td>
+        <td><input type="checkbox" :value="index" v-model="checkboxs"></td>
         <td :key="indexValue" v-for="(value, indexValue) in line" v-html="value" />
       </tr>
     </tbody>
@@ -26,6 +26,11 @@
       }
     },
     props: {
+      classname: {
+        require: false,
+        default: () => '',
+        type: String
+      },
       columns: {
         require: true,
         default: () => ['#', 'Key (Key path: "<span>isbn</span>")', 'Value'],
@@ -44,8 +49,11 @@
       }
     },
     watch: {
-      checkboxs() {
-        // to add data filtered to dataChecked
+      checkboxs(value = []) {
+        this.dataChecked = this.data.filter((e, i) => value.includes(i))
+      },
+      dataChecked(value) {
+        this.$emit('change', value)
       }
     },
     methods: {

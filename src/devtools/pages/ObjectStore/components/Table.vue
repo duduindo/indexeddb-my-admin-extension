@@ -2,7 +2,7 @@
   <article>
     <form class="pure-form" name="object-stores-table">
       <fieldset class="pt-0 pb-0">
-        <TableSelection @change="handleChange" />
+        <TableSelection @change="handleChange" classname="pure-table c-table c-table-theme-chrome" />
       </fieldset>
     </form>
   </article>
@@ -22,7 +22,7 @@
     },
     methods: {
       handleChange(value) {
-        console.log(value)
+        console.log('Table: ', value)
       }
     }
   }
