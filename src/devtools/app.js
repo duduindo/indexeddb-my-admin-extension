@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Vuex from 'vuex'
 import LiquorTree from 'liquor-tree'
+import VModal from 'vue-js-modal'
 import { sync } from 'vuex-router-sync'
 import VueJsonPretty from 'vue-json-pretty'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -21,6 +22,7 @@ library.add(faRedo, faCaretLeft, faCaretRight, faBroom, faTrashAlt, faCopy, faCl
 Vue.use(VueRouter)
 Vue.use(Vuex)
 Vue.use(LiquorTree)
+Vue.use(VModal, { dialog: true })
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.component('vue-json-pretty', VueJsonPretty)
 

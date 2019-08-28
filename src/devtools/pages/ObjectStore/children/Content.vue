@@ -1,5 +1,7 @@
 <template>
   <section>
+    <v-dialog />
+    <v-dialog />
     <Actions
       @copy="handleCopy"
     />
@@ -30,7 +32,24 @@
         this.objectsSelected = value
       },
       handleCopy(event) {
-        console.log(this.objectsSelected)
+        this.$modal.show('dialog', {
+          title: 'Alert!',
+          text: 'You are too awesome',
+          buttons: [
+            {
+              title: 'Deal with it',
+              handler: () => { alert('Woot!') }
+            },
+            {
+              title: '', // Button title
+              default: true, // Will be triggered by default if 'Enter' pressed.
+              handler: () => {} // Button click handler
+            },
+            {
+              title: 'Close'
+            }
+          ]
+        })
       }
     }
   }

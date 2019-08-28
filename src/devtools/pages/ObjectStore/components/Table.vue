@@ -15,12 +15,14 @@
               <td><input type="checkbox" :value="index" v-model="checkboxs"></td>
 
               <td :key="indexValue" v-for="(value, indexValue) in line">
-                <span v-if="indexValue < 2">{{value}}</span>
+                <!-- <span v-if="indexValue < 2">{{value}}</span>
                 <vue-json-pretty
                   v-else
+                  :showDoubleQuotes="false"
                   :path="'res'"
                   :data="value">
-                </vue-json-pretty>
+                </vue-json-pretty> -->
+                <span>{{value}}</span>
               </td>
             </tr>
           </tbody>
@@ -31,11 +33,11 @@
 </template>
 
 <script>
-  import VueJsonPretty from 'vue-json-pretty'
+  // import VueJsonPretty from 'vue-json-pretty'
 
   export default {
     name: 'object-store-table',
-    components: { VueJsonPretty },
+    // components: { VueJsonPretty },
     data() {
       return {
         checkboxs: [],
