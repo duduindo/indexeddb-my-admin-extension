@@ -1,10 +1,18 @@
 <template>
   <section>
-    <v-dialog />
-    <v-dialog />
+    <DialogNative :open="dialogToClipboard" @closed="dialogToClipboard = false">
+      <button @click="copyClipboardText" type="button">copy</button>
+      <button @click="minify" type="button">minify</button>
+      <button @click="unminify" type="button">unminify</button>
+      <button @click="dialogToClipboard = false" type="button">close</button>
+      <br><br>
+      <textarea ref="textarea" spellcheck="false" cols="60" rows="10" :value="jsonToClipboard"></textarea>
+    </DialogNative>
+
     <Actions
       @copy="handleCopy"
     />
+
     <Table
       @change="handleChange"
     />
@@ -14,12 +22,17 @@
 <script>
   import Actions from '../components/Actions'
   import Table from '../components/Table'
+  import DialogNative from '@/devtools/components/DialogNative'
+  import { format } from 'json-string-formatter'
+
 
   export default {
     name: 'object-store-content',
-    components: { Actions, Table },
+    components: { Actions, DialogNative, Table },
     data() {
       return {
+        jsonToClipboard: '[]',
+        dialogToClipboard: false,
         objectsSelected: [],
         data: [
           [ 0, 'John', '{title: "Quarry Memories", author: "Fred", isbn: 123456}' ],
@@ -31,25 +44,26 @@
       handleChange(value) {
         this.objectsSelected = value
       },
-      handleCopy(event) {
-        this.$modal.show('dialog', {
-          title: 'Alert!',
-          text: 'You are too awesome',
-          buttons: [
-            {
-              title: 'Deal with it',
-              handler: () => { alert('Woot!') }
-            },
-            {
-              title: '', // Button title
-              default: true, // Will be triggered by default if 'Enter' pressed.
-              handler: () => {} // Button click handler
-            },
-            {
-              title: 'Close'
-            }
-          ]
-        })
+      handleCopy() {
+        const json = JSON.stringify(this.objectsSelected)
+
+        this.jsonToClipboard = format(json)
+        this.dialogToClipboard = true
+        this.$refs.textarea.select()
+      },
+      copyClipboardText() {
+        this.$refs.textarea.select()
+        document.execCommand('copy')
+      },
+      minify() {
+        const json = JSON.stringify(this.objectsSelected)
+
+        this.jsonToClipboard = format(json)
+      },
+      unminify() {
+        const json = JSON.stringify(this.objectsSelected)
+
+        this.jsonToClipboard = json
       }
     }
   }
