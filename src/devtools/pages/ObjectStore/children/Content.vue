@@ -58,12 +58,12 @@
       minify() {
         const json = JSON.stringify(this.objectsSelected)
 
-        this.jsonToClipboard = format(json)
+        this.jsonToClipboard = json
       },
       unminify() {
         const json = JSON.stringify(this.objectsSelected)
 
-        this.jsonToClipboard = json
+        this.jsonToClipboard = format(json)
       }
     }
   }
