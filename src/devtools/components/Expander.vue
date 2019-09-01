@@ -23,6 +23,7 @@
           {
             text: 'library',
             data: { url: '/database/library/1' },
+            state: { dropable: false },
             children: [
               { text: 'New' },
               {
