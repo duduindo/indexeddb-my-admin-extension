@@ -1,13 +1,6 @@
 <template>
   <section>
-    <DialogNative :open="dialogToClipboard" @closed="dialogToClipboard = false">
-      <button @click="copyClipboardText" type="button">copy</button>
-      <button @click="minify" type="button">minify</button>
-      <button @click="unminify" type="button">unminify</button>
-      <button @click="dialogToClipboard = false" type="button">close</button>
-      <br><br>
-      <textarea ref="textarea" spellcheck="false" cols="60" rows="10" :value="jsonToClipboard"></textarea>
-    </DialogNative>
+    <DialogCopy :open="dialogToClipboard" :json="jsonToClipboard" @closed="dialogToClipboard = false" />
 
     <Actions
       @copy="handleCopy"
@@ -21,14 +14,12 @@
 
 <script>
   import Actions from '../components/Actions'
+  import DialogCopy from '../components/DialogCopy'
   import Table from '../components/Table'
-  import DialogNative from '@/devtools/components/DialogNative'
-  import { format } from 'json-string-formatter'
-
 
   export default {
     name: 'object-store-content',
-    components: { Actions, DialogNative, Table },
+    components: { Actions, DialogCopy, Table },
     data() {
       return {
         jsonToClipboard: '[]',
@@ -47,23 +38,8 @@
       handleCopy() {
         const json = JSON.stringify(this.objectsSelected)
 
-        this.jsonToClipboard = format(json)
-        this.dialogToClipboard = true
-        this.$refs.textarea.select()
-      },
-      copyClipboardText() {
-        this.$refs.textarea.select()
-        document.execCommand('copy')
-      },
-      minify() {
-        const json = JSON.stringify(this.objectsSelected)
-
         this.jsonToClipboard = json
-      },
-      unminify() {
-        const json = JSON.stringify(this.objectsSelected)
-
-        this.jsonToClipboard = format(json)
+        this.dialogToClipboard = true
       }
     }
   }
