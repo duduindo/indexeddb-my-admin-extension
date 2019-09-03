@@ -2,7 +2,8 @@
   <div>
     <tree
       :data="treeDatabase"
-      @node:selected="onNodeSelected"
+      @node:selected="handleSelected"
+      @node:clicked="handleClicked"
     />
 
     <tree
@@ -47,7 +48,14 @@
     },
     [LiquorTree.name]: LiquorTree,
     methods: {
-      onNodeSelected(node) {
+      handleClicked(node) {
+        const { url = '/' } = node.data
+
+        if (node.selected()) {
+          this.$router.push({ path: url })
+        }
+      },
+      handleSelected(node) {
         const { url = '/' } = node.data
 
         this.$router.push({ path: url })
