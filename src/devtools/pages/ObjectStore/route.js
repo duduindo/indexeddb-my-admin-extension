@@ -5,17 +5,8 @@ import Header from './components/Header'
 
 
 export const route = {
-  path: '/object-store/:database/:version/:store',
+  path: '/object-store/:database/:version/:store/',
   component: Index,
-  beforeEnter(to, from, next) {
-    // console.log(to, from, next)
-
-    if (to === from) {
-      console.log('é o msm')
-    }
-
-    return next()
-  },
   children: [
     {
       path: 'content',
@@ -27,7 +18,7 @@ export const route = {
       }
     },
     {
-      path: 'insert*',
+      path: 'insert/(add|clone)/',
       name: 'object-store-insert',
       components: {
         default: Insert,

@@ -12,7 +12,7 @@
       <button @click="handleCopy" class="pure-button" type="button" title="Copy selected to clipboard"><font-awesome-icon icon="copy" /></button>
 
       <!-- <button @click="handleClone" class="pure-button" type="button" title="Clone selected"><font-awesome-icon icon="clone" /></button> -->
-      <router-link :to="`/object-store/library/1/books/insert`" class="pure-button" title="Clone selected">
+      <router-link :to="`/object-store/library/1/books/insert/clone/`" class="pure-button" title="Clone selected">
         <font-awesome-icon icon="clone" />
       </router-link>
 

@@ -3,7 +3,9 @@
     <div class="pure-menu pure-menu-horizontal c-menu c-menu-primary">
       <ul class="pure-menu-list">
         <li :class="`pure-menu-item ${item.classname}`" :key="index" v-for="(item, index) in items">
-          <a href="#" class="pure-menu-link">{{ item.name }}</a>
+          <router-link :to="`${item.href}`" class="pure-menu-link">
+            {{ item.name }}
+          </router-link>
         </li>
       </ul>
     </div>
@@ -16,12 +18,12 @@
     data() {
       return {
         items: [
-          { name: 'Browser', classname: 'pure-menu-selected' },
-          { name: 'Search', classname: '' },
-          { name: 'Insert', classname: '' },
-          { name: 'Export', classname: '' },
-          { name: 'Import', classname: '' },
-          { name: 'Operations', classname: '' }
+          { name: 'Browser', href: '/object-store/library/1/books/', classname: 'pure-menu-selected' },
+          { name: 'Search', href: '/', classname: '' },
+          { name: 'Insert', href: '/object-store/library/1/books/insert/add/', classname: '' },
+          { name: 'Export', href: '/', classname: '' },
+          { name: 'Import', href: '/', classname: '' },
+          { name: 'Operations', href: '/', classname: '' }
         ]
       }
     },
