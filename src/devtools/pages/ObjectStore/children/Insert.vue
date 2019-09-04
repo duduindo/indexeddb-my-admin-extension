@@ -1,5 +1,11 @@
 <template>
   <div class="container-fluid mt-3">
+    <div class="row">
+      <div class="col">
+        <MyComponent />
+      </div>
+    </div>
+
     <div class="row" v-if="isPageClone">
       <div class="col">
         <table class="pure-table c-table c-table-theme-chrome">
@@ -17,8 +23,11 @@
 </template>
 
 <script>
+  import MyComponent from './MyComponent'
+
   export default {
     name: 'object-store-insert',
+    components: { MyComponent },
     data() {
       return {
         label: 'empty',

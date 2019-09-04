@@ -37,19 +37,19 @@
     "@types/node": "^12.0.2",
     "bootstrap": "^4.3.1",
     "json-string-formatter": "^1.0.1",
+    "liquor-tree": "git+https://github.com/duduindo/liquor-tree.git#master",
     "lodash": "^4.17.15",
     "normalize.css": "^8.0.1",
     "purecss": "^1.0.1",
     "typescript": "^3.5.3",
     "typescript-fsa": "^3.0.0-beta-2",
     "vue": "^2.6.10",
-    "vue-class-component": "^7.0.2",
+    "vue-class-component": "^7.1.0",
     "vue-json-pretty": "^1.6.0",
     "vue-property-decorator": "^8.1.0",
     "vue-router": "^3.0.6",
     "vuex": "^3.1.0",
-    "vuex-router-sync": "^5.0.0",
-    "liquor-tree": "git+https://github.com/duduindo/liquor-tree.git#master"
+    "vuex-router-sync": "^5.0.0"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.4.3",
