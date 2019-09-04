@@ -4,6 +4,7 @@
 
     <Actions
       @copy="handleCopy"
+      @clone="handleClone"
     />
 
     <Table
@@ -40,6 +41,17 @@
 
         this.jsonToClipboard = json
         this.dialogToClipboard = true
+      },
+      handleClone() {
+        const path = this.$route.path
+        const objects = this.objectsSelected.map(arr => arr.filter((e, i) => i === 2)).flat()
+
+        this.$router.push({
+          path: `${path}insert/clone/`,
+          query: {
+            data: objects
+          }
+        })
       }
     }
   }
