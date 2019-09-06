@@ -8,10 +8,10 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faRedo, faCaretLeft, faCaretRight, faBroom, faTrashAlt, faCopy, faClone, faEdit, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { faJs } from '@fortawesome/free-brands-svg-icons/faJs'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { routes } from '@/devtools/router-config.js'
+import { routes } from '@/devtools/router-config'
 import App from '@/devtools/App.vue'
-import Store from '@/devtools/vuex/store.js'
-import '@/devtools/assets/array-filter-index.js'
+import Store from '@/devtools/vuex/store'
+import '@/devtools/assets/array-filter-index'
 
 Vue.config.devtools = false
 Vue.config.productionTip = false

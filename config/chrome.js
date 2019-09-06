@@ -42,7 +42,7 @@ const plugins = mergeWith({}, commonConfig, {
 
 const app = mergeWith({}, plugins, {
   name: 'chrome',
-  entry: './src/devtools/app.js',
+  entry: './src/devtools/app.ts',
   output: {
     filename: 'chrome/IndexedDBMyAdmin/devtools.js'
   }

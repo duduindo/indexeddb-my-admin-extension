@@ -23,16 +23,16 @@
           { text: 'New', data: { url: '/' } },
           {
             text: 'library',
-            data: { url: '/database/library/1' },
+            data: { url: '/database/library/1/' },
             state: { dropable: false },
             children: [
               { text: 'New' },
               {
                 text: 'books',
-                data: { url: '/object-store/library/1/books' },
+                data: { url: '/object-store/library/1/books/' },
                 children: [
                   { text: 'New' },
-                  { text: 'by_title', data: { url: '/database/library/1/books/by_title' } }
+                  { text: 'by_title', data: { url: '/database/library/1/books/by_title/' } }
                 ]
               }
             ]

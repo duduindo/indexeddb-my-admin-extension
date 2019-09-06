@@ -1,3 +1,13 @@
+declare module 'liquor-tree'
+declare module 'vue-json-pretty'
+declare module 'json-string-formatter'
+
+
+declare module "*.vue" {
+  import Vue from 'vue'
+  export default Vue
+}
+
 /**
  * Reference:
  * - https://github.com/redux-utilities/flux-standard-action#actions
@@ -48,3 +58,4 @@ type IDBAdminResponseDataGetAll = {
   values: Array<object>,
   valuesIndex?: Array<any>
 }
+
