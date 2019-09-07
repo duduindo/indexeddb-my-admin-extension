@@ -3,7 +3,7 @@
     <DialogCopy :open="dialogToClipboard" :json="jsonToClipboard" @closed="dialogToClipboard = false" />
 
     <Actions
-      @copy="handleCopy"
+      @copy-json="handleCopyJSON"
       @clone="handleClone"
     />
 
@@ -36,7 +36,7 @@
       handleChange(value) {
         this.objectsSelected = value
       },
-      handleCopy() {
+      handleCopyJSON() {
         const json = JSON.stringify(this.objectsSelected)
 
         this.jsonToClipboard = json

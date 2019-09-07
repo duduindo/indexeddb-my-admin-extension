@@ -18,7 +18,7 @@ export const route = {
       }
     },
     {
-      path: 'insert/(add|clone)/',
+      path: 'insert/(add|clone|update)/',
       name: 'object-store-insert',
       components: {
         default: Insert,

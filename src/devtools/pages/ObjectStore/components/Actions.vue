@@ -9,18 +9,13 @@
       <input class="pure-field" @input="handleSearch" type="search" placeholder="Quick search">
       <hr class="c-diviser-vertical">
 
-      <button @click="handleClear" class="pure-button" type="button" title="Clear object store"><font-awesome-icon icon="broom" /></button>
-      <button @click="handleDelete" class="pure-button" type="button" title="Delete selected"><font-awesome-icon icon="trash-alt" /></button>
-      <button @click="handleCopy" class="pure-button" type="button" title="Copy selected to clipboard"><font-awesome-icon icon="copy" /></button>
-
-      <button @click="handleClone" class="pure-button" type="button" title="Clone selected"><font-awesome-icon icon="clone" /></button>
-      <!-- <router-link :to="`/object-store/library/1/books/insert/clone/`" class="pure-button" title="Clone selected">
-        <font-awesome-icon icon="clone" />
-      </router-link> -->
-
+      <button @click="handleAdd" class="pure-button" type="button" title="Add objects"><font-awesome-icon icon="plus" /></button>
       <button @click="handleEdit" class="pure-button" type="button" title="Edit selected"><font-awesome-icon icon="edit" /></button>
-      <button @click="handleInsert" class="pure-button" type="button" title="Insert objects"><font-awesome-icon icon="plus" /></button>
-      <button @click="handleExport" class="pure-button" type="button" title="Export selected to Javascript"><font-awesome-icon :icon="['fab', 'js']" /></button>
+      <button @click="handleClone" class="pure-button" type="button" title="Clone selected"><font-awesome-icon icon="clone" /></button>
+      <button @click="handleDelete" class="pure-button" type="button" title="Delete selected"><font-awesome-icon icon="trash-alt" /></button>
+      <button @click="handleClear" class="pure-button" type="button" title="Clear object store"><font-awesome-icon icon="broom" /></button>
+      <button @click="handleCopyJSON" class="pure-button" type="button" title="Copy selected as JSON"><font-awesome-icon icon="copy" /></button>
+      <button @click="handleCopyJS" class="pure-button" type="button" title="Copy selected as Javascript"><font-awesome-icon :icon="['fab', 'js']" /></button>
     </form>
   </nav>
 </template>
@@ -47,8 +42,8 @@
       handleDelete(e) {
         this.$emit('delete', e)
       },
-      handleCopy(e) {
-        this.$emit('copy', e)
+      handleCopyJSON(e) {
+        this.$emit('copy-json', e)
       },
       handleClone(e) {
         this.$emit('clone', e)
@@ -56,11 +51,11 @@
       handleEdit(e) {
         this.$emit('edit', e)
       },
-      handleInsert(e) {
-        this.$emit('insert', e)
+      handleAdd(e) {
+        this.$emit('add', e)
       },
-      handleExport(e) {
-        this.$emit('export', e)
+      handleCopyJS(e) {
+        this.$emit('copy-js', e)
       }
     }
   }

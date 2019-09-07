@@ -1,11 +1,20 @@
 <template>
-  <div class="container-fluid mt-3">
-    <div class="row" v-if="isPageClone">
-      <div class="col">
-        <textarea :value="value" cols="80" rows="10" spellcheck="false"></textarea>
+  <article>
+    <div class="container-fluid mt-2">
+      <div class="row">
+        <div class="col">
+          <button class="pure-button btn btn-primary" type="button" v-if="isPageAdd || isPageClone">Add</button>
+          <button class="pure-button btn btn-primary" type="button" v-if="isPageUpdate">Update</button>
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col">
+          <textarea :value="value" cols="80" rows="10" spellcheck="false"></textarea>
+        </div>
       </div>
     </div>
-  </div>
+  </article>
 </template>
 
 
@@ -19,8 +28,9 @@
   export default class ObjectStoreInsert extends Vue {
     json: string = '[]'
     page: string = ''
-    isPageClone: boolean = false
     isPageAdd: boolean = false
+    isPageClone: boolean = false
+    isPageUpdate: boolean = false
 
     get value(): string {
       return format(this.json)
@@ -28,8 +38,9 @@
 
     @Watch('page')
     handlePage(value: string) {
-      this.isPageClone = value === 'clone'
       this.isPageAdd = value === 'add'
+      this.isPageClone = value === 'clone'
+      this.isPageUpdate = value === 'update'
     }
 
     @Watch('$route', { immediate: true })
