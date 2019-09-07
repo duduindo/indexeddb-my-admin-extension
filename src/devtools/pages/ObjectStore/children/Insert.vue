@@ -17,34 +17,33 @@
     name: 'object-store-insert'
   })
   export default class ObjectStoreInsert extends Vue {
-    jsonString: string = '[]'
-    isPageClone: boolean = true
+    json: string = '[]'
+    page: string = ''
+    isPageClone: boolean = false
+    isPageAdd: boolean = false
 
     get value(): string {
-      return format(this.jsonString)
+      return format(this.json)
+    }
+
+    @Watch('page')
+    handlePage(value: string) {
+      this.isPageClone = value === 'clone'
+      this.isPageAdd = value === 'add'
     }
 
     @Watch('$route', { immediate: true })
-    handleRoute(value: any) {
-      const path: string = value.path
-      // const isPageAdd = !!path.match(/\/insert\/add\/$/i)
-      // const isPageClone = !!path.match(/\/insert\/clone\/$/i)
-      const regex = /\/insert(?<add>\/add)|(?<clone>\/clone)/i
-      const match = path.match(regex) || { groups: { add: undefined, clone: undefined } }
+    handleRoute(route: any) {
+      const { pathMatch = 'any' } = route.params
 
-
-      console.log(match.groups)
+      this.page = pathMatch
     }
 
-    handleJson() {
-      const data = this.$route.query.data
-      const json = JSON.stringify(data)
+    @Watch('$route', { immediate: true })
+    handleJson(route: any) {
+      const { data = [] } = route.query
 
-      this.jsonString = json
-    }
-
-    mounted() {
-      this.handleJson()
+      this.json = JSON.stringify(data)
     }
   }
 </script>
