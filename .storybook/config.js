@@ -1,6 +1,6 @@
-import { addParameters, configure } from '@storybook/vue';
-import { themes } from '@storybook/theming';
-
+import { addDecorator, addParameters, configure } from '@storybook/vue'
+import { themes } from '@storybook/theming'
+import './addons'
 
 addParameters({
   options: {
@@ -9,8 +9,9 @@ addParameters({
 });
 
 function loadStories() {
-  require('../stories/index.ts');
+  require('../stories/index.ts')
   // You can require as many stories as you need.
 }
 
-configure(loadStories, module);
+
+configure(loadStories, module)

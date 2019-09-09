@@ -18,12 +18,9 @@ library.add(faIcons)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 
-storiesOf('Alert', module)
-  .add('Default', () => ({
-    components: { Alert },
-    template: '<Alert text="Lorem Ipsum!!" />'
-  }))
-  .add('Colors', () => ({
+storiesOf('Alert', module).add(
+  'Types',
+  () => ({
     components: { Alert },
     template: `
       <div>
@@ -34,4 +31,8 @@ storiesOf('Alert', module)
         <Alert text="type='secondary' (Default)" type="secondary" />
        </div>
       `
-  }))
+  }),
+  {
+    notes: 'Test notes'
+  }
+)
