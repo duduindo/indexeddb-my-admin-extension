@@ -1,140 +1,141 @@
 'use strict'
 
 const path = require('path')
-const { VueLoaderPlugin } = require('vue-loader')
+const { resolve } = require('./tools')
 
 
-function resolve(dir) {
-  return path.join(__dirname, '..', dir)
-}
+module.exports = (options = {config: {}}) => {
+  const config = {
+    devtool: null,
+    watchOptions: null,
+    module: {
+      rules: []
+    },
+    plugins: [],
+    resolve: {
+      extensions: [],
+      alias: {}
+    },
+    entry: {},
+    output: {},
+    ...options.config
+  }
 
+  config.devtool = 'cheap-source-map';
+  config.watchOptions = {
+    ignored: ['node_modules', 'dist', 'config', 'build', '.*', 'stories']
+  };
 
-module.exports = {
-  devtool: 'cheap-source-map',
+  // Vue
+  // vue-loader is conflicting with Storybook
 
-  // Watch
-  watchOptions: {
-    ignored: ['node_modules', 'dist', 'config', 'build', '.*']
-  },
+  // JS
+  config.module.rules.push({
+    test: /\.js$/,
+    loader: 'babel-loader',
+    options: {
+      configFile: resolve('babel.config.js')
+    }
+  })
 
-  // Module
-  module: {
-    rules: [
-      // VUE
+  // TypeScript
+  config.module.rules.push({
+    test: /\.tsx?$/,
+    loader: 'ts-loader',
+    exclude: /node_modules/,
+    options: {
+      appendTsSuffixTo: [/\.vue$/],
+    }
+  })
+
+  // CSS
+  config.module.rules.push({
+    test: /\.css$/,
+    use: [
+      'vue-style-loader',
+      'css-loader'
+    ]
+  })
+
+  // SASS - .scss
+  config.module.rules.push({
+    test: /\.scss$/,
+    use: [
       {
-        test: /\.vue$/,
-        loader: 'vue-loader'
+        loader: 'vue-style-loader'
       },
-
-      // JS
-      // this will apply to both plain `.js` files AND `<script>` blocks in `.vue` files
       {
-        test: /\.js$/,
-        loader: 'babel-loader',
+        loader: 'css-loader'
+      },
+      {
+        loader: 'postcss-loader',
         options: {
-          configFile: resolve('babel.config.js')
-        }
-      },
-
-      // TypeScript
-      {
-        test: /\.tsx?$/,
-        loader: 'ts-loader',
-        exclude: /node_modules/,
-        options: {
-          appendTsSuffixTo: [/\.vue$/],
-        }
-      },
-
-
-      // CSS
-      // this will apply to both plain `.css` files AND `<style>` blocks in `.vue` files
-      {
-        test: /\.css$/,
-        use: [
-          'vue-style-loader',
-          'css-loader'
-        ]
-      },
-
-      // SASS
-      // this will apply to both plain `.scss` files AND `<style lang="scss">` blocks in `.vue` files
-      {
-        test: /\.scss$/,
-        use: [
-          {
-            loader: 'vue-style-loader'
-          },
-          {
-            loader: 'css-loader'
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              plugins: function() {
-                return [
-                  require('autoprefixer')
-                ]
-              }
-            }
-          },
-          {
-            loader: 'sass-loader'
-          },
-        ]
-      },
-      {
-        test: /\.sass$/,
-        use: [
-          'vue-style-loader',
-          'css-loader',
-          {
-            loader: 'sass-loader',
-            options: {
-              indentedSyntax: true
-            }
+          plugins: function() {
+            return [
+              require('autoprefixer')
+            ]
           }
-        ]
+        }
       },
-
-      // Stylus
       {
-        test: /\.styl(us)?$/,
-        use: [
-          {
-            loader: 'vue-style-loader'
-          },
-          {
-            loader: 'css-loader'
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              plugins: function() {
-                return [
-                  require('autoprefixer')
-                ]
-              }
-            }
-          },
-          {
-            loader: 'stylus-loader'
-          },
-        ],
+        loader: 'sass-loader'
       },
+    ]
+  })
 
-      // Eslint
+  // SASS - .sass
+  config.module.rules.push({
+    test: /\.sass$/,
+    use: [
+      'vue-style-loader',
+      'css-loader',
       {
-        enforce: 'pre',
-        test: /\.(js|vue)$/,
-        loader: 'eslint-loader',
-        exclude: /node_modules/
+        loader: 'sass-loader',
+        options: {
+          indentedSyntax: true
+        }
       }
     ]
-  },
+  })
 
-  // Plugins
-  plugins: [
-    new VueLoaderPlugin(),
-  ]
+  // Stylus
+  config.module.rules.push({
+    test: /\.styl(us)?$/,
+    use: [
+      {
+        loader: 'vue-style-loader'
+      },
+      {
+        loader: 'css-loader'
+      },
+      {
+        loader: 'postcss-loader',
+        options: {
+          plugins: function() {
+            return [
+              require('autoprefixer')
+            ]
+          }
+        }
+      },
+      {
+        loader: 'stylus-loader'
+      },
+    ],
+  })
+
+  // Eslint
+  config.module.rules.push({
+    enforce: 'pre',
+    test: /\.(js|vue)$/,
+    loader: 'eslint-loader',
+    exclude: /node_modules/
+  })
+
+  // Resolve
+  config.resolve.extensions = ['.js', '.vue', '.ts', '.tsx']
+  config.resolve.alias['@'] = resolve('src')
+  config.resolve.alias['~'] = resolve('src')
+
+  return config
 }
