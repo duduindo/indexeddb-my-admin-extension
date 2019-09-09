@@ -2,13 +2,13 @@
 
 const CopyPlugin = require('copy-webpack-plugin')
 const { resolve } = require('./tools')
-const extension = require('./extension')
+const common = require('./common')
 
 
 // Exports
 module.exports = () => {
   const config = {
-    ...extension()
+    ...common({}, 'extension')
   }
 
   // Plugin Copy

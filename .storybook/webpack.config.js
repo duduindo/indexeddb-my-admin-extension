@@ -1,3 +1,3 @@
-const common = require('../config/common');
+const build = require('../build/storybook');
 
-module.exports = common
+module.exports = build;

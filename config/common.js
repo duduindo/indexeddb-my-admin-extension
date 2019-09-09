@@ -1,10 +1,12 @@
 'use strict'
 
 const path = require('path')
+const { VueLoaderPlugin } = require('vue-loader')
 const { resolve } = require('./tools')
 
 
-module.exports = (options = {config: {}}) => {
+module.exports = (options = {config: {}}, type = 'extension') => {
+  const isStorybook = type === 'storybook';
   const config = {
     devtool: null,
     watchOptions: null,
@@ -27,7 +29,12 @@ module.exports = (options = {config: {}}) => {
   };
 
   // Vue
-  // vue-loader is conflicting with Storybook
+  if (!isStorybook) {
+    config.module.rules.push({
+      test: /\.vue$/,
+      loader: 'vue-loader'
+    })
+  }
 
   // JS
   config.module.rules.push({
@@ -136,6 +143,11 @@ module.exports = (options = {config: {}}) => {
   config.resolve.extensions = ['.js', '.vue', '.ts', '.tsx']
   config.resolve.alias['@'] = resolve('src')
   config.resolve.alias['~'] = resolve('src')
+
+  // Plugin VueLoader
+  if (!isStorybook) {
+    config.plugins.push(new VueLoaderPlugin())
+  }
 
   return config
 }
