@@ -32,10 +32,6 @@
   "include": [
     "typings/**/*.d.ts",
     "node_modules/@*/types-*/*.d.ts",
-    "stories/**/*.js",
-    "stories/**/*.ts",
-    "stories/**/*.tsx",
-    "stories/**/*.vue",
     "src/**/*.js",
     "src/**/*.ts",
     "src/**/*.tsx",

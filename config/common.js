@@ -24,7 +24,7 @@ module.exports = (options = {config: {}}) => {
 
   config.devtool = 'cheap-source-map';
   config.watchOptions = {
-    ignored: ['node_modules', 'dist', 'config', 'build', '.*', 'stories']
+    ignored: ['node_modules', 'dist', 'config', 'build', '.*']
   };
 
   // Vue
