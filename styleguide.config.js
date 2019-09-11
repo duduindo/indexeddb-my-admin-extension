@@ -1,7 +1,7 @@
 const path = require('path')
 
 module.exports = {
-  title: 'Components from IndexedDBMyAdmin - Style Guide',
+  title: 'Devtools\' Components from IndexedDBMyAdmin - Style Guide',
   components: './src/devtools/components/**/*.vue',
   copyCodeButton: true,
   webpackConfig: require('./config/common.js'),
