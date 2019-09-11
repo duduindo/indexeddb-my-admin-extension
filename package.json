@@ -11,7 +11,7 @@
     "watch": "webpack --config build/extension.js --progress --watch --mode=development",
     "dev": "webpack --config build/extension.js --progress --mode=development",
     "build": "webpack --config build/extension.js --progress --mode=production",
-    "storybook": "start-storybook -p 9001"
+    "styleguide": "vue-styleguidist server"
   },
   "repository": {
     "type": "git",
@@ -56,13 +56,8 @@
     "@babel/core": "^7.6.0",
     "@babel/preset-env": "^7.4.3",
     "@babel/preset-typescript": "^7.3.3",
-    "@storybook/addon-info": "^5.1.11",
-    "@storybook/addon-notes": "^5.1.11",
-    "@storybook/theming": "^5.1.11",
-    "@storybook/vue": "^5.1.11",
     "@types/jest": "^24.0.13",
     "@types/mocha": "^5.2.6",
-    "@types/storybook__vue": "^5.0.2",
     "@typescript-eslint/eslint-plugin": "^1.10.2",
     "@typescript-eslint/parser": "^1.10.2",
     "@vue/babel-preset-app": "^3.5.5",
@@ -99,6 +94,7 @@
     "vue-jest": "^3.0.4",
     "vue-loader": "^15.7.1",
     "vue-style-loader": "^4.1.2",
+    "vue-styleguidist": "^3.22.2",
     "vue-template-compiler": "^2.6.10",
     "webpack": "^4.39.3",
     "webpack-cli": "^3.3.0"

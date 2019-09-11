@@ -16,7 +16,7 @@
   import { Vue, Component, Prop } from 'vue-property-decorator'
 
   @Component({
-    name: 'alert'
+    name: 'Alert'
   })
   export default class Alert extends Vue {
     @Prop({ type: String, default: 'secondary' }) readonly type!: string

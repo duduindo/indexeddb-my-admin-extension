@@ -8,7 +8,7 @@ const common = require('./common')
 // Exports
 module.exports = () => {
   const config = {
-    ...common({}, 'extension')
+    ...common({})
   }
 
   // Plugin Copy

@@ -18,7 +18,7 @@
 
 <script>
   export default {
-    name: 'table-selection',
+    name: 'Table Selection',
     data() {
       return {
         checkboxs: [],

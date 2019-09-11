@@ -13,7 +13,7 @@
 
 <script>
   export default {
-    name: 'dialog-native',
+    name: 'Dialog Native',
     props: {
       open: {
         required: false,

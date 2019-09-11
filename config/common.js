@@ -5,8 +5,7 @@ const { VueLoaderPlugin } = require('vue-loader')
 const { resolve } = require('./tools')
 
 
-module.exports = (options = {config: {}}, type = 'extension') => {
-  const isStorybook = type === 'storybook';
+module.exports = (options = {config: {}}) => {
   const config = {
     devtool: null,
     watchOptions: null,
@@ -29,12 +28,10 @@ module.exports = (options = {config: {}}, type = 'extension') => {
   };
 
   // Vue
-  if (!isStorybook) {
-    config.module.rules.push({
-      test: /\.vue$/,
-      loader: 'vue-loader'
-    })
-  }
+  config.module.rules.push({
+    test: /\.vue$/,
+    loader: 'vue-loader'
+  })
 
   // JS
   config.module.rules.push({
@@ -145,9 +142,7 @@ module.exports = (options = {config: {}}, type = 'extension') => {
   config.resolve.alias['~'] = resolve('src')
 
   // Plugin VueLoader
-  if (!isStorybook) {
-    config.plugins.push(new VueLoaderPlugin())
-  }
+  config.plugins.push(new VueLoaderPlugin())
 
   return config
 }
