@@ -1,18 +1,26 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Vuex from 'vuex'
+import LiquorTree from 'liquor-tree'
 import { sync } from 'vuex-router-sync'
 import VueJsonPretty from 'vue-json-pretty'
-import { routes } from '@/devtools/router-config.js'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import * as faIcons from '@/devtools/common/icons'
+import { routes } from '@/devtools/router-config'
 import App from '@/devtools/App.vue'
-import Store from '@/devtools/vuex/store.js'
-import '@/devtools/assets/array-filter-index.js'
+import Store from '@/devtools/vuex/store'
+import '@/devtools/assets/array-filter-index'
 
 Vue.config.devtools = false
 Vue.config.productionTip = false
 
+library.add(faIcons)
+
 Vue.use(VueRouter)
 Vue.use(Vuex)
+Vue.use(LiquorTree)
+Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.component('vue-json-pretty', VueJsonPretty)
 
 // Vuex

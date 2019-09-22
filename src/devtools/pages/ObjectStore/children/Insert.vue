@@ -1,94 +1,74 @@
 <template>
-  <div>
-    <h2>Insert</h2>
-
-    <form @submit.prevent>
-      <p>Status: <i>{{ status }}</i></p>
-
-      <table class="table table-extension table-borderless">
-        <thead>
-          <tr>
-            <th><label for="cursorTextarea">Value</label></th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr>
-            <td>
-              <div class="form-group">
-                <textarea v-model="cursor" :rows="rows" id="cursorTextarea" class="form-control" autofocus="true" autocorrect="off" spellcheck="false"></textarea>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-
-        <tfoot>
-          <tr>
-            <td>
-              <button class="btn btn-sm btn-primary btn-extension" @click="handleClick"><b>Go</b></button>
-            </td>
-          </tr>
-        </tfoot>
-      </table>
-
-      <div>
-        <button class="btn btn-sm btn-secondary btn-extension">Preview script</button>
-        <button class="btn btn-sm btn-secondary btn-extension">Reset</button>
+  <article>
+    <div class="container-fluid mt-2">
+      <div class="row">
+        <div class="col">
+          <Alert text="Lorem Ipsum" type="success"/>
+          <Alert text="Error!!!" type="error"/>
+          <button class="pure-button btn btn-secundary" type="button" @click="copy">{{labelCopied}}</button>
+          <button class="pure-button btn btn-primary" type="button" v-if="isPageAdd || isPageClone">Add</button>
+          <button class="pure-button btn btn-primary" type="button" v-if="isPageUpdate">Update</button>
+        </div>
       </div>
-    </form>
-  </div>
+
+      <div class="row mt-2">
+        <div class="col">
+          <textarea :value="value" ref="textarea" cols="80" rows="10" spellcheck="false"></textarea>
+        </div>
+      </div>
+    </div>
+  </article>
 </template>
 
-<script>
-  import { mapActions, mapGetters } from 'vuex'
-  import JsonStringFormatter from 'json-string-formatter'
 
-  export default {
-    data() {
-      return {
-        cursor: '{}',
-        rows: 2
-      }
-    },
-    computed: {
-      ...mapGetters({
-        status: 'getObjectStoreInsertedStatus'
-      })
-    },
-    methods: {
-      ...mapActions({
-        fetch: 'fetchObjectStoreInsert',
-        setStatus: 'setObjectStoreStatusInserted'
-      }),
-      handleClick() {
-        const { database, store, version } = this.$route.params
+<script lang="ts">
+  import { Vue, Component, Watch } from 'vue-property-decorator'
+  import { format } from 'json-string-formatter'
+  import Alert from '@/devtools/components/Alert.vue'
 
-        try {
-          const cursor = JSON.parse(this.cursor)
+  @Component({
+    name: 'object-store-insert',
+    components: { Alert }
+  })
+  export default class ObjectStoreInsert extends Vue {
+    json: string = '[]'
+    page: string = ''
+    isPageAdd: boolean = false
+    isPageClone: boolean = false
+    isPageUpdate: boolean = false
+    labelCopied: string = 'Copy to clipboard'
 
-          this.fetch({
-            name: database,
-            version,
-            store,
-            value: cursor
-          })
+    get value(): string {
+      return format(this.json)
+    }
 
-          this.setStatus('loading...')
-        } catch (err) {
-          this.setStatus(err.message)
-        }
-      }
-    },
-    mounted() {
-      const { cursor = {} } = this.$route.query
-      const cursorString = JSON.stringify(cursor)
-      const cursorFormatted = JsonStringFormatter.format(cursorString, '  ')
+    @Watch('page')
+    handlePage(value: string) {
+      this.isPageAdd = value === 'add'
+      this.isPageClone = value === 'clone'
+      this.isPageUpdate = value === 'update'
+    }
 
-      this.cursor = cursorFormatted
-      this.rows = cursorFormatted.match(/\n/g) ? (cursorFormatted.match(/\n/g).length + 1) : 2
-    },
-    destroyed() {
-      this.setStatus('')
+    @Watch('$route', { immediate: true })
+    handleRoute(route: any) {
+      const { pathMatch = 'any' } = route.params
+
+      this.page = pathMatch
+    }
+
+    @Watch('$route', { immediate: true })
+    handleJson(route: any) {
+      const { data = [] } = route.query
+
+      this.json = JSON.stringify(data)
+    }
+
+    copy() {
+      const textarea: any = this.$refs.textarea
+
+      textarea.select()
+      document.execCommand('copy')
+      this.labelCopied = 'Copied to clipboard'
     }
   }
 </script>

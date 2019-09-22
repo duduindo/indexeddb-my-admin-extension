@@ -1,84 +1,58 @@
 <template>
-  <div>
-    <div class="alert alert-success alert-extension" role="alert">
-      <div class="alert-head">
-        Showing rows 0 - 7 (8 total, Query took 0.0005 seconds.)
-      </div>
+  <section>
+    <DialogCopy :open="dialogToClipboard" :json="jsonToClipboard" @closed="dialogToClipboard = false" />
 
-      <div class="alert-body">
-        SELECT * FROM `Categories`
-      </div>
-
-      <div class="alert-foot text-right">
-        <button class="btn btn-sm btn-secondary btn-extension">Copy code</button>
-      </div>
-    </div>
-
-    <Pagination />
-    <Table
-      :database="$route.params.database"
-      :version="$route.params.version"
-      :store="$route.params.store"
-      :content="content"
-      :handleDelete="handleDelete"
+    <Actions
+      @copy-json="handleCopyJSON"
+      @clone="handleClone"
     />
-  </div>
+
+    <Table
+      @change="handleChange"
+    />
+  </section>
 </template>
 
 <script>
-  import { mapActions, mapGetters } from 'vuex'
-  import Pagination from '../components/Pagination'
+  import Actions from '../components/Actions'
+  import DialogCopy from '../components/DialogCopy'
   import Table from '../components/Table'
 
   export default {
-    name: 'Content',
-    components: { Pagination, Table },
-    computed: {
-      ...mapGetters({
-        content: 'getObjectStoreContent',
-        statusDeleted: 'getObjectStoreDeletedStatus'
-      })
+    name: 'object-store-content',
+    components: { Actions, DialogCopy, Table },
+    data() {
+      return {
+        jsonToClipboard: '[]',
+        dialogToClipboard: false,
+        objectsSelected: [],
+        data: [
+          [ 0, 'John', '{title: "Quarry Memories", author: "Fred", isbn: 123456}' ],
+          [ 1, 'Jane', '{title: "Quarry Memories", author: "Fred", isbn: 123456}' ]
+        ]
+      }
     },
     methods: {
-      ...mapActions({
-        fetch: 'fetchObjectStoreContent',
-        fetchDelete: 'fetchObjectStoreDelete',
-        setStatusDeleted: 'setObjectStoreStatusDeleted'
-      }),
-      handleDelete(key) {
-        const { database: name, version, store } = this.$route.params
-        const isConfirm = confirm('Do you really want to delete it?')
-
-        if (isConfirm) {
-          this.fetchDelete({
-            name,
-            version,
-            store,
-            key
-          })
-
-          this.setStatusDeleted('loading')
-        }
+      handleChange(value) {
+        this.objectsSelected = value
       },
-      handleMount() {
-        const { database: name, version, store } = this.$route.params
+      handleCopyJSON() {
+        const json = JSON.stringify(this.objectsSelected)
 
-        this.fetch({
-          name,
-          version,
-          store
+        this.jsonToClipboard = json
+        this.dialogToClipboard = true
+      },
+      handleClone() {
+        const path = this.$route.path
+        const objects = this.objectsSelected.map(arr => arr.filter((e, i) => i === 2)).flat()
+
+        this.$router.push({
+          path: `${path}insert/clone/`,
+          query: {
+            data: objects
+          }
         })
       }
-    },
-    watch: {
-      statusDeleted(value) {
-        if (value === 'success') {
-          this.handleMount()
-        }
-      }
-    },
-    mounted() {
-      this.handleMount()
     }
   }
 </script>

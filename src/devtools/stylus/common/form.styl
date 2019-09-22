@@ -1,0 +1,17 @@
+// ==========================================================================
+// Form
+// ==========================================================================
+
+$types ?= 'text' 'password' 'email' 'url' 'date' 'month' 'time' 'datetime' 'datetime-local' 'week' 'number' 'search' 'tel' 'color'
+
+
+.pure-form
+  for $type in $types
+    input[type={$type}]
+      border-radius to-em(2px)
+      box-shadow none
+
+  select,
+  textarea
+    border-radius to-em(2px)
+    box-shadow none

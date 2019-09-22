@@ -1,97 +1,78 @@
 <template>
-  <table class="table table-extension">
-    <thead>
-      <tr>
-        <th scope="col" colspan="4"><a href="#">Actions</a></th>
-        <th scope="col"><a href="#">#</a></th>
-        <th scope="col"><a href="#">Key (key path: "{{ keyPath }}")</a></th>
-        <th scope="col"><a href="#">Value</a></th>
-      </tr>
-    </thead>
+  <article>
+    <form class="pure-form" name="object-stores-table">
+      <fieldset class="pt-0 pb-0">
+        <table v-if="columns.length && data.length" class="pure-table c-table c-table-theme-chrome">
+          <thead>
+            <tr>
+              <td><input type="checkbox" title="Check all" @change="handleCheckAll"></td>
+              <td :key="index" v-for="(html, index) in columns" v-html="html" />
+            </tr>
+          </thead>
 
-    <tbody>
-      <tr :key="index" v-for="(cursor, index) in values">
-        <td><input type="checkbox"></td>
-        <td>
-          <router-link :to="{ path: `/object-store/${database}/${version}/${store}/insert`, query: { cursor } }">
-            <img src="images/b_edit.png" alt="Edit object store">
-            <span>Edit</span>
-          </router-link>
-        </td>
-        <td>
-          <router-link :to="{ path: `/object-store/${database}/${version}/${store}/insert`, query: { cursor } }">
-            <img src="images/b_insrow.png" alt="Copy object store">
-            <span>Copy</span>
-          </router-link>
-        </td>
-        <td>
-          <a @click.prevent="handleDelete(keys[index])" href="#delete">
-            <img src="images/b_drop.png" alt="Delete object store">
-            <span>Delete</span>
-          </a>
-        </td>
-        <td scope="row">{{ index }}</td>
-        <td>{{ keys[index] }}</td>
-        <td>
-          <vue-json-pretty :data="cursor"></vue-json-pretty>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+          <tbody>
+            <tr :key="index" v-for="(line, index) in data">
+              <td><input type="checkbox" :value="index" v-model="checkboxs"></td>
+
+              <td :key="indexValue" v-for="(value, indexValue) in line">
+                <!-- <span v-if="indexValue < 2">{{value}}</span>
+                <vue-json-pretty
+                  v-else
+                  :showDoubleQuotes="false"
+                  :path="'res'"
+                  :data="value">
+                </vue-json-pretty> -->
+                <span>{{value}}</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </fieldset>
+    </form>
+  </article>
 </template>
 
 <script>
+  // import VueJsonPretty from 'vue-json-pretty'
+
   export default {
-    name: 'Table',
+    name: 'object-store-table',
+    // components: { VueJsonPretty },
     data() {
       return {
-        keyPath: null,
-        keys: [],
-        values: []
-      }
-    },
-    props: {
-      database: {
-        type: String,
-        required: true
-      },
-      version: {
-        type: [String, Number],
-        required: true
-      },
-      store: {
-        type: String,
-        required: true
-      },
-      content: {
-        type: Object,
-        required: true,
-        default() {
-          return {
-            keyPath: null,
-            keys: [],
-            values: []
-          }
-        }
-      },
-      handleDelete: {
-        type: Function,
-        required: true
+        checkboxs: [],
+        dataChecked: []
       }
     },
     watch: {
-      content(value) {
-        if (value.keyPath) {
-          this.keyPath = value.keyPath
-        }
-
-        if (value.keys) {
-          this.keys = value.keys
-        }
-
-        if (value.values) {
-          this.values = value.values
-        }
+      checkboxs(value = []) {
+        this.dataChecked = this.data.filter((e, i) => value.includes(i))
+      },
+      dataChecked(value) {
+        this.$emit('change', value)
+      }
+    },
+    methods: {
+      handleCheckAll({ target }) {
+        this.checkboxs = target.checked ? this.data.map(e => e[0]) : []
+      }
+    },
+    props: {
+      columns: {
+        require: true,
+        default: () => ['#', 'Key (Key path: "<span>isbn</span>")', 'Value'],
+        type: Array
+      },
+      data: {
+        require: true,
+        default: () => [
+          [ 0, 'John', { title: 'Quarry Memories', author: 'Fred', isbn: 123456 } ],
+          [ 1, 'Jane', { title: 'Quarry Memories', author: 'Fred', isbn: 123456 } ],
+          [ 2, 'Susan', { title: 'Quarry Memories', author: 'Fred', isbn: 123456 } ],
+          [ 3, 'Chris', { title: 'Quarry Memories', author: 'Fred', isbn: 123456 } ],
+          [ 4, 'Dan', { title: 'Quarry Memories', author: 'Fred', isbn: 123456 } ]
+        ],
+        type: Array
       }
     }
   }

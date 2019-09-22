@@ -1,0 +1,109 @@
+// ==========================================================================
+// Button
+// ==========================================================================
+
+
+.btn
+  &-primary
+  &-success
+  &-error
+  &-warning
+  &-secondary
+    color white
+
+  &-primary
+    background-color $color-blue-light
+
+  &-success
+    background-color $color-green-light
+
+  &-error
+    background-color $color-red-light
+
+  &-warning
+    background-color $color-yellow-light
+
+  &-secondary
+    background-color $color-silver-light
+
+  // Outline
+  // ============================================
+  &-outline-secondary
+  &-outline-primary
+  &-outline-success
+  &-outline-error
+  &-outline-warning
+  &-outline-secondary
+    background-color transparent
+    border-style solid
+    border-width 1px
+
+    &:hover
+    &:active
+    &:focus
+      color $color-white
+
+  &-outline-primary
+    color $color-blue-light
+    border-color $color-blue-light
+
+    &:hover
+    &:active
+    &:focus
+      @extend .btn-primary
+
+  &-outline-success
+    color $color-green-light
+    border-color $color-green-light
+
+    &:hover
+    &:active
+    &:focus
+      @extend .btn-success
+
+  &-outline-error
+    color $color-red-light
+    border-color $color-red-light
+
+    &:hover
+    &:active
+    &:focus
+      @extend .btn-error
+
+  &-outline-warning
+    color $color-yellow-light
+    border-color $color-yellow-light
+
+    &:hover
+    &:active
+    &:focus
+      @extend .btn-warning
+      color $color-black
+
+  &-outline-secondary
+    color $color-silver-light
+    border-color $color-silver-light
+
+    &:hover
+    &:active
+    &:focus
+      @extend .btn-secondary
+
+  // Icons
+  // ============================================
+  &-icon
+    background transparent
+    padding .2em .5em
+
+    svg
+      vertical-align top
+
+    svg + span
+      padding-left 10px
+
+    &:hover
+    &:active
+      border 0
+      background transparent
+      outline 0
+

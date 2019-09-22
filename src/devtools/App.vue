@@ -1,17 +1,10 @@
 <template>
-  <div class="l-container theme-pmahomme" id="app">
+  <div class="l-container platform-linux" id="app">
     <aside class="l-aside">
-      <router-link :to="'/'" >Go to index</router-link>
       <Expander />
     </aside>
 
-    <header class="l-masthead">
-      <router-view name="header" />
-    </header>
-
     <main class="l-main">
-      <Breadcrumb />
-      <NavigatorBar />
       <router-view />
     </main>
   </div>
@@ -19,13 +12,11 @@
 
 <script>
   import { mapActions } from 'vuex'
-  import Breadcrumb from '@/devtools/components/Breadcrumb'
   import Expander from '@/devtools/components/Expander'
-  import NavigatorBar from '@/devtools/components/NavigatorBar'
 
   export default {
     name: 'App',
-    components: { Breadcrumb, Expander, NavigatorBar },
+    components: { Expander },
     methods: {
       ...mapActions({
         fetch: 'fetchHost'
@@ -38,20 +29,9 @@
 </script>
 
 <style lang="sass">
-  @import '@/devtools/sass/index'
+  @import './sass/index'
+</style>
 
-  // body
-  //   background-color: silver
-
-  // table
-  //   border-collapse: collapse
-  //   width: 100%
-
-  // td, th
-  //   border: 1px solid #dddddd
-  //   text-align: left
-  //   padding: 8px
-
-  // tr:nth-child(even)
-  //   background-color: #dddddd
+<style lang="stylus">
+  @import './stylus/index'
 </style>

@@ -1,58 +1,64 @@
 <template>
   <div>
-    <main-tree :tree="tree"/>
+    <tree
+      :data="treeDatabase"
+      @node:selected="handleSelected"
+      @node:clicked="handleClicked"
+    />
+
+    <tree
+      :data="treeSettings"
+    />
   </div>
 </template>
 
 <script>
-  import { mapActions, mapGetters } from 'vuex'
-  import MainTree from '@/devtools/components/MainTree'
+  import LiquorTree from 'liquor-tree'
 
   export default {
     name: 'Expander',
-    components: {
-      MainTree
-    },
     data() {
       return {
-        databasesFiltered: []
+        treeDatabase: [
+          { text: 'New', data: { url: '/' } },
+          {
+            text: 'library',
+            data: { url: '/database/library/1/' },
+            state: { dropable: false },
+            children: [
+              { text: 'New' },
+              {
+                text: 'books',
+                data: { url: '/object-store/library/1/books/' },
+                children: [
+                  { text: 'New' },
+                  { text: 'by_title', data: { url: '/database/library/1/books/by_title/' } }
+                ]
+              }
+            ]
+          },
+          { text: 'Item 3' },
+          { text: 'Item 4' }
+        ],
+
+        treeSettings: [
+          { text: 'Settings', state: { selectable: false } }
+        ]
       }
     },
-    computed: {
-      ...mapGetters({
-        filter: 'filterDatabases',
-        tree: 'getTree',
-        host: 'getHost'
-      })
-    },
+    [LiquorTree.name]: LiquorTree,
     methods: {
-      ...mapActions({
-        fetch: 'fetchTree',
-        fetchStore: 'fetchStore'
-      })
-    },
-    watch: {
-      host(value, oldValue) {
-        if (value !== oldValue) {
-          this.databasesFiltered = this.filter(value)
+      handleClicked(node) {
+        const { url = '/' } = node.data
+
+        if (node.selected()) {
+          this.$router.push({ path: url })
         }
       },
-      databasesFiltered(value) {
-        const databases = value
+      handleSelected(node) {
+        const { url = '/' } = node.data
 
-        databases.forEach(database => {
-          this.fetch({
-            name: database.name,
-            version: database.version
-          })
-        })
-      },
-      '$route'(to) {
-        const storeMatched = to.fullPath.match(/^\/store\/(?<name>.*)\/(?<version>\d{1,})\/(?<store>\w{1,})/)
-
-        if (storeMatched) {
-          this.fetchStore({ ...storeMatched.groups })
-        }
+        this.$router.push({ path: url })
       }
     }
   }

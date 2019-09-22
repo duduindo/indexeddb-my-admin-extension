@@ -1,6 +1,7 @@
 <template>
   <div>
-    <h1>Im a Database 2</h1>
+    <router-view name="header"></router-view>
+    <router-view></router-view>
   </div>
 </template>
 

@@ -1,0 +1,61 @@
+// ==========================================================================
+// Reboot
+// ==========================================================================
+
+body
+  font-size $font-size-base
+  width 100%
+  height 100vh
+
+  .platform-linux
+    font-family $platform-linux-font-family
+    color $platform-linux-color
+
+  .platform-mac
+    font-family $platform-mac-font-family
+    color $platform-mac-color
+
+  .platform-windows
+    font-family $platform-windows-font-family
+    color $platform-windows-color
+
+
+// Headings
+// -------------------------------------------
+h1, h2, h3, h4, h5, h6
+  font-weight $headings-font-weight
+
+h1
+  font-size $h1-font-size
+h2
+  font-size $h2-font-size
+h3
+  font-size $h3-font-size
+h4
+  font-size $h4-font-size
+h5
+  font-size $h5-font-size
+h6
+  font-size $h6-font-size
+
+
+// Divisors
+// -------------------------------------------
+hr
+  border 0
+  border-top 1px solid rgba(0,0,0,.1)
+
+
+// Dialog
+// -------------------------------------------
+dialog
+  padding 0
+  min-width 200px
+
+  & > section
+    article
+      padding 1em
+
+  footer
+    button
+      width 100%

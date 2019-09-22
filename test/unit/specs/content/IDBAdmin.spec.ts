@@ -1,406 +1,132 @@
+import actionCreatorFactory from 'typescript-fsa';
 import IDBAdmin from '@/content/IDBAdmin'
+import actions from '@/content/IDBAdmin/actions'
 
 
-describe('IDBAdmin', () => {
-  beforeAll((): void => {
+describe('Test', () => {
+  beforeAll(() => {
     require('../../mocks/content/indexeddb-library.js')
   })
 
 
-  describe('getStoreNamesToArray', () => {
-    describe('Successfully', () => {
-      test('Should return a list of the names of stores from database', async () => {
-        const dbLibrary = new IDBAdmin('library', 1)
-        const storesName = await dbLibrary.getStoreNamesToArray()
-        const result = {
-          data: ['books', 'e-readers'],
-          text: 'Success',
-          type: 'success',
-          timeStamp: expect.any(Number)
-        }
+  describe('Database', () => {
+    test('Open database', async () => {
+      const admin = new IDBAdmin
+      const request = await admin.reducer(actions.openDatabase({name: 'library', version: 1}))
 
-        expect(storesName).toEqual(result)
-      })
+      expect(request.type).toBe('success')
     })
 
-    describe('Failed', () => {
-      test('Should return any Error in string when version is wrong', async () => {
-        const dbLibrary = new IDBAdmin('library', -2)
-        const storesName = await dbLibrary.getStoreNamesToArray()
-        const result = {
-          data: [],
-          text: expect.any(String),
-          type: 'error',
-          timeStamp: expect.any(Number)
-        }
+    test('Delete database', async () => {
+      const admin = new IDBAdmin
+      let open = await admin.reducer(actions.openDatabase({name: 'test', version: 1}))
+      let request = await admin.reducer(actions.deleteDatabase({name: 'test'}))
 
-        expect(storesName).toEqual(result)
-      })
-
-      test('Should return a message of altered version', async () => {
-        const dbLibrary = new IDBAdmin('library', 2)
-        const storesName = await dbLibrary.getStoreNamesToArray()
-        const result = {
-          data: [],
-          text: 'Altered version from 1 to 2',
-          type: 'error',
-          timeStamp: expect.any(Number)
-        }
-
-        expect(storesName).toEqual(result)
-      })
+      expect(request.type).toBe('success')
     })
   })
 
 
-  describe('getAllKeysFromObjectStore', () => {
-    describe('Successfully', () => {
-      test('Should return a array of Keys Object Store', async () => {
-        const dbLibrary = new IDBAdmin('library', 1)
-        const keys = await dbLibrary.getAllKeysFromObjectStore('books')
-        const result = {
-          data: [123456, 234567, 345678],
-          text: expect.any(String),
-          type: 'success',
-          timeStamp: expect.any(Number)
-        }
-
-        expect(keys).toEqual(result)
-      })
-    })
-
-    describe('Failed', () => {
-      test('Should return a error when objectStore not found', async () => {
-        const dbLibrary = new IDBAdmin('library', 1)
-        const keys = await dbLibrary.getAllKeysFromObjectStore('BOOKSSSS')
-        const result = {
-          data: [],
-          text: expect.any(String),
-          type: 'error',
-          timeStamp: expect.any(Number)
-        }
-
-        expect(keys).toEqual(result)
-      })
-    })
-  })
-
-
-  describe('getAllValuesFromObjectStore', () => {
-    describe('Successfully', () => {
-      test('Should return a array of Values Object Store', async () => {
-        const dbLibrary = new IDBAdmin('library', 1)
-        const valuesBooks = await dbLibrary.getAllValuesFromObjectStore('books')
-        const result = {
-          data: [
-            { title: 'Quarry Memories', author: 'Fred', isbn: 123456 },
-            { title: 'Water Buffaloes', author: 'Fred', isbn: 234567 },
-            { title: 'Bedrock Nights', author: 'Barney', isbn: 345678 }
-          ],
-          text: expect.any(String),
-          type: 'success',
-          timeStamp: expect.any(Number)
-        }
-
-        expect(valuesBooks).toEqual(result)
-      })
-    })
-
-    describe('Failed', () => {
-      test('Should return a error when objectStore not found', async () => {
-        const dbLibrary = new IDBAdmin('library', 1)
-        const valuesBooks = await dbLibrary.getAllValuesFromObjectStore('BOOKSSSS')
-        const result = {
-          data: {},
-          text: expect.any(String),
-          type: 'error',
-          timeStamp: expect.any(Number)
-        }
-
-        expect(valuesBooks).toEqual(result)
-      })
-    })
-  })
-
-
-  describe('getIndexesFromObjectStore', () => {
-    describe('Successfully', () => {
-      test('Should return a array of Indexes', async () => {
-        const dbLibrary = new IDBAdmin('library', 1)
-        const indexesBooks = await dbLibrary.getIndexesFromObjectStore('books')
-        const indexesReaders = await dbLibrary.getIndexesFromObjectStore('e-readers')
-        const result = {
-          data: ['by_title'],
-          text: expect.any(String),
-          type: 'success',
-          timeStamp: expect.any(Number)
-        }
-
-        const resultReaders = {
-          data: ['by_maker', 'by_title'],
-          text: expect.any(String),
-          type: 'success',
-          timeStamp: expect.any(Number)
-        }
-
-        expect(indexesBooks).toEqual(result)
-        expect(indexesReaders).toEqual(resultReaders)
-      })
-    })
-
-    describe('Failed', () => {
-      test('Should return a error when objectStore not found', async () => {
-        const dbLibrary = new IDBAdmin('library', 1)
-        const indexesBooks = await dbLibrary.getIndexesFromObjectStore('BOOKSSSS')
-        const result = {
-          data: {},
-          text: expect.any(String),
-          type: 'error',
-          timeStamp: expect.any(Number)
-        }
-
-        expect(indexesBooks).toEqual(result)
-      })
-    })
-  })
-
-
-  describe('getAllFromObjectStore', () => {
-    describe('Successfully', () => {
-      test('Should return a array of all data from Object Stores', async () => {
-        const dbLibrary = new IDBAdmin('library', 1)
-        const allBooks = await dbLibrary.getAllFromObjectStore('books')
-        const result = {
-          data: {
-            keyPath: 'isbn',
-            keys: [123456, 234567, 345678],
-            values: [
-              { title: 'Quarry Memories', author: 'Fred', isbn: 123456 },
-              { title: 'Water Buffaloes', author: 'Fred', isbn: 234567 },
-              { title: 'Bedrock Nights', author: 'Barney', isbn: 345678 }
-            ]
+  describe('Object Store', () => {
+    test('Create object store', async () => {
+      const admin = new IDBAdmin
+      const request = await admin.reducer(actions.createObjectStores({
+        name: 'testTables',
+        version: 1,
+        stores: [
+          {
+            name: 'table1',
+            keyPath: 'id',
+            autoIncrement: false
           },
-          text: expect.any(String),
-          type: 'success',
-          timeStamp: expect.any(Number)
-        }
+          {
+            name: 'table2'
+          }
+        ]
+      }))
 
-        expect(allBooks).toEqual(result)
-      })
+      expect(request.type).toBe('upgradeneeded')
     })
 
-    describe('Failed', () => {
-      test('Should return a error when objectStore not found', async () => {
-        const dbLibrary = new IDBAdmin('library', 1)
-        const allBooks = await dbLibrary.getAllFromObjectStore('BOOOKS')
-        const result = {
-          data: { keyPath: '', keys: [], values: [] },
-          text: expect.any(String),
-          type: 'error',
-          timeStamp: expect.any(Number)
-        }
+    test('Delete object store', async () => {
+      const admin = new IDBAdmin
+      const request = await admin.reducer(actions.deleteObjectStores({
+        name: 'testTables',
+        version: 2,
+        stores: ['table1']
+      }))
 
-        expect(allBooks).toEqual(result)
-      })
+      expect(request.type).toBe('upgradeneeded')
     })
   })
 
 
-  describe('getAllFromObjectStoreSearch', () => {
-    describe('Successfully', () => {
-      test('Should return a array of all data from Object Stores', async () => {
-        const dbLibrary = new IDBAdmin('library', 1)
-        const allBooks = await dbLibrary.getAllFromObjectStoreSearch('books', 'Fre')
-        const result = {
-          data: {
-            keyPath: 'isbn',
-            keys: [123456, 234567],
-            values: [
-              { title: 'Quarry Memories', author: 'Fred', isbn: 123456 },
-              { title: 'Water Buffaloes', author: 'Fred', isbn: 234567 }
-            ]
-          },
-          text: expect.any(String),
-          type: 'success',
-          timeStamp: expect.any(Number)
-        }
+  describe('Object', () => {
+    test('Add objects', async () => {
+      const admin = new IDBAdmin
+      const request = await admin.reducer(actions.addObjects({
+        name: 'library',
+        version: 1,
+        store: 'books',
+        values: [
+          { value: { title: 'Indexed Database API 3.0', author: 'W3C', isbn: 79457 } },
+          { value: { title: 'Indexed Database API 2.0', author: 'MDN', isbn: 14258 } },
+          { value: { title: 'Indexed Database API 1.0', author: 'GOOGLE', isbn: 4682 } },
+        ]
+      }))
 
-        expect(allBooks).toEqual(result)
-      })
+      request.forEach((req:any) => expect(req.target.readyState).toBe('done'))
     })
 
-    describe('Failed', () => {
-      test('Should return empty data when terms not found', async () => {
-        const dbLibrary = new IDBAdmin('library', 1)
-        const allBooks = await dbLibrary.getAllFromObjectStoreSearch('books', 'LA LA LA LA')
-        const result = {
-          data: { keyPath: 'isbn', keys: [], values: [] },
-          text: expect.any(String),
-          type: 'success',
-          timeStamp: expect.any(Number)
-        }
+    test('Put objects', async () => {
+      const admin = new IDBAdmin
+      const request = await admin.reducer(actions.putObjects({
+        name: 'library',
+        version: 1,
+        store: 'books',
+        values: [
+          { value: { title: 'Indexed Database API 13.0v2', author: 'W3C', isbn: 79457 } },
+          { value: { title: 'Indexed Database API 13.0v3', author: 'MDN', isbn: 14258 } },
+        ]
+      }))
 
-        expect(allBooks).toEqual(result)
-      })
-    })
-  })
-
-
-  describe('getDatabaseTree', () => {
-    describe('Successfully', () => {
-      test('Should return a array of all data from Object Stores', async () => {
-        const dbLibrary = new IDBAdmin('library', 1)
-        const tree = await dbLibrary.getDatabaseTree()
-        const result = {
-          data: {
-            name: 'library',
-            version: 1,
-            stores: [
-              { name: 'books', indexes: [ 'by_title' ] },
-              { name: 'e-readers', indexes: [ 'by_maker', 'by_title' ] }
-            ]
-          },
-          text: expect.any(String),
-          type: 'success',
-          timeStamp: expect.any(Number)
-        }
-
-        expect(tree).toEqual(result)
-      })
+      request.forEach((req:any) => expect(req.target.readyState).toBe('done'))
     })
 
-    describe('Failed', () => {
-      test('Should return empty stores', async () => {
-        const dbLibrary = new IDBAdmin('libraryyy', 100)
-        const tree = await dbLibrary.getDatabaseTree()
-        const result = {
-          data: {
-            name: 'libraryyy',
-            version: 100,
-            stores: []
-          },
-          text: expect.any(String),
-          type: 'success',
-          timeStamp: expect.any(Number)
-        }
+    test('Get objects', async () => {
+      const admin = new IDBAdmin
+      const request = await admin.reducer(actions.getObjects({
+        name: 'library',
+        version: 1,
+        store: 'books',
+        keys: [79457, 14258]
+      }))
 
-        expect(tree).toEqual(result)
-      })
-    })
-  })
-
-
-  describe('insertObjectStoreContent', () => {
-    describe('Successfully', () => {
-      test('Should return success and has been searched book "Clean Code"', async () => {
-        const dbLibrary = new IDBAdmin('library', 1)
-        const tree = await dbLibrary.insertObjectStoreContent('books', {
-          title: 'Clean Code',
-          author: 'Robert Cecil Martin',
-          isbn: 9780132350884
-        })
-        const result = {
-          data: 'success',
-          text: expect.any(String),
-          type: 'success',
-          timeStamp: expect.any(Number)
-        }
-        const booksSearched = await dbLibrary.getAllFromObjectStoreSearch('books', 'Clean Code')
-
-        expect(booksSearched.data.keys.length).toBe(1)
-        expect(tree).toEqual(result)
-      })
+      request.forEach((req:any) => expect(req.target.readyState).toBe('done'))
     })
 
-    describe('Failed', () => {
-      test('Should return a error', async () => {
-        const dbLibrary = new IDBAdmin('library', 100)
-        const tree = await dbLibrary.insertObjectStoreContent('BOOOKSS', {})
-        const result = {
-          data: 'error',
-          text: expect.any(String),
-          type: 'error',
-          timeStamp: expect.any(Number)
-        }
+    test('Delete objects', async () => {
+      const admin = new IDBAdmin
+      const request = await admin.reducer(actions.deleteObjects({
+        name: 'library',
+        version: 1,
+        store: 'books',
+        keys: [79457, 14258]
+      }))
 
-        expect(tree).toEqual(result)
-      })
-    })
-  })
-
-
-  describe('deleteObjectStoreContent', () => {
-    describe('Successfully', () => {
-      test('Should return success and has been searched book "Clean Code"', async () => {
-        const dbLibrary = new IDBAdmin('library', 1)
-        const tree = await dbLibrary.deleteObjectStoreContent('books', 234567)
-        const result = {
-          data: 'success',
-          text: expect.any(String),
-          type: 'success',
-          timeStamp: expect.any(Number)
-        }
-        const booksSearched = await dbLibrary.getAllFromObjectStoreSearch('books', 'Water Buffaloes')
-
-        expect(booksSearched.data.keys.length).not.toBe(1)
-        expect(tree).toEqual(result)
-      })
+      request.forEach((req:any) => expect(req.target.readyState).toBe('done'))
     })
 
-    describe('Failed', () => {
-      test('Should return a error', async () => {
-        const dbLibrary = new IDBAdmin('library', 100)
-        const tree = await dbLibrary.deleteObjectStoreContent('BOOOKSS', 234567)
-        const result = {
-          data: 'error',
-          text: expect.any(String),
-          type: 'error',
-          timeStamp: expect.any(Number)
-        }
+    test('Count objects', async () => {
+      const admin = new IDBAdmin
+      const request = await admin.reducer(actions.countObjects({
+        name: 'library',
+        version: 1,
+        store: 'books',
+        keys: [79457]
+      }))
 
-        expect(tree).toEqual(result)
-      })
-    })
-  })
-
-
-  describe('getAllFromIndex', () => {
-    describe('Successfully', () => {
-      test('Should return a array of all data from Index', async () => {
-        const dbLibrary = new IDBAdmin('library', 1)
-        const index = await dbLibrary.getAllFromIndex('books', 'by_title')
-        const result = {
-          data: {
-            keyPath: 'title',
-            keys: [345678, 9780132350884, 123456],
-            values: [
-              { title: 'Bedrock Nights', author: 'Barney', isbn: 345678 },
-              { title: 'Clean Code', author: 'Robert Cecil Martin', isbn: 9780132350884 },
-              { title: 'Quarry Memories', author: 'Fred', isbn: 123456 }
-            ]
-          },
-          text: expect.any(String),
-          type: 'success',
-          timeStamp: expect.any(Number)
-        }
-
-        expect(index).toEqual(result)
-      })
-    })
-
-    describe('Failed', () => {
-      test('Should return a error', async () => {
-        const dbLibrary = new IDBAdmin('library', 100)
-        const index = await dbLibrary.getAllFromIndex('BOOOKSS', '')
-        const result = {
-          data: { keyPath: '', keys: [], values: [] },
-          text: expect.any(String),
-          type: 'error',
-          timeStamp: expect.any(Number)
-        }
-
-        expect(index).toEqual(result)
-      })
+      request.forEach((req:any) => expect(req.target.readyState).toBe('done'))
     })
   })
 })
