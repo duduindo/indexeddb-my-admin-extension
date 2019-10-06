@@ -4,10 +4,9 @@
   "description": "IndexedDB My Admin Extension",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint --ext .js,.ts,.vue src shells test/unit/specs",
-    "test": "jest --config test/unit/jest.conf.js --detectOpenHandles",
-    "test:coverage": "jest --config test/unit/jest.conf.js --coverage --detectOpenHandles",
-    "test:watch": "jest --config test/unit/jest.conf.js --watch --detectOpenHandles",
+    "test": "jest --config jest/jest.conf.js --detectOpenHandles",
+    "test:coverage": "jest --config jest/jest.conf.js --coverage --detectOpenHandles",
+    "test:watch": "jest --config jest/jest.conf.js --watch --detectOpenHandles",
     "extension:prod": "webpack --config build/extension.js --progress --mode=production",
     "extension:dev": "webpack --config build/extension.js --progress --mode=development",
     "extension:watch": "webpack --config build/extension.js --progress --watch --mode=development",
