@@ -4,13 +4,16 @@
   "description": "IndexedDB My Admin Extension",
   "main": "index.js",
   "scripts": {
-    "test": "jest --config test/unit/jest.conf.js --detectOpenHandles",
     "lint": "eslint --ext .js,.ts,.vue src shells test/unit/specs",
+    "test": "jest --config test/unit/jest.conf.js --detectOpenHandles",
     "test:coverage": "jest --config test/unit/jest.conf.js --coverage --detectOpenHandles",
     "test:watch": "jest --config test/unit/jest.conf.js --watch --detectOpenHandles",
-    "watch": "webpack --config build/extension.js --progress --watch --mode=development",
-    "dev": "webpack --config build/extension.js --progress --mode=development",
-    "build": "webpack --config build/extension.js --progress --mode=production",
+    "extension:prod": "webpack --config build/extension.js --progress --mode=production",
+    "extension:dev": "webpack --config build/extension.js --progress --mode=development",
+    "extension:watch": "webpack --config build/extension.js --progress --watch --mode=development",
+    "browser:prod": "webpack-dev-server --config build/browser.js --progress --mode=production",
+    "browser:dev": "webpack-dev-server --config build/browser.js --progress --mode=development",
+    "browser:watch": "webpack-dev-server --config build/browser.js --progress --watch --mode=development",
     "styleguide": "vue-styleguidist server"
   },
   "repository": {
@@ -97,6 +100,7 @@
     "vue-styleguidist": "^3.22.2",
     "vue-template-compiler": "^2.6.10",
     "webpack": "^4.39.3",
-    "webpack-cli": "^3.3.0"
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "^3.8.2"
   }
 }

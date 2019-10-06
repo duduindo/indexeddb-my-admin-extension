@@ -19,6 +19,7 @@ module.exports = (options = {config: {}}) => {
     },
     entry: {},
     output: {},
+    devServer: {},
     ...options.config
   }
 
