@@ -16,17 +16,13 @@ module.exports = () => {
       {
         from: resolve('shells/chrome'),
         to: resolve('dist/chrome/IndexedDBMyAdmin')
-      },
-      {
-        from: resolve('src/devtools/assets/images'),
-        to: resolve('dist/chrome/IndexedDBMyAdmin/images')
       }
     ]))
 
   // Entry
   config.entry = {
-    devtools: resolve('src/devtools/app.ts'),
-    content: resolve('src/content/app.js')
+    devtools: resolve('src/devtools/index.ts'),
+    content: resolve('src/content/index.ts')
   }
 
   // Output
