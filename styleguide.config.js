@@ -1,10 +1,14 @@
 const path = require('path')
+const dotenv = require('dotenv')
+
+dotenv.config()
 
 module.exports = {
   title: 'Components Vue from IndexedDBMyAdmin - Style Guide',
   components: path.join(__dirname, 'src/common/vue/components/[A-Z]*/index.vue'),
   copyCodeButton: true,
   webpackConfig: require('./config/common.js'),
+  serverPort: process.env.STYLEGUIDIST_PORT || 9001,
   getExampleFilename: componentPath => componentPath.replace(/.*([A-Z].*)\/.*/, `${__dirname}/docs/$1.md`),
   require: [
     path.join(__dirname, 'src/styleguide/global.requires.js'),

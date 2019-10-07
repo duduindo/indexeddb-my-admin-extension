@@ -1,8 +1,11 @@
 'use strict'
 
 const path = require('path')
+const dotenv = require('dotenv')
 const { VueLoaderPlugin } = require('vue-loader')
 const { resolve } = require('./tools')
+
+dotenv.config()
 
 
 module.exports = (options = {config: {}}) => {
@@ -20,6 +23,7 @@ module.exports = (options = {config: {}}) => {
     entry: {},
     output: {},
     devServer: {},
+    mode: process.env.MODE || 'production',
     ...options.config
   }
 
@@ -137,6 +141,13 @@ module.exports = (options = {config: {}}) => {
     exclude: /node_modules/
   })
 
+  // Server
+  config.devServer = {
+    contentBase: resolve('dist/browser/'),
+    compress: false,
+    port: process.env.SERVER_PORT || 9000
+  }
+
   // Resolve
   config.resolve.extensions = ['.js', '.vue', '.ts', '.tsx']
   config.resolve.alias['@'] = resolve('src')
@@ -144,6 +155,7 @@ module.exports = (options = {config: {}}) => {
 
   // Plugin VueLoader
   config.plugins.push(new VueLoaderPlugin())
+
 
   return config
 }

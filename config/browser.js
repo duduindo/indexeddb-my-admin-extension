@@ -31,12 +31,5 @@ module.exports = () => {
     path: resolve('dist/browser/')
   }
 
-  // Server
-  config.devServer = {
-    contentBase: resolve('dist/browser/'),
-    compress: false,
-    port: 9000
-  }
-
   return config
 };
