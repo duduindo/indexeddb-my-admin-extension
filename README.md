@@ -1,5 +1,25 @@
 # IndexedDB My Admin
 
+## ENV
+
+### Create `.env`
+1. Create a empty file `.env`
+2. Copy content from `.env.example` to `.env`
+
+### Variables
+- `MODE`
+  - Values
+    - `production` minified files (default)
+    - `development` doens't minified files
+- `SERVER_PORT`
+  - Server port to build in browser
+  - Value
+    - `9000` (default)
+- `STYLEGUIDIST_PORT`
+  - Value
+    - `9001` (default)
+
+
 ## Scripts
 
 - `test`
@@ -8,25 +28,22 @@
   - Test coverage
 - `test:watch`
   - Test Watch
-- `extension:prod`
-  - Build files minified to extension
-- `extension:dev`
-  - Build files unminified to extension
+- `extension:build`
+  - Build files to extension
 - `extension:watch`
-  - Watch files and build unminified to extension
-- `browser:prod`
-  - Simulate an extension and build minified to browser
-  - Open in browser: http://localhost:9000
-- `browser:dev`
-  - Simulate an extension and build unminified to browser
-  - Open in browser: http://localhost:9000
+  - Watch and build files to extension
+
+- `browser:build`
+  - Simulate the extension in browser
+  - Open in browser: http://localhost:9000 *(default in .env.example)*
 - `browser:watch`
-  - Simulate an extension, watch files and build minified to browser
-  - Open in browser: http://localhost:9000
+  - Simulate the extension in browser and watching files
+  - Open in browser: http://localhost:9000 *(default in .env.example)*
 - `styleguide`
   - "Storybook" of common components
     - Directory common components
       - `src/common/vue/`
+    - Open in browser: http://localhost:9001 *(default in .env.example)*
 
 ## How to see the extension in my browser?
 
