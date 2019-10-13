@@ -1,0 +1,18 @@
+// ==========================================================================
+// Grid
+// ==========================================================================
+
+// Grid system
+// ==========================================================================
+.l-grid
+  display grid
+  grid-template-columns grid-columns-values(12)
+
+for media in $medias
+  for column in $columns
+    .l-grid--{media}-{column}
+      if (media == 'xs')
+        grid-template-columns grid-columns-values(column)
+      else
+        @media (min-width $grid-breakpoints[media])
+          grid-template-columns grid-columns-values(column)

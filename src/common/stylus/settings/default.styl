@@ -1,0 +1,21 @@
+// ==========================================================================
+// Default
+// ==========================================================================
+
+$medias      ?= xs sm md lg
+$columns     ?= 1..12
+
+$grid-breakpoints ?= {
+  xs: screen,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+}
+
+$grid-breakpoints-max ?= {
+  xs: $grid-breakpoints[sm] - 1,
+  sm: $grid-breakpoints[md] - 1,
+  md: $grid-breakpoints[lg] - 1,
+  lg: 100vw,
+}
+
