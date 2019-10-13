@@ -28,15 +28,15 @@
   - Test coverage
 - `test:watch`
   - Test Watch
-- `extension:build`
+- `build:extension`
   - Build files to extension
-- `extension:watch`
+- `watch:extension`
   - Watch and build files to extension
 
-- `browser:build`
+- `build:browser`
   - Simulate the extension in browser
   - Open in browser: http://localhost:9000 *(default in .env.example)*
-- `browser:watch`
+- `watch:browser`
   - Simulate the extension in browser and watching files
   - Open in browser: http://localhost:9000 *(default in .env.example)*
 - `styleguide`

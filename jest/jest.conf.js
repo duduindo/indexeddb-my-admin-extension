@@ -8,9 +8,9 @@ module.exports = {
     'vue',
     'ts'
   ],
-  moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/src/$1'
-  },
+  // moduleNameMapper: {
+  //   '^@/(.*)$': '<rootDir>/src/$1'
+  // },
   testMatch: [
     '<rootDir>/src/**/__tests__/**/*.[jt]s?(x)'
   ],

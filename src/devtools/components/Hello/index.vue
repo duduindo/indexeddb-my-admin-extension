@@ -1,22 +1,14 @@
 <template>
-  <h1>Hello, {{ subject }}</h1>
+  <h1>Hello</h1>
 </template>
 
-<script>
-  import { ref, watch } from '@vue/composition-api'
+<script lang="ts">
+  import { ref } from '@vue/composition-api'
 
   export default {
     name: 'hello',
-    setup(props, context) {
+    setup(props: any, context: any) {
       const subject = ref('World')
-
-      watch(subject, (newValue, oldValue) => {
-        console.log(newValue, oldValue)
-      })
-
-      setTimeout(() => {
-        subject.value = 4444444
-      }, 2000)
 
       return {
         subject
