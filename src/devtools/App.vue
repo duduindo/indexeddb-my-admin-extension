@@ -1,14 +1,16 @@
 <template>
-  <h1>Hello, World!</h1>
+  <Hello />
 </template>
 
 <script>
+  import Hello from './components/Hello'
+
   export default {
     name: 'App',
-    components: {}
+    components: { Hello }
   }
 </script>
 
-<style lang="stylus">
+<!-- <style lang="stylus">
   @import '../common/stylus/index'
-</style>
+</style> -->

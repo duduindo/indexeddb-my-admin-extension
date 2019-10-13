@@ -2,6 +2,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Vuex from 'vuex'
+import VueCompositionApi from '@vue/composition-api'
 import LiquorTree from 'liquor-tree'
 import { sync } from 'vuex-router-sync'
 import VueJsonPretty from 'vue-json-pretty'
@@ -23,6 +24,7 @@ library.add(faIcons)
 
 Vue.use(VueRouter)
 Vue.use(Vuex)
+Vue.use(VueCompositionApi)
 Vue.use(LiquorTree)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.component('vue-json-pretty', VueJsonPretty)
