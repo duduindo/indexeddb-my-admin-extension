@@ -12,13 +12,9 @@
     - `production` minified files (default)
     - `development` doens't minified files
 - `SERVER_PORT`
-  - Server port to build in browser
+  - Server port to build in browser and Styleguidist
   - Value
     - `9000` (default)
-- `STYLEGUIDIST_PORT`
-  - Value
-    - `9001` (default)
-
 
 ## Scripts
 

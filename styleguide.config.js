@@ -8,7 +8,7 @@ module.exports = {
   components: path.join(__dirname, 'src/common/vue/components/[A-Z]*/index.vue'),
   copyCodeButton: true,
   webpackConfig: require('./config/common.js'),
-  serverPort: process.env.STYLEGUIDIST_PORT || 9001,
+  serverPort: process.env.SERVER_PORT || 9000,
   getExampleFilename: componentPath => componentPath.replace(/.*([A-Z].*)\/.*/, `${__dirname}/docs/$1.md`),
   require: [
     path.join(__dirname, 'src/styleguide/global.requires.js'),
