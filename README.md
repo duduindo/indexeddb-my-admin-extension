@@ -26,12 +26,11 @@
   - Test Watch
 - `build:extension`
   - Build files to extension
-- `watch:extension`
-  - Watch and build files to extension
-
 - `build:browser`
   - Simulate the extension in browser
   - Open in browser: http://localhost:9000 *(default in .env.example)*
+- `watch:extension`
+  - Watch and build files to extension
 - `watch:browser`
   - Simulate the extension in browser and watching files
   - Open in browser: http://localhost:9000 *(default in .env.example)*
@@ -39,7 +38,7 @@
   - "Storybook" of common components
     - Directory common components
       - `src/common/vue/`
-    - Open in browser: http://localhost:9001 *(default in .env.example)*
+    - Open in browser: http://localhost:9000 *(default in .env.example)*
 
 ## How to see the extension in my browser?
 
