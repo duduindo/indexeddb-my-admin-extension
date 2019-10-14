@@ -1,5 +1,7 @@
 <template>
-  <button class="c-button-like">100</button>
+  <button class="c-button-like">
+    <slot />
+  </button>
 </template>
 
 <script lang="ts">

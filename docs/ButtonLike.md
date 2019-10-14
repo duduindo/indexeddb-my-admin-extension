@@ -5,8 +5,10 @@
 
 ```vue
 <template>
-  <div>
-    <ButtonLike />
+  <div class="platform-linux">
+    <ButtonLike>
+      Open modal
+    </ButtonLike>
   </div>
 </template>
 

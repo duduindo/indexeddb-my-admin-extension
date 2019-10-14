@@ -14,3 +14,12 @@ to-em(values, base = $font-size-base)
   for value in values
     $r += ' ' + unit(value / base, em)
     $r = unquote($r)
+
+
+size(width = initial, height = false)
+  if (height)
+    height height
+    width width
+  else
+    height width
+    width width
