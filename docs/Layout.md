@@ -1,7 +1,13 @@
 -----------------------
 ## Grid system
 
-Block: `.l-grid`
+```html
+.l-grid
+.l-grid--xs-{n}
+.l-grid--sm-{n}
+.l-grid--md-{n}
+.l-grid--lg-{n}
+```
 
 Grid system is using [Grid Layout](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Basic_Concepts_of_Grid_Layout).
 
@@ -11,12 +17,11 @@ Grid system is using [Grid Layout](https://developer.mozilla.org/en-US/docs/Web/
 
 **Example:**
 
-
 ```vue
   <div class="l-grid l-grid--xs-3">
-    <div style="background: #fd6d6d;"><b>1</b></div>
-    <div style="background: #6d98fd;"><b>2</b></div>
-    <div style="background: #6dfd9b;"><b>3</b></div>
+    <div style="background: #fd6d6d;">1</div>
+    <div style="background: #6d98fd;">2</div>
+    <div style="background: #6dfd9b;">3</div>
   </div>
 ```
 -----------------------

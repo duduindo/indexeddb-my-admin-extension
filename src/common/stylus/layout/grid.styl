@@ -4,9 +4,15 @@
 
 // Grid system
 // ==========================================================================
+$grid-template-columns-default ?= 12
+
 .l-grid
   display grid
-  grid-template-columns grid-columns-values(12)
+  grid-template-columns grid-columns-values($grid-template-columns-default)
+
+  >
+    *
+      padding to-em(2px 5px)
 
 for media in $medias
   for column in $columns
