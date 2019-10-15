@@ -1,14 +1,14 @@
 ### Types (prop)
 
 - primary
+- secondary
 
 
 ```vue
 <template>
   <div class="platform-linux">
-    <ButtonLike>
-      Open modal
-    </ButtonLike>
+    <ButtonLike>Open modal</ButtonLike>
+    <ButtonLike type="primary">Open modal</ButtonLike>
   </div>
 </template>
 
