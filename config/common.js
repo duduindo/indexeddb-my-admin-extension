@@ -2,11 +2,9 @@
 
 const path = require('path')
 const dotenv = require('dotenv')
-const { VueLoaderPlugin } = require('vue-loader')
-const { resolve } = require('./tools')
+const { resolve } = require('path')
 
 dotenv.config()
-
 
 module.exports = (options = {config: {}}) => {
   const config = {
@@ -18,7 +16,8 @@ module.exports = (options = {config: {}}) => {
     plugins: [],
     resolve: {
       extensions: [],
-      alias: {}
+      alias: {},
+      mainFields: [],
     },
     entry: {},
     output: {},
@@ -32,20 +31,33 @@ module.exports = (options = {config: {}}) => {
     ignored: ['node_modules', 'dist', 'config', 'build', '.*']
   };
 
-  // Vue
+  // Svelte
   config.module.rules.push({
-    test: /\.vue$/,
-    loader: 'vue-loader'
+    test: /\.(html|svelte)$/,
+    exclude: /node_modules/,
+    use: {
+      loader: 'svelte-loader',
+      options: {
+        preprocess: require('svelte-preprocess')({
+          typescript: {
+            tsconfigFile: 'tsconfig.json'
+          },
+          stylus: {
+            paths: ['node_modules'],
+          },
+        })
+      }
+    }
   })
 
   // JS
-  config.module.rules.push({
-    test: /\.js$/,
-    loader: 'babel-loader',
-    options: {
-      configFile: resolve('babel.config.js')
-    }
-  })
+  // config.module.rules.push({
+  //   test: /\.js$/,
+  //   loader: 'babel-loader',
+  //   options: {
+  //     configFile: resolve('babel.config.js')
+  //   }
+  // })
 
   // TypeScript
   config.module.rules.push({
@@ -53,93 +65,17 @@ module.exports = (options = {config: {}}) => {
     loader: 'ts-loader',
     exclude: /node_modules/,
     options: {
-      appendTsSuffixTo: [/\.vue$/],
+      appendTsSuffixTo: [/\.svelte$/],
     }
   })
 
-  // CSS
-  config.module.rules.push({
-    test: /\.css$/,
-    use: [
-      'vue-style-loader',
-      'css-loader'
-    ]
-  })
-
-  // SASS - .scss
-  config.module.rules.push({
-    test: /\.scss$/,
-    use: [
-      {
-        loader: 'vue-style-loader'
-      },
-      {
-        loader: 'css-loader'
-      },
-      {
-        loader: 'postcss-loader',
-        options: {
-          plugins: function() {
-            return [
-              require('autoprefixer')
-            ]
-          }
-        }
-      },
-      {
-        loader: 'sass-loader'
-      },
-    ]
-  })
-
-  // SASS - .sass
-  config.module.rules.push({
-    test: /\.sass$/,
-    use: [
-      'vue-style-loader',
-      'css-loader',
-      {
-        loader: 'sass-loader',
-        options: {
-          indentedSyntax: true
-        }
-      }
-    ]
-  })
-
-  // Stylus
-  config.module.rules.push({
-    test: /\.styl(us)?$/,
-    use: [
-      {
-        loader: 'vue-style-loader'
-      },
-      {
-        loader: 'css-loader'
-      },
-      {
-        loader: 'postcss-loader',
-        options: {
-          plugins: function() {
-            return [
-              require('autoprefixer')
-            ]
-          }
-        }
-      },
-      {
-        loader: 'stylus-loader'
-      },
-    ],
-  })
-
   // Eslint
-  config.module.rules.push({
-    enforce: 'pre',
-    test: /\.(js|vue|ts)$/,
-    loader: 'eslint-loader',
-    exclude: /node_modules/
-  })
+  // config.module.rules.push({
+  //   enforce: 'pre',
+  //   test: /\.(js|svelte|ts)$/,
+  //   loader: 'eslint-loader',
+  //   exclude: /node_modules/
+  // })
 
   // Server
   config.devServer = {
@@ -149,13 +85,14 @@ module.exports = (options = {config: {}}) => {
   }
 
   // Resolve
-  config.resolve.extensions = ['.js', '.vue', '.ts', '.tsx']
-  config.resolve.alias['@'] = resolve('src')
-  config.resolve.alias['~'] = resolve('src')
-
-  // Plugin VueLoader
-  config.plugins.push(new VueLoaderPlugin())
-
+  config.resolve.extensions = ['.mjs', '.js', '.svelte', '.ts', '.tsx']
+  config.resolve.mainFields = ['svelte', 'browser', 'module', 'main']
+  config.resolve.alias = {
+    svelte: resolve('node_modules', 'svelte'),
+    '@': resolve('src/js'),
+    'common': resolve('src/js/common'),
+    'css': resolve('src/css'),
+  }
 
   return config
 }

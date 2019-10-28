@@ -1,7 +1,7 @@
 'use strict'
 
 const CopyPlugin = require('copy-webpack-plugin')
-const { resolve } = require('./tools')
+const { resolve } = require('path')
 const common = require('./common')
 
 
@@ -21,8 +21,8 @@ module.exports = () => {
 
   // Entry
   config.entry = {
-    devtools: resolve('src/devtools/index.ts'),
-    content: resolve('src/content/index.ts')
+    devtools: resolve('src/js/products/devtools/index.ts'),
+    content: resolve('src/js/products/content/index.ts')
   }
 
   // Output
