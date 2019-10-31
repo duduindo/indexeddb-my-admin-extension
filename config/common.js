@@ -50,15 +50,6 @@ module.exports = (options = {config: {}}) => {
     }
   })
 
-  // JS
-  // config.module.rules.push({
-  //   test: /\.js$/,
-  //   loader: 'babel-loader',
-  //   options: {
-  //     configFile: resolve('babel.config.js')
-  //   }
-  // })
-
   // TypeScript
   config.module.rules.push({
     test: /\.tsx?$/,
@@ -68,14 +59,6 @@ module.exports = (options = {config: {}}) => {
       appendTsSuffixTo: [/\.svelte$/],
     }
   })
-
-  // Eslint
-  // config.module.rules.push({
-  //   enforce: 'pre',
-  //   test: /\.(js|svelte|ts)$/,
-  //   loader: 'eslint-loader',
-  //   exclude: /node_modules/
-  // })
 
   // Server
   config.devServer = {

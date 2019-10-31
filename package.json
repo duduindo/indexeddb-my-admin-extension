@@ -10,7 +10,8 @@
     "build:extension": "webpack --config build/extension.js --progress",
     "watch:extension": "webpack --config build/extension.js --progress --watch",
     "build:browser": "webpack-dev-server --config build/browser.js --progress",
-    "watch:browser": "webpack-dev-server --config build/browser.js --progress --watch"
+    "watch:browser": "webpack-dev-server --config build/browser.js --progress --watch",
+    "lint": "eslint --ext .js,.ts,.svelte src shells; exit 0"
   },
   "repository": {
     "type": "git",
@@ -30,11 +31,17 @@
   "homepage": "https://gitlab.com/duduindo/indexeddb-my-admin-extension#readme",
   "dependencies": {},
   "devDependencies": {
+    "@babel/preset-env": "^7.6.3",
+    "@babel/preset-typescript": "^7.6.0",
     "@types/chrome": "0.0.91",
     "@types/jest": "^24.0.20",
     "@types/mocha": "^5.2.7",
+    "@typescript-eslint/eslint-plugin": "^2.6.0",
+    "@typescript-eslint/parser": "^2.6.0",
     "copy-webpack-plugin": "^5.0.4",
     "dotenv": "^8.2.0",
+    "eslint": "^6.6.0",
+    "eslint-plugin-svelte3": "^2.7.3",
     "stylus": "^0.54.7",
     "svelte": "^3.12.1",
     "svelte-loader": "^2.13.6",
