@@ -1,11 +1,20 @@
 <script>
-  import Sum from './Sum/index.svelte'
+  import Router from 'svelte-spa-router'
+  // import Sum from './Sum/index.svelte'
+
+  /**
+   * Documentation
+   * - https://www.npmjs.com/package/svelte-spa-router#define-your-routes
+   */
+  const routes = new Map()
+
+  // routes.set('*', Sum)
 </script>
 
-<style type="text/stylus">
-  @import '../../../css/'
-</style>
 
-<div class="text-center">
-  <Sum />
+<div id="app">
+
+  <main>
+    <Router {routes} />
+  </main>
 </div>

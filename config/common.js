@@ -31,20 +31,32 @@ module.exports = (options = {config: {}}) => {
     ignored: ['node_modules', 'dist', 'config', 'build', '.*']
   };
 
+  // Stylus
+  config.module.rules.push({
+    test: /\.styl(us)?$/,
+    use: [
+      {
+        loader: 'style-loader'
+      },
+      {
+        loader: 'css-loader'
+      },
+      {
+        loader: 'stylus-loader'
+      },
+    ],
+  })
+
   // Svelte
   config.module.rules.push({
     test: /\.(html|svelte)$/,
-    exclude: /node_modules/,
     use: {
       loader: 'svelte-loader',
       options: {
         preprocess: require('svelte-preprocess')({
           typescript: {
             tsconfigFile: 'tsconfig.json'
-          },
-          stylus: {
-            paths: ['node_modules'],
-          },
+          }
         })
       }
     }
