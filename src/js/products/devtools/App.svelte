@@ -1,6 +1,6 @@
 <script>
-  import Router from 'svelte-spa-router'
-  // import Sum from './Sum/index.svelte'
+  import Router, { link } from 'svelte-spa-router'
+  import Sum from './Sum/index.svelte'
 
   /**
    * Documentation
@@ -8,13 +8,20 @@
    */
   const routes = new Map()
 
-  // routes.set('*', Sum)
+  routes.set('*', Sum)
 </script>
 
 
-<div id="app">
+<div class="l-container platform-linux" id="app">
+  <aside class="l-aside">
+    <!-- <Expander /> -->
+  </aside>
 
-  <main>
+  <main class="l-main">
+    <a href="/databases/" use:link>Databases</a>
+    <hr>
+    <a href="/*" use:link>Not found</a>
+    <hr>
     <Router {routes} />
   </main>
 </div>
