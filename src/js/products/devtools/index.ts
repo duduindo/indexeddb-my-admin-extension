@@ -1,9 +1,9 @@
 import App from './App.svelte'
-import '../../../css/index.styl'
+import 'css/products/devtools/index.styl'
 
 
 const app = new App({
-  target: document.body
+  target: document.getElementById('app')
 })
 
 

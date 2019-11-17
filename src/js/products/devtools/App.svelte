@@ -12,9 +12,9 @@
 </script>
 
 
-<div class="l-container platform-linux" id="app">
+<div class="l-container platform-linux">
   <aside class="l-aside">
-    <!-- <Expander /> -->
+    <!-- <Expander /> -->asasa
   </aside>
 
   <main class="l-main">
