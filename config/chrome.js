@@ -1,6 +1,7 @@
 'use strict'
 
 const CopyPlugin = require('copy-webpack-plugin')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const { resolve } = require('path')
 const common = require('./common')
 
@@ -13,16 +14,19 @@ module.exports = () => {
 
   // Plugin Copy
   config.plugins.push(new CopyPlugin([
-      {
-        from: resolve('shells/chrome'),
-        to: resolve('dist/chrome/IndexedDBMyAdmin')
-      }
-    ]))
+    {
+      from: resolve('src/public/shells/chrome/'),
+      to: resolve('dist/chrome/IndexedDBMyAdmin/')
+    }
+  ]))
+
+  // Vue plugin
+  config.plugins.push(new VueLoaderPlugin())
 
   // Entry
   config.entry = {
-    devtools: resolve('src/js/products/devtools/index.ts'),
-    content: resolve('src/js/products/content/index.ts')
+    content: resolve('src/devtools.ts'),
+    devtools: resolve('src/content.ts'),
   }
 
   // Output

@@ -47,18 +47,11 @@ module.exports = (options = {config: {}}) => {
     ],
   })
 
-  // Svelte
+  // Vue
   config.module.rules.push({
-    test: /\.(html|svelte)$/,
+    test: /\.(html|vue)$/,
     use: {
-      loader: 'svelte-loader',
-      options: {
-        preprocess: require('svelte-preprocess')({
-          typescript: {
-            tsconfigFile: 'tsconfig.json'
-          }
-        })
-      }
+      loader: 'vue-loader',
     }
   })
 
@@ -68,7 +61,7 @@ module.exports = (options = {config: {}}) => {
     loader: 'ts-loader',
     exclude: /node_modules/,
     options: {
-      appendTsSuffixTo: [/\.svelte$/],
+      appendTsSuffixTo: [/\.vue$/],
     }
   })
 
@@ -80,10 +73,10 @@ module.exports = (options = {config: {}}) => {
   }
 
   // Resolve
-  config.resolve.extensions = ['.mjs', '.js', '.svelte', '.ts', '.tsx']
-  config.resolve.mainFields = ['svelte', 'browser', 'module', 'main']
+  config.resolve.extensions = ['.mjs', '.js', '.vue', '.ts', '.tsx']
+  config.resolve.mainFields = ['vue', 'browser', 'module', 'main']
   config.resolve.alias = {
-    svelte: resolve('node_modules', 'svelte'),
+    vue: resolve('node_modules', 'vue'),
     '@': resolve('src/js'),
     'common': resolve('src/js/common'),
     'css': resolve('src/css'),
