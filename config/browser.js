@@ -25,8 +25,8 @@ module.exports = () => {
 
   // Entry
   config.entry = {
-    content: resolve('src/devtools.ts'),
-    devtools: resolve('src/content.ts'),
+    content: resolve('src/content.ts'),
+    devtools: resolve('src/devtools.ts'),
   }
 
   // Output

@@ -30,9 +30,10 @@
   },
   "homepage": "https://gitlab.com/duduindo/indexeddb-my-admin-extension#readme",
   "dependencies": {
-    "normalize.css": "^8.0.1",
-    "vue-loader": "^15.8.3",
-    "vue-template-compiler": "^2.6.11"
+    "graphql-anywhere": "^4.2.6",
+    "graphql-tag": "^2.10.1",
+    "idb": "^5.0.0",
+    "normalize.css": "^8.0.1"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.6.3",
@@ -54,6 +55,8 @@
     "ts-jest": "^24.1.0",
     "ts-loader": "^6.2.1",
     "typescript": "^3.6.4",
+    "vue-loader": "^15.8.3",
+    "vue-template-compiler": "^2.6.11",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.9",
     "webpack-dev-server": "^3.9.0"
