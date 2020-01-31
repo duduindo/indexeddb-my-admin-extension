@@ -1,38 +1,106 @@
 import { openDB, deleteDB, wrap, unwrap } from 'idb'
+import { graphql } from 'graphql'
+import { makeExecutableSchema } from 'graphql-tools'
 
-
-async function doDatabaseStuff() {
-  try {
-    const db = await openDB('gih-reservations', 12, {
-      upgrade(db: string, oldVersion: number, newVersion: number, transaction: number) {
-        // …
-        console.warn('upgrade', db, oldVersion, newVersion, transaction)
-      },
-      blocked() {
-        // …
-        console.warn('blocked')
-      },
-      blocking() {
-        // …
-        console.warn('blocking')
-      },
-      terminated() {
-        // …
-        console.warn('terminated')
-      },
-    });
-
-    const tx = db.transaction('reservations');
-    const store = tx.objectStore('reservations');
-    const val = (await store.getAll()) || 0;
-
-    // console.warn( unwrap(tx) )
-  } catch(e) {
-    // console.log(e.message)
+const typeDefs = `
+  type Student {
+    id: ID!
+    name: String
+    age: Int
   }
 
+  type OpenDBRequest {
+    name: String
+    version: Int
+    message: String
+  }
+
+  type Transaction {
+    mode: String
+    message: String
+  }
+
+  type Query  {
+    greeting: String
+    students: [Student]
+    db: OpenDBRequest
+    transaction: Transaction
+  }
+
+  schema {
+    query: Query
+  }
+`
+
+async function getDB() {
+  try {
+    const db = await openDB('library', 3);
+
+    return {
+      name: db.name,
+      version: db.version,
+      message: '',
+    }
+  } catch(e) {
+    return {
+      message: e.message,
+    }
+  }
+}
+
+async function getTransaction() {
+  try {
+    const db = await openDB('library', 3);
+    const transaction = db.transaction('books')
+
+    return {
+      mode: transaction.mode,
+    }
+  } catch(e) {
+    return {
+      message: e.message,
+    }
+  }
+}
+
+//getTransaction()
+
+
+const  resolvers = {
+  Query : {
+    greeting: () => 'Hello GraphQL  From TutorialsPoint !!',
+    students: () => {
+      return [
+        {id: 0, name: 'Opaa', age: 100},
+        {id: 1, name: 'fulano', age: 9}
+      ]
+    },
+    db: () => getDB(),
+    transaction: () => getTransaction(),
+  },
+
+  Student: {
+    id: () => 1,
+    name: () => 'Estudante',
+    age: () => 33
+  },
+
+  OpenDBRequest: {
+    name: (ctx: any) => ctx.name,
+    version: (ctx: any) => ctx.version,
+    message: (ctx: any) => ctx.message,
+  },
+
+  Transaction: {
+    mode: (ctx: any) => ctx.mode,
+    message: (ctx: any) => ctx.message,
+  }
 }
 
 
+const schema = makeExecutableSchema({ typeDefs, resolvers })
 
-doDatabaseStuff()
+
+graphql(schema, '{ db { name, version, message }, transaction { mode, message } }').then((response) => {
+  console.log(response.data);
+});
