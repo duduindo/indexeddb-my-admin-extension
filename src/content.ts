@@ -1,6 +1,7 @@
-import { openDB, deleteDB, wrap, unwrap } from 'idb'
+/*import { openDB, deleteDB, wrap, unwrap } from 'idb'
 import { graphql } from 'graphql'
 import { makeExecutableSchema } from 'graphql-tools'
+
 
 const typeDefs = `
   type Student {
@@ -104,3 +105,12 @@ const schema = makeExecutableSchema({ typeDefs, resolvers })
 graphql(schema, '{ db { name, version, message }, transaction { mode, message } }').then((response) => {
   console.log(response.data);
 });
+*/
+
+import IndexedDBRepository from '@/models/IDBAdmin/Driver/IndexedDBRepository'
+
+const indexeddb = new IndexedDBRepository()
+
+indexeddb.getDatabases().then(e => console.log(e))
+
+indexeddb.findDatabases('li').then(e => console.log(e))

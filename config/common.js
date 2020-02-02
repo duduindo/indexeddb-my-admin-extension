@@ -77,9 +77,9 @@ module.exports = (options = {config: {}}) => {
   config.resolve.mainFields = ['vue', 'browser', 'module', 'main']
   config.resolve.alias = {
     vue: resolve('node_modules', 'vue'),
-    '@': resolve('src/js'),
-    'common': resolve('src/js/common'),
-    'css': resolve('src/css'),
+    '@': resolve('src'),
+    // 'common': resolve('src/js/common'),
+    // 'css': resolve('src/css'),
   }
 
   return config
