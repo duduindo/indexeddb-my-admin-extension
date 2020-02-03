@@ -107,10 +107,13 @@ graphql(schema, '{ db { name, version, message }, transaction { mode, message } 
 });
 */
 
+import Service from '@/models/IDBAdmin/UseCase/Service'
 import IndexedDBRepository from '@/models/IDBAdmin/Driver/IndexedDBRepository'
+
 
 const indexeddb = new IndexedDBRepository()
 
 indexeddb.getDatabases().then(e => console.log(e))
 
-indexeddb.findDatabases('li').then(e => console.log(e))
+//@ts-ignore
+indexeddb.getTables({ name: 'library', version: 4 })

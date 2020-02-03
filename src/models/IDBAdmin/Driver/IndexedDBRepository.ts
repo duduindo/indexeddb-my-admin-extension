@@ -1,28 +1,28 @@
-import idb from 'idb'
-import Databases from '@/models/IDBAdmin/Entities/Databases'
+import { openDB } from 'idb'
+import Database from '@/models/IDBAdmin/Entities/Database'
+import Table from '@/models/IDBAdmin/Entities/Table'
 
 
-class IndexedDBRepository {
-  async getDatabases() {
+class IndexedDBRepository {  // it need an interface: "RepositoryInterface"
+  async getDatabases(): Promise<Database[]> {
     // @ts-ignore
-    const listDatabase: DatabaseType[] = await window.indexedDB.databases()
-    const databases: Databases = new Databases(listDatabase)
+    const dbs: any[] = await window.indexedDB.databases()
+    const databases: Database[] = dbs.map(({ name, version }) => new Database(name, version))
 
-    return databases.getAll()
+    return databases
   }
 
-  async findDatabases(name: string) {
-    // @ts-ignore
-    const listDatabase: DatabaseType[] = await window.indexedDB.databases()
-    const databases: Databases = new Databases(listDatabase)
+  async getTables(database: Database): Promise<Table[]> {
+    const db = await openDB(database.name, database.version)
+    const tables: Table[] = []
+    let name: string
 
-    return databases.find(name)
+    for (name of db.objectStoreNames) {
+      tables.push(new Table(name))
+    }
+
+    return tables
   }
-
-  // async openDatabase(name: string, version: any) {
-  //   const db = await idb.openDB('library', 3);
-  // }
-
 }
 
 export default IndexedDBRepository
