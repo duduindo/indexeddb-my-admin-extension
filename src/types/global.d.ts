@@ -5,7 +5,7 @@ declare module '*.vue'
 declare module 'idb'
 
 
-type DatabaseType = {
+type DatabaseNamesType = {
   name: string,
   version: any,
 }

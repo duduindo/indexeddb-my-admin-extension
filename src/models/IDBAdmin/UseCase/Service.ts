@@ -1,6 +1,6 @@
-import Database from '@/models/IDBAdmin/Entities/Database'
-import Table from '@/models/IDBAdmin/Entities/Table'
-import Index from '@/models/IDBAdmin/Entities/Index'
+// import Database from '@/models/IDBAdmin/Entities/Database'
+// import Table from '@/models/IDBAdmin/Entities/Table'
+// import Index from '@/models/IDBAdmin/Entities/Index'
 
 
 class Service {
@@ -10,25 +10,19 @@ class Service {
     this.repository = repository
   }
 
-  async getDatabases(): Promise<Database[]> {
-    return await this.repository.getDatabases()
+  async getDatabaseNames(): Promise<DatabaseNamesType[]> {
+    return await this.repository.getDatabaseNames()
   }
 
-  async getTables(database: Database): Promise<Table[]> {
-    return await this.repository.getTables(database)
+  async getStoreNames(database: DatabaseNamesType): Promise<string[]> {
+    return await this.repository.getStoreNames(database)
   }
 
-  async getIndexes(database: Database, table: Table): Promise<Index[]> {
-    return await this.repository.getIndexes(database, table)
+  async getIndexNames(database: DatabaseNamesType, tablename: string): Promise<string[]> {
+    return await this.repository.getIndexNames(database, tablename)
   }
 
-  async getContentFromTable(database: Database, table: Table): Promise<any[]> {
-    return await this.repository.getContentFromTable(database, table)
-  }
 
-  async getContentFromIndex(database: Database, table: Table, index: Index): Promise<any[]> {
-    return await this.repository.getContentFromTable(database, table, index)
-  }
 }
 
 export default Service

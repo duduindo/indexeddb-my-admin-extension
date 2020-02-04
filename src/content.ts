@@ -114,14 +114,14 @@ import IndexedDBRepository from '@/models/IDBAdmin/Driver/IndexedDBRepository'
 const indexeddb = new IndexedDBRepository()
 const service = new Service(indexeddb)
 
-service.getContentFromIndex(
-  { name: 'library', version: 4 },
-  { name: 'e-readers' },
-  { name: 'by_title' }
-).then(e => console.log(e))
+// service.getContentFromIndex(
+//   { name: 'library', version: 4 },
+//   { name: 'e-readers' },
+//   { name: 'by_title' }
+// ).then(e => console.log(e))
 
-// service.getDatabases().then(e => console.log(e))
-// service.getTables({ name: 'library', version: 4 }).then(e => console.log(e))
-// service.getIndexes({ name: 'library', version: 4 }, { name: 'e-readers' }).then(e => console.log(e))
+service.getDatabaseNames().then(e => console.log(e))
+service.getStoreNames({ name: 'library', version: 4 }).then(e => console.log(e))
+service.getIndexNames({ name: 'library', version: 4 }, 'e-books').then(e => console.log(e))
 
 
