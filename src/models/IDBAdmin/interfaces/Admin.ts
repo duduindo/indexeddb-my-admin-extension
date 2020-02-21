@@ -41,7 +41,7 @@ class Admin implements InterfaceBridge {
     return tables
   }
 
-  async close() {
+  async close(): Promise<void> {
     return await this.driver.close()
   }
 

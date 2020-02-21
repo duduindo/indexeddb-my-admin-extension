@@ -1,5 +1,10 @@
 interface InterfaceBridge {
   /*
+   * @return void
+   */
+  close(): Promise<void>
+
+  /*
    * @return promise array DatabaseStruture
    */
   getStructureFromDatabase(): Promise<DatabaseStruture>
