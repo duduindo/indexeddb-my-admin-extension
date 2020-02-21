@@ -150,6 +150,7 @@ admin.getContentFromTable('papers')
   .catch(e => console.warn(e))
 
 
+
 // # | Key (Key path "type") | Value
 // # | Key (Key path "title") | Primary Key (Key path "type") | Value
 
@@ -170,8 +171,7 @@ admin.getContentFromTable('papers')
 //   //   cursor = await cursor.continue();
 //   // }
 
-//   console.log( content )
-//   console.log( content2 )
+//   //console.log( db.close() )
 
 // })()
 

@@ -9,6 +9,12 @@ class IndexedDB implements DriverBridge {
     this.connection = connection
   }
 
+  async close(): Promise<void> {
+    const db = await this.connection
+
+    db.close()
+  }
+
   async getDescribeDatabase(): Promise<DatabaseDescription> {
     const db = await this.connection
     const description = { name: db.name, version: db.version }

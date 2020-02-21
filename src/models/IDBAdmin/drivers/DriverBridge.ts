@@ -1,5 +1,10 @@
 interface DriverBridge {
   /*
+   * @return void
+   */
+  close(): Promise<void>
+
+  /*
    * @return promise database description
    */
   getDescribeDatabase(): Promise<DatabaseDescription>
@@ -28,7 +33,7 @@ interface DriverBridge {
    *
    * @return promise object
    */
-   getContentFromTable(table: string): Promise<object>
+  getContentFromTable(table: string): Promise<object>
 }
 
 
