@@ -41,9 +41,6 @@ class Admin implements InterfaceBridge {
     return tables
   }
 
-  /*
-   * @return promise array DatabaseStruture
-   */
   async getStructureFromDatabase(): Promise<DatabaseStruture> {
     const { name, version = '' } = await this.driver.getDescribeDatabase()
     const tables = await this.getTableStrutured()
@@ -53,6 +50,18 @@ class Admin implements InterfaceBridge {
       version,
       tables
     }
+  }
+
+  async getColumnNamesFromTable(tablename: string): Promise<string[]> {
+    const names = await this.driver.getColumnNamesFromTable(tablename)
+
+    return names
+  }
+
+  async getContentFromTable(tablename: string): Promise<object> {
+    const content = await this.driver.getContentFromTable(tablename)
+
+    return content
   }
 }
 

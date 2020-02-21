@@ -133,10 +133,46 @@ import { openDB } from 'idb'
 import IndexedDB from '@/models/IDBAdmin/drivers/IndexedDB'
 import Admin from '@/models/IDBAdmin/interfaces/Admin'
 
-const drive = new IndexedDB(openDB('library', 4))
+const database = openDB('library', 5)
+const drive = new IndexedDB(database)
 const admin = new Admin(drive)
 
 admin.getStructureFromDatabase()
   .then(e => console.log(e))
   .catch(e => console.warn(e))
+
+admin.getColumnNamesFromTable('papers')
+  .then(e => console.log(e))
+  .catch(e => console.warn(e))
+
+admin.getContentFromTable('papers')
+  .then(e => console.log(e))
+  .catch(e => console.warn(e))
+
+
+// # | Key (Key path "type") | Value
+// # | Key (Key path "title") | Primary Key (Key path "type") | Value
+
+
+// ;(async function () {
+
+//   const db = await openDB('library', 5)
+//   const tx = db.transaction('papers')
+//   const store = tx.objectStore('papers')
+//   const content = await store.getAll()
+//   const content2 = await store.getAllKeys()
+//   // const content = await store.get('A1')
+
+//   // let cursor = await store.openCursor()
+
+//   // while (cursor) {
+//   //   console.log(cursor.key, cursor.value);
+//   //   cursor = await cursor.continue();
+//   // }
+
+//   console.log( content )
+//   console.log( content2 )
+
+// })()
+
 
