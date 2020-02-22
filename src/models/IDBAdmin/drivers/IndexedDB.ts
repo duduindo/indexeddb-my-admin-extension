@@ -63,6 +63,36 @@ class IndexedDB implements DriverBridge {
     return content
   }
 
+  async getContentFromIndex(table: string, indexname: string): Promise<object> {
+    const db = await this.connection
+    const tx = db.transaction(table)
+    const store = tx.objectStore(table)
+
+    // Store
+    const keyPathStore = store.keyPath
+    const keysStore = await store.getAllKeys()
+
+    // Index
+    const index = store.index(indexname)
+    const keyPath = index.keyPath
+    const values = await index.getAll()
+    const content: any = {}
+    const keys: any[] = []
+    let cursor = await index.openKeyCursor()
+
+    while(cursor) {
+      keys.push(cursor.key)
+      cursor = await cursor.continue()
+    }
+
+    content['#'] = keys.map((e: any, i: number) => i)
+    content[keyPath] = keys
+    content[keyPathStore] = keysStore
+    content['value'] = values
+
+    return content
+  }
+
 }
 
 export default IndexedDB

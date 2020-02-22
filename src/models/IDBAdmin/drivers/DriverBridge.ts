@@ -34,6 +34,14 @@ interface DriverBridge {
    * @return promise object
    */
   getContentFromTable(table: string): Promise<object>
+
+  /*
+   * @param $table name of table
+   * @param indexname name of index
+   *
+   * @return promise object
+   */
+  getContentFromIndex(table: string, indexname: string): Promise<object>
 }
 
 

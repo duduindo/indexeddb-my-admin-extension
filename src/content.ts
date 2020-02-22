@@ -149,7 +149,11 @@ admin.getContentFromTable('papers')
   .then(e => console.log(e))
   .catch(e => console.warn(e))
 
+admin.getContentFromIndex('papers', 'by_title')
+  .then(e => console.log(e))
+  .catch(e => console.warn(e))
 
+setTimeout(() => admin.close(), 1000)
 
 // # | Key (Key path "type") | Value
 // # | Key (Key path "title") | Primary Key (Key path "type") | Value
@@ -160,18 +164,17 @@ admin.getContentFromTable('papers')
 //   const db = await openDB('library', 5)
 //   const tx = db.transaction('papers')
 //   const store = tx.objectStore('papers')
-//   const content = await store.getAll()
-//   const content2 = await store.getAllKeys()
-//   // const content = await store.get('A1')
+//   const keyPathStore = store.keyPath
 
-//   // let cursor = await store.openCursor()
+//   // -- index
+//   const index = store.index('by_title')
+//   const keyPath = index.keyPath
+//   const keys = await index.getAllKeys()
+//   const values = await index.getAll()
 
-//   // while (cursor) {
-//   //   console.log(cursor.key, cursor.value);
-//   //   cursor = await cursor.continue();
-//   // }
-
-//   //console.log( db.close() )
+//   //getAllKeys
+//   //getAll
+//   console.log(keyPath, keys, values, keyPathStore)
 
 // })()
 

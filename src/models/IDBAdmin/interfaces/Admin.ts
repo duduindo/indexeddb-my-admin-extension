@@ -67,6 +67,12 @@ class Admin implements InterfaceBridge {
 
     return content
   }
+
+  async getContentFromIndex(tablename: string, indexname: string): Promise<object> {
+    const content = await this.driver.getContentFromIndex(tablename, indexname)
+
+    return content
+  }
 }
 
 export default Admin
