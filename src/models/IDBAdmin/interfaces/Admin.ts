@@ -1,4 +1,3 @@
-import { openDB } from 'idb'
 import DriverBridge from '../drivers/DriverBridge'
 import InterfaceBridge from './InterfaceBridge'
 
@@ -68,10 +67,22 @@ class Admin implements InterfaceBridge {
     return content
   }
 
+  async isTableAutoIncrement(tablename: string): Promise<boolean> {
+    const is = await this.driver.isTableAutoIncrement(tablename)
+
+    return is
+  }
+
   async getContentFromIndex(tablename: string, indexname: string): Promise<object> {
     const content = await this.driver.getContentFromIndex(tablename, indexname)
 
     return content
+  }
+
+  async getIndexChoice(tablename: string, indexname: string): Promise<string | null> {
+    const choice = await this.driver.getIndexChoice(tablename, indexname)
+
+    return choice
   }
 }
 

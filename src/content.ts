@@ -133,7 +133,7 @@ import { openDB } from 'idb'
 import IndexedDB from '@/models/IDBAdmin/drivers/IndexedDB'
 import Admin from '@/models/IDBAdmin/interfaces/Admin'
 
-const database = openDB('library', 5)
+const database = openDB('library', 7)
 const drive = new IndexedDB(database)
 const admin = new Admin(drive)
 
@@ -149,7 +149,15 @@ admin.getContentFromTable('papers')
   .then(e => console.log(e))
   .catch(e => console.warn(e))
 
-admin.getContentFromIndex('papers', 'by_title')
+admin.isTableAutoIncrement('notebooks')
+  .then(e => console.log(e))
+  .catch(e => console.warn(e))
+
+admin.getContentFromIndex('computer', 'by_id')
+  .then(e => console.log(e))
+  .catch(e => console.warn(e))
+
+admin.getIndexChoice('computer', 'by_id')
   .then(e => console.log(e))
   .catch(e => console.warn(e))
 
@@ -168,13 +176,9 @@ setTimeout(() => admin.close(), 1000)
 
 //   // -- index
 //   const index = store.index('by_title')
-//   const keyPath = index.keyPath
-//   const keys = await index.getAllKeys()
-//   const values = await index.getAll()
 
-//   //getAllKeys
-//   //getAll
-//   console.log(keyPath, keys, values, keyPathStore)
+//   console.log(store)
+//   console.log(index)
 
 // })()
 

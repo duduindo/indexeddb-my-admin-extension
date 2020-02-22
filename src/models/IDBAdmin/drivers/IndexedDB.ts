@@ -1,6 +1,10 @@
 import { openDB } from 'idb'
 import DriverBridge from './DriverBridge'
 
+enum Choices {
+  unique = 'UNIQUE'
+}
+
 
 class IndexedDB implements DriverBridge {
   private connection: any
@@ -27,6 +31,15 @@ class IndexedDB implements DriverBridge {
     const names: string[] = Array.from(db.objectStoreNames)
 
     return names
+  }
+
+  async isTableAutoIncrement(table: string): Promise<boolean> {
+    const db = await this.connection
+    const tx = db.transaction(table)
+    const store = tx.objectStore(table)
+    const is = store.autoIncrement
+
+    return is
   }
 
   async getIndexNames(table: string): Promise<string[]> {
@@ -91,6 +104,16 @@ class IndexedDB implements DriverBridge {
     content['value'] = values
 
     return content
+  }
+
+  async getIndexChoice(table: string, indexname: string): Promise<string | null> {
+    const db = await this.connection
+    const tx = db.transaction(table)
+    const store = tx.objectStore(table)
+    const index = store.index(indexname)
+    const choice = index.unique ? Choices.unique : null
+
+    return choice
   }
 
 }

@@ -24,12 +24,27 @@ interface InterfaceBridge {
   getContentFromTable(tablename: string): Promise<object>
 
   /*
+   * @param $tablename name of tablename
+   *
+   * @return promise boolean
+   */
+  isTableAutoIncrement(tablename: string): Promise<boolean>
+
+  /*
    * @param $table name of table
    * @param indexname name of index
    *
    * @return promise object
    */
   getContentFromIndex(table: string, indexname: string): Promise<object>
+
+  /*
+   * @param $table name of table
+   * @param $indexname name of index
+   *
+   * @return promise string
+   */
+  getIndexChoice(table: string, indexname: string): Promise<string | null>
 }
 
 
