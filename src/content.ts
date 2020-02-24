@@ -128,58 +128,61 @@ graphql(schema, '{ db { name, version, message }, transaction { mode, message } 
 
 
 // ------------------------------ novo
-import { openDB } from 'idb'
+import { openDB, deleteDB } from 'idb'
 
-import IndexedDB from '@/models/IDBAdmin/drivers/IndexedDB'
-import Admin from '@/models/IDBAdmin/interfaces/Admin'
+// import IndexedDB from '@/models/IDBAdmin/drivers/IndexedDB'
+// import Admin from '@/models/IDBAdmin/interfaces/Admin'
 
-const database = openDB('library', 7)
-const drive = new IndexedDB(database)
-const admin = new Admin(drive)
+// const database = openDB('library', 7)
+// const drive = new IndexedDB(database)
+// const admin = new Admin(drive)
 
-admin.getStructureFromDatabase()
-  .then(e => console.log(e))
-  .catch(e => console.warn(e))
+// admin.getStructureFromDatabase()
+//   .then(e => console.log(e))
+//   .catch(e => console.warn(e))
 
-admin.getColumnNamesFromTable('papers')
-  .then(e => console.log(e))
-  .catch(e => console.warn(e))
+// admin.getColumnNamesFromTable('papers')
+//   .then(e => console.log(e))
+//   .catch(e => console.warn(e))
 
-admin.getContentFromTable('papers')
-  .then(e => console.log(e))
-  .catch(e => console.warn(e))
+// admin.getContentFromTable('papers')
+//   .then(e => console.log(e))
+//   .catch(e => console.warn(e))
 
-admin.isTableAutoIncrement('notebooks')
-  .then(e => console.log(e))
-  .catch(e => console.warn(e))
+// admin.isTableAutoIncrement('notebooks')
+//   .then(e => console.log(e))
+//   .catch(e => console.warn(e))
 
-admin.getContentFromIndex('computer', 'by_id')
-  .then(e => console.log(e))
-  .catch(e => console.warn(e))
+// admin.getContentFromIndex('computer', 'by_id')
+//   .then(e => console.log(e))
+//   .catch(e => console.warn(e))
 
-admin.getIndexChoice('computer', 'by_id')
-  .then(e => console.log(e))
-  .catch(e => console.warn(e))
+// admin.getIndexChoice('computer', 'by_id')
+//   .then(e => console.log(e))
+//   .catch(e => console.warn(e))
 
-setTimeout(() => admin.close(), 1000)
+// setTimeout(() => admin.close(), 1000)
 
 // # | Key (Key path "type") | Value
 // # | Key (Key path "title") | Primary Key (Key path "type") | Value
 
 
-// ;(async function () {
+;(async function () {
 
-//   const db = await openDB('library', 5)
-//   const tx = db.transaction('papers')
-//   const store = tx.objectStore('papers')
-//   const keyPathStore = store.keyPath
+  const db = await openDB('library', 9, {
+    // @ts-ignore
+    upgrade(db, oldVersion, newVersion, transaction) {
+      db.deleteObjectStore('notebooks')
+    },
+  })
+  // const tx = db.transaction('notebooks', 'readwrite')
+  // const store = tx.objectStore('notebooks')
+  // const deleted = db.deleteObjectStore('notebooks')
 
-//   // -- index
-//   const index = store.index('by_title')
+  // console.log(deleted)
 
-//   console.log(store)
-//   console.log(index)
+  // db
 
-// })()
+})()
 
 

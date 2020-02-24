@@ -5,6 +5,11 @@ interface DriverBridge {
   close(): Promise<void>
 
   /*
+   * @return void
+   */
+  deleteDatabase(databasename: string): Promise<void>
+
+  /*
    * @return promise database description
    */
   getDescribeDatabase(): Promise<DatabaseDescription>
@@ -37,13 +42,6 @@ interface DriverBridge {
 
   /*
    * @param $table name of table
-   *
-   * @return promise boolean
-   */
-  isTableAutoIncrement(table: string): Promise<boolean>
-
-  /*
-   * @param $table name of table
    * @param $indexname name of index
    *
    * @return promise object
@@ -57,6 +55,13 @@ interface DriverBridge {
    * @return promise string
    */
   getIndexChoice(table: string, indexname: string): Promise<string | null>
+
+  /*
+   * @param $table name of table
+   *
+   * @return promise boolean
+   */
+  isTableAutoIncrement(table: string): Promise<boolean>
 }
 
 

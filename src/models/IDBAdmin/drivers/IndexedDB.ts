@@ -1,4 +1,4 @@
-import { openDB } from 'idb'
+import { openDB, deleteDB } from 'idb'
 import DriverBridge from './DriverBridge'
 
 enum Choices {
@@ -17,6 +17,12 @@ class IndexedDB implements DriverBridge {
     const db = await this.connection
 
     db.close()
+  }
+
+  async deleteDatabase(databasename: string): Promise<void> {
+    const db = await deleteDB(databasename)
+
+    return db
   }
 
   async getDescribeDatabase(): Promise<DatabaseDescription> {
