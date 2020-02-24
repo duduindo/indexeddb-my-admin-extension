@@ -1,7 +1,9 @@
 // For a detailed explanation regarding each configuration property, visit:
 // https://jestjs.io/docs/en/configuration.html
+const path = require('path')
 
 module.exports = {
+  rootDir: path.resolve(__dirname, '../../'),
   // All imported modules in your tests should be mocked automatically
   // automock: false,
 
@@ -24,7 +26,7 @@ module.exports = {
   // collectCoverageFrom: null,
 
   // The directory where Jest should output its coverage files
-  coverageDirectory: "coverage",
+  coverageDirectory: '<rootDir>/test/unit/coverage',
 
   // An array of regexp pattern strings used to skip coverage collection
   // coveragePathIgnorePatterns: [
@@ -80,7 +82,10 @@ module.exports = {
   ],
 
   // A map from regular expressions to module names that allow to stub out resources with a single module
-  // moduleNameMapper: {},
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/src/$1'
+  },
+
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
   // modulePathIgnorePatterns: [],
@@ -125,8 +130,8 @@ module.exports = {
 
   // The paths to modules that run some code to configure or set up the testing environment before each test
   setupFiles: [
-    "<rootDir>/jest/setup.js",
-    "<rootDir>/jest/jest.globals.js"
+    '<rootDir>/test/unit/setup',
+    '<rootDir>/test/unit/jest.globals.js'
   ],
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
@@ -146,8 +151,8 @@ module.exports = {
 
   // The glob patterns Jest uses to detect test files
   testMatch: [
-    "<rootDir>/src/js/**/__tests__/**/*.[jt]s?(x)",
-    // "**/?(*.)+(spec|test).[tj]s?(x)"
+    // "<rootDir>/src/js/**/__tests__/**/*.[jt]s?(x)",
+    "**/?(*.)+(spec|test).[tj]s?(x)"
   ],
 
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
@@ -174,9 +179,9 @@ module.exports = {
   transform: {
     "^.+\\.(ts|tsx)$": "ts-jest",
     "\\.js$": "babel-jest",
-    "^.+\\.svelte$": ["jest-transform-svelte", {
-      preprocess: require("svelte-preprocess")({ /* options */ })
-    }]
+    // "^.+\\.svelte$": ["jest-transform-svelte", {
+    //   preprocess: require("svelte-preprocess")({ /* options */ })
+    // }]
   },
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
