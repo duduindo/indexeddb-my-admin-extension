@@ -38,6 +38,12 @@
   "include": [
     "typings/**/*.d.ts",
     "node_modules/@*/types-*/*.d.ts",
-    "src/**/*"
-  ]
+    "src/**/*",
+    "test/**/*.ts",
+  ],
+  "globals": {
+    "ts-jest": {
+      "diagnostics": true
+    }
+  }
 }
