@@ -42,6 +42,14 @@ interface DriverBridge {
 
   /*
    * @param $table name of table
+   * @param $value value to table
+   *
+   * @return promise any
+   */
+  addContentToTable(table: string, value: any): Promise<any>
+
+  /*
+   * @param $table name of table
    * @param $indexname name of index
    *
    * @return promise object

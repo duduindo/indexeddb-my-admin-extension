@@ -66,6 +66,15 @@ class IndexedDB implements DriverBridge {
     return names
   }
 
+  async addContentToTable(table: string, value: any): Promise<any> {
+    const db = await this.connection
+    const tx = db.transaction(table, 'readwrite')
+    const store = tx.objectStore(table)
+    const any = store.add(value)
+
+    return any
+  }
+
   async getContentFromTable(table: string): Promise<object> {
     const db = await this.connection
     const tx = db.transaction(table)
