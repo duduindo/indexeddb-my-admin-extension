@@ -1,4 +1,9 @@
 interface IDriverBridge {
+
+  // ==============================================
+  // Database
+  // ==============================================
+
   /*
    * @return void
    */
@@ -14,17 +19,18 @@ interface IDriverBridge {
    */
   getDescribeDatabase(): Promise<DatabaseDescription>
 
-  /*
-   * @return promise array table names
-   */
-  getTableNames(): Promise<string[]>
+
+  // ==============================================
+  // Table
+  // ==============================================
 
   /*
    * @param $tablename name of table
+   * @param $value value to table
    *
-   * @return promise array index names
+   * @return promise any
    */
-  getIndexNames(tablename: string): Promise<string[]>
+  addContentToTable(tablename: string, value: any): Promise<any>
 
   /*
    * @param $tablename name of table
@@ -41,12 +47,16 @@ interface IDriverBridge {
   getContentFromTable(tablename: string): Promise<object>
 
   /*
-   * @param $tablename name of table
-   * @param $value value to table
-   *
-   * @return promise any
+   * @return promise array table names
    */
-  addContentToTable(tablename: string, value: any): Promise<any>
+  getTableNames(): Promise<string[]>
+
+  /*
+   * @param $tablename name of table
+   *
+   * @return promise boolean
+   */
+  isTableAutoIncrement(tablename: string): Promise<boolean>
 
   /*
    * @param $tablename name of table
@@ -56,6 +66,11 @@ interface IDriverBridge {
    * @return promise any
    */
   putContentToTable(tablename: string, value: any, key?: any): Promise<any>
+
+
+  // ==============================================
+  // Index
+  // ==============================================
 
   /*
    * @param $tablename name of table
@@ -76,9 +91,9 @@ interface IDriverBridge {
   /*
    * @param $tablename name of table
    *
-   * @return promise boolean
+   * @return promise array index names
    */
-  isTableAutoIncrement(tablename: string): Promise<boolean>
+  getIndexNames(tablename: string): Promise<string[]>
 }
 
 
