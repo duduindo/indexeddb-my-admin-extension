@@ -2,11 +2,6 @@ import { openDB, deleteDB } from 'idb'
 import IDriverBridge from './IDriverBridge'
 
 
-enum Choices {
-  unique = 'UNIQUE'
-}
-
-
 class IndexedDB implements IDriverBridge {
   private connection: any
 
