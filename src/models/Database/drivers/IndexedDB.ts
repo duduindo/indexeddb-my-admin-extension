@@ -30,6 +30,33 @@ class IndexedDB implements IDriverBridge {
     return description
   }
 
+  // Static
+  static async openDatabase(name: string, version: number): Promise<any> {
+    return await openDB(name, version)
+  }
+
+  // Static
+  static async upgradeDatabase(data: DatabaseStruture): Promise<any> {
+    return await openDB(data.name, data.version, {
+      upgrade(db: any) {
+        let store = null
+
+        for (const table of data.tables) {
+          // Store
+          store = db.createObjectStore(table.name, {
+            keyPath: table.keyPath,
+            autoIncrement: table.autoIncrement
+          })
+
+          // Index
+          for (const index of table.indexes) {
+            store.createIndex(index.name, index.keyPath, { unique: index.unique })
+          }
+        }
+      }
+    })
+  }
+
   // Table
   // =========================================================
   async addContentToTable(table: string, value: any): Promise<any> {

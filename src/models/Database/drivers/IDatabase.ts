@@ -13,12 +13,6 @@ interface IDatabase {
    * @return promise database description
    */
   getDescribeDatabase(): Promise<DatabaseDescription>
-
-
-  /*
-   * @return promise database description
-   */
-  upgradeDatabase(data: DatabaseStruture): Promise<any>
 }
 
 

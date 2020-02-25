@@ -133,8 +133,55 @@ import { openDB, deleteDB } from 'idb'
 import IndexedDB from '@/models/Database/drivers/IndexedDB'
 // import Admin from '@/models/IDBAdmin/interfaces/Admin'
 
-const database = openDB('library', 11)
-const drive = new IndexedDB(database)
+// const database = openDB('library', 11)
+// const drive = new IndexedDB(database)
+
+// const database = IndexedDB.openDatabase('library', 11)
+// const database = IndexedDB.openDatabase('library', 11)
+
+const tables: DatabaseTableStruture[] = [
+  {
+    name: 'secao',
+    keyPath: 'isbn',
+    autoIncrement: false,
+    indexes: [
+      {
+        name: 'por_titulo',
+        keyPath: 'titulo',
+        unique: true
+      },
+      {
+        name: 'por_autor',
+        keyPath: 'ator',
+        unique: false
+      }
+    ]
+  },
+
+  {
+    name: 'corredores',
+    keyPath: 'corredor',
+    autoIncrement: true,
+    indexes: [
+      {
+        name: 'por_corredor',
+        keyPath: 'corredor'
+      }
+    ]
+  }
+]
+
+const data: DatabaseStruture = {
+  name: 'biblioteca',
+  version: 2,
+  tables
+}
+
+// const database = IndexedDB.upgradeDatabase(data)
+// const drive = new IndexedDB(database)
+
+
+
 
 /*
   drive.deleteDatabase('library11')
