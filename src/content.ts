@@ -130,59 +130,77 @@ graphql(schema, '{ db { name, version, message }, transaction { mode, message } 
 // ------------------------------ novo
 import { openDB, deleteDB } from 'idb'
 
-// import IndexedDB from '@/models/IDBAdmin/drivers/IndexedDB'
+import IndexedDB from '@/models/Database/drivers/IndexedDB'
 // import Admin from '@/models/IDBAdmin/interfaces/Admin'
 
-// const database = openDB('library', 7)
-// const drive = new IndexedDB(database)
-// const admin = new Admin(drive)
+const database = openDB('library', 1)
+const drive = new IndexedDB(database)
 
-// admin.getStructureFromDatabase()
+
+// drive.deleteDatabase('library')
 //   .then(e => console.log(e))
 //   .catch(e => console.warn(e))
 
-// admin.getColumnNamesFromTable('papers')
+drive.getDescribeDatabase()
+  .then(e => console.log(e))
+  .catch(e => console.warn(e))
+
+drive.getTableNames()
+  .then(e => console.log(e))
+  .catch(e => console.warn(e))
+
+drive.getIndexNames('books')
+  .then(e => console.log(e))
+  .catch(e => console.warn(e))
+
+drive.getColumnNamesFromTable('books')
+  .then(e => console.log(e))
+  .catch(e => console.warn(e))
+
+drive.getContentFromTable('books')
+  .then(e => console.log(e))
+  .catch(e => console.warn(e))
+
+// drive.addContentToTable('books', {})
 //   .then(e => console.log(e))
 //   .catch(e => console.warn(e))
 
-// admin.getContentFromTable('papers')
-//   .then(e => console.log(e))
-//   .catch(e => console.warn(e))
+drive.putContentToTable('books', {title: "Dudu updated", author: "Indo", isbn: 1})
+  .then(e => console.log(e))
+  .catch(e => console.warn(e))
 
-// admin.isTableAutoIncrement('notebooks')
-//   .then(e => console.log(e))
-//   .catch(e => console.warn(e))
+drive.getContentFromIndex('books', 'by_title')
+  .then(e => console.log(e))
+  .catch(e => console.warn(e))
 
-// admin.getContentFromIndex('computer', 'by_id')
-//   .then(e => console.log(e))
-//   .catch(e => console.warn(e))
+drive.getIndexChoice('books', 'by_title')
+  .then(e => console.log(e))
+  .catch(e => console.warn(e))
 
-// admin.getIndexChoice('computer', 'by_id')
-//   .then(e => console.log(e))
-//   .catch(e => console.warn(e))
-
-// setTimeout(() => admin.close(), 1000)
-
-// # | Key (Key path "type") | Value
-// # | Key (Key path "title") | Primary Key (Key path "type") | Value
+drive.isTableAutoIncrement('books')
+  .then(e => console.log(e))
+  .catch(e => console.warn(e))
 
 
-;(async function () {
+setTimeout(() => drive.close(), 2000)
 
-  const db = await openDB('library', 9, {
-    // @ts-ignore
-    upgrade(db, oldVersion, newVersion, transaction) {
-      db.deleteObjectStore('notebooks')
-    },
-  })
-  // const tx = db.transaction('notebooks', 'readwrite')
-  // const store = tx.objectStore('notebooks')
-  // const deleted = db.deleteObjectStore('notebooks')
 
-  // console.log(deleted)
+// ;(async function () {
 
-  // db
+//   const db = await openDB('library', 9, {
+//     // @ts-ignore
+//     upgrade(db, oldVersion, newVersion, transaction) {
+//       db.deleteObjectStore('notebooks')
+//     },
+//   })
+//   // const tx = db.transaction('notebooks', 'readwrite')
+//   // const store = tx.objectStore('notebooks')
+//   // const deleted = db.deleteObjectStore('notebooks')
 
-})()
+//   // console.log(deleted)
+
+//   // db
+
+// })()
 
 

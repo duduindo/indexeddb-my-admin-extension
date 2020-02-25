@@ -1,5 +1,5 @@
 import { openDB } from 'idb'
-import IndexedDB from '@/models/IDBAdmin/drivers/IndexedDB'
+import IndexedDB from '@/models/Database/drivers/IndexedDB'
 
 
 describe('IDBAdmin - IndexedDB', () => {

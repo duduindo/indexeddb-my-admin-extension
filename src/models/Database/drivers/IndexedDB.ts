@@ -1,12 +1,12 @@
 import { openDB, deleteDB } from 'idb'
-import DriverBridge from './DriverBridge'
+import IDriverBridge from './IDriverBridge'
 
 enum Choices {
   unique = 'UNIQUE'
 }
 
 
-class IndexedDB implements DriverBridge {
+class IndexedDB implements IDriverBridge {
   private connection: any
 
   constructor(connection: any) {
@@ -71,6 +71,15 @@ class IndexedDB implements DriverBridge {
     const tx = db.transaction(table, 'readwrite')
     const store = tx.objectStore(table)
     const any = store.add(value)
+
+    return any
+  }
+
+  async putContentToTable(table: string, value: any, key?: any): Promise<any> {
+    const db = await this.connection
+    const tx = db.transaction(table, 'readwrite')
+    const store = tx.objectStore(table)
+    const any = store.put(value, key)
 
     return any
   }
