@@ -1,6 +1,7 @@
 import { openDB, deleteDB } from 'idb'
 import IDriverBridge from './IDriverBridge'
 
+
 enum Choices {
   unique = 'UNIQUE'
 }
@@ -13,6 +14,8 @@ class IndexedDB implements IDriverBridge {
     this.connection = connection
   }
 
+  // Database
+  // =========================================================
   async close(): Promise<void> {
     const db = await this.connection
 
@@ -32,40 +35,8 @@ class IndexedDB implements IDriverBridge {
     return description
   }
 
-  async getTableNames(): Promise<string[]> {
-    const db = await this.connection
-    const names: string[] = Array.from(db.objectStoreNames)
-
-    return names
-  }
-
-  async isTableAutoIncrement(table: string): Promise<boolean> {
-    const db = await this.connection
-    const tx = db.transaction(table)
-    const store = tx.objectStore(table)
-    const is = store.autoIncrement
-
-    return is
-  }
-
-  async getIndexNames(table: string): Promise<string[]> {
-    const db = await this.connection
-    const tx = db.transaction(table)
-    const store = tx.objectStore(table)
-    const names: string[] = Array.from(store.indexNames)
-
-    return names
-  }
-
-  async getColumnNamesFromTable(table: string): Promise<string[]> {
-    const db = await this.connection
-    const tx = db.transaction(table)
-    const store = tx.objectStore(table)
-    const names = ['#', store.keyPath, 'Value']
-
-    return names
-  }
-
+  // Table
+  // =========================================================
   async addContentToTable(table: string, value: any): Promise<any> {
     const db = await this.connection
     const tx = db.transaction(table, 'readwrite')
@@ -75,13 +46,31 @@ class IndexedDB implements IDriverBridge {
     return any
   }
 
-  async putContentToTable(table: string, value: any, key?: any): Promise<any> {
+  async clearContentFromTable(table: string): Promise<any> {
     const db = await this.connection
     const tx = db.transaction(table, 'readwrite')
     const store = tx.objectStore(table)
-    const any = store.put(value, key)
+    const any = store.clear()
 
     return any
+  }
+
+  async deleteRow(table: string, key: any): Promise<any> {
+    const db = await this.connection
+    const tx = db.transaction(table, 'readwrite')
+    const store = tx.objectStore(table)
+    const any = store.delete(key)
+
+    return any
+  }
+
+  async getColumnNamesFromTable(table: string): Promise<string[]> {
+    const db = await this.connection
+    const tx = db.transaction(table)
+    const store = tx.objectStore(table)
+    const names = ['#', store.keyPath, 'Value']
+
+    return names
   }
 
   async getContentFromTable(table: string): Promise<object> {
@@ -100,6 +89,43 @@ class IndexedDB implements IDriverBridge {
     return content
   }
 
+  async getRowsFromTable(table: string): Promise<number> {
+    const db = await this.connection
+    const tx = db.transaction(table)
+    const store = tx.objectStore(table)
+    const any = store.count()
+
+    return any
+  }
+
+  async getTableNames(): Promise<string[]> {
+    const db = await this.connection
+    const names: string[] = Array.from(db.objectStoreNames)
+
+    return names
+  }
+
+  async isTableAutoIncrement(table: string): Promise<boolean> {
+    const db = await this.connection
+    const tx = db.transaction(table)
+    const store = tx.objectStore(table)
+    const is = store.autoIncrement
+
+    return is
+  }
+
+  async putContentToTable(table: string, value: any, key?: any): Promise<any> {
+    const db = await this.connection
+    const tx = db.transaction(table, 'readwrite')
+    const store = tx.objectStore(table)
+    const any = store.put(value, key)
+
+    return any
+  }
+
+
+  // Index
+  // =========================================================
   async getContentFromIndex(table: string, indexname: string): Promise<object> {
     const db = await this.connection
     const tx = db.transaction(table)
@@ -140,6 +166,14 @@ class IndexedDB implements IDriverBridge {
     return choice
   }
 
+  async getIndexNames(table: string): Promise<string[]> {
+    const db = await this.connection
+    const tx = db.transaction(table)
+    const store = tx.objectStore(table)
+    const names: string[] = Array.from(store.indexNames)
+
+    return names
+  }
 }
 
 export default IndexedDB

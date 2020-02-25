@@ -133,74 +133,72 @@ import { openDB, deleteDB } from 'idb'
 import IndexedDB from '@/models/Database/drivers/IndexedDB'
 // import Admin from '@/models/IDBAdmin/interfaces/Admin'
 
-const database = openDB('library', 1)
+const database = openDB('library', 11)
 const drive = new IndexedDB(database)
 
+/*
+  drive.deleteDatabase('library11')
+    .then(e => console.log(e))
+    .catch(e => console.warn(e))
+*/
 
-// drive.deleteDatabase('library')
+// drive.getDescribeDatabase()
 //   .then(e => console.log(e))
 //   .catch(e => console.warn(e))
 
-drive.getDescribeDatabase()
-  .then(e => console.log(e))
-  .catch(e => console.warn(e))
+// drive.getTableNames()
+//   .then(e => console.log(e))
+//   .catch(e => console.warn(e))
 
-drive.getTableNames()
-  .then(e => console.log(e))
-  .catch(e => console.warn(e))
+// drive.getIndexNames('books')
+//   .then(e => console.log(e))
+//   .catch(e => console.warn(e))
 
-drive.getIndexNames('books')
-  .then(e => console.log(e))
-  .catch(e => console.warn(e))
+// drive.getColumnNamesFromTable('books')
+//   .then(e => console.log(e))
+//   .catch(e => console.warn(e))
 
-drive.getColumnNamesFromTable('books')
-  .then(e => console.log(e))
-  .catch(e => console.warn(e))
-
-drive.getContentFromTable('books')
-  .then(e => console.log(e))
-  .catch(e => console.warn(e))
+// drive.getContentFromTable('books')
+//   .then(e => console.log(e))
+//   .catch(e => console.warn(e))
 
 // drive.addContentToTable('books', {})
 //   .then(e => console.log(e))
 //   .catch(e => console.warn(e))
 
-drive.putContentToTable('books', {title: "Dudu updated", author: "Indo", isbn: 1})
-  .then(e => console.log(e))
-  .catch(e => console.warn(e))
+// drive.putContentToTable('books', {title: "Dudu 123", author: "Indooo", isbn: 1})
+//   .then(e => console.log(e))
+//   .catch(e => console.warn(e))
 
-drive.getContentFromIndex('books', 'by_title')
-  .then(e => console.log(e))
-  .catch(e => console.warn(e))
+// drive.getContentFromIndex('books', 'by_title')
+//   .then(e => console.log(e))
+//   .catch(e => console.warn(e))
 
-drive.getIndexChoice('books', 'by_title')
-  .then(e => console.log(e))
-  .catch(e => console.warn(e))
+// drive.getIndexChoice('books', 'by_title')
+//   .then(e => console.log(e))
+//   .catch(e => console.warn(e))
 
-drive.isTableAutoIncrement('books')
-  .then(e => console.log(e))
-  .catch(e => console.warn(e))
+// drive.isTableAutoIncrement('books')
+//   .then(e => console.log(e))
+//   .catch(e => console.warn(e))
 
 
 setTimeout(() => drive.close(), 2000)
 
 
-// ;(async function () {
+;(async function () {
 
-//   const db = await openDB('library', 9, {
-//     // @ts-ignore
-//     upgrade(db, oldVersion, newVersion, transaction) {
-//       db.deleteObjectStore('notebooks')
-//     },
-//   })
-//   // const tx = db.transaction('notebooks', 'readwrite')
-//   // const store = tx.objectStore('notebooks')
-//   // const deleted = db.deleteObjectStore('notebooks')
+  const db = await openDB('test', 4)
 
-//   // console.log(deleted)
+  // db.deleteObjectStore('books')
+  // const tx = db.transaction('books', 'readwrite')
+  // const store = tx.objectStore('books')
+  // const count = await store.delete()
 
-//   // db
+  // console.log( count )
 
-// })()
+  // db
+
+})()
 
 
