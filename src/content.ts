@@ -186,19 +186,19 @@ const drive = new IndexedDB(database)
 setTimeout(() => drive.close(), 2000)
 
 
-;(async function () {
+// ;(async function () {
 
-  const db = await openDB('test', 4)
+//   const db = await openDB('test', 4)
 
-  // db.deleteObjectStore('books')
-  // const tx = db.transaction('books', 'readwrite')
-  // const store = tx.objectStore('books')
-  // const count = await store.delete()
+//   // db.deleteObjectStore('books')
+//   // const tx = db.transaction('books', 'readwrite')
+//   // const store = tx.objectStore('books')
+//   // const count = await store.delete()
 
-  // console.log( count )
+//   // console.log( count )
 
-  // db
+//   // db
 
-})()
+// })()
 
 

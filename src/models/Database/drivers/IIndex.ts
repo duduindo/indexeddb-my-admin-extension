@@ -21,6 +21,14 @@ interface IIndex {
    * @return promise array index names
    */
   getIndexNames(tablename: string): Promise<string[]>
+
+  /*
+   * @param $tablename name of table
+   * @param $indexname name of index
+   *
+   * @return promise number
+   */
+  getRowsFromIndex(tablename: string, indexname: string): Promise<number>
 }
 
 

@@ -93,9 +93,9 @@ class IndexedDB implements IDriverBridge {
     const db = await this.connection
     const tx = db.transaction(table)
     const store = tx.objectStore(table)
-    const any = store.count()
+    const count = store.count()
 
-    return any
+    return count
   }
 
   async getTableNames(): Promise<string[]> {
@@ -173,6 +173,16 @@ class IndexedDB implements IDriverBridge {
     const names: string[] = Array.from(store.indexNames)
 
     return names
+  }
+
+  async getRowsFromIndex(table: string, indexname: string): Promise<number> {
+    const db = await this.connection
+    const tx = db.transaction(table)
+    const store = tx.objectStore(table)
+    const index = store.index(indexname)
+    const count = index.count()
+
+    return count
   }
 }
 
