@@ -38,19 +38,25 @@ class IndexedDB implements IDriverBridge {
   // Static
   static async upgradeDatabase(data: DatabaseStruture): Promise<any> {
     return await openDB(data.name, data.version, {
-      upgrade(db: any) {
-        let store = null
+      upgrade(db: IDBDatabase, oldVersion: number, newVersion: number, transaction: IDBTransaction) {
+        let store: IDBObjectStore
 
+        // Store
         for (const table of data.tables) {
-          // Store
-          store = db.createObjectStore(table.name, {
-            keyPath: table.keyPath,
-            autoIncrement: table.autoIncrement
-          })
+          if (db.objectStoreNames.contains(table.name)) {
+            store = transaction.objectStore(table.name)
+          } else {
+            store = db.createObjectStore(table.name, {
+              keyPath: table.keyPath,
+              autoIncrement: table.autoIncrement
+            })
+          }
 
           // Index
           for (const index of table.indexes) {
-            store.createIndex(index.name, index.keyPath, { unique: index.unique })
+            if (!store.indexNames.contains(index.name)) {
+              store.createIndex(index.name, index.keyPath, { unique: index.unique })
+            }
           }
         }
       }
@@ -90,7 +96,7 @@ class IndexedDB implements IDriverBridge {
     const db = await this.connection
     const tx = db.transaction(table)
     const store = tx.objectStore(table)
-    const names = ['#', store.keyPath, 'Value']
+    const names = ['#', store.keyPath, 'value']
 
     return names
   }

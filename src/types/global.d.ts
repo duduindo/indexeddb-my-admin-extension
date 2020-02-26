@@ -15,7 +15,7 @@ type DatabaseDescription = {
 
 type DatabaseIndexStruture = {
   name: string,
-  keyPath?: string,
+  keyPath: string,
   unique?: boolean
 }
 
@@ -31,24 +31,3 @@ type DatabaseStruture = {
   version?: any,
   tables: Array<DatabaseTableStruture>,
 }
-
-
-// @ts-ignore
-var request = indexedDB.open("test", 3);
-
-// @ts-ignore
-request.onupgradeneeded = function () {
-    // @ts-ignore
-    var db = request.result;
-    // @ts-ignore
-    var store = db.createObjectStore("books", {keyPath: "isbn"});
-    store.createIndex("by_title", "title", {unique: true});
-
-    store.put({title: "Quarry Memories", author: "Fred", isbn: 123456});
-    store.put({title: "Water Buffaloes", author: "Fred", isbn: 234567});
-    store.put({title: "Bedrock Nights", author: "Barney", isbn: 345678});
-}
-
-
-
-

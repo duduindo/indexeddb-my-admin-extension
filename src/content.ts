@@ -164,21 +164,33 @@ const tables: DatabaseTableStruture[] = [
     autoIncrement: true,
     indexes: [
       {
-        name: 'por_corredor',
+        name: 'por_corredor2',
         keyPath: 'corredor'
+      },
+      {
+        name: 'por_corredorlalala',
+        keyPath: 'corredorlalallaaaaa'
       }
     ]
+  },
+
+  {
+    name: 'livros',
+    keyPath: 'isbn',
+    autoIncrement: false,
+    indexes: []
   }
 ]
 
 const data: DatabaseStruture = {
-  name: 'biblioteca',
-  version: 2,
+  name: 'biblioteca2',
+  version: Date.now(),
   tables
 }
 
-// const database = IndexedDB.upgradeDatabase(data)
-// const drive = new IndexedDB(database)
+const database = IndexedDB.upgradeDatabase(data)
+const drive = new IndexedDB(database)
+
 
 
 
@@ -193,9 +205,9 @@ const data: DatabaseStruture = {
 //   .then(e => console.log(e))
 //   .catch(e => console.warn(e))
 
-// drive.getTableNames()
-//   .then(e => console.log(e))
-//   .catch(e => console.warn(e))
+drive.getTableNames()
+  .then(e => console.log(e))
+  .catch(e => console.warn(e))
 
 // drive.getIndexNames('books')
 //   .then(e => console.log(e))
@@ -230,21 +242,36 @@ const data: DatabaseStruture = {
 //   .catch(e => console.warn(e))
 
 
-setTimeout(() => drive.close(), 2000)
+// setTimeout(() => drive.close(), 2000)
 
 
 // ;(async function () {
 
-//   const db = await openDB('test', 4)
+//   const db = await openDB('biblioteca2', Date.now(), {
+//     // @ts-ignore
+//     upgrade(dba: any, oldVersion, newVersion, transaction) {
+//       // const tx = dba.transaction('corredores')
+//       const store = transaction.objectStore('corredores')
+//       // console.log(tx)
 
-//   // db.deleteObjectStore('books')
-//   // const tx = db.transaction('books', 'readwrite')
-//   // const store = tx.objectStore('books')
-//   // const count = await store.delete()
+//       // const store = dba.createObjectStore('corredores')
 
-//   // console.log( count )
+//       console.log( store )
+//     }
+//   })
 
-//   // db
+  // console.log('sideout',  db )
+
+  // db.deleteObjectStore('books')
+  // const tx = db.transaction('corredores', 'readonly')
+  // const store: IDBObjectStore = tx.objectStore('corredores')
+
+  // console.log(store)
+  // const count = await store.delete()
+
+  // console.log( count )
+
+  // db
 
 // })()
 
