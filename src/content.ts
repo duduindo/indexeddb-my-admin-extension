@@ -128,9 +128,10 @@ graphql(schema, '{ db { name, version, message }, transaction { mode, message } 
 
 
 // ------------------------------ novo
-import { openDB, deleteDB } from 'idb'
+// import { openDB, deleteDB } from 'idb'
 
-import IndexedDB from '@/models/Database/drivers/IndexedDB'
+import WebSQL from '@/models/Database/drivers/WebSQL'
+// import IndexedDB from '@/models/Database/drivers/IndexedDB'
 // import Admin from '@/models/IDBAdmin/interfaces/Admin'
 
 // const database = openDB('library', 11)
@@ -188,10 +189,12 @@ const data: DatabaseStruture = {
   tables
 }
 
-const database = IndexedDB.upgradeDatabase(data)
-const drive = new IndexedDB(database)
+// const database = IndexedDB.upgradeDatabase(data)
+// const drive = new IndexedDB(database)
 
 
+const database = WebSQL.openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024)
+const drive = new WebSQL(database)
 
 
 
@@ -200,28 +203,41 @@ const drive = new IndexedDB(database)
     .then(e => console.log(e))
     .catch(e => console.warn(e))
 */
+drive.deleteDatabase('library11')
+    .then(e => console.log(e))
+    .catch(e => console.warn(e))
 
-// drive.getDescribeDatabase()
-//   .then(e => console.log(e))
-//   .catch(e => console.warn(e))
-
-drive.getTableNames()
+drive.getDescribeDatabase()
   .then(e => console.log(e))
   .catch(e => console.warn(e))
+
+// drive.getTableNames()
+//   .then(e => console.log(e))
+//   .catch(e => console.warn(e))
 
 // drive.getIndexNames('books')
 //   .then(e => console.log(e))
 //   .catch(e => console.warn(e))
 
-// drive.getColumnNamesFromTable('books')
-//   .then(e => console.log(e))
-//   .catch(e => console.warn(e))
+drive.getColumnNamesFromTable('TESTSS')
+  .then(e => console.log(e))
+  .catch(e => console.warn(e))
 
 // drive.getContentFromTable('books')
 //   .then(e => console.log(e))
 //   .catch(e => console.warn(e))
 
-// drive.addContentToTable('books', {})
+
+// drive.addContentToTable('LOGS', {id: 5, log: 'Cinco'})
+//   .then(e => console.log(e))
+//   .catch(e => console.warn(e))
+
+// drive.deleteRow('LOGS', {id: 5})
+//   .then(e => console.log(e))
+//   .catch(e => console.warn(e))
+
+
+// drive.clearContentFromTable('LOGS')
 //   .then(e => console.log(e))
 //   .catch(e => console.warn(e))
 

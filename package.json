@@ -41,6 +41,7 @@
     "@types/chrome": "0.0.91",
     "@types/jest": "^24.0.20",
     "@types/mocha": "^5.2.7",
+    "@types/websql": "0.0.27",
     "@typescript-eslint/eslint-plugin": "^2.6.0",
     "@typescript-eslint/parser": "^2.6.0",
     "babel-jest": "^24.9.0",
