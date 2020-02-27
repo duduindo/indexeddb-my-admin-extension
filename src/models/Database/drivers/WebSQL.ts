@@ -1,3 +1,5 @@
+import PromisedWebSQL from 'promised-websql'
+
 
 class WebSQL {
   private connection: any
@@ -22,7 +24,7 @@ class WebSQL {
   // Static
   static async openDatabase(name: string, version: string, comment: string, size: number): Promise<any> {
     // @ts-ignore
-    return await openDatabase(name, version, comment, size);
+    return PromisedWebSQL(openDatabase(name, version, comment, size))
   }
 
   async getDescribeDatabase(): Promise<DatabaseDescription> {
@@ -39,60 +41,34 @@ class WebSQL {
     const db = await this.connection
     const columns = Object.keys(value).join(', ')
     const values = Object.values(value).map(v => `"${v}"`).join(', ')
+    const any = await db.sql(`INSERT INTO ${table} (${columns}) VALUES (${values})`)
 
-    return new Promise((resolve, reject) => {
-      db.transaction(function (tx: any) {
-        tx.executeSql(`INSERT INTO ${table} (${columns}) VALUES (${values})`, [], function(tx: any, {rowsAffected, insertId}: any) {
-          resolve({ insertId, rowsAffected })
-        }, function(tx: any, { code, message }: any) {
-          reject({ code, message })
-        });
-      });
-    })
+    return any
   }
 
   async clearContentFromTable(table: string): Promise<any> {
     const db = await this.connection
+    const any = await db.sql(`DELETE FROM ${table}`)
 
-    return new Promise((resolve, reject) => {
-      db.transaction(function (tx: any) {
-        tx.executeSql(`DELETE FROM ${table}`, [], function(tx: any, {rowsAffected}: any) {
-          resolve({ rowsAffected })
-        }, function(tx: any, { code, message }: any) {
-          reject({ code, message })
-        });
-      });
-    })
+    return any
   }
 
   async deleteRow(table: string, key: object): Promise<any> {
     const db = await this.connection
     const column = Object.keys(key).join('')
     const value = Object.values(key).map(v => `"${v}"`).join('')
+    const any = await db.sql(`DELETE FROM ${table} WHERE ${column} = ${value}`)
 
-    // @ts-ignore
-    return await db.transaction(async function (tx) {
-      return await tx.executeSql(`DELETE FROM ${table} WHERE ${column} = ${value}`);
-    });
+    return any
   }
 
   async getColumnNamesFromTable(table: string): Promise<string[]> {
     const db = await this.connection
-    let result: any = []
+    const query = await db.sql(`SELECT DISTINCT * FROM ${table}`)
 
-    return new Promise((resolve) => {
-      const a = db.transaction((tx: any) => {
-        tx.executeSql(`SELECT DISTINCT * FROM ${table}`, [], function(tx: any, results: any) {
-          resolve(results)
-        });
-      });
-    })
-
+    return query
   }
 }
 
 
 export default WebSQL
-
-
-// SELECT * FROM LOGS WHERE id = 2

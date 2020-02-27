@@ -197,6 +197,21 @@ const database = WebSQL.openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024)
 const drive = new WebSQL(database)
 
 
+// import PromisedWebSQL from 'promised-websql'
+
+// // @ts-ignore
+// const db = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024);
+// const promised_db = PromisedWebSQL(db)
+
+// promised_db.sql('SELECT * FROM LOGSa')
+//   // @ts-ignore
+//   .then(([transaction, result]) => {
+//     console.log(result);
+//   })
+//   // @ts-ignore
+//   .catch((error) => {
+//     console.log(error);
+//   });
 
 /*
   drive.deleteDatabase('library11')
@@ -219,16 +234,16 @@ const drive = new WebSQL(database)
 //   .then(e => console.log(e))
 //   .catch(e => console.warn(e))
 
-// drive.getColumnNamesFromTable('TESTSS')
-//   .then(e => console.log(e))
-//   .catch(e => console.warn(e))
+drive.getColumnNamesFromTable('TEST')
+  // .then(e => console.log(e))
+  // .catch(e => console.warn(e))
 
 // drive.getContentFromTable('books')
 //   .then(e => console.log(e))
 //   .catch(e => console.warn(e))
 
 // ------------------- ADD -------------------
-// drive.addContentToTable('LOGS', {id: 1, log: 'um'})
+// drive.addContentToTable('LOGS', {id: 7, log: 'six'})
 //   .then(e => console.log(e))
 //   .catch(e => console.warn(e))
 
