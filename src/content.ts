@@ -203,13 +203,13 @@ const drive = new WebSQL(database)
     .then(e => console.log(e))
     .catch(e => console.warn(e))
 */
-drive.deleteDatabase('library11')
-    .then(e => console.log(e))
-    .catch(e => console.warn(e))
+// drive.deleteDatabase('library11')
+//     .then(e => console.log(e))
+//     .catch(e => console.warn(e))
 
-drive.getDescribeDatabase()
-  .then(e => console.log(e))
-  .catch(e => console.warn(e))
+// drive.getDescribeDatabase()
+//   .then(e => console.log(e))
+//   .catch(e => console.warn(e))
 
 // drive.getTableNames()
 //   .then(e => console.log(e))
@@ -219,23 +219,35 @@ drive.getDescribeDatabase()
 //   .then(e => console.log(e))
 //   .catch(e => console.warn(e))
 
-drive.getColumnNamesFromTable('TESTSS')
-  .then(e => console.log(e))
-  .catch(e => console.warn(e))
+// drive.getColumnNamesFromTable('TESTSS')
+//   .then(e => console.log(e))
+//   .catch(e => console.warn(e))
 
 // drive.getContentFromTable('books')
 //   .then(e => console.log(e))
 //   .catch(e => console.warn(e))
 
+// ------------------- ADD -------------------
+// drive.addContentToTable('LOGS', {id: 1, log: 'um'})
+//   .then(e => console.log(e))
+//   .catch(e => console.warn(e))
 
-// drive.addContentToTable('LOGS', {id: 5, log: 'Cinco'})
+// drive.addContentToTable('LOGS', {id: 2, log: 'dois'})
+//   .then(e => console.log(e))
+//   .catch(e => console.warn(e))
+
+// drive.addContentToTable('LOGS', {id: 3, log: 'tres'})
+//   .then(e => console.log(e))
+//   .catch(e => console.warn(e))
+
+// drive.addContentToTable('LOGS', {id: 4, log: 'quatro'})
 //   .then(e => console.log(e))
 //   .catch(e => console.warn(e))
 
 // drive.deleteRow('LOGS', {id: 5})
 //   .then(e => console.log(e))
 //   .catch(e => console.warn(e))
-
+// ------------------- /ADD -------------------
 
 // drive.clearContentFromTable('LOGS')
 //   .then(e => console.log(e))

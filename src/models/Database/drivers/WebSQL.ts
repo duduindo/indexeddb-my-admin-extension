@@ -40,19 +40,29 @@ class WebSQL {
     const columns = Object.keys(value).join(', ')
     const values = Object.values(value).map(v => `"${v}"`).join(', ')
 
-    // @ts-ignore
-    return await db.transaction(async function (tx) {
-      return await tx.executeSql(`INSERT INTO ${table} (${columns}) VALUES (${values})`);
-    });
+    return new Promise((resolve, reject) => {
+      db.transaction(function (tx: any) {
+        tx.executeSql(`INSERT INTO ${table} (${columns}) VALUES (${values})`, [], function(tx: any, {rowsAffected, insertId}: any) {
+          resolve({ insertId, rowsAffected })
+        }, function(tx: any, { code, message }: any) {
+          reject({ code, message })
+        });
+      });
+    })
   }
 
   async clearContentFromTable(table: string): Promise<any> {
     const db = await this.connection
 
-    // @ts-ignore
-    return await db.transaction(async function (tx) {
-      return await tx.executeSql(`DELETE FROM ${table}`);
-    });
+    return new Promise((resolve, reject) => {
+      db.transaction(function (tx: any) {
+        tx.executeSql(`DELETE FROM ${table}`, [], function(tx: any, {rowsAffected}: any) {
+          resolve({ rowsAffected })
+        }, function(tx: any, { code, message }: any) {
+          reject({ code, message })
+        });
+      });
+    })
   }
 
   async deleteRow(table: string, key: object): Promise<any> {
