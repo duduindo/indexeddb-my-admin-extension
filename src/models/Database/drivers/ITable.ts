@@ -5,14 +5,14 @@ interface ITable {
    *
    * @return promise any
    */
-  addContentToTable(tablename: string, value: any): Promise<any>
+  addContentToTable(tablename: string, value: any): Promise<boolean>
 
   /*
    * @param $tablename name of table
    *
    * @return promise any
    */
-  clearContentFromTable(tablename: string): Promise<any>
+  clearContentFromTable(tablename: string): Promise<boolean>
 
   /*
    * @param $tablename name of table
@@ -20,7 +20,7 @@ interface ITable {
    *
    * @return promise any
    */
-  deleteRow(tablename: string, key: any): Promise<any>
+  deleteRow(tablename: string, key: any): Promise<boolean>
 
   /*
    * @param $tablename name of table
@@ -62,7 +62,7 @@ interface ITable {
    *
    * @return promise any
    */
-  putContentToTable(tablename: string, value: any, key?: any): Promise<any>
+  putContentToTable(tablename: string, value: any, key?: any): Promise<boolean>
 }
 
 

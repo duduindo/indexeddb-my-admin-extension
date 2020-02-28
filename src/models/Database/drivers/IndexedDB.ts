@@ -17,7 +17,7 @@ class IndexedDB implements IDriverBridge {
     db.close()
   }
 
-  async deleteDatabase(databasename: string): Promise<any> {
+  async deleteDatabase(databasename: string): Promise<boolean> {
     await this.close()
     await deleteDB(databasename)
 
@@ -67,31 +67,31 @@ class IndexedDB implements IDriverBridge {
 
   // Table
   // =========================================================
-  async addContentToTable(table: string, value: any): Promise<any> {
+  async addContentToTable(table: string, value: any): Promise<boolean> {
     const db = await this.connection
     const tx = db.transaction(table, 'readwrite')
     const store = tx.objectStore(table)
-    const any = store.add(value)
+    const any = await store.add(value)
 
-    return any
+    return any ? true : false
   }
 
-  async clearContentFromTable(table: string): Promise<any> {
+  async clearContentFromTable(table: string): Promise<boolean> {
     const db = await this.connection
     const tx = db.transaction(table, 'readwrite')
     const store = tx.objectStore(table)
-    const any = store.clear()
+    const any = await store.clear()
 
-    return any
+    return any ? true : false
   }
 
-  async deleteRow(table: string, key: any): Promise<any> {
+  async deleteRow(table: string, key: any): Promise<boolean> {
     const db = await this.connection
     const tx = db.transaction(table, 'readwrite')
     const store = tx.objectStore(table)
-    const any = store.delete(key)
+    const any = await store.delete(key)
 
-    return any
+    return any ? true : false
   }
 
   async getColumnNamesFromTable(table: string): Promise<string[]> {
@@ -144,13 +144,13 @@ class IndexedDB implements IDriverBridge {
     return is
   }
 
-  async putContentToTable(table: string, value: any, key?: any): Promise<any> {
+  async putContentToTable(table: string, value: any, key?: any): Promise<boolean> {
     const db = await this.connection
     const tx = db.transaction(table, 'readwrite')
     const store = tx.objectStore(table)
-    const any = store.put(value, key)
+    const any = await store.put(value, key)
 
-    return any
+    return any ? true : false
   }
 
 

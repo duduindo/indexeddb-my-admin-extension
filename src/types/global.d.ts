@@ -4,6 +4,8 @@ declare module 'json-string-formatter'
 declare module '*.vue'
 declare module 'idb'
 declare module 'promised-websql'
+declare module 'graphql-type-json'
+
 
 declare enum Choices {
   unique = 'UNIQUE'

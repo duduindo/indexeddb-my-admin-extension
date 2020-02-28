@@ -7,7 +7,7 @@ interface IDatabase {
   /*
    * @return void
    */
-  deleteDatabase(databasename: string): Promise<void>
+  deleteDatabase(databasename: string): Promise<boolean>
 
   /*
    * @return promise database description
