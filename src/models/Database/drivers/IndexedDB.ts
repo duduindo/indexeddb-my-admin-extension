@@ -55,6 +55,7 @@ class IndexedDB implements IDriverBridge {
           // Index
           for (const index of table.indexes) {
             if (!store.indexNames.contains(index.name)) {
+              // @ts-ignore
               store.createIndex(index.name, index.keyPath, { unique: index.unique })
             }
           }

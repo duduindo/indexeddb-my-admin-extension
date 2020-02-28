@@ -1,89 +1,216 @@
-// import DriverBridge from '../drivers/DriverBridge'
-// import InterfaceBridge from './InterfaceBridge'
+import DriverBridge from '../drivers/IDriverBridge'
+import InterfaceBridge from './IInterfaceBridge'
 
 
-// class Admin implements InterfaceBridge {
-//   private driver: DriverBridge
+class Admin implements InterfaceBridge {
+  private driver: DriverBridge
 
-//   constructor(driver: DriverBridge) {
-//     this.driver = driver;
-//   }
+  constructor(driver: DriverBridge) {
+    this.driver = driver
+  }
 
-//   /*
-//    * @param $tablename name of table
-//    *
-//    * @return promise array DatabaseIndexStruture
-//    */
-//   private async getIndexStrutured(tablename: string): Promise<DatabaseIndexStruture[]> {
-//     const indexnames = await this.driver.getIndexNames(tablename)
-//     const indexes = indexnames.map(name => ({ name }))
+  /*
+   * @param $resolved any
+   * @param $rejected any
+   *
+   * @return DatabaseAdminResponse
+   */
+  private formatResponse(resolved: any, rejected: any = null): DatabaseAdminResponse {
+    return { resolved, rejected }
+  }
 
-//     return indexes
-//   }
+  /*
+   * @param $tablename name of table
+   *
+   * @return promise array DatabaseIndexStruture
+   */
+  private async getIndexStrutured(tablename: string): Promise<DatabaseIndexStruture[]> {
+    const indexnames = await this.driver.getIndexNames(tablename)
+    const indexes = indexnames.map(name => ({ name }))
 
-//   /*
-//    * @return promise array DatabaseTableStruture
-//    */
-//   private async getTableStrutured(): Promise<DatabaseTableStruture[]> {
-//     const tablenames = await this.driver.getTableNames()
-//     const tables = []
+    return indexes
+  }
 
-//     for (const name of tablenames) {
-//       const indexes = await this.getIndexStrutured(name)
+  /*
+   * @return promise array DatabaseTableStruture
+   */
+  private async getTableStrutured(): Promise<DatabaseTableStruture[]> {
+    const tablenames = await this.driver.getTableNames()
+    const tables = []
 
-//       tables.push({
-//         name,
-//         indexes
-//       })
-//     }
+    for (const name of tablenames) {
+      const indexes = await this.getIndexStrutured(name)
 
-//     return tables
-//   }
+      tables.push({
+        name,
+        indexes
+      })
+    }
 
-//   async close(): Promise<void> {
-//     return await this.driver.close()
-//   }
+    return tables
+  }
 
-//   async getStructureFromDatabase(): Promise<DatabaseStruture> {
-//     const { name, version = '' } = await this.driver.getDescribeDatabase()
-//     const tables = await this.getTableStrutured()
 
-//     return {
-//       name,
-//       version,
-//       tables
-//     }
-//   }
+  // Database
+  // =========================================================
+  async deleteDatabase(databasename: string): Promise<DatabaseAdminResponse> {
+    try {
+      const result = await this.driver.deleteDatabase(databasename)
 
-//   async getColumnNamesFromTable(tablename: string): Promise<string[]> {
-//     const names = await this.driver.getColumnNamesFromTable(tablename)
+      return this.formatResponse(result)
+    } catch(e) {
+      return this.formatResponse(null, e.message)
+    }
+  }
 
-//     return names
-//   }
+  async getStructureFromDatabase(): Promise<DatabaseAdminResponse> {
+    try {
+      const describe = await this.driver.getDescribeDatabase()
+      const tables = await this.getTableStrutured()
+      const result = { ...describe, tables }
 
-//   async getContentFromTable(tablename: string): Promise<object> {
-//     const content = await this.driver.getContentFromTable(tablename)
+      return this.formatResponse(result)
+    } catch(e) {
+      return this.formatResponse(null, e.message)
+    }
+  }
 
-//     return content
-//   }
 
-//   async isTableAutoIncrement(tablename: string): Promise<boolean> {
-//     const is = await this.driver.isTableAutoIncrement(tablename)
+  // Table
+  // =========================================================
+  async addContentToTable(tablename: string, value: any): Promise<DatabaseAdminResponse> {
+    try {
+      const result = await this.driver.addContentToTable(tablename, value)
 
-//     return is
-//   }
+      return this.formatResponse(result)
+    } catch(e) {
+      return this.formatResponse(null, e.message)
+    }
+  }
 
-//   async getContentFromIndex(tablename: string, indexname: string): Promise<object> {
-//     const content = await this.driver.getContentFromIndex(tablename, indexname)
+  async clearContentFromTable(tablename: string): Promise<DatabaseAdminResponse> {
+    try {
+      const result = await this.driver.clearContentFromTable(tablename)
 
-//     return content
-//   }
+      return this.formatResponse(result)
+    } catch(e) {
+      return this.formatResponse(null, e.message)
+    }
+  }
 
-//   async getIndexChoice(tablename: string, indexname: string): Promise<string | null> {
-//     const choice = await this.driver.getIndexChoice(tablename, indexname)
+  async deleteRow(tablename: string, key: any): Promise<DatabaseAdminResponse> {
+    try {
+      const result = await this.driver.deleteRow(tablename, key)
 
-//     return choice
-//   }
-// }
+      return this.formatResponse(result)
+    } catch(e) {
+      return this.formatResponse(null, e.message)
+    }
+  }
 
-// export default Admin
+  async getColumnNamesFromTable(tablename: string): Promise<DatabaseAdminResponse> {
+    try {
+      const result = await this.driver.getColumnNamesFromTable(tablename)
+
+      return this.formatResponse(result)
+    } catch(e) {
+      return this.formatResponse(null, e.message)
+    }
+  }
+
+  async getContentFromTable(tablename: string): Promise<DatabaseAdminResponse> {
+    try {
+      const result = await this.driver.getContentFromTable(tablename)
+
+      return this.formatResponse(result)
+    } catch(e) {
+      return this.formatResponse(null, e.message)
+    }
+  }
+
+  async getRowsFromTable(tablename: string): Promise<DatabaseAdminResponse> {
+    try {
+      const result = await this.driver.getRowsFromTable(tablename)
+
+      return this.formatResponse(result)
+    } catch(e) {
+      return this.formatResponse(null, e.message)
+    }
+  }
+
+  async getTableNames(): Promise<DatabaseAdminResponse> {
+    try {
+      const result = await this.driver.getTableNames()
+
+      return this.formatResponse(result)
+    } catch(e) {
+      return this.formatResponse(null, e.message)
+    }
+  }
+
+  async isTableAutoIncrement(tablename: string): Promise<DatabaseAdminResponse> {
+    try {
+      const result = await this.driver.isTableAutoIncrement(tablename)
+
+      return this.formatResponse(result)
+    } catch(e) {
+      return this.formatResponse(null, e.message)
+    }
+  }
+
+  async putContentToTable(tablename: string, value: any, key?: any): Promise<DatabaseAdminResponse> {
+    try {
+      const result = await this.driver.putContentToTable(tablename, value, key)
+
+      return this.formatResponse(result)
+    } catch(e) {
+      return this.formatResponse(null, e.message)
+    }
+  }
+
+
+  // Index
+  // =========================================================
+  async getContentFromIndex(tablename: string, indexname: string): Promise<DatabaseAdminResponse> {
+    try {
+      const result = await this.driver.getContentFromIndex(tablename, indexname)
+
+      return this.formatResponse(result)
+    } catch(e) {
+      return this.formatResponse(null, e.message)
+    }
+  }
+
+  async getIndexChoice(tablename: string, indexname: string): Promise<DatabaseAdminResponse> {
+    try {
+      const result = await this.driver.getIndexChoice(tablename, indexname)
+
+      return this.formatResponse(result)
+    } catch(e) {
+      return this.formatResponse(null, e.message)
+    }
+  }
+
+  async getIndexNames(tablename: string): Promise<DatabaseAdminResponse> {
+    try {
+      const result = await this.driver.getIndexNames(tablename)
+
+      return this.formatResponse(result)
+    } catch(e) {
+      return this.formatResponse(null, e.message)
+    }
+  }
+
+  async getRowsFromIndex(tablename: string, indexname: string): Promise<DatabaseAdminResponse> {
+    try {
+      const result = await this.driver.getRowsFromIndex(tablename, indexname)
+
+      return this.formatResponse(result)
+    } catch(e) {
+      return this.formatResponse(null, e.message)
+    }
+  }
+}
+
+
+export default Admin

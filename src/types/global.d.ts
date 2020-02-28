@@ -16,7 +16,7 @@ type DatabaseDescription = {
 
 type DatabaseIndexStruture = {
   name: string,
-  keyPath: string,
+  keyPath?: string,
   unique?: boolean
 }
 
@@ -31,4 +31,10 @@ type DatabaseStruture = {
   name: string,
   version?: any,
   tables: Array<DatabaseTableStruture>,
+}
+
+
+type DatabaseAdminResponse = {
+  resolved: any,
+  rejected: any,
 }
