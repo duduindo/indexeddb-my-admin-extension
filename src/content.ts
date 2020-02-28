@@ -187,16 +187,15 @@ import Admin from '@/models/Database/interfaces/Admin'
 
 // const database = IndexedDB.openDatabase('biblioteca2', 1582729579933)
 
-
-
-;(async function() {
-const database = IndexedDB.openDatabase('test2', 1)
+const database = IndexedDB.openDatabase('biblioteca2', 1582729579933)
 const drive = new IndexedDB(database)
 const admin = new Admin(drive)
 
-  const result = await admin.deleteDatabase('test2')
 
-  // alert(result)
+;(async function() {
+
+  const result = await admin.getColumnNamesFromTable('corredores')
+
 
   console.log(result)
 

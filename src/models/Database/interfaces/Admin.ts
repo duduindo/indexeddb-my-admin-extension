@@ -15,7 +15,7 @@ class Admin implements InterfaceBridge {
    *
    * @return DatabaseAdminResponse
    */
-  private formatResponse(resolved: any, rejected: any = null): DatabaseAdminResponse {
+  private formatResponse(resolved: any, rejected?: any): DatabaseAdminResponse {
     return { resolved, rejected }
   }
 

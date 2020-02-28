@@ -17,10 +17,11 @@ class IndexedDB implements IDriverBridge {
     db.close()
   }
 
-  async deleteDatabase(databasename: string): Promise<void> {
-    const db = await deleteDB(databasename)
+  async deleteDatabase(databasename: string): Promise<any> {
+    await this.close()
+    await deleteDB(databasename)
 
-    return db
+    return true
   }
 
   async getDescribeDatabase(): Promise<DatabaseDescription> {
