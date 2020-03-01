@@ -27,16 +27,22 @@ const typeDefs = `
 
   # the schema allows the following query:
   type Query  {
-    database(name: String): Database
+    database(name: String, version: String!): Database
+  }
+
+  # this schema allows the following mutation:
+  type Mutation {
+    addContentToTable(name: String!, version: String!, tablename: String!, value: JSONObject): Database
   }
 
   schema {
     query: Query
+    mutation: Mutation
   }
 `
 
 
-async function connectAdmin(name: string, version: number): Promise<any> {
+async function connectAdmin(name: string, version: number): Promise<IInterfaceBridge> {
   const database = await IndexedDB.openDatabase(name, version)
   const drive = new IndexedDB(database)
   const admin = new Admin(drive)
@@ -61,14 +67,31 @@ const resolvers = {
     table: (admin: IInterfaceBridge, { name, value, key }: any) => ({admin, name, value, key}),
   },
 
+
   Query: {
-    database: async (_: any, { name }: any) => {
+    database: async (_: any, { name, version }: any) => {
       try {
-        return await connectAdmin('biblioteca2', 158272957993319)
+        return await connectAdmin(name, version)
       } catch (e) {
         throw new Error(e.message);
       }
     }
+  },
+
+  Mutation: {
+    addContentToTable: async (_: any, { name, version, tablename, value }: any) => {
+      let admin: IInterfaceBridge
+      let updated
+
+      try {
+        admin = await connectAdmin(name, version)
+        updated = await admin.addContentToTable(tablename, value)
+      } catch (e) {
+        throw new Error(e.message);
+      }
+
+      return admin
+    },
   },
 }
 
@@ -76,20 +99,34 @@ const resolvers = {
 const schema = makeExecutableSchema({ typeDefs, resolvers })
 
 
+// const query = `
+//   query {
+//     database(name: "biblioteca2", version: "158272957993319") {
+//       table(name: "corredores") {
+//         columnNames,
+//         content,
+//         names,
+//         rows,
+//         isAutoIncrement
+//       }
+//     }
+//   }
+// `
+
 const query = `
-  query {
-    database(name: "opaopa") {
+  mutation {
+    addContentToTable(name: "biblioteca2", version: "158272957993319", tablename: "corredores", value: {corredor: "A7"}) {
       table(name: "corredores") {
-        columnNames,
-        content,
-        names,
-        rows,
-        isAutoIncrement
+        content
       }
     }
   }
 `
 
-graphql(schema, query).then((response) => {
-  console.log(response.data);
-});
+graphql(schema, query)
+  .then((response) => {
+    console.log(response.data);
+  })
+  .catch((error) => {
+    console.warn('graphql error: ', error);
+  })
