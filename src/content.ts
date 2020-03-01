@@ -32,7 +32,7 @@ const typeDefs = `
 
   # this schema allows the following mutation:
   type Mutation {
-    addContentToTable(name: String!, version: String!, tablename: String!, value: JSONObject): Database
+    addContentToTable(name: String!, version: String!, tablename: String!, value: JSONObject): JSON
   }
 
   schema {
@@ -80,17 +80,14 @@ const resolvers = {
 
   Mutation: {
     addContentToTable: async (_: any, { name, version, tablename, value }: any) => {
-      let admin: IInterfaceBridge
-      let updated
-
       try {
-        admin = await connectAdmin(name, version)
-        updated = await admin.addContentToTable(tablename, value)
-      } catch (e) {
-        throw new Error(e.message);
-      }
+        const admin: IInterfaceBridge = await connectAdmin(name, version)
+        const updated = await admin.addContentToTable(tablename, value)
 
-      return admin
+        return JSON.stringify(updated)
+      } catch (e) {
+        return JSON.stringify(e)
+      }
     },
   },
 }
@@ -115,11 +112,7 @@ const schema = makeExecutableSchema({ typeDefs, resolvers })
 
 const query = `
   mutation {
-    addContentToTable(name: "biblioteca2", version: "158272957993319", tablename: "corredores", value: {corredor: "A7"}) {
-      table(name: "corredores") {
-        content
-      }
-    }
+    addContentToTable(name: "biblioteca2", version: "158272957993319", tablename: "corredores", value: {corredor: "A8"})
   }
 `
 
