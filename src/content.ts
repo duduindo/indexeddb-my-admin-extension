@@ -29,6 +29,7 @@ const typeDefs = `
 
   type Database {
     table(tablename: String!): Table
+    structure: JSON
   }
 
 
@@ -39,6 +40,7 @@ const typeDefs = `
 
   # this schema allows the following mutation:
   type Mutation {
+    deleteDatabase(name: String!, version: String!): JSON
     addContentToTable(name: String!, version: String!, tablename: String!, value: JSONObject!): JSON
     clearContentFromTable(name: String!, version: String!, tablename: String!): JSON
     deleteRow(name: String!, version: String!, tablename: String!, key: String!): JSON
@@ -83,6 +85,7 @@ const resolvers = {
 
   Database: {
     table: (admin: IInterfaceBridge, { tablename, value, key }: any) => ({admin, tablename, value, key}),
+    structure: async (admin: IInterfaceBridge) => JSON.stringify(await admin.getStructureFromDatabase()),
   },
 
 
@@ -97,6 +100,19 @@ const resolvers = {
   },
 
   Mutation: {
+    // Database
+    // =========================================================
+    deleteDatabase: async (_: any, { name, version }: any) => {
+      try {
+        const admin: IInterfaceBridge = await connectAdmin(name, version)
+        const deleted = await admin.deleteDatabase(name)
+
+        return JSON.stringify(deleted)
+      } catch (e) {
+        return JSON.stringify(e)
+      }
+    },
+
     // Table
     // =========================================================
     addContentToTable: async (_: any, { name, version, tablename, value }: any) => {
@@ -174,17 +190,25 @@ const schema = makeExecutableSchema({ typeDefs, resolvers })
 //   }
 // `
 
+// const query = `
+//   query {
+//     database(name: "biblioteca2", version: "158272957993319") {
+//       table(tablename: "corredores") {
+//         index(indexname: "por_corredor") {
+//           content
+//           choice
+//           names
+//           rows
+//         }
+//       }
+//     }
+//   }
+// `
+
 const query = `
   query {
     database(name: "biblioteca2", version: "158272957993319") {
-      table(tablename: "corredores") {
-        index(indexname: "por_corredor") {
-          content
-          choice
-          names
-          rows
-        }
-      }
+      structure
     }
   }
 `
