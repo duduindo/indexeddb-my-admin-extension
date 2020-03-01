@@ -64,7 +64,7 @@ interface InterfaceBridge {
   /*
    * @return DatabaseAdminResponse
    */
-  getTableNames(tablename: string): Promise<DatabaseAdminResponse>
+  getTableNames(): Promise<DatabaseAdminResponse>
 
   /*
    * @param $databasename table's name
