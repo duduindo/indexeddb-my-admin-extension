@@ -11,17 +11,24 @@ const typeDefs = `
   scalar JSON
   scalar JSONObject
 
+  type Index {
+    content: JSON
+    choice: JSON
+    names: JSON
+    rows: JSON
+  }
 
   type Table {
     columnNames: JSON
     content: JSON
+    index(indexname: String!): Index
     isAutoIncrement: JSON
     names: JSON
     rows: JSON
   }
 
   type Database {
-    table(name: String!): Table
+    table(tablename: String!): Table
   }
 
 
@@ -32,7 +39,10 @@ const typeDefs = `
 
   # this schema allows the following mutation:
   type Mutation {
-    addContentToTable(name: String!, version: String!, tablename: String!, value: JSONObject): JSON
+    addContentToTable(name: String!, version: String!, tablename: String!, value: JSONObject!): JSON
+    clearContentFromTable(name: String!, version: String!, tablename: String!): JSON
+    deleteRow(name: String!, version: String!, tablename: String!, key: String!): JSON
+    putContentToTable(name: String!, version: String!, tablename: String!, value: JSONObject!, key: String): JSON
   }
 
   schema {
@@ -55,16 +65,24 @@ const resolvers = {
   JSON: GraphQLJSON,
   JSONObject: GraphQLJSONObject,
 
+  Index: {
+    content: async ({admin, tablename, indexname}: any) => JSON.stringify(await admin.getContentFromIndex(tablename, indexname)),
+    choice: async ({admin, tablename, indexname}: any) => JSON.stringify(await admin.getIndexChoice(tablename, indexname)),
+    names: async ({admin, tablename}: any) => JSON.stringify(await admin.getIndexNames(tablename)),
+    rows: async ({admin, tablename, indexname}: any) => JSON.stringify(await admin.getRowsFromIndex(tablename, indexname)),
+  },
+
   Table: {
-    columnNames: async ({admin, name}: any) => JSON.stringify(await admin.getColumnNamesFromTable(name)),
-    content: async ({admin, name}: any) => JSON.stringify(await admin.getContentFromTable(name)),
-    isAutoIncrement: async ({admin, name}: any) => JSON.stringify(await admin.isTableAutoIncrement(name)),
+    columnNames: async ({admin, tablename}: any) => JSON.stringify(await admin.getColumnNamesFromTable(tablename)),
+    content: async ({admin, tablename}: any) => JSON.stringify(await admin.getContentFromTable(tablename)),
+    index: ({admin, tablename}: any, { indexname }: any) => ({admin, tablename, indexname}),
+    isAutoIncrement: async ({admin, tablename}: any) => JSON.stringify(await admin.isTableAutoIncrement(tablename)),
     names: async ({admin}: any) => JSON.stringify(await admin.getTableNames()),
-    rows: async ({admin, name}: any) => JSON.stringify(await admin.getRowsFromTable(name)),
+    rows: async ({admin, tablename}: any) => JSON.stringify(await admin.getRowsFromTable(tablename)),
   },
 
   Database: {
-    table: (admin: IInterfaceBridge, { name, value, key }: any) => ({admin, name, value, key}),
+    table: (admin: IInterfaceBridge, { tablename, value, key }: any) => ({admin, tablename, value, key}),
   },
 
 
@@ -79,6 +97,8 @@ const resolvers = {
   },
 
   Mutation: {
+    // Table
+    // =========================================================
     addContentToTable: async (_: any, { name, version, tablename, value }: any) => {
       try {
         const admin: IInterfaceBridge = await connectAdmin(name, version)
@@ -123,6 +143,10 @@ const resolvers = {
       }
     },
 
+
+    // Index
+    // =========================================================
+
   },
 }
 
@@ -144,11 +168,27 @@ const schema = makeExecutableSchema({ typeDefs, resolvers })
 //   }
 // `
 
+// const query = `
+//   mutation {
+//     addContentToTable(name: "biblioteca2", version: "158272957993319", tablename: "corredores", value: {corredor: "A8"})
+//   }
+// `
+
 const query = `
-  mutation {
-    addContentToTable(name: "biblioteca2", version: "158272957993319", tablename: "corredores", value: {corredor: "A8"})
+  query {
+    database(name: "biblioteca2", version: "158272957993319") {
+      table(tablename: "corredores") {
+        index(indexname: "por_corredor") {
+          content
+          choice
+          names
+          rows
+        }
+      }
+    }
   }
 `
+
 
 graphql(schema, query)
   .then((response) => {
