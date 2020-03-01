@@ -89,6 +89,40 @@ const resolvers = {
         return JSON.stringify(e)
       }
     },
+
+    clearContentFromTable: async (_: any, { name, version, tablename }: any) => {
+      try {
+        const admin: IInterfaceBridge = await connectAdmin(name, version)
+        const cleared = await admin.clearContentFromTable(tablename)
+
+        return JSON.stringify(cleared)
+      } catch (e) {
+        return JSON.stringify(e)
+      }
+    },
+
+    deleteRow: async (_: any, { name, version, tablename, key }: any) => {
+      try {
+        const admin: IInterfaceBridge = await connectAdmin(name, version)
+        const deleted = await admin.deleteRow(tablename, key)
+
+        return JSON.stringify(deleted)
+      } catch (e) {
+        return JSON.stringify(e)
+      }
+    },
+
+    putContentToTable: async (_: any, { name, version, tablename, value, key }: any) => {
+      try {
+        const admin: IInterfaceBridge = await connectAdmin(name, version)
+        const updated = await admin.putContentToTable(tablename, value, key)
+
+        return JSON.stringify(updated)
+      } catch (e) {
+        return JSON.stringify(e)
+      }
+    },
+
   },
 }
 
