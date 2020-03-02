@@ -1,19 +1,28 @@
 const path = require('path')
+const dotenv = require('dotenv')
+
+dotenv.config()
 
 module.exports = {
-  title: 'Devtools\' Components from IndexedDBMyAdmin - Style Guide',
-  components: './src/devtools/components/**/*.vue',
+  title: 'Components Vue from IndexedDBMyAdmin - Style Guide',
+  components: path.join(__dirname, 'src/common/vue/components/[a-zA-Z]*/index.vue'),
   copyCodeButton: true,
   webpackConfig: require('./config/common.js'),
-  getExampleFilename(componentPath) {
-    const path = componentPath.replace(`${__dirname}/src/devtools/components/`, `${__dirname}/docs/`)
-    const pathFull = path.replace(/\.vue?$/, '.md')
-
-    return pathFull
-  },
+  serverPort: process.env.SERVER_PORT || 9000,
+  getExampleFilename: componentPath => componentPath.replace(/.+\/([A-Z].+)\/.+\.vue$/, `${__dirname}/docs/$1.md`),
   require: [
-    path.join(__dirname, 'styleguide/global.requires.js'),
-    path.join(__dirname, 'src/devtools/sass/index.sass'),
-    path.join(__dirname, 'src/devtools/stylus/index.styl')
-   ]
+    path.join(__dirname, 'src/styleguide/global.requires.js'),
+    path.join(__dirname, 'src/common/stylus/index.styl')
+  ],
+  sections: [
+    {
+      name: 'Layout',
+      content: 'docs/Layout.md'
+    },
+    {
+      name: 'Common components',
+      content: path.join(__dirname, 'docs/Common.md'),
+      components: path.join(__dirname, 'src/common/vue/components/**/*.vue'),
+    }
+  ]
 };

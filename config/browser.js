@@ -15,8 +15,8 @@ module.exports = () => {
   // Plugin Copy
   config.plugins.push(new CopyPlugin([
     {
-      from: resolve('src/public/shells/chrome/'),
-      to: resolve('dist/chrome/IndexedDBMyAdmin/')
+      from: resolve('src/public/shells/browser/'),
+      to: resolve('dist/browser/')
     }
   ]))
 
@@ -32,7 +32,7 @@ module.exports = () => {
   // Output
   config.output = {
     filename: '[name].js',
-    path: resolve('dist/chrome/IndexedDBMyAdmin/')
+    path: resolve('dist/browser/')
   }
 
   return config
