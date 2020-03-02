@@ -1,21 +1,20 @@
 <template>
   <v-app>
-    <v-btn color="primary" v-on:click="increment">Primary</v-btn>
-    <div>
-      {{ count }}
-    </div>
-
-    <router-view />
+    <Expander />
   </v-app>
 </template>
 
 
 <script>
   import '@/views/sass/index.sass'
+  import Expander from './components/Expander'
 
 
   export default {
     name: 'App',
+    components: {
+      Expander,
+    },
     computed: {
       count() {
         return this.$store.getters.getCount

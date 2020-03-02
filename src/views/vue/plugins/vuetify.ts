@@ -1,12 +1,36 @@
 import Vue from 'vue'
 import Vuetify, {
-  VBtn
+  // Button
+  VBtn,
+
+  // Card
+  VCard,
+
+  // Icon
+  VIcon,
+
+  // List
+  VList,
+  VListGroup,
+  VListItem,
+  VListItemIcon,
+  VListItemContent,
+  VListItemTitle,
+
+  // Select
+  VSelect,
+
 } from 'vuetify/lib'
 
 
 Vue.use(Vuetify, {
   components: {
-    VBtn
+    VBtn,
+    VList,
+    VListItem,
+  },
+  icons: {
+    iconfont: 'mdiSvg', // 'mdi' || 'mdiSvg' || 'md' || 'fa' || 'fa4' || 'faSvg'
   },
 })
 
