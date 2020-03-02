@@ -1,3 +1,4 @@
+/*
 import { graphql } from 'graphql'
 import { makeExecutableSchema } from 'graphql-tools'
 import GraphQLJSON, { GraphQLJSONObject } from 'graphql-type-json';
@@ -221,3 +222,4 @@ graphql(schema, query)
   .catch((error) => {
     console.warn('graphql error: ', error);
   })
+*/
