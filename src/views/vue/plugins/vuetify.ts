@@ -6,6 +6,15 @@ import Vuetify, {
   // Card
   VCard,
 
+  // Divider
+  VDivider,
+
+  // Expansion
+  VExpansionPanel,
+  VExpansionPanelContent,
+  VExpansionPanelHeader,
+  VExpansionPanels,
+
   // Icon
   VIcon,
 
@@ -17,6 +26,10 @@ import Vuetify, {
   VListItemContent,
   VListItemTitle,
 
+  // Navigation
+  VNavigationDrawer,
+
+
   // Select
   VSelect,
 
@@ -24,6 +37,7 @@ import Vuetify, {
 
 
 Vue.use(Vuetify, {
+
   components: {
     VBtn,
     VList,
