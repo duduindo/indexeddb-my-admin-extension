@@ -1,7 +1,13 @@
 <template>
-  <v-app>
-    <Expander />
-  </v-app>
+  <div class="l-container">
+    <aside class="l-aside">
+      <Expander class="c-expander" />
+    </aside>
+
+    <main class="l-main">
+      <!-- <router-view /> -->
+    </main>
+  </div>
 </template>
 
 

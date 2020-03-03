@@ -3,9 +3,56 @@
 // ===============================================
 // $font-size-root: 12px
 
-$body-font-family: Ubuntu, 'Roboto', sans-serif !default
+// $body-font-family: Ubuntu, 'Roboto', sans-serif !default
 
 // $btn-sizes: ('primary': 20, 'large': 40)
 
 
-@import '~vuetify/src/styles/main.sass'
+// @import '~vuetify/src/styles/main.sass'
+
+// @import 'element-ui/lib/theme-chalk/index.css'
+
+/* theme color */
+// $--color-primary: teal
+
+/* icon font path, required */
+$--font-path: '~element-ui/lib/theme-chalk/fonts'
+
+
+/* Transition
+/* -------------------------- */
+$--all-transition: none
+$--fade-transition: none
+$--fade-linear-transition: none
+$--md-fade-transition: none
+$--border-transition-base: none
+$--color-transition-base: none
+
+
+// Custom
+$--font-family: Ubuntu, 'Roboto', sans-serif !default
+// $--size-base: 12px !default
+
+
+body
+  font-family: $--font-family
+
+
+// Libraries
+@import '~normalize.css'
+// @import '~element-ui/packages/theme-chalk/src/common/var'
+@import '~element-ui/packages/theme-chalk/src/index'
+
+
+// CSS
+@import 'expander'
+@import 'layout'
+
+
+@debug " "
+@debug " "
+@debug " "
+@debug "divider offset: #{$--all-transition}"
+@debug " "
+@debug " "
+@debug " "

@@ -1,115 +1,40 @@
 <template>
-  <v-navigation-drawer permanent :dark="true">
-    <v-list-item>
-      <v-list-item-content>
-        <v-select
-          :items="items"
-          v-model="storageSelected"
-          label="Select storage or database"
-          outlined
-        />
-      </v-list-item-content>
-    </v-list-item>
+  <el-menu :default-openeds="['1']">
 
-    <v-divider />
+    <el-submenu index="1">
+      <template slot="title">IndexedDB</template>
+      <el-menu-item-group>
+        <el-menu-item index="1-1"><div><i class="el-icon-coin"></i> Database 1</div></el-menu-item>
+        <el-menu-item index="1-2"><div><i class="el-icon-coin"></i> Database 2</div></el-menu-item>
+        <el-menu-item index="1-3"><div><i class="el-icon-coin"></i> Database 3</div></el-menu-item>
+      </el-menu-item-group>
 
-    <v-list
-      nav
-    >
-      <!-- <v-list-item
-        v-for="structure in structures"
-        :key="structure.title"
-        link
-      >
-        <v-list-item-icon>
-          <v-icon>mdi-database</v-icon>
-        </v-list-item-icon>
+      <!-- Database -->
+      <el-submenu index="1-4">
+        <template slot="title"><div><i class="el-icon-coin"></i> Database 4</div></template>
+        <el-menu-item-group>
+          <!-- Store -->
+          <el-submenu index="1-4-1" >
+            <template slot="title"><div><i class="el-icon-s-grid"></i> Store 1</div></template>
 
-        <v-list-item-content>
-          <v-list-item-title>{{ structure.name }}</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item> -->
+            <!-- Index -->
+            <el-menu-item-group>
+              <el-menu-item index="1-4-1-1"><div><i class="el-icon-notebook-2"></i> Index 1</div></el-menu-item>
+              <el-menu-item index="1-4-1-2"><div><i class="el-icon-notebook-2"></i> Index 2</div></el-menu-item>
+              <el-menu-item index="1-4-1-3"><div><i class="el-icon-notebook-2"></i> Index 3</div></el-menu-item>
+            </el-menu-item-group>
+          </el-submenu>
+        </el-menu-item-group>
+      </el-submenu>
+    </el-submenu>
 
-      <v-list-group
-        prepend-icon="mdi-database"
-        value="true"
-        v-model="test"
-      >
-
-        <template v-slot:activator>
-          <v-list-item-title>Users</v-list-item-title>
-        </template>
-
-        <v-list-item
-          v-for="structure in structures"
-          :key="structure.title"
-          link
-        >
-          <v-list-item-icon>
-            <v-icon>mdi-database</v-icon>
-          </v-list-item-icon>
-
-          <v-list-item-content>
-            <v-list-item-title>{{ structure.name }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-
-        <!-- Sub 1 -->
-          <v-list-group
-            prepend-icon="mdi-database"
-            value="true"
-            sub-group
-          >
-
-            <template v-slot:activator>
-              <v-list-item-title>Users</v-list-item-title>
-            </template>
-
-            <v-list-item
-              v-for="structure in structures"
-              :key="structure.title"
-              link
-            >
-              <v-list-item-icon>
-                <v-icon>mdi-database</v-icon>
-              </v-list-item-icon>
-
-              <v-list-item-content>
-                <v-list-item-title>{{ structure.name }}</v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-
-          </v-list-group>
-        <!-- /Sub 1 -->
-
-
-      </v-list-group>
-
-
-
-    </v-list>
-  </v-navigation-drawer>
+  </el-menu>
 </template>
 
 
 <script lang="ts">
   export default {
     data: () => ({
-      admins: [
-        ['Management'],
-        ['Settings'],
-      ],
-      cruds: [
-        ['Create', 'add'],
-        ['Read', 'insert_drive_file'],
-        ['Update', 'update'],
-        ['Delete', 'delete'],
-      ],
-
-      test: false,
-
-      storageSelected: {text: 'IndexedDB', value: 'indexeddb'},
-
       items: [
         {text: 'IndexedDB', value: 'indexeddb'},
         {text: 'Local Storage', value: 'local-storage'},

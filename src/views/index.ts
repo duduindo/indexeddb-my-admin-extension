@@ -1,15 +1,17 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Vuex from 'vuex'
+import ElementUI from 'element-ui'
+// import 'element-ui/lib/theme-chalk/index.css';
 import { sync } from 'vuex-router-sync'
 
 import { routes } from './vue/router/router-config'
 import Store from './vue/vuex/store'
 
-import vuetify from './vue/plugins/vuetify' // path to vuetify export
 import App from './vue/App.vue'
 
 
+Vue.use(ElementUI)
 Vue.use(VueRouter)
 Vue.use(Vuex)
 
@@ -30,7 +32,6 @@ sync(store, router)
 new Vue({
   router,
   store,
-  vuetify,
   render(create) {
     return create(App)
   }

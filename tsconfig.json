@@ -18,7 +18,7 @@
       "node",
       "chrome",
       "jest",
-      "vuetify"
+      "element-ui"
     ],
     "paths": {
       "@/*": [
