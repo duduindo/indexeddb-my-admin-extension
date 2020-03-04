@@ -11,6 +11,11 @@ declare enum Choices {
   unique = 'UNIQUE'
 }
 
+type IDBDatabaseInfo = {
+  name: string,
+  version: number,
+}
+
 type DatabaseDescription = {
   name: string,
   version?: any,
