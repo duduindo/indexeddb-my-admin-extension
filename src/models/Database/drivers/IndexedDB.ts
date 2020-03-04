@@ -24,6 +24,13 @@ class IndexedDB implements IDriverBridge {
     return true
   }
 
+  async getDatabases(): Promise<object[]> {
+    // @ts-ignore: Property 'databases' does not exist on type 'IDBFactory'.
+    const databases: object[] = await indexedDB.databases()
+
+    return databases
+  }
+
   async getDescribeDatabase(): Promise<DatabaseDescription> {
     const db = await this.connection
     const description = { name: db.name, version: db.version }
@@ -33,7 +40,17 @@ class IndexedDB implements IDriverBridge {
 
   // Static
   static async openDatabase(name: string, version: number): Promise<any> {
-    return await openDB(name, version)
+    // @ts-ignore
+    const databases: IDBDatabaseInfo[] = await indexedDB.databases() || []
+    const found: IDBDatabaseInfo | undefined = databases.find((db: IDBDatabaseInfo) => {
+      return db.name === name && db.version < version
+    })
+
+    if (found) {
+      throw new DOMException(`The requested version (${version}) is bigger than the existing version (${found.version}).`);
+    } else {
+      return await openDB(name, version)
+    }
   }
 
   // Static

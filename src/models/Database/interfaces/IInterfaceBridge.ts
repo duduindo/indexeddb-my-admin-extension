@@ -12,6 +12,11 @@ interface InterfaceBridge {
   /*
    * @return DatabaseAdminResponse
    */
+  getDatabases(): Promise<DatabaseAdminResponse>
+
+  /*
+   * @return DatabaseAdminResponse
+   */
   getStructureFromDatabase(): Promise<DatabaseAdminResponse>
 
 
