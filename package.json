@@ -30,8 +30,10 @@
   },
   "homepage": "https://gitlab.com/duduindo/indexeddb-my-admin-extension#readme",
   "dependencies": {
+    "@graphql-modules/core": "^0.7.14",
     "element-ui": "^2.13.0",
     "graphql": "^14.6.0",
+    "graphql-tag": "^2.10.3",
     "graphql-tools": "^4.0.6",
     "graphql-type-json": "^0.3.1",
     "idb": "^5.0.0",
