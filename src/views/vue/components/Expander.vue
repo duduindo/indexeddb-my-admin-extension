@@ -1,87 +1,56 @@
 <template>
   <el-menu :default-openeds="['1']">
 
-    <el-submenu index="1">
-      <template slot="title">IndexedDB</template>
-      <el-menu-item-group>
-        <el-menu-item index="1-1"><div><i class="el-icon-coin"></i> Database 1</div></el-menu-item>
-        <el-menu-item index="1-2"><div><i class="el-icon-coin"></i> Database 2</div></el-menu-item>
-        <el-menu-item index="1-3"><div><i class="el-icon-coin"></i> Database 3</div></el-menu-item>
-      </el-menu-item-group>
+    <!-- Storage -->
+    <el-submenu
+      v-for="(storage, indexStorage) in storages"
+      :key="indexStorage"
+      :index="String(indexStorage)"
+      >
+      <template slot="title">{{ storage.name }}</template>
 
-      <!-- Database -->
-      <el-submenu index="1-4">
-        <template slot="title"><div><i class="el-icon-coin"></i> Database 4</div></template>
-        <el-menu-item-group>
-          <!-- Store -->
-          <el-submenu index="1-4-1" >
-            <template slot="title"><div><i class="el-icon-s-grid"></i> Store 1</div></template>
+      <el-menu-item-group>
+        <!-- Database -->
+        <el-submenu
+          v-for="(database, indexDatabase) in storage.databases"
+          :key="indexDatabase"
+          :index="String(indexStorage) + '-' + String(indexDatabase)"
+          >
+          <template slot="title"><div><i class="el-icon-coin"></i> {{ database.name }}</div></template>
+
+          <!-- Table -->
+          <el-submenu
+            v-for="(table, indexTable) in database.tables"
+            :key="indexTable"
+            :index="String(indexStorage) + '-' + String(indexDatabase) + '-' + String(indexTable)"
+            >
+            <template slot="title"><div><i class="el-icon-coin"></i> {{ table.name }}</div></template>
 
             <!-- Index -->
             <el-menu-item-group>
-              <el-menu-item index="1-4-1-1"><div><i class="el-icon-notebook-2"></i> Index 1</div></el-menu-item>
-              <el-menu-item index="1-4-1-2"><div><i class="el-icon-notebook-2"></i> Index 2</div></el-menu-item>
-              <el-menu-item index="1-4-1-3"><div><i class="el-icon-notebook-2"></i> Index 3</div></el-menu-item>
+              <el-menu-item
+                v-for="(index, i) in table.indexes"
+                :key="i"
+                :index="String(indexStorage) + '-' + String(indexDatabase) + '-' + String(indexTable)+ '-' + String(i)"
+              >
+                <div><i class="el-icon-notebook-2"></i> {{ index.name }}</div>
+              </el-menu-item>
             </el-menu-item-group>
           </el-submenu>
-        </el-menu-item-group>
-      </el-submenu>
+        </el-submenu>
+      </el-menu-item-group>
     </el-submenu>
 
   </el-menu>
 </template>
 
 
-<script lang="ts">
+<script>
   export default {
-    data: () => ({
-      items: [
-        {text: 'IndexedDB', value: 'indexeddb'},
-        {text: 'Local Storage', value: 'local-storage'},
-        {text: 'Session Storage', value: 'session-storage'},
-      ],
-
-      // Structures
-      structures: [
-        {
-          name: "biblioteca2",
-          version: 158272957993319,
-          tables: [
-            {
-              name: "corredores",
-              indexes: [
-                {
-                  name: "by_corredor"
-                }
-              ]
-            }
-          ]
-        },
-
-        {
-          name: "banco1",
-          version: 1,
-          tables: [
-            {
-              name: "filials",
-              indexes: []
-            },
-            {
-              name: "caixas",
-              indexes: [
-                {
-                  name: "by_caixa"
-                },
-                {
-                  name: "by_funcionario"
-                }
-              ]
-            }
-          ]
-        },
-
-      ],
-
-    }),
+    computed: {
+      storages() {
+        return this.$store.getters.getExpanderStorages
+      }
+    },
   }
 </script>

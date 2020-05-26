@@ -1,42 +1,23 @@
-import { graphql } from 'graphql'
-import { makeExecutableSchema, mergeSchemas } from 'graphql-tools'
-import { DatabaseModule } from '@/controllers/databaseModule'
-import { StorageModule } from '@/controllers/storageModule'
+import IndexedDB from '@/models/Database/drivers/IndexedDB'
+import Database from '@/models/Database/interfaces/Admin'
+import Browser from '@/models/Message/devices/Browser'
+import Message from '@/models/Message/Message'
+
+const device = new Browser()
+const messenger = new Message(device)
 
 
-const databaseSchema = makeExecutableSchema(DatabaseModule)
-const storageSchema = makeExecutableSchema(StorageModule)
+messenger.listener((action: MessagePluginAction) => {
+  // const action: MessagePluginAction = {
+  //   value: 'Opaopaopa',
+  //   type: 'TEST_HERE'
+  // }
 
-const schema = mergeSchemas({
-  schemas: [
-    databaseSchema,
-    storageSchema
-  ],
-});
+  // const driver = new IndexedDB();
+  // const admin = new Database();
 
-
-const query = `
-  query {
-    database {
-      tables {
-        name
-      }
-    }
-
-    storage {
-      tables {
-        name
-      }
-    }
-  }
-`
+  // GET_STRUCTURE_FROM_DATABASE
 
 
-graphql(schema, query)
-  .then((response) => {
-    console.log(response.data);
-  })
-  .catch((error) => {
-    console.warn('graphql error: ', error);
-  })
 
+})

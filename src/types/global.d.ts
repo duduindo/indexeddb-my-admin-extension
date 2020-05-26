@@ -45,3 +45,13 @@ type DatabaseAdminResponse = {
   resolved: any,
   rejected: any,
 }
+
+type ChromeExtensionSend = {
+  id: number,
+  value: any
+}
+
+type MessagePluginAction = {
+  payload: any,
+  type: string
+}

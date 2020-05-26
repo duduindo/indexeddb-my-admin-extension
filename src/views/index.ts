@@ -11,12 +11,16 @@ import Store from './vue/vuex/store'
 import App from './vue/App.vue'
 
 
+Vue.config.productionTip = false;
+Vue.config.devtools = false;
+
 Vue.use(ElementUI)
 Vue.use(VueRouter)
 Vue.use(Vuex)
 
 
 // Vuex
+// @ts-ignore
 const store = new Vuex.Store(Store)
 
 // Router
