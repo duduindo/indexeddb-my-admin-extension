@@ -5,7 +5,7 @@
     </aside>
 
     <main class="l-main">
-      <!-- <router-view /> -->
+      <router-view />
     </main>
   </div>
 </template>

@@ -13,14 +13,17 @@ const state = {
         {
           name: "Database 1",
           version: 158272957993319,
+          tables: [],
         }, // 1
         {
           name: "Database 2",
           version: 158272957993319,
+          tables: [],
         }, // 2
         {
           name: "Database 3",
           version: 158272957993319,
+          tables: [],
         }, // 3
         {
           name: "Database 4",

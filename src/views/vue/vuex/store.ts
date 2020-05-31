@@ -2,6 +2,7 @@
 import createOnMessagePlugin from './plugins/createOnMessagePlugin'
 import example from './modules/example'
 import expander from './modules/expander'
+import table from './modules/table'
 
 
 const plugins = [
@@ -11,7 +12,8 @@ const plugins = [
 export default {
   modules: {
     example,
-    expander
+    expander,
+    table
   },
   strict: true,
   plugins: plugins
