@@ -3,6 +3,7 @@
 const path = require('path')
 const dotenv = require('dotenv')
 const { resolve } = require('path')
+const sveltePreprocess = require('svelte-preprocess');
 
 dotenv.config()
 
@@ -86,7 +87,8 @@ module.exports = (options = {config: {}}) => {
           implementation: require('sass'),
           sassOptions: {
             fiber: require('fibers'),
-            indentedSyntax: true // optional
+            indentedSyntax: true, // optional
+            // includePaths: ['node_modules/foundation-sites/scss'],
           },
         },
       },
@@ -111,6 +113,18 @@ module.exports = (options = {config: {}}) => {
     }
   })
 
+  // Svelte
+  config.module.rules.push({
+    test: /\.(html|svelte)$/,
+    // exclude: /node_modules/,
+    use: {
+      loader: 'svelte-loader',
+      options: {
+        preprocess: sveltePreprocess({})
+      },
+    }
+  })
+
   // Server
   config.devServer = {
     contentBase: resolve('dist/browser/'),
@@ -119,11 +133,13 @@ module.exports = (options = {config: {}}) => {
   }
 
   // Resolve
-  config.resolve.extensions = ['.mjs', '.js', '.vue', '.ts', '.tsx']
-  config.resolve.mainFields = ['vue', 'browser', 'module', 'main']
+  config.resolve.extensions = ['.mjs', '.js', '.vue', '.ts', '.tsx', '.svelte']
+  config.resolve.mainFields = ['svelte', 'vue', 'browser', 'module', 'main']
   config.resolve.alias = {
+    svelte: path.resolve('node_modules', 'svelte'),
     vue: resolve('node_modules', 'vue'),
     '@': resolve('src'),
+    'views': resolve('src/views'),
     // 'common': resolve('src/js/common'),
     // 'css': resolve('src/css'),
   }

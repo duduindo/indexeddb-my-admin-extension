@@ -2,19 +2,19 @@ interface InterfaceBridge {
 
   // Database
   // =========================================================
-  /*
+  /**
    * @param $databasename database's name
    *
    * @return DatabaseAdminResponse
    */
   deleteDatabase(databasename: string): Promise<DatabaseAdminResponse>
 
-  /*
+  /**
    * @return DatabaseAdminResponse
    */
   getDatabases(): Promise<DatabaseAdminResponse>
 
-  /*
+  /**
    * @return DatabaseAdminResponse
    */
   getStructureFromDatabase(): Promise<DatabaseAdminResponse>
@@ -22,7 +22,7 @@ interface InterfaceBridge {
 
   // Table
   // =========================================================
-  /*
+  /**
    * @param $databasename table's name
    * @param $value value
    *
@@ -30,14 +30,14 @@ interface InterfaceBridge {
    */
   addContentToTable(tablename: string, value: any): Promise<DatabaseAdminResponse>
 
-  /*
+  /**
    * @param $databasename table's name
    *
    * @return DatabaseAdminResponse
    */
   clearContentFromTable(tablename: string): Promise<DatabaseAdminResponse>
 
-  /*
+  /**
    * @param $databasename table's name
    * @param $key key
    *
@@ -45,40 +45,40 @@ interface InterfaceBridge {
    */
   deleteRow(tablename: string, key: any): Promise<DatabaseAdminResponse>
 
-  /*
+  /**
    * @param $databasename table's name
    *
    * @return DatabaseAdminResponse
    */
   getColumnNamesFromTable(tablename: string): Promise<DatabaseAdminResponse>
 
-  /*
+  /**
    * @param $databasename table's name
    *
    * @return DatabaseAdminResponse
    */
   getContentFromTable(tablename: string): Promise<DatabaseAdminResponse>
 
-  /*
+  /**
    * @param $databasename table's name
    *
    * @return DatabaseAdminResponse
    */
   getRowsFromTable(tablename: string): Promise<DatabaseAdminResponse>
 
-  /*
+  /**
    * @return DatabaseAdminResponse
    */
   getTableNames(): Promise<DatabaseAdminResponse>
 
-  /*
+  /**
    * @param $databasename table's name
    *
    * @return DatabaseAdminResponse
    */
   isTableAutoIncrement(tablename: string): Promise<DatabaseAdminResponse>
 
-  /*
+  /**
    * @param $databasename table's name
    * @param $value value
    * @param $key key
@@ -90,7 +90,7 @@ interface InterfaceBridge {
 
   // Index
   // =========================================================
-  /*
+  /**
    * @param $tablename name of table
    * @param indexname name of index
    *
@@ -98,7 +98,7 @@ interface InterfaceBridge {
    */
   getContentFromIndex(tablename: string, indexname: string): Promise<DatabaseAdminResponse>
 
-  /*
+  /**
    * @param $tablename name of table
    * @param indexname name of index
    *
@@ -106,14 +106,14 @@ interface InterfaceBridge {
    */
   getIndexChoice(tablename: string, indexname: string): Promise<DatabaseAdminResponse>
 
-  /*
+  /**
    * @param $tablename name of table
    *
    * @return DatabaseAdminResponse
    */
   getIndexNames(tablename: string): Promise<DatabaseAdminResponse>
 
-  /*
+  /**
    * @param $tablename name of table
    * @param indexname name of index
    *

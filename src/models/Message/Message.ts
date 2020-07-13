@@ -16,6 +16,10 @@ class Message implements IMessageBridge {
   send(message: any, option?: any) {
     return this.device.sendMessage(message, option)
   }
+
+  destroy(): void {
+    this.device.destroy()
+  }
 }
 
 

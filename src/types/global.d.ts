@@ -2,6 +2,7 @@ declare module 'liquor-tree'
 declare module 'vue-json-pretty'
 declare module 'json-string-formatter'
 declare module '*.vue'
+declare module '*.svelte'
 declare module 'idb'
 declare module 'promised-websql'
 declare module 'graphql-type-json'
@@ -51,7 +52,14 @@ type ChromeExtensionSend = {
   value: any
 }
 
+
+declare enum MessagePluginActionOrigins {
+  content = 'CONTENT',
+  devtools = 'DEVTOOOLS'
+}
+
 type MessagePluginAction = {
   payload: any,
-  type: string
+  type: string,
+  origin: string
 }

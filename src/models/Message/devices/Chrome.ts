@@ -13,6 +13,8 @@ class Chrome implements IDeviceBridge {
       })
     })
   }
+
+  destroy(): void {}
 }
 
 

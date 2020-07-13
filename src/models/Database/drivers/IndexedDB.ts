@@ -197,7 +197,6 @@ class IndexedDB implements IDriverBridge {
 
     content['#'] = keys.map((e: any, i: number) => i)
     content[keyPath] = keys
-    content[keyPathStore] = keysStore
     content['value'] = values
 
     return content

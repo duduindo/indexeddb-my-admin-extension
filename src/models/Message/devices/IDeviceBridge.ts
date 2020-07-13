@@ -1,12 +1,12 @@
 interface IDeviceBridge {
-  /*
+  /**
    * @param $callback function
    *
    * @return void
    */
   listener(callback: Function): void
 
-  /*
+  /**
    * @param message object
    * @param callback function
    * @param targetOrigin any
@@ -14,6 +14,8 @@ interface IDeviceBridge {
    * @return void
    */
   sendMessage(message: any, targetOrigin?: any, callback?: Function): Promise<any>
+
+  destroy(): void
 }
 
 export default IDeviceBridge
