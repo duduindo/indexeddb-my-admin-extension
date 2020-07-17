@@ -1,5 +1,5 @@
 import IndexedDB from '@/models/Database/drivers/IndexedDB'
-import Database from '@/models/Database/interfaces/Admin'
+import Admin from '@/models/Database/interfaces/Admin'
 import Browser from '@/models/Message/devices/Browser'
 import Message from '@/models/Message/Message'
 import isUndefined from 'lodash/isUndefined'
@@ -13,7 +13,7 @@ const messenger = new Message(device)
 function openStorage(name: string, version: number, type: string = 'indexeddb'): InterfaceBridge {
   const connection = IndexedDB.openDatabase(name, version)
   const driver = new IndexedDB(connection);
-  const admin = new Database(driver);
+  const admin = new Admin(driver);
 
   return admin
 }
@@ -65,14 +65,14 @@ function openStorage(name: string, version: number, type: string = 'indexeddb'):
 
 async function handleListener(action: MessagePluginAction) {
   const { payload } = action;
-  const storage = await openStorage(payload.database, payload.version, payload.storage)
+
+  const storage = await openStorage(payload.database, payload.version);
 
 
   switch (action.type) {
     // Database
     case 'GET_STRUCTURE_FROM_DATABASE':
       messenger.send({
-        storage: payload.storage,
         payload: await storage.getStructureFromDatabase(),
         type: action.type,
         origin: 'CONTENT'
@@ -82,7 +82,6 @@ async function handleListener(action: MessagePluginAction) {
     // Table
     case 'GET_CONTENT_FROM_TABLE':
       messenger.send({
-        storage: payload.storage,
         payload: await storage.getContentFromTable(payload.table),
         type: action.type,
         origin: 'CONTENT'
@@ -92,7 +91,6 @@ async function handleListener(action: MessagePluginAction) {
     // Index
     case 'GET_CONTENT_FROM_INDEX':
       messenger.send({
-        storage: payload.storage,
         payload: await storage.getContentFromIndex(payload.table, payload.index),
         type: action.type,
         origin: 'CONTENT'

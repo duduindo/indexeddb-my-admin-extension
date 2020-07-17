@@ -1,1 +1,5 @@
-import './views'
+// import './views'
+
+window.onload = () => {
+  require('./views')
+}

@@ -1,4 +1,5 @@
 <script>
+  import { onDestroy } from 'svelte'
   import zipWith from 'lodash/zipWith'
   import isArrayLike from 'lodash/isArrayLike'
   import { querystring } from 'svelte-spa-router'
