@@ -7,6 +7,7 @@
   import Index from 'views/svelte/routes/pages/Index.svelte'
   import Expander from 'views/svelte/routes/components/Expander.svelte'
 
+
   const routes = new Map()
 
   routes.set('/', Home)

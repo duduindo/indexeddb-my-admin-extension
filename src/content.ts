@@ -4,7 +4,8 @@ import Browser from '@/models/Message/devices/Browser'
 import Message from '@/models/Message/Message'
 import isUndefined from 'lodash/isUndefined'
 import InterfaceBridge from '@/models/Database/interfaces/IInterfaceBridge'
-
+import IMessageBridge from '@/models/Message/IMessageBridge'
+import IDeviceBridge from '@/models/Message/devices/IDeviceBridge'
 
 const device = new Browser()
 const messenger = new Message(device)
@@ -18,49 +19,82 @@ function openStorage(name: string, version: number, type: string = 'indexeddb'):
   return admin
 }
 
-// // ---------------------------------------------------
-// class StorageRequests {
-//   private request: any
 
-//   setRequest(request: any) {
-//     this.request = request
-//   }
+/* ------------------------------------------- */
+class AdminFactory {
+  static getConnection(name: string, version: number) {
+    const connection = IndexedDB.openDatabase(name, version)
+    const driver = new IndexedDB(connection);
+    const admin = new Admin(driver);
 
-//   public getData() {
-//     this.request.getData()
-//   }
-// }
+    return admin
+  }
+}
+
+class MessageFactory {
+  static getMessage() {
+    const device = new Browser()
+    const messenger = new Message(device)
+
+    return messenger
+  }
+}
+
+// Strategy
+interface DatabaseRequest {
+  send(messenger: IMessageBridge,  action: MessagePluginAction): any;
+}
+
+// Context
+class RequestController {
+  private request?: DatabaseRequest
+  private messenger: IMessageBridge = MessageFactory.getMessage()
+
+  setRequest(request: DatabaseRequest) {
+    this.request = request
+  }
+
+  send(action: MessagePluginAction) {
+    if (this.request) {
+      this.request.send(messenger, action)
+    }
+  }
+}
+
+// Concrete Strategy
+class GetStructureFromDatabase implements DatabaseRequest {
+  async send(messenger: IMessageBridge, action: MessagePluginAction) {
+    const { payload } = action;
+    const admin = await AdminFactory.getConnection(payload.database, payload.version)
+
+    messenger.send({
+      payload: await admin.getStructureFromDatabase(),
+      type: action.type,
+      origin: 'CONTENT'
+    })
+  }
+}
 
 
-// class RequestGetStructureFromDatabase {
-//   private messenger: any
+// ------ Executing
+const controller = new RequestController()
 
-//   constructor(messenger: any) {
-//     this.messenger = messenger
-//   }
-
-//   public getData() {
-//     // this.messenger.send({
-//     //   storage: payload.storage,
-//     //   payload: await storage.getStructureFromDatabase(),
-//     //   type: action.type,
-//     //   origin: 'CONTENT'
-//     // })
-//   }
-// }
+const actionFake = {
+  payload: '',
+  type: '',
+  origin: '',
+}
 
 
-// // const any = new Function
-// // const context = new StorageRequests(any)
-
-// // context.setRequest(new RequestGetStructureFromDatabase)
-
-// // context.getData()
-
-// // ---------------------------------------------------
+if (actionFake.type === 'GET_STRUCTURE_FROM_DATABASE') {
+  controller.setRequest(new GetStructureFromDatabase)
+}
 
 
+controller.send(actionFake)
+// ------ /Executing
 
+/* ------------------------------------------- */
 
 
 async function handleListener(action: MessagePluginAction) {

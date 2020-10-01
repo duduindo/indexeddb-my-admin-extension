@@ -1,5 +1,5 @@
 <script>
-  import { onDestroy } from 'svelte'
+  import { fade } from 'svelte/transition'
   import zipWith from 'lodash/zipWith'
   import isArrayLike from 'lodash/isArrayLike'
   import { querystring } from 'svelte-spa-router'
@@ -43,7 +43,7 @@
 </script>
 
 
-<div class="table-container">
+<div class="table-container" in:fade="{{ duration: 100 }}">
   <table class="table is-fullwidth">
     <thead>
       <tr>
