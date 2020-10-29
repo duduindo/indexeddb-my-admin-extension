@@ -1,6 +1,6 @@
 <script>
   // import 'views/sass/index.sass'
-  import 'views/sass/index.sass'
+  // import 'views/sass/index.sass'
   import Router from 'svelte-spa-router'
   import Home from 'views/svelte/routes/pages/Home.svelte'
   import Table from 'views/svelte/routes/pages/Table.svelte'

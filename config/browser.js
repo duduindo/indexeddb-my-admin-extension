@@ -1,7 +1,6 @@
 'use strict'
 
 const CopyPlugin = require('copy-webpack-plugin')
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const { resolve } = require('path')
 const common = require('./common')
 
@@ -21,7 +20,6 @@ module.exports = () => {
   ]))
 
   // Vue plugin
-  config.plugins.push(new VueLoaderPlugin())
 
   // Entry
   config.entry = {
@@ -32,7 +30,8 @@ module.exports = () => {
   // Output
   config.output = {
     filename: '[name].js',
-    path: resolve('dist/browser/')
+    path: resolve('dist/browser/'),
+    libraryTarget: 'umd'
   }
 
   return config

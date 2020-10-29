@@ -4,6 +4,9 @@ const path = require('path')
 const dotenv = require('dotenv')
 const { resolve } = require('path')
 const sveltePreprocess = require('svelte-preprocess');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 
 dotenv.config()
 
@@ -20,6 +23,11 @@ module.exports = (options = {config: {}}) => {
       alias: {},
       mainFields: [],
     },
+    optimization: {
+      splitChunks: {
+        cacheGroups: {}
+      }
+    },
     entry: {},
     output: {},
     devServer: {},
@@ -31,6 +39,14 @@ module.exports = (options = {config: {}}) => {
   config.watchOptions = {
     ignored: ['node_modules', 'dist', 'config', 'build', '.*']
   };
+
+  // // Optimization
+  // config.optimization.splitChunks.cacheGroups.styles = {
+  //   name: 'styles',
+  //   test: /index\.s(c|a)ss$/,
+  //   chunks: 'all',
+  //   enforce: true,
+  // }
 
   // Fonts
   config.module.rules.push({
@@ -44,73 +60,95 @@ module.exports = (options = {config: {}}) => {
 
   // CSS
   config.module.rules.push({
-    test: /\.css$/,
+    test: /\.(sa|sc|c)ss$/,
     use: [
+      {
+        loader: 'file-loader',
+        options: {
+          name: '[name].build.css',
+          context: './',
+          outputPath: '/',
+          publicPath: '/pages'
+        }
+      },
+      {
+        loader: 'extract-loader'
+      },
       {
         loader: 'css-loader'
       },
-    ],
-  })
-
-  // Stylus
-  config.module.rules.push({
-    test: /\.styl(us)?$/,
-    use: [
-      {
-        loader: 'style-loader'
-      },
-      {
-        loader: 'css-loader'
-      },
-      {
-        loader: 'stylus-loader'
-      },
-    ],
-  })
-
-  // Sass
-  config.module.rules.push({
-    test: /\.s(c|a)ss$/,
-    use: [
-      'vue-style-loader',
-      'css-loader',
       {
         loader: 'sass-loader',
-        // Requires sass-loader@^7.0.0
         options: {
-          implementation: require('sass'),
-          fiber: require('fibers'),
-          indentedSyntax: true // optional
-        },
-        // Requires sass-loader@^8.0.0
-        options: {
-          implementation: require('sass'),
-          sassOptions: {
-            fiber: require('fibers'),
-            indentedSyntax: true, // optional
-            // includePaths: ['node_modules/foundation-sites/scss'],
-          },
-        },
+          sourceMap: true
+        }
       },
     ],
   })
 
-  // Vue
-  config.module.rules.push({
-    test: /\.(html|vue)$/,
-    use: {
-      loader: 'vue-loader',
-    }
-  })
+  // // CSS
+  // config.module.rules.push({
+  //   test: /\.(sa|sc|c)ss$/,
+  //   use: [
+  //     'css-loader',
+  //     'sass-loader',
+  //   ],
+  // })
+
+  // Sass
+  // config.module.rules.push({
+  //   test: /\.s(c|a)ss$/,
+  //   use: [
+  //     MiniCssExtractPlugin.loader,
+  //     'css-loader',
+  //     'sass-loader',
+  //   ],
+  // })
+
+  // // CSS
+  // config.module.rules.push({
+  //   test: /\.css$/,
+  //   use: [
+  //     {
+  //       loader: 'css-loader'
+  //     },
+  //   ],
+  // })
+
+  // // Sass
+  // config.module.rules.push({
+  //   test: /\.s(c|a)ss$/,
+  //   use: [
+  //     'css-loader',
+  //     {
+  //       loader: 'sass-loader',
+  //       // Requires sass-loader@^7.0.0
+  //       options: {
+  //         implementation: require('sass'),
+  //         fiber: require('fibers'),
+  //         indentedSyntax: true // optional
+  //       },
+  //       // Requires sass-loader@^8.0.0
+  //       options: {
+  //         implementation: require('sass'),
+  //         sassOptions: {
+  //           fiber: require('fibers'),
+  //           indentedSyntax: true, // optional
+  //           // includePaths: ['node_modules/foundation-sites/scss'],
+  //         },
+  //       },
+  //     },
+  //   ],
+  // })
 
   // TypeScript
   config.module.rules.push({
     test: /\.tsx?$/,
     loader: 'ts-loader',
     exclude: /node_modules/,
-    options: {
-      appendTsSuffixTo: [/\.vue$/],
-    }
+    // options: {
+    //   appendTsSuffixTo: [/\.vue$/],
+    // }
   })
 
   // Svelte
@@ -125,6 +163,12 @@ module.exports = (options = {config: {}}) => {
     }
   })
 
+  // PUG
+  config.module.rules.push({
+    test: /\.pug?$/,
+    loader: 'pug-loader',
+  })
+
   // Server
   config.devServer = {
     contentBase: resolve('dist/browser/'),
@@ -133,19 +177,47 @@ module.exports = (options = {config: {}}) => {
   }
 
   // Resolve
-  config.resolve.extensions = ['.mjs', '.js', '.vue', '.ts', '.tsx', '.svelte']
-  config.resolve.mainFields = ['svelte', 'vue', 'browser', 'module', 'main']
+  config.resolve.extensions = ['.mjs', '.js', '.ts', '.tsx', '.svelte']
+  config.resolve.mainFields = ['svelte', 'browser', 'module', 'main']
   config.resolve.alias = {
     svelte: path.resolve('node_modules', 'svelte'),
-    vue: resolve('node_modules', 'vue'),
     '@': resolve('src'),
     'views': resolve('src/views'),
     // 'common': resolve('src/js/common'),
     // 'css': resolve('src/css'),
   }
 
-  // Plugin
-  config.plugins = []
+  // Plugins
+  config.plugins.push(new MiniCssExtractPlugin({
+    // Options similar to the same options in webpackOptions.output
+    // both options are optional
+    filename: 'style.css',
+    chunkFilename: '[id].css',
+  }));
+
+  config.plugins.push(new HtmlWebpackPlugin({
+    inject: true,
+    cache: false,
+    template: resolve('src/views/pug/pages/index.pug'),
+    filename: 'pages/index.html',
+    // favicon: 'favicon.ico',
+    templateParameters: {
+      title: 'IndexedDB My Admin Extension'
+    }
+  }))
+
+  // config.plugins = [
+  //   new HtmlWebpackPlugin({
+  //     inject: true,
+  //     cache: false,
+  //     template: resolve('src/views/pug/pages/index.pug'),
+  //     filename: resolve('dist/pages/index.html'),
+  //     // favicon: 'favicon.ico',
+  //     templateParameters: {
+  //       title: 'IndexedDB My Admin Extension'
+  //     }
+  //   }),
+  // ]
 
   return config
 }
