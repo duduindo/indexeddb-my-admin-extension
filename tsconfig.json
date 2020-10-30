@@ -17,8 +17,7 @@
     "types": [
       "node",
       "chrome",
-      "jest",
-      "element-ui"
+      "jest"
     ],
     "paths": {
       "@/*": [

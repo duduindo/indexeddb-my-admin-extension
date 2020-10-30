@@ -4,14 +4,9 @@
   "description": "IndexedDB My Admin Extension",
   "main": "index.js",
   "scripts": {
-    "test": "jest --config test/unit/jest.conf.js --detectOpenHandles; exit 0",
-    "test:coverage": "jest --config test/unit/jest.conf.js --coverage --detectOpenHandles; exit 0",
-    "test:watch": "jest --config test/unit/jest.conf.js --watch --detectOpenHandles; exit 0",
-    "build:extension": "webpack --config build/extension.js --progress",
-    "watch:extension": "webpack --config build/extension.js --progress --watch",
-    "build:browser": "webpack --config build/browser.js --progress",
-    "watch:browser": "webpack-dev-server --config build/browser.js --progress --watch",
-    "lint": "eslint --ext .js,.ts,.vue src shells; exit 0"
+    "chrome": "webpack --config config/chrome.config.js --progress --mode=production",
+    "firefox": "webpack --config config/firefox.config.js --progress --mode=production",
+    "watch": "webpack-dev-server --config config/common.config.js --progress --watch --mode=development"
   },
   "repository": {
     "type": "git",
@@ -31,21 +26,14 @@
   "homepage": "https://gitlab.com/duduindo/indexeddb-my-admin-extension#readme",
   "dependencies": {
     "@types/lodash": "^4.14.154",
-    "bulma": "^0.8.2",
-    "element-ui": "^2.13.0",
-    "foundation-sites": "^6.6.3",
     "idb": "^5.0.0",
     "lodash": "^4.17.15",
-    "normalize.css": "^8.0.1",
     "promised-websql": "^0.1.1",
     "svelte": "^3.23.0",
-    "svelte-spa-router": "^2.2.0",
-    "vue": "^2.6.11",
-    "vue-router": "^3.1.6",
-    "vuex": "^3.1.2",
-    "vuex-router-sync": "^5.0.0"
+    "svelte-spa-router": "^2.2.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.12.3",
     "@babel/preset-env": "^7.6.3",
     "@babel/preset-typescript": "^7.6.0",
     "@types/chrome": "0.0.91",
@@ -55,14 +43,13 @@
     "@typescript-eslint/eslint-plugin": "^2.6.0",
     "@typescript-eslint/parser": "^2.6.0",
     "babel-jest": "^24.9.0",
-    "copy-webpack-plugin": "^5.0.4",
+    "babel-loader": "^8.1.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^6.2.1",
     "css-loader": "^3.2.0",
     "deepmerge": "^4.2.2",
-    "dotenv": "^8.2.0",
     "eslint": "^6.6.0",
-    "extract-loader": "^5.1.0",
     "fake-indexeddb": "^3.0.0",
-    "fibers": "^4.0.2",
     "file-loader": "^5.1.0",
     "html-webpack-plugin": "^4.5.0",
     "jest": "^25.1.0",
@@ -72,15 +59,14 @@
     "sass": "^1.26.2",
     "sass-loader": "^8.0.2",
     "style-loader": "^1.0.0",
-    "stylus": "^0.54.7",
     "svelte-loader": "^2.13.6",
     "svelte-preprocess": "^3.7.4",
     "ts-jest": "^24.1.0",
     "ts-loader": "^6.2.1",
     "typescript": "^3.6.4",
-    "vue-template-compiler": "^2.6.11",
-    "webpack": "^4.41.2",
+    "webpack": "^5.3.1",
     "webpack-cli": "^3.3.9",
-    "webpack-dev-server": "^3.9.0"
+    "webpack-dev-server": "^3.11.0",
+    "webpack-merge": "^5.2.0"
   }
 }

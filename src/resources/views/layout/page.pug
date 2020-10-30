@@ -1,0 +1,13 @@
+doctype html
+html
+  head
+    title #{title}
+
+    if isProduction
+      link(href='/pages/static/build.css' rel='stylesheet')
+
+  body
+    block content
+
+    if isProduction
+      script(src='/pages/static/build.js')
