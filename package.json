@@ -6,7 +6,7 @@
   "scripts": {
     "chrome": "webpack --config config/chrome.config.js --progress --mode=production",
     "firefox": "webpack --config config/firefox.config.js --progress --mode=production",
-    "watch": "webpack-dev-server --config config/common.config.js --progress --watch --mode=development"
+    "watch": "webpack-dev-server --config config/common.config.js --open --progress --watch --mode=development"
   },
   "repository": {
     "type": "git",
