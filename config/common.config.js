@@ -60,19 +60,19 @@ module.exports = (env, options) => {
           loader: 'svelte-loader'
         },
 
+        // #### Babel
+        {
+          test: /\.[tj]s?$/,
+          loader: 'babel-loader',
+          exclude: /node_modules/,
+        },
+
         // #### TypeScript
         {
           test: /\.tsx?$/,
           loader: 'ts-loader',
           exclude: /node_modules/,
         },
-
-        // #### Babel
-        {
-          test: /\.[tj]s?$/,
-          loader: 'babel-loader',
-          exclude: /node_modules/,
-        }
       ]
     },
 
@@ -97,12 +97,21 @@ module.exports = (env, options) => {
           isDevelopment,
         }
       }),
+
+      // #### Pug - Popup
+      new HtmlWebpackPlugin({
+        inject: isDevelopment,
+        cache: false,
+        template: resolve('src/resources/views/popup.pug'),
+        filename: 'popup.html',
+      }),
     ],
 
     // ### Entry
     entry: {
       content: resolve('src/resources/assets/content.ts'),
-      'pages/static/build': [resolve('src/resources/assets/pages.ts'), resolve('src/resources/assets/pages.sass')]
+      'pages/static/build': [resolve('src/resources/assets/pages.ts'), resolve('src/resources/assets/pages.sass')],
+      popup: resolve('src/resources/assets/popup.ts'),
     }
   };
 };

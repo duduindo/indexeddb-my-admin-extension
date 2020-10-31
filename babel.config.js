@@ -1,6 +1,5 @@
 module.exports = {
   presets: [
-    "@babel/preset-typescript",
     [
       "@babel/preset-env",
       {
@@ -8,7 +7,8 @@ module.exports = {
           chrome: 70,
         },
       },
-    ]
+    ],
+    "@babel/preset-typescript",
   ]
 }
 
