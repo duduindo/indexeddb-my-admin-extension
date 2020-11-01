@@ -7,7 +7,7 @@ import TabsEvent from './TabsEvent'
 
 
 function TabsEventFactory(): ITabsEventBridge {
-  const isChrome = has(window, 'chrome.tabs.onUpdated.addListener');
+  const isChrome = has(window, 'chrome.tabs.onUpdated.addListener')
   let device: IDeviceBridge = new Browser()
 
   if (isChrome) {
@@ -18,4 +18,4 @@ function TabsEventFactory(): ITabsEventBridge {
 }
 
 
-export default TabsEventFactory;
+export default TabsEventFactory
