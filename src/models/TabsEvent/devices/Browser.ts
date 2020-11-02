@@ -1,8 +1,8 @@
-import IDeviceBridge from './IDeviceBridge'
+import IDevice from './IDevice'
 import type { Tab } from '../types'
 
 
-class Browser implements IDeviceBridge {
+class Browser implements IDevice {
   listener(callback: Function): void {
     const tabs: Tab[] = [{ id: 0, host: location.host }];
 

@@ -1,24 +1,20 @@
-import IDeviceBridge from './devices/IDeviceBridge'
+import IDevice from './devices/IDevice'
 import IMessageBridge from './IMessageBridge'
 
 
 class Message implements IMessageBridge {
-  private device: IDeviceBridge
+  private device: IDevice
 
-  constructor(device: IDeviceBridge) {
+  constructor(device: IDevice) {
     this.device = device
   }
 
   listener(callback: Function): void {
-    this.device.listener((value: any) => callback(value))
+    this.device.onmessage((value: any) => callback(value))
   }
 
-  send(message: any, option?: any) {
-    return this.device.sendMessage(message, option)
-  }
-
-  destroy(): void {
-    this.device.destroy()
+  send(message: any, target?: string|number): void {
+    this.device.postMessage(message, target)
   }
 }
 

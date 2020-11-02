@@ -1,11 +1,11 @@
-import IDeviceBridge from './devices/IDeviceBridge'
+import IDevice from './devices/IDevice'
 import ITabsEventBridge from './ITabsEventBridge'
 
 
 class Tabs implements ITabsEventBridge {
-  private device: IDeviceBridge
+  private device: IDevice
 
-  constructor(device: IDeviceBridge) {
+  constructor(device: IDevice) {
     this.device = device
   }
 

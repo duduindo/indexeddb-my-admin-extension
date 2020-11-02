@@ -1,20 +1,23 @@
-import IDeviceBridge from './IDeviceBridge'
+import has from 'lodash/has'
+import IDevice from './IDevice'
 
 
-class Chrome implements IDeviceBridge {
-  listener(callback: Function): void {
-    chrome.runtime.onMessage.addListener((request, tab) => callback(request, tab))
+class Chrome implements IDevice {
+  onmessage(callback: Function): void {
+    chrome.runtime.onMessage.addListener((request, sender) => callback(request, sender))
   }
 
-  sendMessage(message: ChromeExtensionSend) {
-    return new Promise((resolved, rejected) => {
-      chrome.tabs.sendMessage(message.id, message.value, function (response) {
-        resolved(response)
-      })
-    })
-  }
+  postMessage(message: string, tabId: number) {
+    const isExtension = has(window, 'chrome.tabs.onUpdated.addListener')
 
-  destroy(): void {}
+    console.warn(message, tabId)
+
+    if (isExtension) {
+      chrome.tabs.sendMessage(tabId, message)
+    } else {
+      chrome.runtime.sendMessage(message)
+    }
+  }
 }
 
 

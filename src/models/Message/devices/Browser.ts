@@ -1,32 +1,15 @@
-import IDeviceBridge from './IDeviceBridge'
+import IDevice from './IDevice'
 
 
-class Browser implements IDeviceBridge {
-  private origin: string
-  private callback?: any
+class Browser implements IDevice {
+  private origin = location.origin
 
-  constructor() {
-    this.origin = location.origin
+  onmessage(callback: Function): void {
+    window.addEventListener('message', event => callback(event), false)
   }
 
-  listener(callback: Function): void {
-    this.callback = (event: MessageEvent) => {
-      if (this.origin === event.origin) {
-        callback(event.data);
-      }
-    }
-
-    window.addEventListener('message', this.callback, false);
-  }
-
-  sendMessage(message: string, targetOrigin: string) {
-    window.postMessage(message, targetOrigin);
-
-    return Promise.resolve(true);
-  }
-
-  destroy() {
-    window.removeEventListener('message', this.callback, false);
+  postMessage(message: string) {
+    window.postMessage(message, this.origin)
   }
 }
 

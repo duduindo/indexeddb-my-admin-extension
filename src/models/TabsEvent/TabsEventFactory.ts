@@ -1,16 +1,16 @@
 import has from 'lodash/has'
 import ITabsEventBridge from './ITabsEventBridge'
-import IDeviceBridge from './devices/IDeviceBridge'
+import IDevice from './devices/IDevice'
 import Browser from './devices/Browser'
 import Chrome from './devices/Chrome'
 import TabsEvent from './TabsEvent'
 
 
 function TabsEventFactory(): ITabsEventBridge {
-  const isChrome = has(window, 'chrome.tabs.onUpdated.addListener')
-  let device: IDeviceBridge = new Browser()
+  const isExtension = has(window, 'chrome.tabs.onUpdated.addListener')
+  let device: IDevice = new Browser()
 
-  if (isChrome) {
+  if (isExtension) {
     device = new Chrome()
   }
 

@@ -31,6 +31,7 @@ module.exports = (env, options) => {
       extensions: ['.js', '.ts', '.svelte', '.pug', '.sass', '.scss'],
       mainFields: ['svelte', 'browser', 'module', 'main'],
       alias: {
+        '@': resolve('src'),
         models: resolve('src/models'),
       }
     },
@@ -60,12 +61,12 @@ module.exports = (env, options) => {
           loader: 'svelte-loader'
         },
 
-        // #### Babel
-        {
-          test: /\.[tj]s?$/,
-          loader: 'babel-loader',
-          exclude: /node_modules/,
-        },
+        // // #### Babel
+        // {
+        //   test: /\.[tj]s?$/,
+        //   loader: 'babel-loader',
+        //   exclude: /node_modules/,
+        // },
 
         // #### TypeScript
         {

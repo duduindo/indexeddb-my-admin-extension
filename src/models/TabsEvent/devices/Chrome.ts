@@ -1,9 +1,9 @@
 import uniqBy from 'lodash/uniqBy'
-import IDeviceBridge from './IDeviceBridge'
+import IDevice from './IDevice'
 import type { Tab } from '../types'
 
 
-class Chrome implements IDeviceBridge {
+class Chrome implements IDevice {
   private filterTabNative(tabNative: chrome.tabs.Tab) {
     const { status = '', url = '' } = tabNative
     const filtered = status === 'complete' && url.startsWith('http')

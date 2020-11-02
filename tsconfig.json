@@ -22,6 +22,9 @@
     "paths": {
       "@/*": [
         "src/*"
+      ],
+      "models/*": [
+        "src/models/*"
       ]
     },
     "lib": [

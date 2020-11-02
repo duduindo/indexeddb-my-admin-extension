@@ -47,10 +47,10 @@ type DatabaseAdminResponse = {
   rejected: any,
 }
 
-type ChromeExtensionSend = {
-  id: number,
-  value: any
-}
+// type ChromeExtensionSend = {
+//   id: number,
+//   value: any
+// }
 
 
 declare enum MessagePluginActionOrigins {

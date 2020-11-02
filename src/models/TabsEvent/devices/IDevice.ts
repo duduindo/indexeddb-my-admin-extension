@@ -1,4 +1,4 @@
-interface IDeviceBridge {
+interface IDevice {
   /**
    * @param $callback function
    *
@@ -7,4 +7,4 @@ interface IDeviceBridge {
   listener(callback: Function): void
 }
 
-export default IDeviceBridge
+export default IDevice

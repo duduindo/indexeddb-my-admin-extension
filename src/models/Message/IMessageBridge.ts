@@ -15,9 +15,7 @@ interface IMessageBridge {
    *
    * @return promise any
    */
-  send(message: any, option?: any): Promise<any>
-
-  destroy(): void
+  send(message: any, target?: string|number): void
 }
 
 
