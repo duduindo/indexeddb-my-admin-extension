@@ -1,4 +1,3 @@
-import has from 'lodash/has'
 import ITabsEventBridge from './ITabsEventBridge'
 import IDevice from './devices/IDevice'
 import Browser from './devices/Browser'
@@ -7,7 +6,7 @@ import TabsEvent from './TabsEvent'
 
 
 function TabsEventFactory(): ITabsEventBridge {
-  const isPages = has(window, 'chrome.tabs.onUpdated.addListener')
+  const isPages = window?.chrome?.tabs?.onUpdated?.addListener
   let device: IDevice = new Browser()
 
   if (isPages) {

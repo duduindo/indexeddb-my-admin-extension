@@ -61,12 +61,12 @@ module.exports = (env, options) => {
           loader: 'svelte-loader'
         },
 
-        // // #### Babel
-        // {
-        //   test: /\.[tj]s?$/,
-        //   loader: 'babel-loader',
-        //   exclude: /node_modules/,
-        // },
+        // #### Babel
+        {
+          test: /\.[tj]s?$/,
+          loader: 'babel-loader',
+          exclude: /node_modules/,
+        },
 
         // #### TypeScript
         {

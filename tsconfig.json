@@ -10,7 +10,7 @@
     "importHelpers": true,
     "moduleResolution": "node",
     "outDir": "dist/",
-    "strict": true,
+    "strict": false,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "experimentalDecorators": true,

@@ -1,4 +1,3 @@
-import has from 'lodash/has'
 import IDevice from './IDevice'
 
 
@@ -8,7 +7,7 @@ class Chrome implements IDevice {
   }
 
   postMessage(message: string, tabId: number) {
-    const isPages = has(window, 'chrome.tabs.onUpdated.addListener')
+    const isPages = window?.chrome?.tabs?.onUpdated?.addListener
 
     if (isPages) {
       chrome.tabs.sendMessage(tabId, message)

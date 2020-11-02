@@ -33,6 +33,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",
+    "@babel/plugin-proposal-optional-chaining": "^7.12.1",
     "@babel/preset-env": "^7.6.3",
     "@babel/preset-typescript": "^7.12.1",
     "@types/chrome": "0.0.91",
