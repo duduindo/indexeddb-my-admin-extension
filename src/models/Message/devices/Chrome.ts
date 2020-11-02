@@ -8,11 +8,9 @@ class Chrome implements IDevice {
   }
 
   postMessage(message: string, tabId: number) {
-    const isExtension = has(window, 'chrome.tabs.onUpdated.addListener')
+    const isPages = has(window, 'chrome.tabs.onUpdated.addListener')
 
-    console.warn(message, tabId)
-
-    if (isExtension) {
+    if (isPages) {
       chrome.tabs.sendMessage(tabId, message)
     } else {
       chrome.runtime.sendMessage(message)

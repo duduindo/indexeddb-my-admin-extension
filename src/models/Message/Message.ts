@@ -10,7 +10,7 @@ class Message implements IMessageBridge {
   }
 
   listener(callback: Function): void {
-    this.device.onmessage((value: any) => callback(value))
+    this.device.onmessage((...params: any) => callback(...params))
   }
 
   send(message: any, target?: string|number): void {

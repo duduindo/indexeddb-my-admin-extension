@@ -1,4 +1,4 @@
-import has from 'lodash/has'
+import get from 'lodash/get'
 import IDevice from './devices/IDevice'
 import IMessageBridge from './IMessageBridge'
 import Browser from './devices/Browser'
@@ -7,10 +7,10 @@ import Message from './Message'
 
 
 function MessageFactory(): IMessageBridge {
-  const isExtension = has(window, 'chrome.tabs.onUpdated.addListener') // Arrumar isso!!
+  const isContent = get(window, 'chrome.runtime.id')
   let device: IDevice = new Browser()
 
-  if (isExtension) {
+  if (isContent) {
     device = new Chrome()
   }
 

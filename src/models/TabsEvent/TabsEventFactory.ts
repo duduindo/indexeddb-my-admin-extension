@@ -7,10 +7,10 @@ import TabsEvent from './TabsEvent'
 
 
 function TabsEventFactory(): ITabsEventBridge {
-  const isExtension = has(window, 'chrome.tabs.onUpdated.addListener')
+  const isPages = has(window, 'chrome.tabs.onUpdated.addListener')
   let device: IDevice = new Browser()
 
-  if (isExtension) {
+  if (isPages) {
     device = new Chrome()
   }
 
