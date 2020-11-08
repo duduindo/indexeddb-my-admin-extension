@@ -24,6 +24,11 @@ module.exports = {
 
   // An array of glob patterns indicating a set of files for which coverage information should be collected
   // collectCoverageFrom: null,
+  collectCoverageFrom: [
+    'src/**/*.{js,jsx,ts,tsx}',
+    '!**/*.d.ts',
+    '!**/node_modules/**',
+  ],
 
   // The directory where Jest should output its coverage files
   coverageDirectory: '<rootDir>/test/unit/coverage',
@@ -61,6 +66,14 @@ module.exports = {
 
   // A set of global variables that need to be available in all test environments
   // globals: {},
+  globals: {
+    // we must specify a custom tsconfig for tests because we need the typescript transform
+    // to transform jsx into js rather than leaving it jsx such as the next build requires.  you
+    // can see this setting in tsconfig.jest.json -> "jsx": "react"
+    "ts-jest": {
+      tsconfig: "<rootDir>/test/unit/tsconfig.jest.json",
+    },
+  },
 
   // The maximum amount of workers used to run your tests. Can be specified as % or a number. E.g. maxWorkers: 10% will use 10% of your CPU amount + 1 as the maximum worker number. maxWorkers: 2 will use a maximum of 2 workers.
   // maxWorkers: "50%",
@@ -98,6 +111,8 @@ module.exports = {
 
   // A preset that is used as a base for Jest's configuration
   // preset: null,
+  preset: "ts-jest",
+  testEnvironment: "jsdom",
 
   // Run tests from one or more projects
   // projects: null,
