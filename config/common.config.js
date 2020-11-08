@@ -23,7 +23,8 @@ module.exports = (env, options) => {
       contentBase: resolve('dist'),
       compress: false,
       port: 8443,
-      openPage: 'pages/index.html'
+      openPage: 'pages/index.html',
+      clientLogLevel: 'silent'
     },
 
     // ### Resolve
