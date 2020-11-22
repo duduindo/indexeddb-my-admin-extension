@@ -1,20 +1,22 @@
-import uniqueId from 'lodash/uniqueId'
-import MessageFactory from '@/models/Message/MessageFactory'
+// import uniqueId from 'lodash/uniqueId'
+// import MessageFactory from '@/models/Message/MessageFactory'
 
 
-class FetchManager {
-  private id = uniqueId('fetch_manager_')
+// class FetchManager<T extends Promise<any>> {
+//   // private id = uniqueId('fetch_manager_')
 
-  constructor(idTab, url): Promise<any> {
-    const message = MessageFactory()
+//   constructor(idTab, url) {
+//     // const message = MessageFactory()
 
-    message.send()
+//     // message.send()
 
-    return new Promise((resolve) => {
-      message.listener(data => resolve(data))
-    })
-  }
-}
+//     // return new Promise((resolve) => {
+//     //   message.listener(data => resolve(data))
+//     // })
+
+//     return Promise.resolve(10)
+//   }
+// }
 
 
-export default FetchManager
+// export default FetchManager

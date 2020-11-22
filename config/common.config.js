@@ -11,7 +11,7 @@ module.exports = (env, options) => {
 
   return {
     // ### Devtool
-    devtool: 'cheap-source-map',
+    devtool: 'inline-cheap-source-map',
 
     // ### Watch
     watchOptions: {
@@ -34,6 +34,7 @@ module.exports = (env, options) => {
       alias: {
         '@': resolve('src'),
         models: resolve('src/models'),
+        views: resolve('views'),
       }
     },
 

@@ -1,23 +1,23 @@
-// import TabsEventFactory from '@/models/TabsEvent/TabsEventFactory'
-import MessageFactory from '@/models/Message/MessageFactory'
+import TabsEventFactory from '@/models/TabsEvent/TabsEventFactory'
+// import MessageFactory from '@/models/Message/MessageFactory'
 
 
-const message = MessageFactory()
-// const tabs = TabsEventFactory()
+// const message = MessageFactory()
+const tabs = TabsEventFactory()
 
-// tabs.listener((data: any) => {
-//   console.log('Tabs Evenet: ', data)
+tabs.listener((data: any) => {
+  console.log('Tabs Evenet: ', data)
+})
+
+
+// message.listener((request: any, sender: any) => {
+//   console.log('Page: ', request)
 // })
 
-
-message.listener((request: any, sender: any) => {
-  console.log('Page: ', request)
-})
-
-document.addEventListener('click', () => {
-  console.log('Clicked')
-  message.send('Hello, Content (3)', 159)
-})
+// document.addEventListener('click', () => {
+//   console.log('Clicked')
+//   message.send('Hello, Content (3)', 180)
+// })
 
 
 

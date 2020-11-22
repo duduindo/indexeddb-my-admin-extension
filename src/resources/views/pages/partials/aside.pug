@@ -1,0 +1,35 @@
+.mt-2.text-center
+  div
+    a(href='/pages/index.html')
+      svg(width='100' height='50')
+        g
+          rect(width='100' height='50' style='fill:lightblue;stroke-width:3;stroke:rgb(0,0,0)')
+          text(x='15' y='30' fill='black') logo here
+
+  div
+    .btn-group(role='group' aria-label='Links').mt-2
+      a.btn.btn-secondary(href='/pages/index.html') Home
+      a.btn.btn-secondary(href='/pages/about.html') About
+
+p.text-center.mt-3.mb-1 Current domain:
+
+.input-group.mb-4
+  select.custom-select.pl-2
+    option(value='-1') (All domains)
+    option(value='150') localhost:8443
+    option(value='381') google.com
+    option(value='496') yahoo.com
+
+div
+  details(open)
+    summary Storage
+
+    details(open)
+      summary Database one
+
+      details(open)
+        summary Table one
+
+        details
+          summary Index one
+
