@@ -1,13 +1,30 @@
 
+@import 'sass/index'
+
 
 // Only dev
 // *
 //   background-color: rgba(0,0,0, .07)
 //   border: 1px solid rgba(0,0,0, .08)
+.l-container
+  display: grid
+  grid-template-columns: 2fr 8fr
+  grid-gap: 5px
+
+.l-aside
+  grid-column: 1
+
+.l-main
+  grid-column: 2
 
 details > details
   margin-left: 20px
 
+.sidebar
+  background-color: silver
+  max-height: 100vh
+  overflow: auto
+  position: sticky
+  top: 0
 // /Only dev
 
-@import 'sass/index'
