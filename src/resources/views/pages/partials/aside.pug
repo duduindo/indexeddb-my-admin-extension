@@ -1,47 +1,46 @@
 .container-fluid
   .row
-    .col-12
-      .text-center.mt-2
+    .col
+      .d-flex.justify-content-center.mt-3.mb-3
         a(href='/pages/index.html')
           svg(width='100' height='50')
             g
               rect(width='100' height='50' style='fill:lightblue;stroke-width:3;stroke:rgb(0,0,0)')
               text(x='15' y='30' fill='black') logo here
 
-hr
+      .d-flex.justify-content-center.mb-3
+        .btn-group(role='group' aria-label='Links')
+          a.btn.btn-secondary(href='/pages/index.html') Home
+          a.btn.btn-secondary(href='/pages/about.html') About
 
-.mt-2.text-center
-  div
-    a(href='/pages/index.html')
-      svg(width='100' height='50')
-        g
-          rect(width='100' height='50' style='fill:lightblue;stroke-width:3;stroke:rgb(0,0,0)')
-          text(x='15' y='30' fill='black') logo here
+  //- Storage Tree
+  .row
+    .col
+      div
+        form
+          .form-group.text-center
+            label(for='currentDomain') Current domain:
+            select#currentDomain.form-control
+              option(value='-1') (All domains)
+              option(value='150') localhost:8443
+              option(value='381') google.com
+              option(value='496') yahoo.com
 
-  div
-    .btn-group(role='group' aria-label='Links').mt-2
-      a.btn.btn-secondary(href='/pages/index.html') Home
-      a.btn.btn-secondary(href='/pages/about.html') About
+        details(open)
+          summary Storage
 
-p.text-center.mt-3.mb-1 Current domain:
+          details(open)
+            summary Database one
 
-.input-group.mb-4
-  select.custom-select.pl-2
-    option(value='-1') (All domains)
-    option(value='150') localhost:8443
-    option(value='381') google.com
-    option(value='496') yahoo.com
+            details(open)
+              summary Table one
 
-div
-  details(open)
-    summary Storage
+              details
+                summary Index one
 
-    details(open)
-      summary Database one
+              details
+                summary Index one
 
-      details(open)
-        summary Table one
+        hr
 
-        details
-          summary Index one
-
+        storage-tree

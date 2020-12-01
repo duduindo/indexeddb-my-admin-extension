@@ -60,7 +60,11 @@ module.exports = (env, options) => {
         // #### Svelte
         {
           test: /\.(svelte)$/,
-          loader: 'svelte-loader'
+          loader: 'svelte-loader',
+          options: {
+            customElement: true,
+            tag: null
+          }
         },
 
         // #### Babel

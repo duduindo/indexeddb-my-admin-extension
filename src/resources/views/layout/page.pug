@@ -7,26 +7,18 @@ html
       link(href='/pages/static/build.css' rel='stylesheet')
 
   body
-    //- div.container-fluid
-    //-   div.row.flex-xl-nowrap
-    //-     aside.col-xl-2.col-md-2.sidebar
-    //-       block aside
-    //-         include ../pages/partials/aside.pug
+    .layout-container
+      aside.layout-aside
+        .sidebar.sticky-top
+          block aside
+            include ../pages/partials/aside.pug
 
-    //-     main.col-xl-10.col-md-10.pl-0.pr-0
-    //-       block breadcrumb
-    //-         include ../pages/partials/breadcrumb.pug
+      main.layout-main
+        .sticky-top
+          block breadcrumb
+            include ../pages/partials/breadcrumb.pug
 
-    //-       .container-fluid
-    //-         .row
-    //-          .col-xl-12
-    //-             block content
-    .l-container
-      aside.l-aside
-        block aside
-          include ../pages/partials/aside.pug
-
-      main.l-main main
+        block content
 
 
     if isProduction

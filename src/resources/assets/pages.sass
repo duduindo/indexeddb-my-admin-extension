@@ -6,15 +6,15 @@
 // *
 //   background-color: rgba(0,0,0, .07)
 //   border: 1px solid rgba(0,0,0, .08)
-.l-container
+.layout-container
   display: grid
-  grid-template-columns: 2fr 8fr
-  grid-gap: 5px
+  grid-template-columns: 1.5fr 8.5fr
+  // grid-gap: 5px
 
-.l-aside
+.layout-aside
   grid-column: 1
 
-.l-main
+.layout-main
   grid-column: 2
 
 details > details
@@ -22,9 +22,7 @@ details > details
 
 .sidebar
   background-color: silver
-  max-height: 100vh
+  height: 100vh
   overflow: auto
-  position: sticky
-  top: 0
 // /Only dev
 
