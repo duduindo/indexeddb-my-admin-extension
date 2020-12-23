@@ -6,7 +6,13 @@ declare module '*.svelte'
 declare module 'idb'
 declare module 'promised-websql'
 declare module 'graphql-type-json'
+declare module 'chomex'
+declare module 'url-pattern'
 
+export type RouterAction = {
+  url: string,
+  data?: any
+}
 
 declare enum Choices {
   unique = 'UNIQUE'

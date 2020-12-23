@@ -1,11 +1,17 @@
-// import FetchManager from './FetchManager'
+import get from 'lodash/get'
+import browser from 'webextension-polyfill'
+import Router from 'routes'
+import type { RouterAction } from '@/types/global'
 
 
-// function fetchContent(idTab: number, url: string, init?: object): Promise<any> {
-//   const manager = new FetchManager(idTab, url, init)
+async function fetchContent(url: string, data?: any) {
+  const { origin } = new URL(url)
+  const tabs = await browser.tabs.query({ url: `${origin}/` })
+  const id = get(tabs, '0.id')
+  const action: RouterAction = { url, data }
 
-//   return Promise.resolve(10)
-// }
+  return browser.tabs.sendMessage(id, action)
+}
 
 
-// export default fetchContent
+export default fetchContent

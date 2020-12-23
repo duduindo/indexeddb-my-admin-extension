@@ -4,8 +4,8 @@
   "description": "IndexedDB My Admin Extension",
   "main": "index.js",
   "scripts": {
-    "chrome": "webpack --config config/chrome.config.js --progress --mode=production",
-    "firefox": "webpack --config config/firefox.config.js --progress --mode=production",
+    "extension": "webpack --config config/chrome.config.js --progress --mode=production",
+    "extension:watch": "webpack --config config/chrome.config.js --progress --mode=production --watch",
     "watch": "webpack-dev-server --config config/common.config.js --open --progress --watch --mode=development",
     "test-unit": "jest --config test/unit/jest.config.js --maxWorkers=1",
     "test-unit:watch": "jest --config test/unit/jest.config.js --watch --maxWorkers=1",
@@ -29,13 +29,13 @@
   "homepage": "https://gitlab.com/duduindo/indexeddb-my-admin-extension#readme",
   "dependencies": {
     "bootstrap": "^4.5.3",
-    "browser-express": "^4.6.0",
     "idb": "^5.0.0",
     "lodash": "^4.17.15",
     "promised-websql": "^0.1.1",
-    "rest": "^2.0.0",
+    "routes": "^2.1.0",
     "svelte": "^3.23.0",
-    "svelte-spa-router": "^2.2.0"
+    "svelte-spa-router": "^2.2.0",
+    "webextension-polyfill": "^0.7.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",

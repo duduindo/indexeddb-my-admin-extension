@@ -73,16 +73,21 @@ class Admin implements InterfaceBridge {
     }
   }
 
-  async getStructureFromDatabase(): Promise<DatabaseAdminResponse> {
-    try {
+  async getStructureFromDatabase(): Promise<any> {
       const describe = await this.driver.getDescribeDatabase()
       const tables = await this.getTableStrutured()
       const result = { ...describe, tables }
 
-      return this.formatResponse(result)
-    } catch(e) {
-      return this.formatResponse(null, e.message)
-    }
+      return result
+    // try {
+    //   const describe = await this.driver.getDescribeDatabase()
+    //   const tables = await this.getTableStrutured()
+    //   const result = { ...describe, tables }
+
+    //   return this.formatResponse(result)
+    // } catch(e) {
+    //   return this.formatResponse(null, e.message)
+    // }
   }
 
 

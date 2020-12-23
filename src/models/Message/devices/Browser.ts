@@ -1,15 +1,17 @@
+import uniqueId from 'lodash/uniqueId'
 import IDevice from './IDevice'
 
 
 class Browser implements IDevice {
-  private origin = location.origin
+  private channelName = uniqueId('BROWSER_CHANNEL_')
+  private channel = new BroadcastChannel(this.channelName);
 
   onmessage(callback: Function): void {
-    window.addEventListener('message', event => callback(event), false)
+    this.channel.onmessage = event => callback(event.data)
   }
 
   postMessage(message: string) {
-    window.postMessage(message, this.origin)
+    this.channel.postMessage(message)
   }
 }
 
