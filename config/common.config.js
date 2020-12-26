@@ -117,6 +117,7 @@ module.exports = (env, options) => {
     // ### Entry
     entry: {
       content: resolve('src/resources/assets/content.ts'),
+      background: resolve('src/resources/assets/background.ts'),
       'pages/static/build': [resolve('src/resources/assets/pages.ts'), resolve('src/resources/assets/pages.sass')],
       popup: resolve('src/resources/assets/popup.ts'),
     }
