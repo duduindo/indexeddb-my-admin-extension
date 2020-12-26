@@ -3,25 +3,38 @@ import browser from 'webextension-polyfill'
 import type { RouterAction } from '@/types/global'
 
 // Database
-import IDriverBridge from '@/models/Database/drivers/IDriverBridge'
-import IndexedDB from '@/models/Database/drivers/IndexedDB'
-import Admin from '@/models/Database/interfaces/Admin'
+import DatabaseFactory from '@/models/Database/DatabaseFactory'
 
 
 const router = Router();
 
 
-router.addRoute('https?\://:domain/:name/:version/structure/', function() {
-  const { name, version } = this.params;
-  const connection = IndexedDB.openDatabase(name, version)
-  const driver = new IndexedDB(connection)
-  const admin = new Admin(driver)
+// Database
+// =========================================================
+router.addRoute('https?\://:domain/database/:type/:name/:version/delete/', function() {
+  const { name, type, version } = this.params;
+  const database = DatabaseFactory(type, name, version)
 
-  return admin.getStructureFromDatabase()
+  return database.deleteDatabase(name)
+});
+
+router.addRoute('https?\://:domain/database/:type/:name/:version/databases/', function() {
+  const { name, type, version } = this.params;
+  const database = DatabaseFactory(type, name, version)
+
+  return database.getDatabases()
+});
+
+router.addRoute('https?\://:domain/database/:type/:name/:version/structure/', function() {
+  const { name, type, version } = this.params;
+  const database = DatabaseFactory(type, name, version)
+
+  return database.getStructureFromDatabase()
 });
 
 
-
+// Listener
+// =========================================================
 browser.runtime.onMessage.addListener((action: RouterAction) => {
   const match = router.match(action.url)
 

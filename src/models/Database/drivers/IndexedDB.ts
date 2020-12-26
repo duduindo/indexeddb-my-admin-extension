@@ -1,6 +1,7 @@
 import { openDB, deleteDB } from 'idb'
 import IDriverBridge from './IDriverBridge'
-
+import { Choices } from '../enums'
+import type { IDBDatabaseInfo, DatabaseStruture } from '../types'
 
 class IndexedDB implements IDriverBridge {
   private connection: any
@@ -31,7 +32,7 @@ class IndexedDB implements IDriverBridge {
     return databases
   }
 
-  async getDescribeDatabase(): Promise<DatabaseDescription> {
+  async getDescribeDatabase(): Promise<IDBDatabaseInfo> {
     const db = await this.connection
     const description = { name: db.name, version: db.version }
 
@@ -42,20 +43,28 @@ class IndexedDB implements IDriverBridge {
   static async openDatabase(name: string, version: number): Promise<any> {
     // @ts-ignore
     const databases: IDBDatabaseInfo[] = await indexedDB.databases() || []
-    const found: IDBDatabaseInfo | undefined = databases.find((db: IDBDatabaseInfo) => {
+    const hasDatabase: IDBDatabaseInfo | undefined = databases.find((db: IDBDatabaseInfo) => {
+      return db.name === name
+    })
+    const hasVersionBigger: IDBDatabaseInfo | undefined = databases.find((db: IDBDatabaseInfo) => {
       return db.name === name && db.version < version
     })
 
-    if (found) {
-      throw new DOMException(`The requested version (${version}) is bigger than the existing version (${found.version}).`);
-    } else {
-      return await openDB(name, version)
+    if (!hasDatabase) {
+      throw new DOMException(`Database (${name}) not found`)
     }
+
+    if (hasVersionBigger) {
+      throw new DOMException(`The requested version (${version}) is bigger than the existing version (${hasVersionBigger.version}).`);
+    }
+
+    return await openDB(name, version)
   }
 
   // Static
   static async upgradeDatabase(data: DatabaseStruture): Promise<any> {
     return await openDB(data.name, data.version, {
+      // @ts-ignore
       upgrade(db: IDBDatabase, oldVersion: number, newVersion: number, transaction: IDBTransaction) {
         let store: IDBObjectStore
 
