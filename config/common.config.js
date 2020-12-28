@@ -29,12 +29,10 @@ module.exports = (env, options) => {
 
     // ### Resolve
     resolve: {
-      extensions: ['.js', '.ts', '.svelte', '.pug', '.sass', '.scss'],
-      mainFields: ['svelte', 'browser', 'module', 'main'],
+      extensions: ['.mjs', '.js', '.ts', '.svelte', '.pug', '.sass', '.scss'],
+      mainFields: ['svelte', 'browser', 'main'],
       alias: {
-        '@': resolve('src'),
-        models: resolve('src/models'),
-        views: resolve('views'),
+        '@': resolve('src')
       }
     },
 
@@ -60,11 +58,7 @@ module.exports = (env, options) => {
         // #### Svelte
         {
           test: /\.(svelte)$/,
-          loader: 'svelte-loader',
-          options: {
-            customElement: true,
-            tag: null
-          }
+          loader: 'svelte-loader'
         },
 
         // #### Babel

@@ -29,11 +29,12 @@
   "homepage": "https://gitlab.com/duduindo/indexeddb-my-admin-extension#readme",
   "dependencies": {
     "bootstrap": "^4.5.3",
+    "chrome-extension-async": "^3.4.1",
     "idb": "^5.0.0",
     "lodash": "^4.17.15",
     "promised-websql": "^0.1.1",
     "routes": "^2.1.0",
-    "svelte": "^3.23.0",
+    "svelte": "^3.31.0",
     "svelte-spa-router": "^2.2.0",
     "webextension-polyfill": "^0.7.0"
   },
