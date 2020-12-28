@@ -5,10 +5,6 @@ interface IDatabaseBridge {
   /**
    * @param $databasename database's name
    */
-  deleteDatabase(databasename: string): Promise<boolean>
-
-  getDatabases(): Promise<object[]>
-
   getStructureFromDatabase(): Promise<any>
 
 

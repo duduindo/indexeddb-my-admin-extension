@@ -1,35 +1,29 @@
 import { openDB, deleteDB } from 'idb'
-import IDriverBridge from './IDriverBridge'
+import Driver from './Driver'
 import { Choices } from '../enums'
 import type { IDBDatabaseInfo, DatabaseStruture } from '../types'
 
-class IndexedDB implements IDriverBridge {
-  private connection: any
 
+class IndexedDB extends Driver {
   constructor(connection: any) {
-    this.connection = connection
+    super(connection)
   }
 
   // Database
   // =========================================================
   async close(): Promise<void> {
-    const db = await this.connection
-
-    db.close()
+    return await this.connection.close()
   }
 
-  async deleteDatabase(databasename: string): Promise<boolean> {
-    await this.close()
+  static async deleteDatabase(databasename: string): Promise<boolean> {
     await deleteDB(databasename)
 
     return true
   }
 
-  async getDatabases(): Promise<object[]> {
+  static async getDatabases(): Promise<IDBDatabaseInfo[]> {
     // @ts-ignore: Property 'databases' does not exist on type 'IDBFactory'.
-    const databases: object[] = await indexedDB.databases()
-
-    return databases
+    return await indexedDB.databases()
   }
 
   async getDescribeDatabase(): Promise<IDBDatabaseInfo> {

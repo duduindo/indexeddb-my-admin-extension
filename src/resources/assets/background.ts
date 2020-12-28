@@ -7,7 +7,7 @@ if (isExtension) {
   function handleInstalled() {
     chrome.tabs.query({ status: 'complete' }, tabs => {
       tabs.forEach(tab => {
-        if (tab.url.startsWith('http://localhost:8082/')) {
+        if (tab.url.startsWith('http')) {
           chrome.tabs.executeScript(tab.id, { file: 'content.js' });
         }
       })

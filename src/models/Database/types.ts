@@ -1,4 +1,5 @@
 
+
 type DatabaseIndexStruture = {
   name: string,
   keyPath?: string,

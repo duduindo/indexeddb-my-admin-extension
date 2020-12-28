@@ -1,14 +1,10 @@
-import DriverBridge from './drivers/IDriverBridge'
+import Driver from './drivers/Driver'
 import IDatabaseBridge from './IDatabaseBridge'
-import type { DatabaseIndexStruture, DatabaseTableStruture } from './types'
+import type { DatabaseStruture, DatabaseIndexStruture, DatabaseTableStruture } from './types'
 
 
 class Database implements IDatabaseBridge {
-  private driver: DriverBridge
-
-  constructor(driver: DriverBridge) {
-    this.driver = driver
-  }
+  constructor(private driver: Driver) {}
 
   /*
    * @param $tablename name of table
@@ -41,18 +37,9 @@ class Database implements IDatabaseBridge {
     return tables
   }
 
-
   // Database
   // =========================================================
-  async deleteDatabase(databasename: string): Promise<boolean> {
-    return await this.driver.deleteDatabase(databasename)
-  }
-
-  async getDatabases(): Promise<object[]> {
-    return await this.driver.getDatabases()
-  }
-
-  async getStructureFromDatabase(): Promise<any> {
+  async getStructureFromDatabase(): Promise<DatabaseStruture> {
     const describe = await this.driver.getDescribeDatabase()
     const tables = await this.getTableStrutured()
     const result = { ...describe, tables }

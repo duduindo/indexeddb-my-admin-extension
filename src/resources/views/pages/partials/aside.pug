@@ -16,31 +16,6 @@
   //- Storage Tree
   .row
     .col
-      div
-        form
-          .form-group.text-center
-            label(for='currentDomain') Current domain:
-            select#currentDomain.form-control
-              option(value='-1') (All domains)
-              option(value='150') localhost:8443
-              option(value='381') google.com
-              option(value='496') yahoo.com
-
-        details(open)
-          summary Storage
-
-          details(open)
-            summary Database one
-
-            details(open)
-              summary Table one
-
-              details
-                summary Index one
-
-              details
-                summary Index one
-
-        hr
-
-        storage-tree
+      hr
+      div(data-storage-tree)
+      hr

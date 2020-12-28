@@ -4,6 +4,7 @@ import type { RouterAction } from '@/types/global'
 
 // Database
 import DatabaseFactory from '@/models/Database/DatabaseFactory'
+import IndexedDB from '@/models/Database/drivers/IndexedDB'
 
 
 const router = Router();
@@ -13,16 +14,16 @@ const router = Router();
 // =========================================================
 router.addRoute('https?\://:domain/database/:type/:name/:version/delete/', function() {
   const { name, type, version } = this.params;
-  const database = DatabaseFactory(type, name, version)
+  const driver = IndexedDB
 
-  return database.deleteDatabase(name)
+  return driver.deleteDatabase(name)
 });
 
-router.addRoute('https?\://:domain/database/:type/:name/:version/databases/', function() {
+router.addRoute('https?\://:domain/database/:type/databases/', function() {
   const { name, type, version } = this.params;
-  const database = DatabaseFactory(type, name, version)
+  const driver = IndexedDB
 
-  return database.getDatabases()
+  return driver.getDatabases()
 });
 
 router.addRoute('https?\://:domain/database/:type/:name/:version/structure/', function() {
@@ -44,3 +45,5 @@ browser.runtime.onMessage.addListener((action: RouterAction) => {
 
   return Promise.reject(new Error('Route not found'))
 })
+
+
