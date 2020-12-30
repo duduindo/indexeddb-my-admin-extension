@@ -6,7 +6,7 @@
     let url = browser.runtime.getURL('/pages/index.html')
 
     if (value !== '-1') {
-      url = browser.runtime.getURL(`/pages/index.html?origin=${target.value}`)
+      url = browser.runtime.getURL(`/pages/domain.html?origin=${target.value}`)
     }
 
     location.href = url

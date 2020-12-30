@@ -99,6 +99,32 @@ module.exports = (env, options) => {
         }
       }),
 
+      // #### Pug - Pages - Domain
+      new HtmlWebpackPlugin({
+        inject: isDevelopment,
+        cache: false,
+        template: resolve('src/resources/views/pages/domain.pug'),
+        filename: 'pages/domain.html',
+        templateParameters: {
+          title: 'IndexedDB My Admin Extension - Domain',
+          isProduction,
+          isDevelopment,
+        }
+      }),
+
+      // #### Pug - Pages - Database
+      new HtmlWebpackPlugin({
+        inject: isDevelopment,
+        cache: false,
+        template: resolve('src/resources/views/pages/database.pug'),
+        filename: 'pages/database.html',
+        templateParameters: {
+          title: 'IndexedDB My Admin Extension - Database',
+          isProduction,
+          isDevelopment,
+        }
+      }),
+
       // #### Pug - Popup
       new HtmlWebpackPlugin({
         inject: isDevelopment,

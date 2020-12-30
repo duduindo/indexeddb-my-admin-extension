@@ -15,9 +15,8 @@ const optionsTabs = readable([], set => {
       const value = tab.origin
       const text = tab.host
       const isSelected = tab.origin === params.get('origin')
-      const url = browser.runtime.getURL(`/pages/index.html?origin=${value}`)
 
-      return { value, text, isSelected, url }
+      return { value, text, isSelected }
     })
 
     set(options)
