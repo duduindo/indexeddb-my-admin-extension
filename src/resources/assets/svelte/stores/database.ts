@@ -7,7 +7,7 @@ const origin = params.get('origin')
 
 // Readable
 const databases = readable([], set => {
-  fetchContent(`${origin}/database/indexeddb/databases/`)
+  fetchContent(`${origin}/databases/`)
     .then(list => set(list))
     .catch(err => {
       console.log('ERRO databases: ', err.message)
@@ -16,23 +16,17 @@ const databases = readable([], set => {
 })
 
 // Readable
-const allDatabasesStructured = readable([], set => {
-  // databases.subscribe(value => {
-  //   value.forEach(({name, version}) => {
-  //     fetchContent(`${origin}/database/indexeddb/${name}/${version}/structure/`)
-  //       .then(list => set(list))
-  //       .catch(err => {
-  //         console.log('ERRO allDatabasesStructured: ', err.message)
-  //         set([])
-  //       })
-  //   })
-  // })
-
-  set([1])
+const structures = readable([], set => {
+  fetchContent(`${origin}/structure-databases/`)
+    .then(list => set(list))
+    .catch(err => {
+      console.log('ERRO structure-databases: ', err.message)
+      set([])
+    })
 })
 
 
 export {
   databases,
-  allDatabasesStructured
+  structures
 }

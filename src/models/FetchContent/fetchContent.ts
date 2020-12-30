@@ -1,6 +1,6 @@
 import browser from 'webextension-polyfill'
 import Router from 'routes'
-import type { RouterAction } from '@/types/global'
+import type { RouterAction } from './types'
 
 
 async function fetchContent(url: string, data?: any) {

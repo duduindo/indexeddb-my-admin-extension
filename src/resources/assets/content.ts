@@ -1,36 +1,46 @@
 import Router from 'routes'
 import browser from 'webextension-polyfill'
-import type { RouterAction } from '@/types/global'
+import type { RouterAction } from '@/models/FetchContent/types'
+import type { DatabaseStruture, IDBDatabaseInfo } from '@/models/Database/types'
 
 // Database
-import DatabaseFactory from '@/models/Database/DatabaseFactory'
-import IndexedDB from '@/models/Database/drivers/IndexedDB'
-
+import IndexedDB from '@/models/Database/IndexedDB'
 
 const router = Router();
 
 
 // Database
 // =========================================================
-router.addRoute('https?\://:domain/database/:type/:name/:version/delete/', function() {
-  const { name, type, version } = this.params;
-  const driver = IndexedDB
+router.addRoute('https?\://:domain/:name/:version/delete/', function() {
+  const { name, version } = this.params;
 
-  return driver.deleteDatabase(name)
+  return IndexedDB.deleteDatabase(name)
 });
 
-router.addRoute('https?\://:domain/database/:type/databases/', function() {
-  const { name, type, version } = this.params;
-  const driver = IndexedDB
-
-  return driver.getDatabases()
+router.addRoute('https?\://:domain/databases/', function() {
+  return IndexedDB.getDatabases()
 });
 
-router.addRoute('https?\://:domain/database/:type/:name/:version/structure/', function() {
-  const { name, type, version } = this.params;
-  const database = DatabaseFactory(type, name, version)
+router.addRoute('https?\://:domain/:name/:version/structure/', function() {
+  const { name, version } = this.params;
+  const connection = IndexedDB.openDatabase(name, version)
+  const indexedDB = new IndexedDB(connection)
 
-  return database.getStructureFromDatabase()
+  return indexedDB.getStructureFromDatabase()
+});
+
+router.addRoute('https?\://:domain/structure-databases/', async function(): Promise<DatabaseStruture[]> {
+  const databases: IDBDatabaseInfo[] = await IndexedDB.getDatabases()
+  let structures = []
+
+  structures = databases.map(({ name, version }) => {
+    const connection = IndexedDB.openDatabase(name, version)
+    const indexedDB = new IndexedDB(connection)
+
+    return indexedDB.getStructureFromDatabase()
+  })
+
+  return await Promise.all(structures)
 });
 
 

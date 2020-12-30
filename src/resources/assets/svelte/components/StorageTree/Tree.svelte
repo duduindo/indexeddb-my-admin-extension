@@ -1,20 +1,24 @@
 <script>
-  export let databases
+  export let structures
 </script>
 
-{#each databases as database}
-  <p>{database.name}</p>
-{/each}
+{#each structures as structure}
+  <!-- Database -->
+  <details>
+    <summary>{structure.name}</summary>
 
-<details open="">
-  <summary>Database one</summary>
-  <details open="">
-    <summary>Table one</summary>
-    <details>
-      <summary>Index one</summary>
-    </details>
-    <details>
-      <summary>Index one</summary>
-    </details>
+    <!-- Table -->
+    {#each structure.tables as table}
+      <details>
+        <summary>{table.name}</summary>
+
+        <!-- Index -->
+        {#each table.indexes as index}
+          <details>
+            <summary>{index.name}</summary>
+          </details>
+        {/each}
+      </details>
+    {/each}
   </details>
-</details>
+{/each}
