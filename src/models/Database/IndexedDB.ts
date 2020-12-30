@@ -1,12 +1,37 @@
 import { openDB, deleteDB } from 'idb'
-import Driver from './Driver'
-import { Choices } from '../enums'
-import type { IDBDatabaseInfo, DatabaseStruture } from '../types'
+import { Choices } from './enums'
+import type {
+  IDBDatabaseInfo,
+  DatabaseStruture,
+  DatabaseIndexStruture,
+  DatabaseTableStruture
+} from './types'
 
 
-class IndexedDB extends Driver {
-  constructor(connection: any) {
-    super(connection)
+class IndexedDB {
+  constructor(private connection?: any) {}
+
+  private async getIndexStrutured(tablename: string): Promise<DatabaseIndexStruture[]> {
+    const indexnames = await this.getIndexNames(tablename)
+    const indexes = indexnames.map(name => ({ name }))
+
+    return indexes
+  }
+
+  private async getTableStrutured(): Promise<DatabaseTableStruture[]> {
+    const tablenames = await this.getTableNames()
+    const tables = []
+
+    for (const name of tablenames) {
+      const indexes = await this.getIndexStrutured(name)
+
+      tables.push({
+        name,
+        indexes
+      })
+    }
+
+    return tables
   }
 
   // Database
@@ -31,6 +56,14 @@ class IndexedDB extends Driver {
     const description = { name: db.name, version: db.version }
 
     return description
+  }
+
+  async getStructureFromDatabase(): Promise<DatabaseStruture> {
+    const describe = await this.getDescribeDatabase()
+    const tables = await this.getTableStrutured()
+    const result = { ...describe, tables }
+
+    return result
   }
 
   // Static
