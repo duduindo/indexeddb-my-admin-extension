@@ -1,6 +1,8 @@
-
+// @ts-ignore
 import StorageTree from './svelte/components/StorageTree/Index'
+// @ts-ignore
 import DomainsListGroup from './svelte/components/DomainsListGroup/Index'
+// @ts-ignore
 import StoragesListGroup from './svelte/components/StoragesListGroup/Index'
 
 

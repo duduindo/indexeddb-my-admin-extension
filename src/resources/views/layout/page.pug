@@ -3,8 +3,7 @@ html
   head
     title #{title}
 
-    if isProduction
-      link(href='/pages/static/build.css' rel='stylesheet')
+    link(href='/pages/static/build.css' rel='stylesheet')
 
   body
     .layout-container
@@ -20,6 +19,4 @@ html
 
         block content
 
-
-    if isProduction
-      script(src='/pages/static/build.js')
+    script(src='/pages/static/build.js')

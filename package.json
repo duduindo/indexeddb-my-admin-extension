@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "extension": "webpack --config config/chrome.config.js --progress --mode=production",
-    "extension:watch": "webpack --config config/chrome.config.js --progress --mode=production --watch",
+    "extension:watch": "webpack --config config/chrome.config.js --progress --mode=development --watch",
     "watch": "webpack-dev-server --config config/common.config.js --open --progress --watch --mode=development",
     "test-unit": "jest --config test/unit/jest.config.js --maxWorkers=1",
     "test-unit:watch": "jest --config test/unit/jest.config.js --watch --maxWorkers=1",

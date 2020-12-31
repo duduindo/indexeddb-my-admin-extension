@@ -6,9 +6,6 @@ const webpack = require('webpack');
 
 
 module.exports = (env, options) => {
-  const isProduction = options.mode === 'production';
-  const isDevelopment = !isProduction;
-
   return {
     // ### Devtool
     devtool: 'inline-cheap-source-map',
@@ -16,15 +13,6 @@ module.exports = (env, options) => {
     // ### Watch
     watchOptions: {
       ignored: ['node_modules', 'dist', 'config', 'build', '.*']
-    },
-
-    // ### Dev
-    devServer: {
-      contentBase: resolve('dist'),
-      compress: false,
-      port: 8443,
-      openPage: 'pages/index.html',
-      clientLogLevel: 'silent'
     },
 
     // ### Resolve
@@ -88,46 +76,40 @@ module.exports = (env, options) => {
 
       // #### Pug - Pages
       new HtmlWebpackPlugin({
-        inject: isDevelopment,
+        inject: false,
         cache: false,
         template: resolve('src/resources/views/pages/index.pug'),
         filename: 'pages/index.html',
         templateParameters: {
           title: 'IndexedDB My Admin Extension',
-          isProduction,
-          isDevelopment,
         }
       }),
 
       // #### Pug - Pages - Domain
       new HtmlWebpackPlugin({
-        inject: isDevelopment,
+        inject: false,
         cache: false,
         template: resolve('src/resources/views/pages/domain.pug'),
         filename: 'pages/domain.html',
         templateParameters: {
           title: 'IndexedDB My Admin Extension - Domain',
-          isProduction,
-          isDevelopment,
         }
       }),
 
       // #### Pug - Pages - Database
       new HtmlWebpackPlugin({
-        inject: isDevelopment,
+        inject: false,
         cache: false,
         template: resolve('src/resources/views/pages/database.pug'),
         filename: 'pages/database.html',
         templateParameters: {
           title: 'IndexedDB My Admin Extension - Database',
-          isProduction,
-          isDevelopment,
         }
       }),
 
       // #### Pug - Popup
       new HtmlWebpackPlugin({
-        inject: isDevelopment,
+        inject: false,
         cache: false,
         template: resolve('src/resources/views/popup.pug'),
         filename: 'popup.html',
