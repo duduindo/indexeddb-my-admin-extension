@@ -1,0 +1,17 @@
+[
+  {
+    "template": "src/resources/views/pages/index.pug",
+    "filename": "pages/index.html",
+    "title": "IndexedDB My Admin Extension"
+  },
+  {
+    "template": "src/resources/views/pages/domain.pug",
+    "filename": "pages/domain.html",
+    "title": "IndexedDB My Admin Extension - Domain"
+  },
+  {
+    "template": "src/resources/views/pages/database.pug",
+    "filename": "pages/database.html",
+    "title": "IndexedDB My Admin Extension - Database"
+  }
+]

@@ -1,11 +1,14 @@
 const { resolve } = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const webpack = require('webpack');
+const pages = require('./pages.json')
 
 
 module.exports = (env, options) => {
+
   return {
     // ### Devtool
     devtool: 'inline-cheap-source-map',
@@ -75,36 +78,16 @@ module.exports = (env, options) => {
       }),
 
       // #### Pug - Pages
-      new HtmlWebpackPlugin({
-        inject: false,
-        cache: false,
-        template: resolve('src/resources/views/pages/index.pug'),
-        filename: 'pages/index.html',
-        templateParameters: {
-          title: 'IndexedDB My Admin Extension',
-        }
-      }),
-
-      // #### Pug - Pages - Domain
-      new HtmlWebpackPlugin({
-        inject: false,
-        cache: false,
-        template: resolve('src/resources/views/pages/domain.pug'),
-        filename: 'pages/domain.html',
-        templateParameters: {
-          title: 'IndexedDB My Admin Extension - Domain',
-        }
-      }),
-
-      // #### Pug - Pages - Database
-      new HtmlWebpackPlugin({
-        inject: false,
-        cache: false,
-        template: resolve('src/resources/views/pages/database.pug'),
-        filename: 'pages/database.html',
-        templateParameters: {
-          title: 'IndexedDB My Admin Extension - Database',
-        }
+      ...pages.map(page => {
+        return new HtmlWebpackPlugin({
+          inject: false,
+          cache: false,
+          template: resolve(page.template),
+          filename: page.filename,
+          templateParameters: {
+            title: page.title,
+          },
+        })
       }),
 
       // #### Pug - Popup
@@ -114,6 +97,13 @@ module.exports = (env, options) => {
         template: resolve('src/resources/views/popup.pug'),
         filename: 'popup.html',
       }),
+
+      // Copy
+      new CopyPlugin({
+        patterns: [
+          { from: resolve('src/resources/skeleton'), to: resolve('dist') }
+        ]
+      })
     ],
 
     // ### Entry
@@ -122,6 +112,13 @@ module.exports = (env, options) => {
       background: resolve('src/resources/assets/background.ts'),
       'pages/static/build': [resolve('src/resources/assets/pages.ts'), resolve('src/resources/assets/pages.sass')],
       popup: resolve('src/resources/assets/popup.ts'),
+    },
+
+    // ### Output
+    output: {
+      path: resolve('dist'),
+      filename: '[name].js',
+      libraryTarget: 'umd',
     }
   };
 };
