@@ -44,6 +44,17 @@ router.addRoute('https?\://:domain/structure-databases/', async function(): Prom
 });
 
 
+// Table
+// =========================================================
+router.addRoute('https?\://:domain/:name/:version/table-names/', function() {
+  const { name, version } = this.params;
+  const connection = IndexedDB.openDatabase(name, version)
+  const indexedDB = new IndexedDB(connection)
+
+  return indexedDB.getTableNames()
+});
+
+
 // Listener
 // =========================================================
 browser.runtime.onMessage.addListener((action: RouterAction) => {

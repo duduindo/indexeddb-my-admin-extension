@@ -4,8 +4,8 @@
   "description": "IndexedDB My Admin Extension",
   "main": "index.js",
   "scripts": {
-    "extension": "webpack --config config/common.config.js --progress --mode=production",
-    "extension:watch": "webpack --config config/common.config.js --progress --mode=development --watch",
+    "build": "webpack --config config/common.config.js --progress --mode=production",
+    "watch": "webpack --config config/common.config.js --progress --mode=development --watch",
     "test-unit": "jest --config test/unit/jest.config.js --maxWorkers=1",
     "test-unit:watch": "jest --config test/unit/jest.config.js --watch --maxWorkers=1",
     "test-unit:coverage": "jest --config test/unit/jest.config.js --coverage --maxWorkers=1"
