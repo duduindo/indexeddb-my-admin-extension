@@ -35,13 +35,13 @@
 
   <div class="row">
     <div class="col">
-      <table class="table table-striped table-borderless">
+      <table class="table table-sm table-striped table-borderless">
         <thead>
           <tr>
             <th scope="col"></th>
             <th scope="col">Database</th>
             <th scope="col">Version</th>
-            <th scope="col">Total tables</th>
+            <th scope="col">Tables</th>
           </tr>
         </thead>
 
@@ -79,8 +79,9 @@
               <button type="button" class="btn btn-link btn-sm mr-3">Check all</button>
               <button type="button" class="btn btn-primary btn-sm">Copy</button>
               <button type="button" class="btn btn-primary btn-sm">Merge</button>
+              <button type="button" class="btn btn-dark btn-sm">Export</button>
               <button type="button" class="btn btn-warning btn-sm">Upgrade</button>
-              <button type="button" class="btn btn-danger btn-sm">Drop</button>
+              <button type="button" class="btn btn-danger btn-sm">Delete</button>
             </td>
           </tr>
         </tfoot>

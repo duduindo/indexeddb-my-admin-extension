@@ -24,10 +24,14 @@ class IndexedDB {
 
     for (const name of tablenames) {
       const indexes = await this.getIndexStrutured(name)
+      const autoIncrement = await this.isTableAutoIncrement(name)
+      const keyPath = await this.getKeyPathFromTable(name)
 
       tables.push({
         name,
-        indexes
+        indexes,
+        keyPath,
+        autoIncrement,
       })
     }
 
@@ -170,6 +174,15 @@ class IndexedDB {
     content['value'] = values
 
     return content
+  }
+
+  async getKeyPathFromTable(table: string): Promise<string> {
+    const db = await this.connection
+    const tx = db.transaction(table)
+    const store = tx.objectStore(table)
+    const key = store.keyPath
+
+    return key
   }
 
   async getRowsFromTable(table: string): Promise<number> {
