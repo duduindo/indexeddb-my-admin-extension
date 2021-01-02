@@ -5,13 +5,13 @@
     "title": "IndexedDB My Admin Extension"
   },
   {
-    "template": "src/resources/views/pages/domain.pug",
-    "filename": "pages/domain.html",
-    "title": "Domain - IndexedDB My Admin Extension"
-  },
-  {
     "template": "src/resources/views/pages/database/index.pug",
     "filename": "pages/database/index.html",
     "title": "Database - IndexedDB My Admin Extension"
+  },
+  {
+    "template": "src/resources/views/pages/database/list.pug",
+    "filename": "pages/database/list.html",
+    "title": "Databases - IndexedDB My Admin Extension"
   }
 ]
