@@ -48,7 +48,7 @@
                 </div>
               </th>
               <td>
-                <a href="/pages/table/index.html?origin={origin}&name={name}&version={version}&table={table.name}">
+                <a href="/pages/table/browser.html?origin={origin}&name={name}&version={version}&table={table.name}">
                   {table.name}
                 </a>
               </td>

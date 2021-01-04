@@ -5,7 +5,7 @@ import DomainsList from './svelte/components/DomainsList/Index'
 // @ts-ignore
 import DatabasesList from './svelte/components/DatabasesList/Index'
 // @ts-ignore
-import StoresList from './svelte/components/StoresList/Index'
+import TablesList from './svelte/components/TablesList/Index'
 
 
 document.querySelectorAll('[data-storage-tree]').forEach(target => new StorageTree({ target }))
@@ -14,4 +14,4 @@ document.querySelectorAll('[data-domains-list]').forEach(target => new DomainsLi
 
 document.querySelectorAll('[data-databases-list]').forEach(target => new DatabasesList({ target }))
 
-document.querySelectorAll('[data-stores-list]').forEach(target => new StoresList({ target }))
+document.querySelectorAll('[data-tables-list]').forEach(target => new TablesList({ target }))

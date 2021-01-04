@@ -13,5 +13,10 @@
     "template": "src/resources/views/pages/database/list.pug",
     "filename": "pages/database/list.html",
     "title": "Databases - IndexedDB My Admin Extension"
+  },
+  {
+    "template": "src/resources/views/pages/table/browser.pug",
+    "filename": "pages/table/browser.html",
+    "title": "Browser - Table - IndexedDB My Admin Extension"
   }
 ]
