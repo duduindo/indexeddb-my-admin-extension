@@ -15,6 +15,11 @@
     "title": "Databases - IndexedDB My Admin Extension"
   },
   {
+    "template": "src/resources/views/pages/table/create.pug",
+    "filename": "pages/table/create.html",
+    "title": "Create - Table - IndexedDB My Admin Extension"
+  },
+  {
     "template": "src/resources/views/pages/table/browser.pug",
     "filename": "pages/table/browser.html",
     "title": "Browser - Table - IndexedDB My Admin Extension"
