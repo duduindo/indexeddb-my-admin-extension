@@ -19,7 +19,18 @@ const tablenames = readable([], set => {
     })
 })
 
+// Readable
+const content = readable({}, set => {
+  fetchContent(`${origin}/${name}/${version}/${table}/table-content/`)
+    .then(content => set(content))
+    .catch(err => {
+      console.log('ERRO table content: ', err.message)
+      set({})
+    })
+})
+
 
 export {
   tablenames,
+  content
 }

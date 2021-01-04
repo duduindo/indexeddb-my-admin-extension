@@ -52,7 +52,15 @@ router.addRoute('https?\://:domain/:name/:version/table-names/', function() {
   const indexedDB = new IndexedDB(connection)
 
   return indexedDB.getTableNames()
-});
+})
+
+router.addRoute('https?\://:domain/:name/:version/:table/table-content/', function() {
+  const { name, version, table } = this.params;
+  const connection = IndexedDB.openDatabase(name, version)
+  const indexedDB = new IndexedDB(connection)
+
+  return indexedDB.getContentFromTable(table)
+})
 
 
 // Listener

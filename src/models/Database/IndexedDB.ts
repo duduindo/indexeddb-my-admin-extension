@@ -170,7 +170,11 @@ class IndexedDB {
     const content: any = {}
 
     content['#'] = keys.map((e: any, i: number) => i)
-    content[keyPath] = keys
+
+    if (keyPath) {
+      content[keyPath] = keys
+    }
+
     content['value'] = values
 
     return content
