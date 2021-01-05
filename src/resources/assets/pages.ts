@@ -5,7 +5,7 @@ import StorageTree from './svelte/components/StorageTree/Index'
 // @ts-ignore
 import DomainsList from './svelte/components/DomainsList/Index'
 // @ts-ignore
-import TableCreate from './svelte/components/TableCreate/Index'
+import DatabaseCreate from './svelte/components/DatabaseCreate/Index'
 // @ts-ignore
 import DatabasesList from './svelte/components/DatabasesList/Index'
 // @ts-ignore
@@ -20,7 +20,7 @@ document.querySelectorAll('[data-storage-tree]').forEach(target => new StorageTr
 
 document.querySelectorAll('[data-domains-list]').forEach(target => new DomainsList({ target }))
 
-document.querySelectorAll('[data-table-create]').forEach(target => new TableCreate({ target }))
+document.querySelectorAll('[data-database-create]').forEach(target => new DatabaseCreate({ target }))
 
 document.querySelectorAll('[data-databases-list]').forEach(target => new DatabasesList({ target }))
 

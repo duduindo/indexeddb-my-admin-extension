@@ -17,7 +17,7 @@
   <div class="col">
     <h6>Create database</h6>
 
-    <form class="form-inline" action="/pages/table/create.html">
+    <form class="form-inline" action="/pages/database/create.html">
       <input type="hidden" name="origin" value={origin}>
 
       <div class="form-group">
