@@ -31,6 +31,7 @@
     "idb": "^5.0.8",
     "lodash": "^4.17.15",
     "promised-websql": "^0.1.1",
+    "query-string": "^6.13.8",
     "routes": "^2.1.0",
     "svelte": "^3.31.0",
     "svelte-spa-router": "^2.2.0",
