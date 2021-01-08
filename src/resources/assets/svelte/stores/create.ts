@@ -26,9 +26,25 @@ function removeDatabase(index) {
 
 function addTable(indexDatabase) {
   databases.update((value: any[]) => {
-    let datas = value.slice()
+    return value.map((database, index) => {
+      if (indexDatabase === index) {
+        return {...database, tables: [...database.tables, {}]}
+      }
 
-    return datas
+      return database
+    })
+  })
+}
+
+function removeTable(indexDatabase, indexTable) {
+  databases.update((value: any[]) => {
+    return value.map((database, index) => {
+      if (indexDatabase === index) {
+        return {...database, tables: database.tables.filter((table, i) => i !== indexDatabase)}
+      }
+
+      return database
+    })
   })
 }
 
@@ -42,4 +58,5 @@ export {
 
   // Table
   addTable,
+  removeTable,
 }

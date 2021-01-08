@@ -3,7 +3,7 @@
   export let removeFn
 </script>
 
-<fieldset class="ml-3 bg-secondary">
+<fieldset class="ml-3">
   <legend>Table: <code>{name}</code></legend>
   <label for="">Nome</label>
   <input type="text" bind:value={name}>
