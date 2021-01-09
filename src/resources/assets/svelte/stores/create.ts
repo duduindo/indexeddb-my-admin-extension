@@ -1,62 +1,91 @@
-import get from 'lodash/get'
-import set from 'lodash/set'
+import Storage from '@/models/DataStructure/Storage'
+import Database from '@/models/DataStructure/Database'
+import Table from '@/models/DataStructure/Table'
 import { writable } from 'svelte/store'
 
 
-const databases = writable([
-  {
-    name: 'Data 1',
-    version: 10,
-    tables: []
+// const storage = new Storage()
+// const databases = writable([])
+
+
+function createStorage() {
+  const storage = new Storage()
+  const { subscribe, update } = writable([])
+
+  return {
+    subscribe,
+
+    // Storage
+    getDatabases() {
+      return storage.databases
+    },
+
+    // Database
+    addDatabase() {
+      storage.add(new Database('', 1))
+      update(() => storage.databases)
+    },
+
+    removeDatabase(database: Database) {
+      storage.remove(database)
+      update(() => storage.databases)
+    },
+
+    // Table
+    addTable(database: Database) {
+      const table = new Table('')
+
+      database.add(table)
+      update(() => storage.databases)
+    },
+
+    removeTable(database: Database, table: Table) {
+      database.remove(table)
+      update(() => storage.databases)
+    }
   }
-])
-
-databases.subscribe(value => {
-  console.log('subscribe: ', value)
-})
-
-
-function addDatabase() {
-  databases.update((value: any[]) => [...value, { tables: [] }])
-}
-
-function removeDatabase(index) {
-  databases.update((value: any[]) => value.filter((database, i) => index !== i))
-}
-
-function addTable(indexDatabase) {
-  databases.update((value: any[]) => {
-    return value.map((database, index) => {
-      if (indexDatabase === index) {
-        return {...database, tables: [...database.tables, {}]}
-      }
-
-      return database
-    })
-  })
-}
-
-function removeTable(indexDatabase, indexTable) {
-  databases.update((value: any[]) => {
-    return value.map((database, index) => {
-      if (indexDatabase === index) {
-        return {...database, tables: database.tables.filter((table, i) => i !== indexDatabase)}
-      }
-
-      return database
-    })
-  })
 }
 
 
-export {
-  databases,
+export const storage = createStorage()
 
-  // Database
-  addDatabase,
-  removeDatabase,
+// function addDatabase() {
+//   const database = new Database('', 1)
 
-  // Table
-  addTable,
-  removeTable,
-}
+//   storage.add(database)
+//   databases.update(() => storage.databases)
+// }
+
+// function removeDatabase(database) {
+//   storage.remove(database)
+//   databases.update(() => storage.databases)
+// }
+
+// function addTable(database: Database) {
+//   const table = new Table('')
+
+//   database.add(table)
+//   databases.update(() => storage.databases)
+// }
+
+// function removeTable(database: Database, table: Table) {
+//   database.remove(table)
+//   databases.update(() => storage.databases)
+// }
+
+// function getDatabases() {
+//   return storage.databases
+// }
+
+// export {
+//   databases,
+
+//   // Database
+//   addDatabase,
+//   removeDatabase,
+//   getDatabases,
+
+//   // Table
+//   addTable,
+//   removeTable,
+// }

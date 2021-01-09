@@ -1,27 +1,37 @@
 <script>
   import get from 'lodash/get'
-  import { databases, addDatabase, removeDatabase, addTable, removeTable } from '../../stores/create'
-  import Database from './Database'
-  import Table from './Table'
+  // import { databases, getDatabases, addDatabase, removeDatabase, addTable, removeTable } from '../../stores/create'
+  import { storage } from '../../stores/create'
 
 
+  storage.subscribe(value => {
+    console.log('subscribe: ', value)
+  })
 </script>
 
 
-{#each $databases as database, indexDatabase}
-  <Database removeFn={removeDatabase.bind(null, indexDatabase)} bind:name={database.name}>
-
-    {#each database.tables as table, indexTable}
-      <Table removeFn={removeTable.bind(null, indexDatabase, indexTable)} bind:name={table.name} />
-    {/each}
-
-    <button on:click={() => addTable(indexDatabase)}>Add table</button>
-  </Database>
+{#each storage.getDatabases() as database}
+  <p>opaa</p>
 {/each}
 
-<hr>
+<button on:click={storage.addDatabase}>add Database</button>
 
-<button on:click={addDatabase}>Add</button>
+<!--
+{#each $databases as database}
+  <input type="text" bind:value={database.update.name}>
+  <button on:click={removeDatabase.bind(null, database)}>Remove</button>
+  <button on:click={addTable.bind(null, database)}>Add table</button>
 
-<!-- <button on:click={submit}>Submit</button> -->
+  <div class="mt-1 ml-3">
+    {#each database.tables as table}
+      <input type="text" bind:value={table.update.name}>
+      <button on:click={removeTable.bind(null, database, table)}>Remove</button>
+      <hr>
+    {/each}
+  </div>
+  <hr>
+{/each}
 
+<button on:click={addDatabase}>add Database</button>
+<button on:click={() => console.log(getDatabases())}>Submit</button>
+ -->
