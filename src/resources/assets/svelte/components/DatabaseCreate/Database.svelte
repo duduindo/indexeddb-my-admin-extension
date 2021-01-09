@@ -1,14 +1,27 @@
 <script>
+  import uniqueId from 'lodash/uniqueId'
+
+  let id = uniqueId('database-')
+  let idName = `${id}-name`
+  let idVersion = `${id}-version`
+
   export let name = ''
-  export let removeFn
+  export let version = 1
 </script>
 
 <fieldset>
-  <legend>Database: <code>{name}</code></legend>
-  <label for="">Nome</label>
-  <input type="text" bind:value={name}>
+  <legend>Database <code>{name}</code></legend>
 
-  <button on:click={removeFn}>Remove</button>
+  <div class="form-group">
+    <label for="{idName}">Name</label>
+    <input type="text" bind:value={name} class="form-control" id="{idName}">
+  </div>
+
+  <div class="form-group">
+    <label for="{idVersion}">Version</label>
+    <input type="number" bind:value={version} min="1" class="form-control" id="{idVersion}">
+  </div>
+
+  <slot />
 </fieldset>
 
-<slot />
