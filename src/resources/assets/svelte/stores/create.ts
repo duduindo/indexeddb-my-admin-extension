@@ -39,7 +39,7 @@ function createStorage() {
     removeTable(database: Database, table: Table) {
       database.remove(table)
       update(() => ({ databases: storage.databases }))
-    }
+    },
 
     // Index
     addIndex(table: Table) {

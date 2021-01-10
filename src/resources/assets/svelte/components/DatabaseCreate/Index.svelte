@@ -3,11 +3,19 @@
   import Database from './Database'
   import Table from './Table'
   import Indexe from './Indexe'
+  import Import from './Import'
 
   storage.subscribe(value => {
     console.log('subscribe: ', value)
   })
+
 </script>
+
+<Import />
+
+{#if $storage.databases.length}
+  <button class="btn btn-success" on:click={() => console.log( storage.getAllDatabases() )}>Submit</button>
+{/if}
 
 {#each $storage.databases as database}
   <Database
@@ -41,4 +49,10 @@
 {/each}
 
 <button class="btn btn-primary" on:click={storage.addDatabase}>Add database</button>
-<button class="btn btn-success" on:click={() => console.log( storage.getAllDatabases() )}>Submit</button>
+
+{#if $storage.databases.length}
+  <button class="btn btn-success" on:click={() => console.log( storage.getAllDatabases() )}>Submit</button>
+  <hr>
+{/if}
+
+<button class="btn btn-dark">Import database</button>
