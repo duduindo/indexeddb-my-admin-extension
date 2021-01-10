@@ -1,15 +1,15 @@
 <script>
   import uniqueId from 'lodash/uniqueId'
 
-  let id = uniqueId('table-')
+  let id = uniqueId('index-')
 
   export let name = ''
   export let keyPath = ''
-  export let autoIncrement = false
+  export let unique = false
 </script>
 
 <fieldset class="border border-info p-3 m-3">
-  <legend class="w-auto pl-1 pr-1">Table <code>{name}</code></legend>
+  <legend class="w-auto pl-1 pr-1">Index <code>{name}</code></legend>
 
   <div class="form-group">
     <label for="{`${id}-name`}">Name</label>
@@ -22,8 +22,8 @@
   </div>
 
   <div class="form-group">
-    <label for="{`${id}-auto-increment`}">Auto increment</label>
-    <select class="form-control" bind:value={autoIncrement} id="{`${id}-auto-increment`}">
+    <label for="{`${id}-unique`}">Unique</label>
+    <select class="form-control" bind:value={unique} id="{`${id}-unique`}">
       <option value={false}>No</option>
       <option value={true}>Yes</option>
     </select>
