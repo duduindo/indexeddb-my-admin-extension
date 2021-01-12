@@ -42,8 +42,21 @@
   </ul>
 
   <div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade show active" id="text" role="tabpanel" aria-labelledby="text-tab" bind:this={items[0]}>Text</div>
-    <div class="tab-pane fade" id="file" role="tabpanel" aria-labelledby="file-tab" bind:this={items[1]}><p>File</p></div>
+    <div class="tab-pane fade show active" id="text" role="tabpanel" aria-labelledby="text-tab" bind:this={items[0]}>
+      <div class="form-group pt-2">
+        <label for="import-text-input">Paste JSON:</label>
+        <textarea class="form-control" id="import-text-input" rows="5"></textarea>
+      </div>
+    </div>
+
+    <div class="tab-pane fade" id="file" role="tabpanel" aria-labelledby="file-tab" bind:this={items[1]}>
+      <div class="form-group pt-2">
+        <div>
+          <label for="import-file-input">JSON file:</label>
+        </div>
+        <input type="file" id="import-file-input">
+      </div>
+    </div>
   </div>
 
   <div slot="footer">
@@ -51,3 +64,4 @@
     <button class="btn btn-primary">Next</button>
   </div>
 </Dialog>
+
