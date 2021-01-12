@@ -5,9 +5,9 @@
   import Indexe from './Indexe'
   import Import from './Import'
 
-  storage.subscribe(value => {
-    console.log('subscribe: ', value)
-  })
+  // storage.subscribe(value => {
+  //   console.log('subscribe: ', value)
+  // })
 
 </script>
 

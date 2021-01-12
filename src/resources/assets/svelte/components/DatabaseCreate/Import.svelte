@@ -1,6 +1,8 @@
 <script>
   import { onMount } from 'svelte'
   import Dialog from '../Dialog/Index'
+  import NavTabs from '../NavTabs/Index'
+  import NavTabsItem from '../NavTabs/Item'
 
   let navs = []
   let items = []
@@ -31,7 +33,16 @@
 
 
 <Dialog title="Titulooo">
-  <ul class="nav nav-tabs" id="myTab" role="tablist">
+  <NavTabs>
+    <NavTabsItem title="Item 1">
+      opa1
+    </NavTabsItem>
+
+    <NavTabsItem title="Item 2">
+      opa2
+    </NavTabsItem>
+  </NavTabs>
+  <!-- <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
       <button class="nav-link active" id="text-tab" data-toggle="tab" role="tab" aria-controls="text" aria-selected="true" bind:this={navs[0]} on:click={() => select(0)}>Text</button>
     </li>
@@ -57,7 +68,7 @@
         <input type="file" id="import-file-input">
       </div>
     </div>
-  </div>
+  </div> -->
 
   <div slot="footer">
     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
