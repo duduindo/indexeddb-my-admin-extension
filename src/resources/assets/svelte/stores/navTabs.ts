@@ -11,7 +11,7 @@ function select(index) {
   const value = get(items)
   const item = value[index]
 
-  console.log(item)
+  console.log(value)
 }
 
 export {

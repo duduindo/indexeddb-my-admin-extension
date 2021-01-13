@@ -1,4 +1,5 @@
 <script>
+  import { onMount } from 'svelte'
   import { storage } from '../../stores/create'
   import Database from './Database'
   import Table from './Table'
@@ -8,10 +9,11 @@
   // storage.subscribe(value => {
   //   console.log('subscribe: ', value)
   // })
-
 </script>
 
 <Import />
+<Import />
+
 
 {#if $storage.databases.length}
   <button class="btn btn-success" on:click={() => console.log( storage.getAllDatabases() )}>Submit</button>

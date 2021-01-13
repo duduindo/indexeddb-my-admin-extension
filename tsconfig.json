@@ -39,6 +39,7 @@
     "node_modules"
   ],
   "include": [
+    "types/globals.d.ts",
     "typings/**/*.d.ts",
     "node_modules/@*/types-*/*.d.ts",
     "src/**/*",
