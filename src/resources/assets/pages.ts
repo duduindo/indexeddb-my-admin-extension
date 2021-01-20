@@ -1,3 +1,7 @@
+// Bootstrap
+import 'bootstrap/js/src/modal'
+
+// Components
 import Breadcrumb from './svelte/components/Breadcrumb/Index.svelte'
 import StorageTree from './svelte/components/StorageTree/Index.svelte'
 import DomainsList from './svelte/components/DomainsList/Index.svelte'

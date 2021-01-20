@@ -1,18 +1,19 @@
 <script>
+  import j from 'jquery'
   import { onMount } from 'svelte'
   import { storage } from '../../stores/create'
   import Database from './Database'
   import Table from './Table'
   import Indexe from './Indexe'
-  import Import from './Import'
 
   // storage.subscribe(value => {
   //   console.log('subscribe: ', value)
   // })
-</script>
 
-<Import />
-<Import />
+  function openModal() {
+    j('#exampleModal').modal()
+  }
+</script>
 
 
 {#if $storage.databases.length}
@@ -57,4 +58,4 @@
   <hr>
 {/if}
 
-<button class="btn btn-dark">Import database</button>
+<button class="btn btn-dark" on:click={openModal}>Import database</button>
