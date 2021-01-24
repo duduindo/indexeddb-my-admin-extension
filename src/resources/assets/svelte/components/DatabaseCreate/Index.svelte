@@ -13,6 +13,10 @@
   function openModal() {
     j('#exampleModal').modal()
   }
+
+  j('#exampleModal').on('hide.bs.modal', () => {
+    console.log('Fechadoooo')
+  })
 </script>
 
 

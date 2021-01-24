@@ -1,0 +1,50 @@
+#exampleModal.modal.fade(tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
+  .modal-dialog.modal-lg.modal-dialog-scrollable
+    .modal-content
+      .modal-header
+        h5#exampleModalLabel.modal-title Import databases
+        button.close(type='button' data-dismiss='modal' aria-label='Close')
+          span(aria-hidden='true') &times;
+      .modal-body
+        ul#myTab.nav.nav-pills.mb-3(role='tablist')
+          li.nav-item(role='presentation')
+            a#json-tab.nav-link.active(data-toggle='tab' href='#json' role='tab' aria-controls='json' aria-selected='true') JSON
+          li.nav-item(role='presentation')
+            a#example-tab.nav-link(data-toggle='tab' href='#example' role='tab' aria-controls='example' aria-selected='false') Format example
+
+        #myTabContent.tab-content
+          #json.tab-pane.fade.show.active(role='tabpanel' aria-labelledby='json-tab')
+            div(data-database-import)
+          #example.tab-pane.fade(role='tabpanel' aria-labelledby='example-tab')
+            .container-fluid
+              .rol
+                .col
+                  pre
+                    code
+                      |{
+                      |  "databases": [
+                      |    {
+                      |      "name": "Users",
+                      |      "keyPath": "id",
+                      |      "unique": true,
+                      |
+                      |      "tables": [
+                      |        "name": "Pages visited",
+                      |        "keyPath": "title",
+                      |        "autoIncrement": true,
+                      |
+                      |        "indexes": [
+                      |          "name": "Dates",
+                      |          "keyPath": "timestamp",
+                      |          "unique": true
+                      |        ],
+                      |      ]
+                      |    }
+                      |  ]
+                      |}
+
+      .modal-footer
+        button.btn.btn-secondary(type='button' data-dismiss='modal') Close
+        button.btn.btn-primary(type='button') Save changes
+
+
