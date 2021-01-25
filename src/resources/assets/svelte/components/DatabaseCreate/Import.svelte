@@ -1,5 +1,5 @@
 <script>
-  import dJSON from 'dirty-json'
+  import FileDatabases from '@/models/FileDatabases/FileDatabases'
 
   let text = '{"databases":[{"name":"Users","keyPath":"id","unique":true,"stores":[{"name":"Pages visited","keyPath":"title","autoIncrement":true,"indexes":[{"name":"Dates","keyPath":"timestamp","unique":true}]}]}]}'
   let fileInput
@@ -19,6 +19,12 @@
         fileInput.value = ''
       }
     }
+
+    const filesDatabases = new FileDatabases(files)
+
+    filesDatabases.getData()
+      .then(e => console.log('THEN: ', e))
+      .catch(e => console.log('CATCH: ', e))
   }
 
   function handleDrop(event) {
@@ -48,7 +54,7 @@
     textarea.select()
   }
 
-  $: console.log( dJSON.parse(text) )
+  // $: console.log( dJSON.parse(text) )
 </script>
 
 <form class="{formClass}" on:drop|preventDefault={handleDrop} on:dragover={handleDropOver} on:dragleave={handleLeave}>
