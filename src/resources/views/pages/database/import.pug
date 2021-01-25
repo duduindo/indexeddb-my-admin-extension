@@ -27,17 +27,19 @@
                       |      "name": "Users",
                       |      "keyPath": "id",
                       |      "unique": true,
-                      |
-                      |      "tables": [
-                      |        "name": "Pages visited",
-                      |        "keyPath": "title",
-                      |        "autoIncrement": true,
-                      |
-                      |        "indexes": [
-                      |          "name": "Dates",
-                      |          "keyPath": "timestamp",
-                      |          "unique": true
-                      |        ],
+                      |      "stores": [
+                      |        {
+                      |          "name": "Pages visited",
+                      |          "keyPath": "title",
+                      |          "autoIncrement": true,
+                      |          "indexes": [
+                      |            {
+                      |              "name": "Dates",
+                      |              "keyPath": "timestamp",
+                      |              "unique": true
+                      |            }
+                      |          ]
+                      |        }
                       |      ]
                       |    }
                       |  ]

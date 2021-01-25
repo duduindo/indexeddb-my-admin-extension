@@ -14,8 +14,12 @@
     j('#exampleModal').modal()
   }
 
-  j('#exampleModal').on('hide.bs.modal', () => {
-    console.log('Fechadoooo')
+  // j('#exampleModal').on('hide.bs.modal', () => {
+  //   console.log('Fechadoooo')
+  // })
+
+  onMount(() => {
+    j('#exampleModal').modal()
   })
 </script>
 
