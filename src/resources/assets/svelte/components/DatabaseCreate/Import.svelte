@@ -1,45 +1,36 @@
-<script>
-  import FileDatabases from '@/models/FileDatabases/FileDatabases'
+<script context="module">
+  import FileReaderAsync from '@/models/FileReaderAsync/FileReaderAsync'
 
+  function handleFiles(files) {
+    const reader = new FileReader()
+    const readerAsync = new FileReaderAsync(reader)
+
+    return readerAsync.readAsText(files)
+  }
+</script>
+
+<script>
   let text = '{"databases":[{"name":"Users","keyPath":"id","unique":true,"stores":[{"name":"Pages visited","keyPath":"title","autoIncrement":true,"indexes":[{"name":"Dates","keyPath":"timestamp","unique":true}]}]}]}'
   let fileInput
   let textarea
   let formClass = ''
 
   function handleInput() {
-    const { files } = fileInput
-    let reader
-
-    if (files.length) {
-      reader = new FileReader()
-
-      reader.readAsText(files[0], 'UTF-8')
-      reader.onload = event => {
-        text = event.target.result
+    handleFiles(fileInput.files)
+      .then(data => {
+        text = data
         fileInput.value = ''
-      }
-    }
-
-    const filesDatabases = new FileDatabases(files)
-
-    filesDatabases.getData()
-      .then(e => console.log('THEN: ', e))
+      })
       .catch(e => console.log('CATCH: ', e))
   }
 
   function handleDrop(event) {
-    const { files } = event.dataTransfer
-    let reader
-
-    if (files.length) {
-      reader = new FileReader()
-
-      reader.readAsText(files[0], 'UTF-8')
-      reader.onload = event => {
-        text = event.target.result
+    handleFiles(event.dataTransfer.files)
+      .then(data => {
+        text = data
         formClass = ''
-      }
-    }
+      })
+      .catch(e => console.log('CATCH: ', e))
   }
 
   function handleDropOver() {
@@ -53,8 +44,6 @@
   function selectAll() {
     textarea.select()
   }
-
-  // $: console.log( dJSON.parse(text) )
 </script>
 
 <form class="{formClass}" on:drop|preventDefault={handleDrop} on:dragover={handleDropOver} on:dragleave={handleLeave}>
