@@ -1,0 +1,194 @@
+// Header with logos
+.navbar-header.navbar-dark.d-none.d-md-flex.align-items-md-center
+  .navbar-brand.navbar-brand-md
+    a.d-inline-block(href='index.html')
+      img(src='/images/logo_light.png' alt='')
+  .navbar-brand.navbar-brand-xs
+    a.d-inline-block(href='index.html')
+      img(src='/images/logo_icon_light.png' alt='')
+
+// /header with logos
+// Mobile controls
+.d-flex.flex-1.d-md-none
+  .navbar-brand.mr-auto
+    a.d-inline-block(href='index.html')
+      img(src='/images/logo_dark.png' alt='')
+  button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbar-mobile')
+    i.icon-tree5
+  button.navbar-toggler.sidebar-mobile-main-toggle(type='button')
+    i.icon-paragraph-justify3
+
+// /mobile controls
+// Navbar content
+#navbar-mobile.collapse.navbar-collapse
+  ul.navbar-nav
+    li.nav-item
+      a.navbar-nav-link.sidebar-control.sidebar-main-toggle.d-none.d-md-block(href='#')
+        i.icon-paragraph-justify3
+    li.nav-item.dropdown
+      a.navbar-nav-link.dropdown-toggle.caret-0(href='#' data-toggle='dropdown')
+        i.icon-people
+        span.d-md-none.ml-2 Users
+        span.badge.badge-mark.border-pink-400.ml-auto.ml-md-0
+      .dropdown-menu.dropdown-content.wmin-md-300
+        .dropdown-content-header
+          span.font-weight-semibold Users online
+          a.text-default(href='#')
+            i.icon-search4.font-size-base
+        .dropdown-content-body.dropdown-scrollable
+          ul.media-list
+            li.media
+              .mr-3
+                img.rounded-circle(src='/images/placeholders/placeholder.jpg' width='36' height='36' alt='')
+              .media-body
+                a.media-title.font-weight-semibold(href='#') Jordana Ansley
+                span.d-block.text-muted.font-size-sm Lead web developer
+              .ml-3.align-self-center
+                span.badge.badge-mark.border-success
+            li.media
+              .mr-3
+                img.rounded-circle(src='/images/placeholders/placeholder.jpg' width='36' height='36' alt='')
+              .media-body
+                a.media-title.font-weight-semibold(href='#') Will Brason
+                span.d-block.text-muted.font-size-sm Marketing manager
+              .ml-3.align-self-center
+                span.badge.badge-mark.border-danger
+            li.media
+              .mr-3
+                img.rounded-circle(src='/images/placeholders/placeholder.jpg' width='36' height='36' alt='')
+              .media-body
+                a.media-title.font-weight-semibold(href='#') Hanna Walden
+                span.d-block.text-muted.font-size-sm Project manager
+              .ml-3.align-self-center
+                span.badge.badge-mark.border-success
+            li.media
+              .mr-3
+                img.rounded-circle(src='/images/placeholders/placeholder.jpg' width='36' height='36' alt='')
+              .media-body
+                a.media-title.font-weight-semibold(href='#') Dori Laperriere
+                span.d-block.text-muted.font-size-sm Business developer
+              .ml-3.align-self-center
+                span.badge.badge-mark.border-warning-300
+            li.media
+              .mr-3
+                img.rounded-circle(src='/images/placeholders/placeholder.jpg' width='36' height='36' alt='')
+              .media-body
+                a.media-title.font-weight-semibold(href='#') Vanessa Aurelius
+                span.d-block.text-muted.font-size-sm UX expert
+              .ml-3.align-self-center
+                span.badge.badge-mark.border-grey-400
+        .dropdown-content-footer.bg-light
+          a.text-grey.mr-auto(href='#') All users
+          a.text-grey(href='#')
+            i.icon-gear
+
+  span.badge.bg-pink-400.badge-pill.ml-md-3.mr-md-auto 16 orders
+
+  ul.navbar-nav
+    li.nav-item.dropdown
+      a.navbar-nav-link.dropdown-toggle(href='#' data-toggle='dropdown')
+        img.img-flag.mr-2(src='/images/lang/gb.png' alt='')
+        | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;English
+      .dropdown-menu.dropdown-menu-right
+        a.dropdown-item.english.active(href='#')
+          img.img-flag(src='/images/lang/gb.png' alt='')
+          |  English
+        a.dropdown-item.ukrainian(href='#')
+          img.img-flag(src='/images/lang/ua.png' alt='')
+          |  &Ucy;&kcy;&rcy;&acy;&yicy;&ncy;&scy;&softcy;&kcy;&acy;
+        a.dropdown-item.deutsch(href='#')
+          img.img-flag(src='/images/lang/de.png' alt='')
+          |  Deutsch
+        a.dropdown-item.espana(href='#')
+          img.img-flag(src='/images/lang/es.png' alt='')
+          |  Espa&ntilde;a
+        a.dropdown-item.russian(href='#')
+          img.img-flag(src='/images/lang/ru.png' alt='')
+          |  &Rcy;&ucy;&scy;&scy;&kcy;&icy;&jcy;
+    li.nav-item.dropdown
+      a.navbar-nav-link.dropdown-toggle.caret-0(href='#' data-toggle='dropdown')
+        i.icon-bubbles4
+        span.d-md-none.ml-2 Messages
+        span.badge.badge-mark.border-pink-400.ml-auto.ml-md-0
+      .dropdown-menu.dropdown-menu-right.dropdown-content.wmin-md-350
+        .dropdown-content-header
+          span.font-weight-semibold Messages
+          a.text-default(href='#')
+            i.icon-compose
+        .dropdown-content-body.dropdown-scrollable
+          ul.media-list
+            li.media
+              .mr-3.position-relative
+                img.rounded-circle(src='/images/placeholders/placeholder.jpg' width='36' height='36' alt='')
+              .media-body
+                .media-title
+                  a(href='#')
+                    span.font-weight-semibold James Alexander
+                    span.text-muted.float-right.font-size-sm 04:58
+                span.text-muted who knows, maybe that would be the best thing for me...
+            li.media
+              .mr-3.position-relative
+                img.rounded-circle(src='/images/placeholders/placeholder.jpg' width='36' height='36' alt='')
+              .media-body
+                .media-title
+                  a(href='#')
+                    span.font-weight-semibold Margo Baker
+                    span.text-muted.float-right.font-size-sm 12:16
+                span.text-muted That was something he was unable to do because...
+            li.media
+              .mr-3
+                img.rounded-circle(src='/images/placeholders/placeholder.jpg' width='36' height='36' alt='')
+              .media-body
+                .media-title
+                  a(href='#')
+                    span.font-weight-semibold Jeremy Victorino
+                    span.text-muted.float-right.font-size-sm 22:48
+                span.text-muted But that would be extremely strained and suspicious...
+            li.media
+              .mr-3
+                img.rounded-circle(src='/images/placeholders/placeholder.jpg' width='36' height='36' alt='')
+              .media-body
+                .media-title
+                  a(href='#')
+                    span.font-weight-semibold Beatrix Diaz
+                    span.text-muted.float-right.font-size-sm Tue
+                span.text-muted What a strenuous career it is that I&apos;ve chosen...
+            li.media
+              .mr-3
+                img.rounded-circle(src='/images/placeholders/placeholder.jpg' width='36' height='36' alt='')
+              .media-body
+                .media-title
+                  a(href='#')
+                    span.font-weight-semibold Richard Vango
+                    span.text-muted.float-right.font-size-sm Mon
+                span.text-muted Other travelling salesmen live a life of luxury...
+        .dropdown-content-footer.bg-light
+          a.text-grey.mr-auto(href='#') All messages
+          div
+            a.text-grey(href='#' data-popup='tooltip' title='' data-original-title='Mark all as read')
+              i.icon-radio-unchecked
+            a.text-grey.ml-2(href='#' data-popup='tooltip' title='' data-original-title='Settings')
+              i.icon-cog3
+    li.nav-item.dropdown.dropdown-user
+      a.navbar-nav-link.d-flex.align-items-center.dropdown-toggle(href='#' data-toggle='dropdown')
+        img.rounded-circle.mr-2(src='/images/placeholders/placeholder.jpg' height='34' alt='')
+        span Victoria
+      .dropdown-menu.dropdown-menu-right
+        a.dropdown-item(href='#')
+          i.icon-user-plus
+          |  My profile
+        a.dropdown-item(href='#')
+          i.icon-coins
+          |  My balance
+        a.dropdown-item(href='#')
+          i.icon-comment-discussion
+          |  Messages
+          span.badge.badge-pill.bg-indigo-400.ml-auto 58
+        .dropdown-divider
+        a.dropdown-item(href='#')
+          i.icon-cog5
+          |  Account settings
+        a.dropdown-item(href='#')
+          i.icon-switch2
+          |  Logout
+// /navbar content

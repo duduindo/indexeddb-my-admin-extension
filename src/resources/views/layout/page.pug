@@ -3,16 +3,26 @@ html
   head
     title #{title}
 
-    link(href='/pages/static/build.css' rel='stylesheet')
+    link(href='/pages/static/default.css' rel='stylesheet')
 
   body
     block modals
 
-    .layout-container
-      aside.layout-aside
-        .sidebar.sticky-top
-          block aside
-            include ../pages/partials/aside.pug
+    nav.navbar.navbar-expand-md.navbar-light
+      include ../pages/partials/navbar.pug
+
+    main.page-content
+      block content
+
+      sidebar.sidebar.sidebar-dark.sidebar-main.sidebar-expand-md
+        block aside
+          include ../pages/partials/aside.pug
+
+    //- .layout-container
+    //-   aside.layout-aside
+    //-     .sidebar.sticky-top
+    //-       block aside
+    //-         include ../pages/partials/aside.pug
 
       main.layout-main
         .sticky-top

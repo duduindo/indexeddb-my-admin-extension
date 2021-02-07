@@ -1,5 +1,6 @@
 const { resolve } = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const FixStyleOnlyEntriesPlugin = require('webpack-fix-style-only-entries');
 const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -65,6 +66,21 @@ module.exports = (env, options) => {
           loader: 'ts-loader',
           exclude: /node_modules/,
         },
+
+        // #### Fonts - File loader
+        {
+          test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+          use: [
+            {
+              loader: 'file-loader',
+              options: {
+                name: '[name].[ext]',
+                outputPath: 'fonts',
+                publicPath: '/fonts/',
+              }
+            }
+          ]
+        }
       ]
     },
 
@@ -72,6 +88,7 @@ module.exports = (env, options) => {
     plugins: [
       new webpack.ProgressPlugin(),
       new CleanWebpackPlugin(),
+      new FixStyleOnlyEntriesPlugin(),
       new MiniCssExtractPlugin({
         filename: '[name].css',
         chunkFilename: '[id].css',
@@ -108,9 +125,19 @@ module.exports = (env, options) => {
 
     // ### Entry
     entry: {
+      // Content
       content: resolve('src/resources/assets/content.ts'),
+
+      // Background
       background: resolve('src/resources/assets/background.ts'),
-      'pages/static/build': [resolve('src/resources/assets/pages.ts'), resolve('src/resources/assets/pages.sass')],
+
+      // Pages
+      'pages/static/build': resolve('src/resources/assets/pages.ts'),
+      'pages/static/default': resolve('src/resources/assets/sass/default.sass'),
+      'pages/static/dark': resolve('src/resources/assets/sass/dark.sass'),
+      'pages/static/material': resolve('src/resources/assets/sass/material.sass'),
+
+      // Popup
       popup: resolve('src/resources/assets/popup.ts'),
     },
 
