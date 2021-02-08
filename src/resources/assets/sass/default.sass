@@ -1,9 +1,61 @@
-// // Limitless
-// @import '../css/bootstrap.css'
-// @import '../css/default/bootstrap_limitless.css'
-// @import '../css/default/colors.css'
-// @import '../css/default/components.css'
-// @import '../css/default/layout.css'
+// Import custom template config
+@import './limitless/config'
+@import './limitless/shared/utils/ll-functions'
+@import './limitless/shared/utils/ll-mixins'
+@import './limitless/themes/default/colors/palette'
 
-// // Icons
-// @import '../css/icons/icomoon/styles.min.css'
+
+// Core variables and mixins
+@import '~bootstrap'
+
+
+// Import template's variables
+@import './limitless/themes/default/variables/variables-core'
+@import './limitless/themes/default/variables/variables-custom'
+@import './limitless/themes/default/mixins'
+
+
+// Import default files
+@import './limitless/themes/default/reboot'
+@import './limitless/themes/default/type'
+@import './limitless/themes/default/code'
+@import './limitless/themes/default/tables'
+@import './limitless/themes/default/forms'
+@import './limitless/themes/default/buttons'
+@import './limitless/themes/default/dropdown'
+@import './limitless/themes/default/button-group'
+@import './limitless/themes/default/input-group'
+@import './limitless/themes/default/custom-forms'
+@import './limitless/themes/default/nav'
+@import './limitless/themes/default/navbar'
+@import './limitless/themes/default/card'
+@import './limitless/themes/default/breadcrumb'
+@import './limitless/themes/default/pagination'
+@import './limitless/themes/default/badge'
+@import './limitless/themes/default/alert'
+@import './limitless/themes/default/progress'
+@import './limitless/themes/default/media'
+@import './limitless/themes/default/list-group'
+@import './limitless/themes/default/close'
+@import './limitless/themes/default/toasts'
+@import './limitless/themes/default/modal'
+@import './limitless/themes/default/tooltip'
+@import './limitless/themes/default/popover'
+@import './limitless/themes/default/utilities'
+
+
+// Color system, always load last
+@import './limitless/themes/default/colors/colors'
+
+
+// Content
+@import './limitless/themes/default/layout/content'
+
+// Header
+@import './limitless/themes/default/layout/header'
+
+// Sidebar
+@import './limitless/themes/default/layout/sidebar'
+
+// Boxed layout
+@import './limitless/themes/default/layout/boxed'
