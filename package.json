@@ -6,6 +6,7 @@
   "scripts": {
     "build": "webpack --config config/common.config.js --progress --mode=production",
     "watch": "webpack --config config/common.config.js --progress --mode=development --watch",
+    "dev": "webpack --config config/common.config.js --progress --mode=development",
     "test-unit": "jest --config test/unit/jest.config.js --maxWorkers=1",
     "test-unit:watch": "jest --config test/unit/jest.config.js --watch --maxWorkers=1",
     "test-unit:coverage": "jest --config test/unit/jest.config.js --coverage --maxWorkers=1"
@@ -64,9 +65,9 @@
     "html-webpack-plugin": "^4.5.0",
     "jest": "^26.6.3",
     "mini-css-extract-plugin": "^1.2.1",
+    "node-sass": "^4.14.0",
     "pug": "^3.0.0",
     "pug-loader": "^2.4.0",
-    "sass": "^1.26.2",
     "sass-loader": "^8.0.2",
     "style-loader": "^1.0.0",
     "svelte-loader": "^2.13.6",
