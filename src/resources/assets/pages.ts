@@ -21,3 +21,4 @@
 // document.querySelectorAll('[data-databases-list]').forEach(target => new DatabasesList({ target }))
 // document.querySelectorAll('[data-tables-list]').forEach(target => new TablesList({ target }))
 // document.querySelectorAll('[data-table-browser]').forEach(target => new TableBrowser({ target }))
+console.log('opaaa')
