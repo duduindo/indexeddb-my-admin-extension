@@ -121,8 +121,9 @@ module.exports = (env, options) => {
       // Copy
       new CopyPlugin({
         patterns: [
-          { from: resolve('src/resources/skeleton'), to: resolve('dist') },
-          { from: resolve('src/resources/assets/fonts'), to: resolve('dist/fonts') },
+          { from: resolve('src/resources/fonts'), to: resolve('dist/fonts') },
+          { from: resolve('src/resources/images'), to: resolve('dist/images') },
+          { from: resolve('src/resources/jsons/manifest.json'), to: resolve('dist') },
         ]
       })
     ],
