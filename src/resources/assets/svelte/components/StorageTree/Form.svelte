@@ -16,18 +16,22 @@
 </script>
 
 <form>
-  <div class="form-group text-center">
-    <label for="current-domain">Current domain:</label>
+  <div class="field">
+    <label class="label has-text-centered has-text-weight-normal" for="currentDomain">Current domain:</label>
 
-    <!-- svelte-ignore a11y-no-onchange -->
-    <select class="form-control" id="currentDomain" on:change={goToOrigin}>
-      <option value="-1">(All domains)</option>
+    <div class="control">
+      <div class="select">
+        <!-- svelte-ignore a11y-no-onchange -->
+        <select id="currentDomain" on:change={goToOrigin}>
+          <option value="-1">(All domains)</option>
 
-      {#each options as option}
-        <option value="{option.value}" selected={option.isSelected}>
-          {option.text}
-        </option>
-      {/each}
-    </select>
+          {#each options as option}
+            <option value="{option.value}" selected={option.isSelected}>
+              {option.text}
+            </option>
+          {/each}
+        </select>
+      </div>
+    </div>
   </div>
 </form>

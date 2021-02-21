@@ -1,21 +1,18 @@
-.container-fluid
-  .row
-    .col
-      .d-flex.justify-content-center.mt-3.mb-3
-        a(href='/pages/index.html')
-          svg(width='100' height='50')
-            g
-              rect(width='100' height='50' style='fill:lightblue;stroke-width:3;stroke:rgb(0,0,0)')
-              text(x='15' y='30' fill='black') logo here
+.container.is-fluid.mt-2
+  .columns.is-centered
+    .column.is-narrow
+      a(href='/pages/index.html')
+        svg(width='100' height='50')
+          g
+            rect(width='100' height='50' style='fill:lightblue;stroke-width:3;stroke:rgb(0,0,0)')
+            text(x='15' y='30' fill='black') logo here
 
-      .d-flex.justify-content-center.mb-3
-        .btn-group(role='group' aria-label='Links')
-          a.btn.btn-secondary(href='/pages/index.html') Home
-          a.btn.btn-secondary(href='/pages/about.html') About
+  .columns.is-centered
+    .column.is-narrow
+      .buttons
+        a.button(href='/pages/index.html') Home
+        a.button(href='/pages/about.html') About
 
-  //- Storage Tree
-  .row
-    .col
-      hr
+  .columns.is-centered
+    .column.is-narrow
       div(data-storage-tree)
-      hr
