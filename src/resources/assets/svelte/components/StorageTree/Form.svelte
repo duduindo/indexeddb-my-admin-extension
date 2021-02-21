@@ -15,7 +15,7 @@
   export let options
 </script>
 
-<form>
+<form class="mb-3">
   <div class="field">
     <label class="label has-text-centered has-text-weight-normal" for="currentDomain">Current domain:</label>
 

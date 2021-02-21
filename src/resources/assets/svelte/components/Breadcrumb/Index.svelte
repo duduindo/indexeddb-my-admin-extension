@@ -2,16 +2,12 @@
   import { items } from '../../stores/breadcrumb'
 </script>
 
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
+<nav class="breadcrumb" aria-label="breadcrumbs">
+  <ul>
     {#each $items as item}
-      <li class="breadcrumb-item { (item.isActive) ? 'active' : '' }" aria-current="{ item.isActive ? 'page' : null }">
-        {#if item.href}
-          <a href="{item.href}">{item.name}</a>
-        {:else}
-          {item.name}
-        {/if}
+      <li class="{item.isActive ? 'is-active' : '' }">
+        <a href="{item.href ? item.href : location.href}" aria-current="{ item.isActive ? 'page' : null }">{item.name}</a>
       </li>
     {/each}
-  </ol>
+  </ul>
 </nav>
