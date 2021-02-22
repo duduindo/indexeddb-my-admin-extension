@@ -9,15 +9,17 @@ html
     block modals
 
     .layout-container
+      header.layout-header
+        |header here
+
       aside.layout-aside
-        .sidebar.sticky-top
+        .sidebar
           block aside
             include ../pages/partials/aside.pug
 
       main.layout-main
-        .sticky-top
-          block breadcrumb
-            include ../pages/partials/breadcrumb.pug
+        block breadcrumb
+          include ../pages/partials/breadcrumb.pug
 
         block content
 

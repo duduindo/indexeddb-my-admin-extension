@@ -1,10 +1,16 @@
 .layout-container
   display: grid
   grid-template-columns: 1.5fr 8.5fr
-  grid-gap: 5px
+  // grid-gap: 15px
+
+.layout-header
+  grid-column: 2
+  position: sticky
+  top: 0
 
 .layout-aside
   grid-column: 1
+  grid-row: 1 / span 2
 
 .layout-main
   grid-column: 2
@@ -16,3 +22,5 @@
   background-color: silver
   height: 100vh
   overflow: auto
+  position: sticky
+  top: 0
