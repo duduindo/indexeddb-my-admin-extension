@@ -9,13 +9,12 @@ html
     block modals
 
     .layout-container
-      header.layout-header
+      header.layout-header.header.has-background-grey-light
         |header here
 
-      aside.layout-aside
-        .sidebar
-          block aside
-            include ../pages/partials/aside.pug
+      aside.layout-aside.sidebar.has-background-grey-light
+        block aside
+          include ../pages/partials/aside.pug
 
       main.layout-main
         block breadcrumb
