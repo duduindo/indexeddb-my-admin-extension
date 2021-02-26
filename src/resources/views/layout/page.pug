@@ -10,15 +10,14 @@ html
 
     .layout-container
       header.layout-header
-        p header here
+        block breadcrumb
+          include ../pages/partials/breadcrumb.pug
 
       aside.layout-aside
         block aside
           include ../pages/partials/aside.pug
 
       main.layout-main
-        block breadcrumb
-          include ../pages/partials/breadcrumb.pug
 
         block content
 
