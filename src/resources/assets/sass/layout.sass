@@ -1,15 +1,23 @@
 .layout-container
   display: grid
-  grid-template-columns: 1.5fr 8.5fr
+  grid-template-columns: auto 8.5fr
   grid-template-rows: auto 1fr
   grid-template-areas: "aside header" "aside main"
 
 .layout-header
+  background-color: lightgrey
   grid-area: header
+  left: 0
+  position: sticky
+  top: 0
 
 .layout-aside
+  background-color: lightgrey
   grid-area: aside
+  height: 100vh
+  overflow: auto
   position: sticky
+  transition: grid-column ease 5s
   top: 0
 
 .layout-main
