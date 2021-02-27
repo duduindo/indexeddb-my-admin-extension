@@ -2,11 +2,13 @@
   import { optionsTabs } from '../../stores/tabs'
 </script>
 
-<div class="list-group">
-  {#each $optionsTabs as option}
-    <a href="/pages/database/list.html?origin={option.value}" class="list-group-item">
-      {option.text}
-    </a>
-  {/each}
-</div>
+{#each $optionsTabs as option}
+  <tr>
+    <td>
+      <a href="/pages/database/list.html?origin={option.value}" class="is-size-4">
+        {option.text}
+      </a>
+    </td>
+  </tr>
+{/each}
 

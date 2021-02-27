@@ -1,5 +1,10 @@
 extends ../layout/page.pug
 
 block content
-  h2.title.is-4 Domains
-  .list-group(data-domains-list)
+  .container.is-fluid.mt-2
+
+    h2.title.is-4 Domains
+
+    table.table.is-bordered.is-striped.is-narrow.is-fullwidth
+      tbody(data-domains-list)
+
