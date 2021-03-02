@@ -5,7 +5,7 @@
 {#each $optionsTabs as option}
   <tr>
     <td>
-      <a href="/pages/database/list.html?origin={option.value}" class="is-size-4">
+      <a href="/pages/database/list.html?origin={option.value}" class="is-size-5 is-block">
         {option.text}
       </a>
     </td>

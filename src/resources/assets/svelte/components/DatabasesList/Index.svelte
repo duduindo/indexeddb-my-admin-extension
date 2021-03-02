@@ -13,27 +13,37 @@
   })
 </script>
 
-<div class="row mt-3 mb-3">
-  <div class="col">
-    <h6>Create database</h6>
 
-    <form class="form-inline" action="/pages/database/create.html">
-      <input type="hidden" name="origin" value={origin}>
+<div class="mb-6">
+  <h2 class="title is-5">Create database</h2>
 
-      <div class="form-group">
-        <label for="create-database-name" class="sr-only">database name</label>
-        <input type="text" name="name" value="test2" class="form-control form-control-sm mr-2" id="create-database-name" placeholder="Database name" required>
+  <form action="/pages/database/create.html">
+    <input type="hidden" name="origin" value={origin}>
+
+    <div class="field is-horizontal">
+      <div class="field-body">
+        <div class="field">
+          <div class="control">
+            <input class="input" name="name" type="text" placeholder="Database name">
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="control">
+            <input class="input" type="number" name="version" min="1" value="1" placeholder="Database version">
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="control">
+            <button type="submit" class="button is-primary">Create</button>
+          </div>
+        </div>
       </div>
-
-      <div class="form-group">
-        <label for="create-database-version" class="sr-only">database version</label>
-        <input type="number" name="version" min="1" value="1" class="form-control form-control-sm mr-2" id="create-database-version" placeholder="Database version" required>
-      </div>
-
-      <button type="submit" class="btn btn-primary btn-sm">Create</button>
-    </form>
-  </div>
+    </div>
+  </form>
 </div>
+
 
 <div class="row">
   <div class="col">
@@ -51,12 +61,12 @@
         {#each $structures as structure}
           <tr>
             <th scope="row" width="60">
-              <div class="form-check text-center">
-                <input class="form-check-input" type="checkbox">
-              </div>
+              <label class="checkbox is-block p-1" aria-label="Select the database {structure.name}">
+                <input type="checkbox">
+              </label>
             </th>
             <td>
-              <a href="/pages/database/index.html?origin={origin}&name={structure.name}&version={structure.version}">
+              <a href="/pages/database/index.html?origin={origin}&name={structure.name}&version={structure.version}" class="is-size-5 is-block">
                 {structure.name}
               </a>
             </td>
@@ -78,12 +88,12 @@
         </tr>
         <tr>
           <td colspan="4">
-            <button type="button" class="btn btn-link btn-sm mr-3">Check all</button>
-            <button type="button" class="btn btn-primary btn-sm">Copy</button>
-            <button type="button" class="btn btn-primary btn-sm">Merge</button>
-            <button type="button" class="btn btn-dark btn-sm">Export</button>
-            <button type="button" class="btn btn-warning btn-sm">Upgrade</button>
-            <button type="button" class="btn btn-danger btn-sm">Delete</button>
+            <button type="button" class="button">Check all</button>
+            <button type="button" class="button">Copy</button>
+            <button type="button" class="button">Merge</button>
+            <button type="button" class="button">Export</button>
+            <button type="button" class="button">Upgrade</button>
+            <button type="button" class="button">Delete</button>
           </td>
         </tr>
       </tfoot>

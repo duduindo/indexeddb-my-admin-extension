@@ -1,10 +1,11 @@
 extends ../../layout/page.pug
 
 block content
-  .container-fluid
-    .block
-      .row
-        .col
-          h4 Databases
+  .container.is-fluid.mt-2
 
-      div(data-databases-list)
+    h2.title.is-4 Databases
+
+    .columns
+      .column
+        table.table.is-bordered.is-fullwidths.is-striped.is-hoverable
+          tbody(data-databases-list)

@@ -1,13 +1,12 @@
 extends ../../layout/page.pug
 
-block modals
-  include ./import.pug
+//- block modals
+//-   include ./import.pug
 
 block content
-  .container-fluid
-    .block
-      .row
-        .col
-          h3 Create databases
+  .container.is-fluid.mt-2
+    h2.title.is-4 Create databases
 
-    div(data-database-create)
+    .columns
+      .column
+        div(data-database-create)
