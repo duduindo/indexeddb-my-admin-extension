@@ -1,0 +1,12 @@
+extends ../layout/page.pug
+
+block content
+  .container.is-fluid.mt-2
+
+    h2.title.is-4 Domains
+
+    .columns
+      .column
+        table.table.is-bordered.is-fullwidths.is-striped.is-hoverable
+          tbody(data-domains-list)
+

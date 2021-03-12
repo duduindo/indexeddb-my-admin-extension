@@ -6,7 +6,7 @@
   <ul>
     {#each $items as item}
       <li class="{item.isActive ? 'is-active' : '' }">
-        <a href="{item.href ? item.href : location.href}" aria-current="{ item.isActive ? 'page' : null }">{item.name}</a>
+        <a class="has-text-white" href="{item.href ? item.href : location.href}" aria-current="{ item.isActive ? 'page' : null }">{item.name}</a>
       </li>
     {/each}
   </ul>

@@ -1,12 +1,104 @@
 extends ../layout/page.pug
 
+
+block navigation
+  nav.navbar.has-background-light(role='navigation' aria-label='main navigation')
+    .navbar-menu
+      .navbar-start
+        a(href="#").navbar-item
+          | Domains
+        a(href="#").navbar-item
+          | Script
+        a(href="#").navbar-item
+          | Status
+        a(href="#").navbar-item
+          | Export
+        a(href="#").navbar-item
+          | Import
+        a(href="#").navbar-item
+          | Engines
+
+
 block content
   .container.is-fluid.mt-2
-
-    h2.title.is-4 Domains
-
     .columns
+      .column.is-three-fifths
+        .card.mt-5
+          header.card-header.has-background-grey-lighter
+            p.card-header-title
+              | IndexedDBMyAdmin Extension
+          .card-content.has-background-light
+            .content
+              | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
+
+        .card.mt-6
+          header.card-header.has-background-grey-lighter
+            p.card-header-title
+              | General settings
+          .card-content.has-background-light
+            .content
+              a(href="#") More settings
+
+        .card.mt-6
+          header.card-header.has-background-grey-lighter
+            p.card-header-title
+              | Appearance settings
+          .card-content.has-background-light
+            .content
+              .field.is-horizontal
+                .field-label
+                  label.label.has-text-weight-normal.mt-2(for="language") Language:
+                .field-body
+                  .field
+                    .control
+                      .select.is-normal
+                        select#language
+                          option English
+
+              .field.is-horizontal
+                .field-label
+                  label.label.has-text-weight-normal.mt-2(for="theme") Theme:
+                .field-body
+                  .field
+                    .control
+                      .select.is-normal
+                        select#theme
+                          option pmahomme
+
       .column
-        table.table.is-bordered.is-fullwidths.is-striped.is-hoverable
-          tbody(data-domains-list)
+        .card.mt-5
+          header.card-header.has-background-grey-lighter
+            p.card-header-title
+              | Browser
+          .card-content.has-background-light
+            .content
+              ul.mt-0
+                li Database type: IndexedDB
+
+        .card.mt-6
+          header.card-header.has-background-grey-lighter
+            p.card-header-title
+              | IndexedDBMyAdmin
+          .card-content.has-background-light
+            .content
+              ul.mt-0
+                li Version information: 0.0.1
+                li License: MIT
+                li Git revision:&nbsp;
+                  a(href="#") 448878&nbsp;
+                  | from&nbsp;
+                  a(href="#") master&nbsp;
+                  | branch committed on&nbsp;
+                  time(datetime="2021-03-10 18:43") Mar 10, 2021 at 06:43 PM by&nbsp;
+                  a(href="#") Fulano Sicrano
+                li
+                  a(href="https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API" target="_blank") IndexedDB API Documentation
+                li
+                  a(href="#") Official Homepage
+                li
+                  a(href="#") Contribute
+                li
+                  a(href="#") Issues
+                li
+                  a(href="#") List of changes
 
