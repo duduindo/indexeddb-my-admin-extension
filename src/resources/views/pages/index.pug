@@ -2,10 +2,10 @@ extends ../layout/page.pug
 
 
 block navigation
-  nav.navbar.has-background-light(role='navigation' aria-label='main navigation')
+  nav.navbar(role='navigation' aria-label='main navigation')
     .navbar-menu
       .navbar-start
-        a(href="#").navbar-item
+        a(href="/pages/domains/index.html").navbar-item
           | Domains
         a(href="#").navbar-item
           | Script
@@ -24,26 +24,26 @@ block content
     .columns
       .column.is-three-fifths
         .card.mt-5
-          header.card-header.has-background-grey-lighter
+          header.card-header
             p.card-header-title
               | IndexedDBMyAdmin Extension
-          .card-content.has-background-light
+          .card-content
             .content
               | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
 
         .card.mt-6
-          header.card-header.has-background-grey-lighter
+          header.card-header
             p.card-header-title
               | General settings
-          .card-content.has-background-light
+          .card-content
             .content
               a(href="#") More settings
 
         .card.mt-6
-          header.card-header.has-background-grey-lighter
+          header.card-header
             p.card-header-title
               | Appearance settings
-          .card-content.has-background-light
+          .card-content
             .content
               .field.is-horizontal
                 .field-label
@@ -67,19 +67,19 @@ block content
 
       .column
         .card.mt-5
-          header.card-header.has-background-grey-lighter
+          header.card-header
             p.card-header-title
               | Browser
-          .card-content.has-background-light
+          .card-content
             .content
               ul.mt-0
                 li Database type: IndexedDB
 
         .card.mt-6
-          header.card-header.has-background-grey-lighter
+          header.card-header
             p.card-header-title
               | IndexedDBMyAdmin
-          .card-content.has-background-light
+          .card-content
             .content
               ul.mt-0
                 li Version information: 0.0.1

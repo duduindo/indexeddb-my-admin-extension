@@ -1,0 +1,22 @@
+
+
+.breadcrumb
+  text-shadow: 0 1px 0 #000
+  background-color: #888
+
+  li
+    &.is-active
+      a
+        color: white
+
+    & + li::before
+      color: white
+      content: '»'
+
+  a
+    color: white
+
+    &:hover
+      text-decoration: underline
+
+

@@ -10,13 +10,13 @@ html
     block modals
 
     .layout-container
-      header.layout-header
+      header.layout-header.masthead
         block breadcrumb
           include ../pages/partials/breadcrumb.pug
 
         block navigation
 
-      aside.layout-aside
+      aside.layout-aside(style="max-width: 300px")
         block aside
           include ../pages/partials/aside.pug
 

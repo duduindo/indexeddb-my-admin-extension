@@ -6,7 +6,7 @@
     let url = browser.runtime.getURL('/pages/index.html')
 
     if (value !== '-1') {
-      url = browser.runtime.getURL(`/pages/database/list.html?origin=${target.value}`)
+      url = browser.runtime.getURL(`/pages/database/list.html?origin=${value}`)
     }
 
     location.href = url
@@ -26,8 +26,8 @@
           <option value="-1">(All domains)</option>
 
           {#each options as option}
-            <option value="{option.value}" selected={option.isSelected}>
-              {option.text}
+            <option value="{option.origin}" selected={option.isSelected}>
+              {option.host}
             </option>
           {/each}
         </select>

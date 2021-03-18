@@ -1,0 +1,27 @@
+extends ../../layout/page.pug
+
+
+block navigation
+  nav.navbar.has-background-light(role='navigation' aria-label='main navigation')
+    .navbar-menu
+      .navbar-start
+        a(href="#").navbar-item.is-active.has-background-white
+          | Domains
+        a(href="#").navbar-item
+          | Script
+        a(href="#").navbar-item
+          | Status
+        a(href="#").navbar-item
+          | Export
+        a(href="#").navbar-item
+          | Import
+        a(href="#").navbar-item
+          | Engines
+
+
+block content
+  .container.is-fluid.mt-5
+    h2.title.is-4  All tab's domain
+
+  .container.is-fluid.mt-5
+    div(data-domains-cards)

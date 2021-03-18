@@ -1,18 +1,38 @@
 import browser from 'webextension-polyfill'
 import get from 'lodash/get'
-import pick from 'lodash/pick'
 import sortBy from 'lodash/sortBy'
 import uniqBy from 'lodash/uniqBy'
 
 
 class TabsEvent {
+  private filterHTTP(tabs: any[]) {
+    return tabs.filter(tab => get(tab, 'url', '').startsWith('http'))
+  }
+
+  private getDatas(tabs: any[]) {
+    return tabs.map(tab => {
+      const { origin, host } = new URL(tab.url)
+      const { favIconUrl: favicon, title } = tab
+
+      return { origin, host, favicon, title }
+    })
+  }
+
+  private uniqueByHost(tabs: any[]) {
+    return uniqBy(tabs, (tab: URL) => tab.host)
+  }
+
+  private sortByHost(tabs: any[]) {
+    return sortBy(tabs, 'host')
+  }
+
   private async getTabs(): Promise<any[]> {
     let tabs = await browser.tabs.query({ status: 'complete' })
 
-    tabs = tabs.filter(tab => get(tab, 'url', '').startsWith('http'))
-    tabs = tabs.map(tab => pick(new URL(tab.url), ['origin', 'host']))
-    tabs = uniqBy(tabs, (tab: URL) => tab.host)
-    tabs = sortBy(tabs, 'host')
+    tabs = this.filterHTTP(tabs)
+    tabs = this.getDatas(tabs)
+    tabs = this.uniqueByHost(tabs)
+    tabs = this.sortByHost(tabs)
 
     return tabs
   }

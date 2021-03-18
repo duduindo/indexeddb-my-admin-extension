@@ -9,14 +9,11 @@ const tabsEvent = new TabsEvent()
 // Readable
 const optionsTabs = readable([], set => {
   tabsEvent.listener((data: any[]) => {
-    let options = []
+    const options = data.map(tab => {
+      const { origin, host, favicon, title } = tab
+      const isSelected = origin === params.get('origin')
 
-    options = data.map(tab => {
-      const value = tab.origin
-      const text = tab.host
-      const isSelected = tab.origin === params.get('origin')
-
-      return { value, text, isSelected }
+      return { origin, host, favicon, title, isSelected }
     })
 
     set(options)
