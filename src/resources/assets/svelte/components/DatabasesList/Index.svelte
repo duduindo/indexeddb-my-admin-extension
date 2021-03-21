@@ -9,17 +9,17 @@
   let checkboxs = []
   let modalName = 'modal-drop-databases'
 
-  $: hasStructures = $structures.length
+  $: totalDatabases = $structures.length
+  $: hasStructures = totalDatabases
   $: domain = $params.domain
   $: origin = $params.origin
+  $: shouldDisableDropButton = checked.length ? null : true
   $: setBreadcrumb(`Domain: ${domain}`)
 
   function checkAll() {
     checkboxs.forEach(checkbox => {
-      const event = new Event('change')
-
       checkbox.checked = true
-      checkbox.dispatchEvent(event)
+      checkbox.dispatchEvent(new Event('change'))
     })
   }
 
@@ -43,7 +43,11 @@
       <p class="mb-2">Do you really want to execute?</p>
 
       {#each checked as index}
-        <code class="is-block mb-2 is-small"><i>indexedDB.deleteDatabase("{ $structures[index].name }")</i></code>
+        <code class="is-block mb-2 is-small">
+          <i>
+            indexedDB.deleteDatabase("{ $structures[index].name }")
+          </i>
+        </code>
       {/each}
 
       <div class="is-flex is-justify-content-flex-end">
@@ -65,7 +69,7 @@
 
 
 {#if hasStructures}
-  <form action="#">
+  <form>
     <table class="table is-fullwidth is-striped is-hoverable">
       <thead>
         <tr>
@@ -103,9 +107,9 @@
         <tr>
           <td colspan="4">
             <div  class="is-flex is-align-items-center">
-              <strong>Total: {$structures.length}</strong>
+              <strong>Total: {totalDatabases}</strong>
               <button type="button" class="button is-ghost mx-2" on:click={checkAll}>Check all</button>
-              <button type="button" class="button is-ghost mx-2 has-text-danger" disabled={checked.length ? null : true} on:click={openDialog}>Drop</button>
+              <button type="button" class="button is-ghost mx-2 has-text-danger" disabled={shouldDisableDropButton} on:click={openDialog}>Drop</button>
             </div>
           </td>
         </tr>

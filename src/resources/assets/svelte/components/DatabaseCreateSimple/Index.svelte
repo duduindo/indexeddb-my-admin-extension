@@ -1,12 +1,7 @@
 <script>
   import { params } from '../../stores/searchParams'
-  import { setBreadcrumb } from '../../stores/breadcrumb'
 
-  let origin
-
-  params.subscribe(value => {
-    origin = value.origin || ''
-  })
+  $: origin = $params.origin
 </script>
 
 
