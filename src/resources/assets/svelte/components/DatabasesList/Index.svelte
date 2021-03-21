@@ -1,72 +1,91 @@
 <script>
-  import { structures } from '../../stores/database'
   import { params } from '../../stores/searchParams'
+  import { closeAllModals, openModal } from '../../stores/modal'
+  import { structures } from '../../stores/database'
   import { setBreadcrumb } from '../../stores/breadcrumb'
+  import Modal from '../Modal/Index'
 
-  let origin, domain
+  let checked = []
+  let checkboxs = []
+  let modalName = 'modal-drop-databases'
 
-  params.subscribe(value => {
-    origin = value.origin || ''
-    domain = origin.replace(/http(|s):\/\//, '')
+  $: hasStructures = $structures.length
+  $: domain = $params.domain
+  $: origin = $params.origin
+  $: setBreadcrumb(`Domain: ${domain}`)
 
-    setBreadcrumb(domain)
-  })
+  function checkAll() {
+    checkboxs.forEach(checkbox => {
+      const event = new Event('change')
+
+      checkbox.checked = true
+      checkbox.dispatchEvent(event)
+    })
+  }
+
+  function openDialog() {
+    openModal(modalName)
+  }
+
+  function closeDialog() {
+    closeAllModals()
+  }
 </script>
 
 
-<div class="mb-6">
-  <h2 class="title is-5">Create database</h2>
+<Modal name={modalName}>
+  <article class="message">
+    <div class="message-header">
+      <p>You are about to DESTROY a complete database!</p>
+    </div>
 
-  <form action="/pages/database/create.html">
-    <input type="hidden" name="origin" value={origin}>
+    <div class="message-body">
+      <p class="mb-2">Do you really want to execute?</p>
 
-    <div class="field is-horizontal">
-      <div class="field-body">
-        <div class="field">
-          <div class="control">
-            <input class="input" name="name" type="text" placeholder="Database name">
-          </div>
-        </div>
+      {#each checked as index}
+        <code class="is-block mb-2 is-small"><i>indexedDB.deleteDatabase("{ $structures[index].name }")</i></code>
+      {/each}
 
-        <div class="field">
-          <div class="control">
-            <input class="input" type="number" name="version" min="1" value="1" placeholder="Database version">
-          </div>
-        </div>
-
-        <div class="field">
-          <div class="control">
-            <button type="submit" class="button is-primary">Create</button>
-          </div>
-        </div>
+      <div class="is-flex is-justify-content-flex-end">
+        <button class="button mr-2" on:click={closeDialog}>Cancel</button>
+        <button class="button is-danger">Yes, drop!</button>
       </div>
     </div>
-  </form>
-</div>
+  </article>
+</Modal>
 
 
-<div class="row">
-  <div class="col">
-    <table class="table table-striped table-borderless">
+{#if !hasStructures}
+  <article class="message is-warning">
+    <div class="message-body">
+      <p class="subtitle">No databases found at <code>{domain}</code></p>
+    </div>
+  </article>
+{/if}
+
+
+{#if hasStructures}
+  <form action="#">
+    <table class="table is-fullwidth is-striped is-hoverable">
       <thead>
         <tr>
           <th scope="col"></th>
           <th scope="col">Database</th>
           <th scope="col">Version</th>
-          <th scope="col">Tables</th>
+          <th scope="col">Stores</th>
         </tr>
       </thead>
 
       <tbody>
-        {#each $structures as structure}
+        {#each $structures as structure, i}
           <tr>
             <th scope="row" width="60">
-              <label class="checkbox is-block p-1" aria-label="Select the database {structure.name}">
-                <input type="checkbox">
+              <label class="checkbox is-large is-block has-text-centered p-1" aria-label="Select the database {structure.name}">
+                <input type="checkbox" bind:this={checkboxs[i]} bind:group={checked} value={i}>
               </label>
             </th>
             <td>
-              <a href="/pages/database/index.html?origin={origin}&name={structure.name}&version={structure.version}" class="is-size-5 is-block">
+              <a href="/pages/database/index.html?origin={origin}&name={structure.name}&version={structure.version}">
                 {structure.name}
               </a>
             </td>
@@ -83,20 +102,14 @@
       <tfoot>
         <tr>
           <td colspan="4">
-            Total: {$structures.length}
-          </td>
-        </tr>
-        <tr>
-          <td colspan="4">
-            <button type="button" class="button">Check all</button>
-            <button type="button" class="button">Copy</button>
-            <button type="button" class="button">Merge</button>
-            <button type="button" class="button">Export</button>
-            <button type="button" class="button">Upgrade</button>
-            <button type="button" class="button">Delete</button>
+            <div  class="is-flex is-align-items-center">
+              <strong>Total: {$structures.length}</strong>
+              <button type="button" class="button is-ghost mx-2" on:click={checkAll}>Check all</button>
+              <button type="button" class="button is-ghost mx-2 has-text-danger" disabled={checked.length ? null : true} on:click={openDialog}>Drop</button>
+            </div>
           </td>
         </tr>
       </tfoot>
     </table>
-  </div>
-</div>
+  </form>
+{/if}

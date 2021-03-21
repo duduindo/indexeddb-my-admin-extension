@@ -12,7 +12,7 @@
       <div class="card">
         <div class="card-content p-0">
           <div class="content">
-            <a href="/pages/database/list.html?origin={option.origin}" class="is-block p-3">
+            <a href="/pages/database/index.html?origin={option.origin}" class="is-block p-3">
               <img class="image is-32x32 mx-auto mb-2" src="{option.favicon}" alt="" loading="lazy">
               <span>{option.host}</span>
             </a>

@@ -8,6 +8,7 @@ import StorageTree from './svelte/components/StorageTree/Index.svelte'
 import DomainsCards from './svelte/components/DomainsCards/Index.svelte'
 import DomainsList from './svelte/components/DomainsList/Index.svelte'
 import DatabaseCreate from './svelte/components/DatabaseCreate/Index.svelte'
+import DatabaseCreateSimple from './svelte/components/DatabaseCreateSimple/Index.svelte'
 import DatabaseImport from './svelte/components/DatabaseCreate/Import.svelte'
 import DatabasesList from './svelte/components/DatabasesList/Index.svelte'
 import TablesList from './svelte/components/TablesList/Index.svelte'
@@ -19,7 +20,9 @@ document.querySelectorAll('[data-storage-tree]').forEach(target => new StorageTr
 document.querySelectorAll('[data-domains-cards]').forEach(target => new DomainsCards({ target }))
 document.querySelectorAll('[data-domains-list]').forEach(target => new DomainsList({ target }))
 document.querySelectorAll('[data-database-create]').forEach(target => new DatabaseCreate({ target }))
+document.querySelectorAll('[data-database-create-simple]').forEach(target => new DatabaseCreateSimple({ target }))
 document.querySelectorAll('[data-database-import]').forEach(target => new DatabaseImport({ target }))
 document.querySelectorAll('[data-databases-list]').forEach(target => new DatabasesList({ target }))
 document.querySelectorAll('[data-tables-list]').forEach(target => new TablesList({ target }))
 document.querySelectorAll('[data-table-browser]').forEach(target => new TableBrowser({ target }))
+

@@ -1,5 +1,36 @@
 extends ../../layout/page.pug
 
+
+block navigation
+  nav.navbar(role='navigation' aria-label='main navigation')
+    .navbar-menu
+      .navbar-start
+        a(href="/pages/database/index.html").navbar-item.is-active
+          | Databases
+        a(href="#").navbar-item
+          | Script
+        a(href="#").navbar-item
+          | Status
+        a(href="#").navbar-item
+          | Export
+        a(href="#").navbar-item
+          | Import
+        a(href="#").navbar-item
+          | Engines
+
+
 block content
-  .container-fluid
-    div(data-tables-list)
+  .container.is-fluid.mt-5
+    h2.title.is-4  Databases from
+      code lorem ipsum
+
+  .container.is-fluid.mt-6
+    .card.mt-5
+      .card-content
+        .content
+          .columns
+            .column.is-half
+              form.field.is-horizontal(action="/pages/database/create.html" data-database-create-simple)
+
+  .container.is-fluid.mt-5
+    div(data-databases-list)
