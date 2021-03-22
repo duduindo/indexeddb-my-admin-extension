@@ -1,20 +1,43 @@
 <script>
+  import pick from 'lodash/pick'
   import { params } from '../../stores/searchParams'
   import { closeAllModals, openModal } from '../../stores/modal'
-  import { structures } from '../../stores/database'
+  import { deleteDatabases, structures } from '../../stores/database'
   import { setBreadcrumb } from '../../stores/breadcrumb'
   import Modal from '../Modal/Index'
 
   let checked = []
   let checkboxs = []
   let modalName = 'modal-drop-databases'
+  let domain = $params.domain
+  let origin = $params.origin
+  let messageError = ''
+
+  structures.subscribe(value => {
+    console.log(value)
+  })
 
   $: totalDatabases = $structures.length
   $: hasStructures = totalDatabases
-  $: domain = $params.domain
-  $: origin = $params.origin
   $: shouldDisableDropButton = checked.length ? null : true
+  $: structuresSelected = Object.values(pick($structures, checked))
   $: setBreadcrumb(`Domain: ${domain}`)
+
+
+  function drop() {
+    const names = structuresSelected.map(({ name }) => name)
+
+    deleteDatabases(names)
+      .then(() => {
+        // location.href = location.href
+      })
+      .catch(err => {
+        messageError = err;
+
+        closeAllModals()
+        openModal('modal-drop-databases-error')
+      })
+  }
 
   function checkAll() {
     checkboxs.forEach(checkbox => {
@@ -22,18 +45,27 @@
       checkbox.dispatchEvent(new Event('change'))
     })
   }
-
-  function openDialog() {
-    openModal(modalName)
-  }
-
-  function closeDialog() {
-    closeAllModals()
-  }
 </script>
 
+<Modal name="modal-drop-databases-error">
+  <article class="message">
+    <div class="message-header">
+      <p>Error</p>
+    </div>
 
-<Modal name={modalName}>
+    <div class="message-body">
+      <code class="is-block mb-2 is-small">
+        {messageError}
+      </code>
+
+      <div class="is-flex is-justify-content-flex-end">
+        <button class="button mr-2" on:click={closeAllModals}>Ok</button>
+      </div>
+    </div>
+  </article>
+</Modal>
+
+<Modal name="modal-drop-databases">
   <article class="message">
     <div class="message-header">
       <p>You are about to DESTROY a complete database!</p>
@@ -42,17 +74,17 @@
     <div class="message-body">
       <p class="mb-2">Do you really want to execute?</p>
 
-      {#each checked as index}
+      {#each structuresSelected as structure}
         <code class="is-block mb-2 is-small">
           <i>
-            indexedDB.deleteDatabase("{ $structures[index].name }")
+            indexedDB.deleteDatabase("{ structure.name }")
           </i>
         </code>
       {/each}
 
       <div class="is-flex is-justify-content-flex-end">
-        <button class="button mr-2" on:click={closeDialog}>Cancel</button>
-        <button class="button is-danger">Yes, drop!</button>
+        <button class="button mr-2" on:click={closeAllModals}>Cancel</button>
+        <button class="button is-danger" on:click={drop}>Yes, drop!</button>
       </div>
     </div>
   </article>
@@ -109,7 +141,7 @@
             <div  class="is-flex is-align-items-center">
               <strong>Total: {totalDatabases}</strong>
               <button type="button" class="button is-ghost mx-2" on:click={checkAll}>Check all</button>
-              <button type="button" class="button is-ghost mx-2 has-text-danger" disabled={shouldDisableDropButton} on:click={openDialog}>Drop</button>
+              <button type="button" class="button is-ghost mx-2 has-text-danger" disabled={shouldDisableDropButton} on:click={() => openModal('modal-drop-databases')}>Drop</button>
             </div>
           </td>
         </tr>

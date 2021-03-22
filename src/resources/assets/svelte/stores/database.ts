@@ -25,8 +25,22 @@ const structures = readable([], set => {
     })
 })
 
+async function deleteDatabases(names:string[] = []): Promise<any> {
+  try {
+    return await names.forEach(async name => await fetchContent(`${origin}/${name}/delete/`))
+  } catch (err) {
+    return err.message
+  }
+
+  // console.log('Store: ', names)
+
+
+
+  // return Promise.reject('ERRO delete-databases: dasdasdsasd')
+}
 
 export {
   databases,
-  structures
+  deleteDatabases,
+  structures,
 }
