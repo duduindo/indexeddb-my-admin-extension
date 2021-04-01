@@ -17,7 +17,13 @@ type StorageStruture = {
   tables: Array<StorageTableStruture>
 }
 
+type IDBDatabaseInfo = {
+  name: string,
+  version: number,
+}
+
 export {
+  IDBDatabaseInfo,
   StorageStruture,
   StorageIndexStruture,
   StorageTableStruture
