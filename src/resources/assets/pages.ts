@@ -26,46 +26,24 @@
 // document.querySelectorAll('[data-tables-list]').forEach(target => new TablesList({ target }))
 // document.querySelectorAll('[data-table-browser]').forEach(target => new TableBrowser({ target }))
 
-// import IndexedDBBuilder from '@/models/Storage/IndexedDBBuilder'
+import IndexedDBBuilder from '@/models/Storage/IndexedDBBuilder'
+
+const builder = new IndexedDBBuilder()
+  .open('test', '3')
+  .table('books', 'readwrite')
+  // .addContent({author: `author ${Date.now()}`, isbn: Date.now(), title: `title ${Date.now()}`})
+  // .getColumnNames()
+  // .getContent()
+  // .getKeyPath()
+  // .getRows()
+  // .isAutoIncrement()
+  // .putContent({author: "Opaa", isbn: 1122, title: "upteadedd"})
+  // .clear()
+  // .deleteRow(1617582545170)
+  .execute()
 
 
-// const builder = new IndexedDBBuilder()
-//   .open('test 2', '1')
-//   .table('books1')
-//   .getColumnNames()
-//   .execute()
 
-
-// builder
-//   // .then(e => console.log(`%c ${e}`, 'color: white; font-size: 1.3em; margin:10px;'))
-//   // .catch(err => console.log(`%c ${err}`, 'color: red; font-size: 1.3em; margin:10px;'))
-//   .then(e => console.log(e))
-//   .catch(err => console.log(`%c ${err}`, 'color: red; font-size: 1.3em; margin:10px;'))
-
-class Builder {
-  private queue = new Map
-
-  first() {
-    this.queue.set('first', Promise.resolve(1))
-
-    return this
-  }
-
-  second() {
-    this.queue.set('second', Promise.resolve(2))
-
-    return this
-  }
-
-  async build() {
-    return NaN
-  }
-}
-
-
-const builder = new Builder()
-  .first()
-  .second()
-  .build()
-    .then(e => console.log(e))
-    .catch(err => console.log('Error: ', err))
+builder
+  .then(e => console.log(e))
+  .catch(err => console.log('Erro => ', err))

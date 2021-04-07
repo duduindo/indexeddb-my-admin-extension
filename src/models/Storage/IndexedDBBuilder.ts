@@ -1,44 +1,129 @@
-import values from 'lodash/values'
 import { openDB, deleteDB } from 'idb'
 import StorageBuilder from './StorageBuilder'
 import Open from './IndexedDB/Open'
+import ContentStore from './IndexedDB/ContentStore'
 
 
 class IndexedDBBuilder extends StorageBuilder {
-  private selectDatabase() {
-    const { name, version } = this.query.get('database')
-    const database = new Open(name, version).getPromise()
+  open(name: string, version: string) {
+    const connection = new Open(name, version).getPromise()
 
-    return database
+    this.reset()
+
+    this.queue.add(callback => {
+      connection
+        .then(value => callback(null, value))
+        .catch(err => callback(err.message))
+    })
+
+    return this
   }
 
-  private selectTable(database) {
-    const { name, mode } = this.query.get('table')
-    const tx = database.transaction(name, mode)
-    const table = tx.objectStore(name)
+  table(name: string, mode: IDBTransactionMode = 'readonly') {
+    this.queue.add((connection, callback) => {
+      try {
+        const tx = connection.transaction(name, mode)
+        const store = tx.objectStore(name)
 
-    return table
+        callback(null, store)
+      } catch (err) {
+        callback(err.message)
+      }
+    })
+
+    return this
   }
 
-  async execute() {
-    const query = this.query
-    const hasDatabase = this.query.has('database')
-    const hasTable = this.query.has('table')
-    let database, table
+  addContent(value: any) {
+    this.queue.add((store, callback) => {
+      const isWriteMode = store.transaction.mode === 'readwrite'
 
-    if (hasDatabase) {
-      database = await this.selectDatabase()
-    }
+      if (isWriteMode) {
+        store.add(value)
+          .then(result => callback(null, result))
+          .catch(err => callback(err.message))
+      } else {
+        callback('Transaction mode is wrong (readonly)')
+      }
+    })
 
-    if (hasTable) {
-      table = this.selectTable(database)
-    }
+    return this
+  }
 
-    if (query.has('get-column-names')) {
-      return ['#', table.keyPath, 'value']
-    }
+  clear() {
+    this.queue.add((store, callback) => {
+      store.clear()
+        .then(value => callback(null, true))
+        .catch(err => callback(err.message))
+    })
 
-    return 'Not found'
+    return this
+  }
+
+  deleteRow(key: any) {
+    this.queue.add((store, callback) => {
+      store.delete(key)
+        .then(value => callback(null, true))
+        .catch(err => callback(err.message))
+    })
+
+    return this
+  }
+
+  getColumnNames() {
+    this.queue.add((store, callback) => {
+      const names = ['#', store.keyPath, 'value']
+
+      callback(null, names)
+    })
+
+    return this
+  }
+
+  getContent() {
+    this.queue.add((store, callback) => {
+      const content = new ContentStore(store).getPromise()
+
+      content
+        .then(value => callback(null, value))
+        .catch(err => callback(err.message))
+    })
+
+    return this
+  }
+
+  getKeyPath() {
+    this.queue.add((store, callback) => callback(null, store.keyPath))
+
+    return this
+  }
+
+  getRows() {
+    this.queue.add((store, callback) => callback(null, store.count()))
+
+    return this
+  }
+
+  isAutoIncrement() {
+    this.queue.add((store, callback) => callback(null, store.autoIncrement))
+
+    return this
+  }
+
+  putContent(value: any, key?: any) {
+    this.queue.add((store, callback) => {
+      const isWriteMode = store.transaction.mode === 'readwrite'
+
+      if (isWriteMode) {
+        store.put(value, key)
+          .then(result => callback(null, result))
+          .catch(err => callback(err.message))
+      } else {
+        callback('Transaction mode is wrong (readonly)')
+      }
+    })
+
+    return this
   }
 }
 

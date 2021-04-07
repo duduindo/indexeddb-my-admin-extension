@@ -26,5 +26,5 @@ export {
   IDBDatabaseInfo,
   StorageStruture,
   StorageIndexStruture,
-  StorageTableStruture
+  StorageTableStruture,
 }

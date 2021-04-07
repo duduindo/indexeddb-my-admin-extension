@@ -1,3 +1,4 @@
+import waterfall from 'async/waterfall'
 import type {
   StorageStruture,
   StorageIndexStruture,
@@ -5,34 +6,50 @@ import type {
 } from './types'
 
 
-
 abstract class StorageBuilder {
-  protected query: Map<string, any> = new Map
+  protected queue: Set<any> = new Set
 
   protected reset() {
-    this.query = new Map
+    this.queue.clear()
   }
 
-  open(name: string, version: string, displayName?: string, estimatedSize?: number): StorageBuilder {
-    this.reset()
-    this.query.set('database', {name, version, displayName, estimatedSize})
+  abstract addContent(value: any): StorageBuilder
 
-    return this
+  abstract clear(): StorageBuilder
+
+  abstract deleteRow(key: any): StorageBuilder
+
+  abstract getColumnNames(): StorageBuilder
+
+  abstract getContent(): StorageBuilder
+
+  abstract getKeyPath(): StorageBuilder
+
+  abstract getRows(): StorageBuilder
+
+  abstract index(name: string): StorageBuilder
+
+  abstract isAutoIncrement(): StorageBuilder
+
+  abstract open(name: string, version: string, displayName?: string, estimatedSize?: number): StorageBuilder
+
+  abstract putContent(value: any, key?: any): StorageBuilder
+
+  abstract table(name: string, mode?: any): StorageBuilder
+
+  execute(): Promise<any> {
+    const queue = Array.from(this.queue)
+
+    return new Promise((resolve, reject) => {
+      waterfall(queue, (err, result) => {
+        if (err) {
+          reject(err)
+        } else {
+          resolve(result)
+        }
+      })
+    })
   }
-
-  table(name: string, mode?: any) {
-    this.query.set('table', {name, mode})
-
-    return this
-  }
-
-  getColumnNames() {
-    this.query.set('get-column-names', null)
-
-    return this
-  }
-
-  abstract execute(): Promise<any>
 }
 
 export default StorageBuilder
